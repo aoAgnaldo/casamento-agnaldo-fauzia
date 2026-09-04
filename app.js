@@ -83,7 +83,7 @@ function shareGift(g){
 $('#giftSearch')?.addEventListener('input',renderGifts);
 document.querySelectorAll('.gift-filter').forEach(btn=>btn.addEventListener('click',()=>{giftFilter=btn.dataset.filter;document.querySelectorAll('.gift-filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderGifts()}));
 loadGifts();
-}
-loadGifts();
-const inviteParam=new URLSearchParams(location.search).get('convite');
-if(inviteParam){setTimeout(()=>findInvitation(inviteParam),150);}
+
+const inviteParam = new URLSearchParams(location.search).get('convite');
+if (inviteParam) {
+  setTimeout(() => findInvitation(inviteParam), 150);
