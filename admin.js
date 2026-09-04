@@ -1,4 +1,5 @@
 let session=null, guests=[], gifts=[];
+let guestFilter='all';
 const A=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 function showMsg(el,t){el.textContent=t;el.classList.remove('hidden')}
 function genCode(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let out='AF-';for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];return out}
@@ -12,7 +13,15 @@ A('#logout').onclick=()=>supabaseClient.auth.signOut().then(()=>location.reload(
 async function refresh(){const [{data:g,error:ge},{data:gi,error:gie}]=await Promise.all([supabaseClient.rpc('admin_list_invitations_checkin'),supabaseClient.rpc('admin_list_gifts')]);if(ge){toast(ge.message);return}if(gie){toast(gie.message);return}guests=g||[];gifts=gi||[];render()}
 function render(){
  const c={total:guests.length,pending:0,confirmed:0,declined:0,people:0,checkedIn:0,notCheckedIn:0,presentPeople:0};guests.forEach(g=>{if(c[g.rsvp_status]!==undefined)c[g.rsvp_status]++;if(g.rsvp_status==='confirmed'){const people=1+(g.companion_count||0);c.people+=people;if(g.checked_in){c.checkedIn++;c.presentPeople+=people}}});c.notCheckedIn=c.confirmed-c.checkedIn;A('#stTotal').textContent=c.total;A('#stPending').textContent=c.pending;A('#stConfirmed').textContent=c.confirmed;A('#stDeclined').textContent=c.declined;A('#stPeople').textContent=c.people;A('#stCheckedIn').textContent=c.checkedIn;A('#stNotCheckedIn').textContent=c.notCheckedIn;A('#stPresentPeople').textContent=c.presentPeople;
- A('#guestRows').innerHTML=guests.map(g=>`<tr><td>${esc(g.full_name)}</td><td><strong>${esc(g.code)}</strong></td><td>${esc(g.whatsapp||'')}</td><td>${g.allowed_guests}</td><td><span class="badge ${g.rsvp_status}">${g.rsvp_status}</span></td><td>${g.rsvp_status==='confirmed'?1+(g.companion_count||0):0}</td><td>${g.rsvp_at?new Date(g.rsvp_at).toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'}):'—'}</td><td>${g.checked_in?'<span class="badge confirmed">Entrada registada</span>':'<span class="badge pending">Por entrar</span>'}</td><td><button class="button secondary" onclick="editGuest('${g.id}')">Editar</button> <button class="button secondary" onclick="openQR('${g.id}')">▣ QR</button> <button class="button secondary" onclick="openWhats('${g.id}')">${g.invitation_sent_at?'Reenviar':'Enviar convite'}</button> <button class="button danger" onclick="removeGuest('${g.id}')">Remover</button></td></tr>`).join('');
+ const q=String(A('#guestSearch')?.value||'').trim().toLowerCase();
+ const filteredGuests=guests.filter(g=>{
+   const hay=[g.full_name,g.code,g.whatsapp].map(v=>String(v||'').toLowerCase()).join(' ');
+   const matchesQ=!q||hay.includes(q);
+   const matchesF=guestFilter==='all'||(guestFilter==='confirmed'&&g.rsvp_status==='confirmed')||(guestFilter==='pending'&&g.rsvp_status==='pending')||(guestFilter==='declined'&&g.rsvp_status==='declined')||(guestFilter==='checked'&&!!g.checked_in)||(guestFilter==='waiting'&&g.rsvp_status==='confirmed'&&!g.checked_in);
+   return matchesQ&&matchesF;
+ });
+ A('#guestCount').textContent=`${filteredGuests.length} de ${guests.length} convite(s)`;
+ A('#guestRows').innerHTML=filteredGuests.map(g=>`<tr><td>${esc(g.full_name)}</td><td><strong>${esc(g.code)}</strong></td><td>${esc(g.whatsapp||'')}</td><td>${g.allowed_guests}</td><td><span class="badge ${g.rsvp_status}">${g.rsvp_status}</span></td><td>${g.rsvp_status==='confirmed'?1+(g.companion_count||0):0}</td><td>${g.rsvp_at?new Date(g.rsvp_at).toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'}):'—'}</td><td>${g.checked_in?'<span class="badge confirmed">Entrada registada</span>':'<span class="badge pending">Por entrar</span>'}</td><td><button class="button secondary" onclick="editGuest('${g.id}')">Editar</button> <button class="button secondary" onclick="openQR('${g.id}')">▣ QR</button> <button class="button secondary" onclick="openWhats('${g.id}')">${g.invitation_sent_at?'Reenviar':'Enviar convite'}</button> <button class="button danger" onclick="removeGuest('${g.id}')">Remover</button></td></tr>`).join('');
  A('#giftRows').innerHTML=gifts.map(g=>`<tr><td>${g.image_url?`<img class="gift-admin-thumb" src="${esc(g.image_url)}" alt="">`:'<div class="gift-admin-placeholder">♡</div>'}</td><td>${g.item_no}</td><td>${esc(g.name)}</td><td>${g.reserved?'<span class="badge confirmed">Reservado</span>':'<span class="badge pending">Livre</span>'}</td><td>${esc(g.reserved_by_name||'—')}</td><td><div class="gift-actions"><button class="button secondary" onclick="editGift(${g.id})">Editar</button><button class="button danger" onclick="deleteGift(${g.id})" ${g.reserved?'disabled':''}>Remover</button></div></td></tr>`).join('');
 }
 
@@ -34,6 +43,9 @@ window.editGuest=id=>openModal(guests.find(x=>x.id===id));
 window.sendWhats=async id=>{const g=guests.find(x=>x.id===id);if(!g)return;if(!g.whatsapp){toast('Este convidado ainda não tem WhatsApp registado.');return}const url=`https://wa.me/${String(g.whatsapp).replace(/\D/g,'')}?text=${encodeURIComponent(makeMessage(g))}`;window.open(url,'_blank');const {error}=await supabaseClient.rpc('admin_mark_invitation_sent',{invitation_id:id});if(error){toast('WhatsApp aberto, mas não foi possível registar o envio.');return}await refresh();toast('Convite marcado como enviado. ❤️')};
 window.openWhats=window.sendWhats;
 window.removeGuest=async id=>{const g=guests.find(x=>x.id===id);if(!g)return;if(!confirm(`Remover o convite de “${g.full_name}”? Esta acção não pode ser anulada.`))return;const {error}=await supabaseClient.rpc('admin_delete_invitation',{invitation_id:id});if(error){toast(error.message);return}await refresh();toast('Convidado removido.')} ;
+
+A('#guestSearch')?.addEventListener('input',render);
+document.querySelectorAll('.guest-filter').forEach(btn=>btn.addEventListener('click',()=>{guestFilter=btn.dataset.guestFilter;document.querySelectorAll('.guest-filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');render()}));
 A('#addBtn').onclick=()=>openModal();A('#closeModal').onclick=()=>A('#modal').classList.add('hidden');
 async function saveGuestForm(){
  const id=A('#guestId').value;
