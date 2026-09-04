@@ -46,3 +46,61 @@ body.intro-locked{overflow:hidden}
 .program-scroll {
   max-height: 450px;
 }
+
+/* V3.7 — apenas reorganiza a coluna direita do programa conforme a referência visual */
+.program-list-panel {
+  min-width: 0;
+}
+
+.program-list-head {
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.program-list-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--ink);
+}
+.program-list-panel .program-scroll-hint {
+  margin: .65rem 0 .2rem;
+  text-align: right;
+  color: var(--terra);
+  opacity: .72;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.program-list-panel .program-list--compact {
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: .75rem;
+}
+
+.program-list-panel > .program-open-button {
+  margin-top: 1rem;
+}
+
+/* Mobile: mantém a coluna e o scroll, sem alterar o restante da página. */
+@media (max-width: 800px) {
+  .program-list-panel .program-list--compact {
+    max-height: 390px;
+  }
+}
+
+/* V3.9 — alinhamento exacto pela guia azul da referência */
+.program-list-panel {
+  padding-left: 0;
+}
+.program-list-head,
+.program-list-panel .program-scroll-hint,
+.program-list-panel .program-list--compact,
+.program-list-panel > .program-open-button {
+  margin-left: 0;
+}
