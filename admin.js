@@ -38,7 +38,7 @@ window.openQR=id=>{
 A('#closeQrModal').onclick=()=>A('#qrModal').classList.add('hidden');
 A('#copyInviteLink').onclick=async()=>{if(!currentQrGuest)return;const url=inviteUrl()+`?convite=${encodeURIComponent(currentQrGuest.code)}`;await navigator.clipboard.writeText(url);toast('Link do convite copiado.');};
 A('#downloadQr').onclick=()=>{const img=A('#qrCode img')||A('#qrCode canvas');if(!img){toast('QR Code ainda não está pronto.');return;}const a=document.createElement('a');a.href=img.tagName.toLowerCase()==='canvas'?img.toDataURL('image/png'):img.src;a.download=`convite-${currentQrGuest.code}.png`;a.click();};
-function openModal(g={id:'',full_name:'',whatsapp:'',allowed_guests:1,code:genCode()}){A('#modalTitle').textContent=g.id?'Editar convidado':'Novo convidado';A('#guestId').value=g.id;A('#gName').value=g.full_name;A('#gPhone').value=g.whatsapp||'';A('#gAllowed').value=g.allowed_guests;A('#gCode').value=g.code;A('#gMessage').value=makeMessage(g);A('#waLink').href=g.whatsapp?`https://wa.me/${String(g.whatsapp).replace(/\D/g,'')}?text=${encodeURIComponent(makeMessage(g))}`:'#';A('#modal').classList.remove('hidden')}
+function openModal(g={id:'',full_name:'',whatsapp:'',allowed_guests:1,code:genCode()}){A('#modalTitle').textContent=g.id?'Editar convidado':'Novo convidado';A('#guestId').value=g.id;A('#gName').value=g.full_name;A('#gPhone').value=g.whatsapp||'';A('#gAllowed').value=g.allowed_guests;A('#gCode').value=g.code;A('#gMessage').value=makeMessage(g);A('#waLink').href=g.whatsapp?`https://wa.me/${String(g.whatsapp).replace(/\D/g,'')}?text=${encodeURIComponent(makeMessage(g))}`:'#';A('#modal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#gName').focus(),80)}
 window.editGuest=id=>openModal(guests.find(x=>x.id===id));
 window.sendWhats=async id=>{const g=guests.find(x=>x.id===id);if(!g)return;if(!g.whatsapp){toast('Este convidado ainda não tem WhatsApp registado.');return}const url=`https://wa.me/${String(g.whatsapp).replace(/\D/g,'')}?text=${encodeURIComponent(makeMessage(g))}`;window.open(url,'_blank');const {error}=await supabaseClient.rpc('admin_mark_invitation_sent',{invitation_id:id});if(error){toast('WhatsApp aberto, mas não foi possível registar o envio.');return}await refresh();toast('Convite marcado como enviado. ❤️')};
 window.openWhats=window.sendWhats;
@@ -46,7 +46,7 @@ window.removeGuest=async id=>{const g=guests.find(x=>x.id===id);if(!g)return;if(
 
 A('#guestSearch')?.addEventListener('input',render);
 document.querySelectorAll('.guest-filter').forEach(btn=>btn.addEventListener('click',()=>{guestFilter=btn.dataset.guestFilter;document.querySelectorAll('.guest-filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');render()}));
-A('#addBtn').onclick=()=>openModal();A('#addBtn2')?.addEventListener('click',()=>openModal());A('#closeModal').onclick=()=>A('#modal').classList.add('hidden');
+A('#addBtn').onclick=()=>openModal();A('#addBtn2')?.addEventListener('click',()=>openModal());A('#closeModal').onclick=()=>{A('#modal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')};
 async function saveGuestForm(){
  const id=A('#guestId').value;
  const name=A('#gName').value.trim();
@@ -142,8 +142,8 @@ function resetGiftModal(){
  A('#giftFormMsg').classList.add('hidden');A('#giftFormMsg').textContent='';
 }
 
-A('#addGiftBtn').onclick=()=>{resetGiftModal();A('#giftModal').classList.remove('hidden')};
-A('#closeGiftModal').onclick=()=>A('#giftModal').classList.add('hidden');
+A('#addGiftBtn').onclick=()=>{resetGiftModal();A('#giftModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#giftName').focus(),80)};
+A('#closeGiftModal').onclick=()=>{A('#giftModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')};
 
 window.editGift=id=>{
  const g=gifts.find(x=>String(x.id)===String(id)); if(!g)return;
@@ -154,7 +154,7 @@ window.editGift=id=>{
    A('#giftCurrent').innerHTML=`<p class="muted">Fotografia actual:</p><img src="${esc(g.image_url)}" alt="${esc(g.name)}">`;
    A('#giftCurrent').classList.remove('hidden'); A('#removeGiftPhoto').classList.remove('hidden');
  }
- A('#giftModal').classList.remove('hidden');
+ A('#giftModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#giftName').focus(),80);
 };
 
 A('#removeGiftPhoto').onclick=()=>{
@@ -223,7 +223,7 @@ A('#giftForm').onsubmit=async e=>{
        await setGiftImage(id,null);
        const oldPath=giftPathFromUrl(oldGiftImageUrl);if(oldPath)await supabaseClient.storage.from('gift-photos').remove([oldPath]);
      }
-     A('#giftModal').classList.add('hidden');await refresh();toast('Presente actualizado com sucesso. ❤️');
+     A('#giftModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock');await refresh();toast('Presente actualizado com sucesso. ❤️');
    }else{
      const {data,error}=await supabaseClient.rpc('admin_create_gift',{p_name:name});
      if(error)throw new Error('Não foi possível criar o presente: '+error.message);
@@ -233,7 +233,7 @@ A('#giftForm').onsubmit=async e=>{
        try{newUpload=await uploadGiftPhoto(createdId,file);await setGiftImage(createdId,newUpload.url)}
        catch(err){await supabaseClient.rpc('admin_delete_gift',{gift_id:createdId});if(newUpload?.path)await supabaseClient.storage.from('gift-photos').remove([newUpload.path]);throw err}
      }
-     A('#giftModal').classList.add('hidden');await refresh();toast('Presente adicionado com sucesso. ❤️');
+     A('#giftModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock');await refresh();toast('Presente adicionado com sucesso. ❤️');
    }
  }catch(err){showMsg(A('#giftFormMsg'),err.message||String(err));}
  finally{btn.disabled=false;btn.textContent=id?'Guardar alterações':'Guardar presente';}
@@ -250,4 +250,6 @@ window.deleteGift=async id=>{
 };
 
 function toast(t){const x=document.createElement('div');x.className='toast';x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),3000)}
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m){m.classList.add('hidden');document.body.classList.remove('modal-scroll-lock')}}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal:not(.hidden)').forEach(m=>m.classList.add('hidden'));document.body.classList.remove('modal-scroll-lock')}});
 init();
