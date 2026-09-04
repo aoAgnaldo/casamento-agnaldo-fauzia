@@ -1,7 +1,25 @@
 <!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Check-in | Agnaldo & Fáuzia</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script><script src="supabase-config.js"></script></head><body class="reception-body">
 <div id="login" class="login"><div class="login-box"><p class="eyebrow">Recepção</p><h1>Check-in dos convidados</h1><p class="muted">Entre com a conta autorizada para registar as entradas.</p><form id="loginForm"><label>Email<input id="email" type="email" required></label><label>Palavra-passe<input id="password" type="password" required></label><button class="button">Entrar</button><div id="loginMsg" class="status hidden"></div></form></div></div>
-<main id="reception" class="reception hidden"><header class="reception-head"><div><p class="eyebrow">Agnaldo & Fáuzia</p><h1>Check-in</h1><p class="muted">Recepção dos convidados · 29 de Maio de 2027</p></div><div class="reception-actions"><a class="button secondary" href="admin.html">Painel</a><button class="button secondary" id="logout">Sair</button></div></header>
-<section class="scan-card"><div class="scan-title"><span class="scan-icon">⌁</span><div><h2>Ler convite</h2><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="scan-actions"><button class="button reception-primary" id="startScanner">Ler QR Code</button><button class="button secondary hidden" id="stopScanner">Parar leitura</button></div><div id="reader" class="reception-reader hidden"></div><div class="manual-reception"><input id="code" placeholder="Ex.: AF-TESTE01" autocomplete="off" autofocus><button class="button" id="search">Pesquisar</button></div><p class="scan-hint">Também pode usar um leitor de QR externo que preencha este campo.</p></section>
+<main id="reception" class="reception-app hidden">
+<aside class="dash-sidebar reception-sidebar" id="receptionSidebar">
+  <div class="dash-brand"><img src="monogram.svg" alt="A & F"><div><strong>Agnaldo <i>&</i> Fáuzia</strong><span>Área de recepção</span></div></div>
+  <div class="dash-event"><span>CASAMENTO</span><strong>29 MAIO 2027</strong></div>
+  <nav class="dash-nav" aria-label="Navegação da recepção">
+    <p>RECEPÇÃO</p>
+    <a class="dash-nav-link active" href="#checkin-home">✓ <span>Check-in</span></a>
+    <a class="dash-nav-link" href="#scanner">⌾ <span>Ler convite</span></a>
+    <a class="dash-nav-link" href="#entrada">◎ <span>Entradas</span></a>
+    <p>ACESSOS</p>
+    <a class="dash-nav-link" href="admin.html">⌂ <span>Painel Admin</span></a>
+  </nav>
+  <div class="dash-sidebar-bottom"><button class="dash-logout" id="logout">↪ <span>Sair</span></button></div>
+</aside>
+<section class="dash-main reception-content" id="checkin-home">
+  <button class="dash-mobile-toggle" type="button" aria-controls="receptionSidebar" aria-expanded="false">☰ <span>Menu</span></button>
+  <header class="reception-head"><div><p class="eyebrow">Agnaldo & Fáuzia</p><h1>Recepção</h1><p class="muted">Check-in dos convidados · 29 de Maio de 2027</p></div><div class="reception-actions"><a class="button secondary" href="admin.html">Painel Admin</a></div></header>
+<section class="scan-card" id="scanner"><div class="scan-title"><span class="scan-icon">⌁</span><div><h2>Ler convite</h2><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="scan-actions"><button class="button reception-primary" id="startScanner">Ler QR Code</button><button class="button secondary hidden" id="stopScanner">Parar leitura</button></div><div id="reader" class="reception-reader hidden"></div><div class="manual-reception"><input id="code" placeholder="Ex.: AF-TESTE01" autocomplete="off" autofocus><button class="button" id="search">Pesquisar</button></div><p class="scan-hint">Também pode usar um leitor de QR externo que preencha este campo.</p></section>
 <section id="result" class="guest-result hidden"></section>
-<section class="reception-counter"><div><strong id="countIn">0</strong><span>Entraram</span></div><div><strong id="countPeople">0</strong><span>Pessoas presentes</span></div></section>
-</main><div id="toastArea"></div><script src="checkin.js"></script></body></html>
+<section class="reception-counter" id="entrada"><div><strong id="countIn">0</strong><span>Entraram</span></div><div><strong id="countPeople">0</strong><span>Pessoas presentes</span></div></section>
+</section></main><div id="toastArea"></div><script>
+(function(){const btn=document.querySelector('.dash-mobile-toggle'),side=document.getElementById('receptionSidebar'); if(btn&&side){btn.addEventListener('click',()=>{const open=side.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');});side.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{side.classList.remove('is-open');btn.setAttribute('aria-expanded','false');}));}})();
+</script><script src="checkin.js"></script></body></html>
