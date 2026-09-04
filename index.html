@@ -1,0 +1,38 @@
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agnaldo & Fáuzia | 29 de Maio de 2027</title>
+<meta name="description" content="O nosso grande dia — Agnaldo & Fáuzia.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+</head><body>
+<header class="hero"><div class="hero-photo"></div><div class="hero-overlay"></div><div class="hero-content">
+<p class="eyebrow">O nosso grande dia</p><h1>Agnaldo <span>&</span> Fáuzia</h1><p class="date">29 · 05 · 2027</p>
+<p class="hero-verse">“O amor é paciente, o amor é bondoso.”<br><small>1 Coríntios 13:4</small></p>
+<a href="#historia" class="scroll-btn">Descobrir a nossa história ↓</a></div></header>
+<main>
+<section class="intro section"><p class="eyebrow">Com alegria no coração</p><h2>Vamos celebrar o amor</h2><p class="lead">Há encontros que parecem simples, mas que Deus já tinha preparado muito antes de acontecerem. Hoje, queremos partilhar convosco o início de uma nova etapa das nossas vidas.</p></section>
+<section id="historia" class="story section"><div class="section-head"><p class="eyebrow">A nossa história</p><h2>Não foi por acaso</h2></div><div class="story-card">
+<p>Tudo começou num casamento, num daqueles encontros em que a vida parece preparar, silenciosamente, algo muito especial.</p>
+<p>Naquele dia, uma amiga comentou que já tinha sido a ponte para a união de vários casais. A Fáuzia, em tom de brincadeira, perguntou-lhe: <em>“Você vive juntando as pessoas, mas quando chegará a minha vez?”</em></p>
+<p>Pouco tempo depois, essa amiga falou-lhe sobre um amigo querido, descrevendo as suas qualidades e dizendo que talvez houvesse ali uma história bonita para começar. Sem avisar a Fáuzia, entrou em contacto com o Agnaldo e escreveu-lhe: <em>“Agnaldo, tenho uma amiga enviada por Deus que está interessada em conhecer-te.”</em></p>
+<p>Entre fotografias, mensagens e boas conversas, os nossos caminhos começaram a aproximar-se. No dia <strong>23 de Outubro de 2025</strong>, começámos a conversar e demos o primeiro passo para uma história que se tornaria cada vez mais bonita.</p>
+<p>Hoje, percebemos que aquele encontro não foi por acaso: <strong>Deus usou uma amiga como ponte para escrever a nossa história de amor.</strong></p>
+</div></section>
+<section class="countdown-section section"><p class="eyebrow">A contagem decrescente começou</p><h2>Até ao nosso “sim”</h2><div class="countdown"><div><strong id="days">--</strong><span>dias</span></div><div><strong id="hours">--</strong><span>horas</span></div><div><strong id="minutes">--</strong><span>minutos</span></div><div><strong id="seconds">--</strong><span>segundos</span></div></div></section>
+<section class="details section"><div class="section-head"><p class="eyebrow">Marque na agenda</p><h2>O nosso grande dia</h2></div><div class="details-grid">
+<article class="detail-card"><div class="icon">✦</div><h3>Cerimónia religiosa</h3><p><strong>Igreja Universal do Jardim</strong></p><p>29 de Maio de 2027</p><p class="muted">Horário a anunciar</p></article>
+<article class="detail-card"><div class="icon">♡</div><h3>Recepção</h3><p><strong>15 horas</strong></p><p><strong>Sala de Eventos do Kaya Kwanga Residence</strong></p><p>Depois da cerimónia, esperamos por si para celebrar connosco.</p></article>
+</div></section>
+<section id="confirmar" class="rsvp section"><p class="eyebrow">A sua presença importa</p><h2>Confirme a sua presença</h2><p class="lead">Confirme até <strong>30 de Abril de 2027</strong>. Procure o seu convite pelo nome ou pelo código recebido.</p>
+<div class="rsvp-box"><div id="lookupStep"><label>Nome ou código do convite<input id="lookupKey" placeholder="Ex.: Maria João ou AF-8K4P2M"></label><button class="button" id="findBtn">Encontrar o meu convite</button><div id="lookupMsg" class="status hidden"></div></div>
+<div id="rsvpStep" class="hidden"><div id="guestGreeting" class="status"></div><form id="rsvpForm" class="rsvp-form">
+<fieldset><legend>Vai celebrar connosco?</legend><label class="radio"><input type="radio" name="attending" value="true" required><span>Sim, estarei presente ❤️</span></label><label class="radio"><input type="radio" name="attending" value="false"><span>Infelizmente, não poderei estar presente</span></label></fieldset>
+<label id="companionWrap">Número de acompanhantes<select id="companionCount"></select></label>
+<label>Observação <small>(opcional)</small><textarea id="note" rows="3" maxlength="500" placeholder="Alguma informação que queira deixar aos noivos?"></textarea></label>
+<button class="button" type="submit">Confirmar resposta</button><button class="button secondary" type="button" id="changeGuest">Escolher outro convite</button></form><div id="rsvpMsg" class="status hidden"></div></div></div></section>
+<section id="presentes" class="section gifts-section"><div class="section-head"><p class="eyebrow">Com carinho</p><h2>Lista de presentes</h2><p class="lead">Se desejar oferecer-nos algo, poderá reservar um dos itens abaixo. Uma reserva evita que o mesmo presente seja escolhido duas vezes.</p></div><div class="gift-tools"><div class="gift-search"><span>⌕</span><input id="giftSearch" type="search" placeholder="Procurar um presente…" aria-label="Procurar um presente"></div><div class="gift-filters" role="group" aria-label="Filtrar presentes"><button class="gift-filter active" data-filter="all" type="button">Todos</button><button class="gift-filter" data-filter="available" type="button">Disponíveis</button><button class="gift-filter" data-filter="reserved" type="button">Reservados</button></div></div><div id="giftCount" class="gift-count"></div><div id="giftGrid" class="gift-grid"></div></section>
+<section class="music section"><p class="eyebrow">Uma música para nós</p><h2>A nossa banda sonora</h2><div class="music-box"><iframe src="https://www.youtube.com/embed/X9YHnImcww0" title="Música" allow="autoplay; encrypted-media" allowfullscreen></iframe></div></section>
+<section class="final section"><p class="eyebrow">Até lá</p><h2>Será uma alegria ter-vos connosco.</h2><p class="lead">Agnaldo & Fáuzia · 29 de Maio de 2027</p></section>
+</main><footer style="text-align:center;padding:30px;color:#737a80">Feito com amor por Agnaldo & Fáuzia</footer>
+<script src="app.js"></script></body></html>
