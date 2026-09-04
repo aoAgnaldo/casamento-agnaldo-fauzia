@@ -8,7 +8,7 @@ function makeMessage(g){return `Olá, ${g.full_name}! ❤️\n\nÉ com muita ale
 async function init(){const {data}=await supabaseClient.auth.getSession();if(data.session){session=data.session;await enter()}else A('#login').classList.remove('hidden')}
 async function enter(){A('#login').classList.add('hidden');A('#app').classList.remove('hidden');await refresh()}
 A('#loginForm').onsubmit=async e=>{e.preventDefault();const {error}=await supabaseClient.auth.signInWithPassword({email:A('#email').value,password:A('#password').value});if(error)showMsg(A('#loginMsg'),'Email ou palavra-passe incorrectos.');else await enter()}
-A('#logout').onclick=()=>supabaseClient.auth.signOut().then(()=>location.reload());
+A('#logout')?.addEventListener('click',()=>supabaseClient.auth.signOut().then(()=>location.reload()));
 
 async function refresh(){const [{data:g,error:ge},{data:gi,error:gie}]=await Promise.all([supabaseClient.rpc('admin_list_invitations_checkin'),supabaseClient.rpc('admin_list_gifts')]);if(ge){toast(ge.message);return}if(gie){toast(gie.message);return}guests=g||[];gifts=gi||[];render()}
 function render(){
@@ -46,7 +46,7 @@ window.removeGuest=async id=>{const g=guests.find(x=>x.id===id);if(!g)return;if(
 
 A('#guestSearch')?.addEventListener('input',render);
 document.querySelectorAll('.guest-filter').forEach(btn=>btn.addEventListener('click',()=>{guestFilter=btn.dataset.guestFilter;document.querySelectorAll('.guest-filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');render()}));
-A('#addBtn').onclick=()=>openModal();A('#closeModal').onclick=()=>A('#modal').classList.add('hidden');
+A('#addBtn').onclick=()=>openModal();A('#addBtn2')?.addEventListener('click',()=>openModal());A('#closeModal').onclick=()=>A('#modal').classList.add('hidden');
 async function saveGuestForm(){
  const id=A('#guestId').value;
  const name=A('#gName').value.trim();
