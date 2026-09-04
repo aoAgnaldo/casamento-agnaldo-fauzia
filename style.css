@@ -576,3 +576,97 @@ body.intro-locked{overflow:hidden}
     max-height: 400px;
   }
 }
+
+/* V4.1 — afinação do ecrã inicial e capa no mobile */
+@media (max-width: 800px) {
+  .intro-screen {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .intro-screen h1 {
+    margin: .4rem 0 1.25rem;
+    max-width: 92vw;
+    font-size: clamp(4rem, 18vw, 5.8rem);
+    line-height: .78;
+    letter-spacing: -.045em;
+  }
+
+  .intro-screen .intro-note {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .intro-screen .intro-date {
+    margin-top: 2.2rem;
+  }
+
+  .hero {
+    min-height: 100svh;
+    height: 100svh;
+    max-height: none;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  .hero-content {
+    top: auto;
+    bottom: 19%;
+    left: 7vw;
+    right: 7vw;
+  }
+
+  .hero h2 {
+    max-width: 88vw;
+    font-size: clamp(3.8rem, 18vw, 5.6rem);
+    line-height: .78;
+    letter-spacing: -.045em;
+  }
+
+  .hero-copy {
+    max-width: 250px;
+    margin-top: 1.2rem;
+  }
+
+  .hero-date {
+    right: 7vw;
+    bottom: 7%;
+  }
+
+  .hero-date span {
+    font-size: clamp(3.5rem, 14vw, 4.8rem);
+    line-height: .85;
+  }
+
+  .hero-date small {
+    margin-top: .25rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .intro-screen h1 {
+    font-size: clamp(3.7rem, 18.5vw, 5.2rem);
+  }
+
+  .hero-content {
+    bottom: 20%;
+  }
+
+  .hero h2 {
+    font-size: clamp(3.5rem, 18vw, 5rem);
+  }
+
+  .hero-date {
+    bottom: 6.5%;
+  }
+}
