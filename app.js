@@ -215,3 +215,29 @@ loadGifts();
 /* Personalized invitation */
 const inviteParam=new URLSearchParams(location.search).get('convite');
 if(inviteParam)setTimeout(()=>findInvitation(inviteParam),250);
+
+/* V4.2 — modal de acessos reservados */
+(() => {
+  const trigger = document.getElementById('privateAccessTrigger');
+  const modal = document.getElementById('privateAccessModal');
+  const close = document.getElementById('privateAccessClose');
+  if (!trigger || !modal || !close) return;
+
+  const open = () => {
+    modal.hidden = false;
+    document.body.classList.add('private-access-open');
+    close.focus();
+  };
+  const shut = () => {
+    modal.hidden = true;
+    document.body.classList.remove('private-access-open');
+    trigger.focus();
+  };
+
+  trigger.addEventListener('click', open);
+  close.addEventListener('click', shut);
+  modal.querySelectorAll('[data-close-private]').forEach(el => el.addEventListener('click', shut));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !modal.hidden) shut();
+  });
+})();

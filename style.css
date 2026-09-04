@@ -670,3 +670,188 @@ body.intro-locked{overflow:hidden}
     bottom: 6.5%;
   }
 }
+
+/* V4.2 — acessos reservados no rodapé */
+.footer { position: relative; }
+
+.private-access {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.15rem;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.private-access-trigger {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255,255,255,.62);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: opacity .2s ease, border-color .2s ease;
+}
+
+.private-access-trigger:hover {
+  opacity: .85;
+  border-color: rgba(255,255,255,.5);
+}
+
+.private-access-modal[hidden] {
+  display: none;
+}
+
+.private-access-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.private-access-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(25,20,17,.68);
+  backdrop-filter: blur(4px);
+}
+
+.private-access-dialog {
+  position: relative;
+  width: min(680px, 100%);
+  padding: 3rem;
+  background: var(--paper, #f4eee5);
+  color: var(--ink, #302823);
+  border: 1px solid rgba(48,40,35,.14);
+  box-shadow: 0 24px 70px rgba(0,0,0,.2);
+  z-index: 1;
+}
+
+.private-access-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.private-access-kicker {
+  margin: 0 0 .7rem;
+  color: var(--terra, #9a5947);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.private-access-dialog h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 6vw, 4.2rem);
+  font-weight: 400;
+  line-height: .9;
+}
+
+.private-access-subtitle {
+  margin: 1rem 0 2rem;
+  opacity: .72;
+}
+
+.private-access-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.private-access-card {
+  min-height: 180px;
+  padding: 1.4rem;
+  border: 1px solid rgba(48,40,35,.16);
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform .2s ease, border-color .2s ease;
+}
+
+.private-access-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--terra, #9a5947);
+}
+
+.private-access-icon {
+  margin-bottom: auto;
+  font-size: 22px;
+  opacity: .7;
+}
+
+.private-access-card strong {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.private-access-card small {
+  margin-top: .45rem;
+  font-size: .78rem;
+  line-height: 1.4;
+  opacity: .68;
+}
+
+@media (max-width: 800px) {
+  .private-access {
+    margin-top: 1.4rem;
+  }
+
+  .private-access-dialog {
+    padding: 2.3rem 1.25rem 1.5rem;
+  }
+
+  .private-access-options {
+    grid-template-columns: 1fr;
+  }
+
+  .private-access-card {
+    min-height: 130px;
+  }
+}
+
+body.private-access-open { overflow: hidden; }
+
+@media (max-width: 800px) {
+  .private-access {
+    right: 1rem;
+    bottom: 1rem;
+    margin: 0;
+  }
+  .private-access-trigger {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* V4.4 — ícone de acesso reservado visível no rodapé escuro */
+.private-access-trigger {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.55) !important;
+  background: rgba(255,255,255,.04) !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.05);
+}
+.private-access-trigger:hover,
+.private-access-trigger:focus-visible {
+  color: #fff !important;
+  border-color: #fff !important;
+  opacity: 1 !important;
+}

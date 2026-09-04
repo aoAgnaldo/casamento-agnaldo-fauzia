@@ -194,6 +194,35 @@
  </div>
 </section>
 
+
+<div class="private-access">
+  <button class="private-access-trigger" id="privateAccessTrigger" type="button" aria-label="Acessos reservados" title="Acessos reservados">
+    <span aria-hidden="true">⌘</span>
+  </button>
+</div>
+
+<div class="private-access-modal" id="privateAccessModal" hidden>
+  <div class="private-access-backdrop" data-close-private></div>
+  <div class="private-access-dialog" role="dialog" aria-modal="true" aria-labelledby="privateAccessTitle">
+    <button class="private-access-close" id="privateAccessClose" type="button" aria-label="Fechar">×</button>
+    <p class="private-access-kicker">ÁREA RESERVADA</p>
+    <h2 id="privateAccessTitle">Escolha o acesso</h2>
+    <p class="private-access-subtitle">Seleccione o painel que pretende abrir.</p>
+    <div class="private-access-options">
+      <a href="admin.html" class="private-access-card">
+        <span class="private-access-icon" aria-hidden="true">⌂</span>
+        <strong>Admin</strong>
+        <small>Gestão do convite, convidados e presentes</small>
+      </a>
+      <a href="checkin.html" class="private-access-card">
+        <span class="private-access-icon" aria-hidden="true">✓</span>
+        <strong>Recepção</strong>
+        <small>Confirmação da entrada dos convidados</small>
+      </a>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
  <div><p class="footer-names">Agnaldo <i>&amp;</i> Fáuzia</p><p>29 · 05 · 2027</p></div>
  <div class="footer-verse">“O amor é paciente, o amor é bondoso.”<br><span>1 Coríntios 13:4</span></div>
