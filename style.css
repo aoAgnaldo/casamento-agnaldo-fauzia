@@ -2148,3 +2148,85 @@ button,.button,a.wedy-menu,.cover-icon,.quick,.guest-filter,.drawer-mini-btn,.ic
 
 .protocol-tasks{margin-top:20px}.protocol-tasks .chief-tools-card{background:#fff;border:1px solid #e7dfd8;border-radius:18px;padding:18px}.my-task-list{display:grid;gap:0}.my-task{border-top:1px solid #eee8e3;padding:14px 0;display:flex;gap:12px;align-items:flex-start}.my-task:first-child{border-top:0}.my-task-check{width:30px;height:30px;border-radius:50%;border:1px solid #d9d0c8;display:grid;place-items:center;flex:0 0 30px;font-size:.9rem}.my-task.is-done .my-task-check{background:#6f7d6b;color:#fff;border-color:#6f7d6b}.my-task.is-done .chief-task-main b{text-decoration:line-through;opacity:.65}.my-task .chief-task-main small:last-child{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.5rem}.my-task .chief-task-actions{margin-left:auto}.protocol-tasks h2{font:500 2rem/1 'Cormorant Garamond',serif;margin:0 0 5px}
 @media(max-width:620px){.my-task{gap:9px}.my-task .chief-task-actions{flex:0 0 auto}.my-task .icon-btn{padding:.55rem .65rem}}
+
+/* V6.16 — Protocolo Chefe: gestão de equipa e tarefas */
+.chief-tools{display:grid;gap:16px;margin-top:24px}
+.chief-tools-card{background:#fff;border:1px solid #ebe6e1;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(48,38,32,.025)}
+.chief-overview-head,.chief-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.chief-overview-head h3,.chief-card-head h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;line-height:1;margin:7px 0 5px}
+.chief-overview-head .muted,.chief-card-head .muted{font-size:.68rem;line-height:1.5;margin:0;max-width:620px}
+.chief-overview-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ebe6e1;border:1px solid #ebe6e1;border-radius:12px;overflow:hidden;margin-top:18px}
+.chief-overview-stats div{background:#faf9f7;padding:15px 16px}
+.chief-overview-stats span{display:block;font-size:.52rem;letter-spacing:.13em;color:#9b6857;font-weight:600}
+.chief-overview-stats strong{display:block;font-family:'Cormorant Garamond',serif;font-size:2.25rem;font-weight:500;line-height:1;margin:6px 0 2px}
+.chief-overview-stats small{font-size:.58rem;color:#827b75}
+.chief-team-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.chief-task{display:flex;align-items:center;gap:11px;border:1px solid #ebe6e1;border-radius:11px;background:#faf9f7;padding:11px 12px;margin-top:8px}
+.chief-task:first-child{margin-top:0}
+.protocol-avatar{width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#eadfd8;color:#6e5147;display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:1rem}
+.chief-task-main{min-width:0;flex:1}.chief-task-main b{display:block;font-size:.68rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chief-task-main small{display:block;font-size:.57rem;color:#827b75;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chief-task-actions{display:flex;gap:5px;flex:0 0 auto}.icon-btn{border:1px solid #e4ded9;background:#fff;color:#625952;border-radius:8px;padding:7px 9px;font:500 .54rem 'Montserrat',sans-serif;cursor:pointer}.icon-btn:hover{background:#f3efeb}.icon-btn.danger{color:#8b5047}
+.chief-task-form{margin-top:4px}.chief-task-list{margin-top:16px}
+.chief-scroll-list{max-height:270px;overflow:auto;padding-right:4px;scrollbar-width:thin}
+.my-task-list{max-height:320px;overflow:auto;padding-right:4px;scrollbar-width:thin}
+.my-task{display:flex;align-items:center;gap:10px;border:1px solid #ebe6e1;border-radius:11px;background:#faf9f7;padding:11px 12px;margin-top:8px}.my-task:first-child{margin-top:0}.my-task-check{width:30px;height:30px;border-radius:9px;background:#f0ebe6;display:grid;place-items:center;color:#9b6857;font-size:.85rem}.my-task.is-done .my-task-check{background:#e6f2eb;color:#32664a}.my-task .chief-task-main{min-width:0}.my-task .chief-task-main small{white-space:normal}
+@media(max-width:720px){.chief-tools{margin-top:16px}.chief-tools-card{padding:16px;border-radius:13px}.chief-overview-head,.chief-card-head{flex-direction:column}.chief-overview-head .button{width:100%}.chief-overview-head h3,.chief-card-head h3{font-size:1.85rem}.chief-overview-stats{grid-template-columns:repeat(3,1fr)}.chief-overview-stats div{padding:12px 9px}.chief-overview-stats strong{font-size:1.9rem}.chief-overview-stats span{font-size:.47rem}.chief-overview-stats small{font-size:.5rem}.chief-team-grid{grid-template-columns:1fr}.chief-task{align-items:flex-start}.chief-task-actions{margin-left:auto}.chief-task-actions .icon-btn{padding:7px 8px}.chief-scroll-list{max-height:240px}.my-task-list{max-height:280px}}
+
+/* V6.17 - centro de operações da recepção */
+.reception-live-dashboard{margin-top:24px;display:grid;gap:18px}
+.live-summary-card{overflow:hidden}
+.live-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:18px;background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.08)}
+.live-summary-grid>div{background:#fff;padding:18px 16px;display:flex;flex-direction:column;gap:5px}
+.live-summary-grid span,.table-occupancy small,.recent-arrival small{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#777}
+.live-summary-grid strong{font:600 30px/1 'Cormorant Garamond',serif}
+.live-indicator{font-size:9px;letter-spacing:.12em;color:#777;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.live-indicator i{width:7px;height:7px;border-radius:50%;background:#6c8f6c;display:inline-block;box-shadow:0 0 0 4px rgba(108,143,108,.12)}
+.live-columns{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.recent-arrivals-list,.table-occupancy-list{display:grid;gap:8px}
+.recent-arrival,.table-occupancy{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.08)}
+.recent-arrival:last-child,.table-occupancy:last-child{border-bottom:0}
+.recent-arrival>div:first-child,.arrival-meta,.table-occupancy>div:first-child{display:flex;flex-direction:column;gap:3px}
+.arrival-meta{text-align:right;min-width:80px}
+.arrival-meta b{font-size:11px;font-weight:600}
+.occupancy-track{height:5px;background:#eee;width:38%;overflow:hidden;flex:none}
+.occupancy-track i{display:block;height:100%;background:#555}
+@media(max-width:760px){
+ .live-summary-grid{grid-template-columns:repeat(2,1fr)}
+ .live-columns{grid-template-columns:1fr}
+ .live-indicator{display:none}
+ .live-summary-grid strong{font-size:26px}
+}
+
+/* V6.17 — Centro de Operações do Protocolo Chefe */
+.chief-reception-control{background:linear-gradient(135deg,#fff 0%,#faf7f3 100%);border-color:#ddd3ca}
+.chief-live-meta{display:flex;flex-direction:column;align-items:flex-end;gap:7px}.chief-live-meta small{font-size:10px;color:#8b8179;letter-spacing:.08em;text-transform:uppercase}
+.chief-reception-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:18px;background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.08)}
+.chief-reception-kpis>div{background:#fff;padding:18px 16px;display:flex;flex-direction:column;gap:5px}.chief-reception-kpis span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#777}.chief-reception-kpis strong{font:600 32px/1 'Cormorant Garamond',serif}
+.chief-reception-status{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.chief-reception-status>div{border:1px solid #ebe5df;border-radius:12px;padding:11px 13px;background:#fff;display:flex;align-items:baseline;gap:7px}.chief-reception-status b{font:600 20px/1 'Cormorant Garamond',serif}.chief-reception-status span{font-size:10px;color:#8b8179;text-transform:uppercase;letter-spacing:.08em}
+@media(max-width:720px){.chief-live-meta{align-items:flex-start}.chief-reception-kpis{grid-template-columns:repeat(2,1fr)}.chief-reception-status{grid-template-columns:1fr}.chief-reception-status>div{justify-content:space-between}}
+
+/* V6.18 — Painel de comando do Protocolo Chefe */
+.chief-command-card{background:#fff;border-color:#ddd3ca}
+.chief-command-note{font-size:9px;letter-spacing:.11em;color:#8b8179;white-space:nowrap}
+.chief-command-team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}
+.chief-team-person{border:1px solid #ebe5df;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center;background:#faf9f7}
+.chief-team-person .protocol-avatar{flex:0 0 36px}
+.chief-team-person-main{min-width:0;flex:1}.chief-team-person-main b{display:block;font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chief-team-person-main small{display:block;color:#827b75;font-size:.55rem;margin-top:3px}
+.chief-team-status{display:inline-flex;align-items:center;gap:5px;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-top:5px}.chief-team-status i{width:7px;height:7px;border-radius:50%;display:inline-block;background:#aaa}.chief-team-status.online i{background:#6c8f6c}.chief-team-status.offline i{background:#b78a72}
+.chief-team-progress{width:72px;flex:0 0 72px}.chief-team-progress-track{height:4px;background:#e9e4df;overflow:hidden;border-radius:5px}.chief-team-progress-track i{display:block;height:100%;background:#777}.chief-team-progress small{display:block;text-align:right;font-size:8px;color:#827b75;margin-top:3px}
+.chief-operations-columns{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.chief-badge{min-width:27px;height:27px;padding:0 8px;border-radius:99px;border:1px solid #e3dbd4;display:grid;place-items:center;font-size:.62rem;font-weight:600;background:#faf8f5}
+.chief-attention-item,.chief-remaining-item{border:1px solid #ebe5df;border-radius:11px;background:#faf9f7;padding:11px 12px;margin-top:8px;display:flex;gap:10px;align-items:center}.chief-attention-item:first-child,.chief-remaining-item:first-child{margin-top:0}
+.chief-attention-main,.chief-remaining-main{min-width:0;flex:1}.chief-attention-main b,.chief-remaining-main b{display:block;font-size:.64rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chief-attention-main small,.chief-remaining-main small{display:block;font-size:.54rem;color:#827b75;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chief-task-age{font-size:.48rem!important;text-transform:uppercase;letter-spacing:.06em}.chief-task-age.is-late{color:#9b5c4e!important;font-weight:600}
+.chief-remaining-code{font-size:.5rem;letter-spacing:.08em;color:#9b6857}.chief-remaining-table{font-size:.52rem;font-weight:600;color:#625952;white-space:nowrap}
+@media(max-width:720px){.chief-command-team,.chief-operations-columns{grid-template-columns:1fr}.chief-command-note{white-space:normal}.chief-team-progress{width:62px;flex-basis:62px}.chief-operations-columns{gap:14px}}
+
+/* V6.19 — Planta e controlo das mesas */
+.chief-tables-card{background:linear-gradient(135deg,#fff 0%,#fbf8f5 100%);border-color:#ddd3ca}
+.chief-table-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:15px;padding:10px 12px;border:1px solid #ebe5df;background:#fff;border-radius:10px}
+.chief-table-legend span{font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#777;display:flex;align-items:center;gap:6px}.table-dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:#b7b0aa}.table-dot.partial{background:#a48672}.table-dot.full{background:#777}.table-dot.over{background:#9b5c4e}
+.chief-tables-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.chief-table-card{border:1px solid #e6dfd9;border-radius:14px;background:#fff;padding:14px;min-width:0}.chief-table-card.over{border-color:#d8b9b0}.chief-table-card.full{border-color:#d7d0ca}.chief-table-top{display:flex;align-items:center;gap:12px}.table-circle{width:58px;height:58px;flex:0 0 58px;border-radius:50%;border:1px solid #e3ddd7;background:#faf8f5;display:grid;place-items:center;text-align:center}.table-circle b{font:600 .8rem 'Cormorant Garamond',serif;line-height:1.05}.table-circle small{font-size:.48rem;color:#827b75}.chief-table-status{min-width:0;display:flex;flex-direction:column;gap:3px}.chief-table-status strong{font:600 1.2rem/1 'Cormorant Garamond',serif}.chief-table-status span{font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:#827b75}.chief-table-card.over .chief-table-status span{color:#9b5c4e;font-weight:600}.chief-table-bar{height:5px;background:#eee8e2;border-radius:99px;overflow:hidden;margin:13px 0 8px}.chief-table-bar i{display:block;height:100%;background:#777;border-radius:99px}.chief-table-card.over .chief-table-bar i{background:#9b5c4e}.chief-table-meta{display:flex;justify-content:space-between;gap:8px;color:#827b75;font-size:.5rem}.chief-table-guests{border-top:1px solid #eee9e4;margin-top:10px;padding-top:9px;display:flex;flex-wrap:wrap;gap:5px}.chief-table-guests span,.chief-table-guests em{font-size:.5rem;background:#f6f2ee;border-radius:99px;padding:5px 7px;color:#625952;font-style:normal}.chief-table-guests>small{font-size:.53rem;color:#999}.chief-table-guests em{color:#9b6857}
+@media(max-width:900px){.chief-tables-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.chief-tables-grid{grid-template-columns:1fr}.chief-table-meta{flex-direction:column;gap:3px}.chief-table-legend{gap:9px}}
