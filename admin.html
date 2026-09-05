@@ -6,7 +6,129 @@
 .modal-hero{padding:25px 28px 19px;border-bottom:1px solid #ebe5df;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;background:linear-gradient(180deg,#fffdf9 0%,#fbfaf7 100%);}
 .modal-hero-copy{min-width:0}.modal-kicker{margin:0 0 6px;font:600 .58rem Montserrat,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#9b6857}.modal-hero h2{margin:0!important;font-family:'Cormorant Garamond',serif!important;font-size:2.65rem!important;line-height:.92!important;font-weight:500!important;letter-spacing:-.025em!important}.modal-hero p{margin:8px 0 0;font-size:.72rem;line-height:1.5;color:#81776f;max-width:430px}.modal-symbol{flex:0 0 48px;width:48px;height:48px;border-radius:15px;background:#f1ece7;color:#7b5b4d;display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:1.55rem;border:1px solid #e6ddd6}.modal-close-x{width:38px;height:38px;border:1px solid #e6e0db;background:#fff;border-radius:11px;color:#6e625a;display:grid;place-items:center;font-size:1.2rem;cursor:pointer;flex:0 0 auto}.modal-form-body{padding:24px 28px 26px}.modal-form-body label{display:grid;gap:7px;margin-bottom:15px;font-size:.59rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#766c65}.modal-form-body input,.modal-form-body textarea{width:100%;box-sizing:border-box;border:1px solid #e4ddd7;background:#fff;border-radius:12px;padding:12px 13px;font:400 .76rem Montserrat,sans-serif;letter-spacing:0;text-transform:none;color:#302a26;outline:none;transition:border-color .16s,box-shadow .16s,background .16s}.modal-form-body input:focus,.modal-form-body textarea:focus{border-color:#9b6857;box-shadow:0 0 0 3px rgba(155,104,87,.11)}.modal-form-body textarea{resize:vertical;min-height:105px;line-height:1.5}.modal-form-body small{font:500 .57rem Montserrat,sans-serif;letter-spacing:0;text-transform:none;color:#9a9088;margin-left:3px}.modal-grid{display:grid;grid-template-columns:1.5fr .7fr;gap:13px}.modal-grid.equal{grid-template-columns:1fr 1fr}.modal-readonly{background:#f5f2ee!important;color:#746b64!important}.modal-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;padding-top:7px}.modal-actions .button{min-height:42px}.modal-actions .button.primary-modal{background:#9b6857;color:#fff}.modal-actions .button.secondary{border:1px solid #e2dcd6}.gift-upload{border:1px dashed #d8cec6;background:#faf7f3;border-radius:14px;padding:14px}.gift-upload input[type=file]{background:#fff}.gift-photo-current{margin:4px 0 14px}.modal-status{margin-top:12px}.modal-divider{height:1px;background:#ebe5df;margin:3px 0 18px}
 .modal{position:fixed!important;inset:0!important;z-index:10000!important;width:100%!important;height:100%!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:24px!important;margin:0!important;background:rgba(28,24,21,.58)!important;backdrop-filter:blur(7px)!important;-webkit-backdrop-filter:blur(7px)!important;overflow:auto!important}.modal.hidden{display:none!important}.modal-box{position:relative!important;z-index:10001!important;width:min(640px,calc(100vw - 48px))!important;max-width:640px!important;max-height:min(780px,calc(100vh - 48px))!important;overflow:auto!important;margin:0!important;flex:0 1 auto!important;background:#fbfaf7!important;border:1px solid rgba(91,74,64,.16)!important;border-radius:24px!important;box-shadow:0 30px 90px rgba(24,20,17,.30)!important}.modal-box:before{content:"";display:block;height:4px;background:linear-gradient(90deg,#9b6857 0%,#b99582 48%,#718171 100%)}.modal-box:after{content:"×";position:absolute;top:15px;right:17px;width:36px;height:36px;border-radius:11px;background:#f3efeb;border:1px solid #e4ddd7;color:#665c55;display:grid;place-items:center;font:400 24px/1 'Montserrat',sans-serif;pointer-events:none}.modal-hero{padding-right:64px!important}.modal-scroll-lock{overflow:hidden!important}@media(max-width:640px){.modal{padding:12px!important;align-items:center!important}.modal-box{width:min(100%,calc(100vw - 24px))!important;max-height:calc(100vh - 24px)!important;border-radius:21px!important}.modal-hero{padding:20px 56px 16px 18px!important}.modal-form-body{padding:18px!important}.modal-hero h2{font-size:2.2rem!important}.modal-symbol{width:42px;height:42px;flex-basis:42px}.modal-grid,.modal-grid.equal{grid-template-columns:1fr}.modal-actions{display:grid;grid-template-columns:1fr 1fr}.modal-actions .button,.modal-actions a{width:100%;box-sizing:border-box}.modal-actions .button:last-child{grid-column:1/-1}.guest-message-action{grid-column:1/-1}}
-</style></head><body class="admin-body">
+</style><style id="v630-admin-shell">
+/* V6.30 — shell administrativo fixo: cabeçalho + menu lateral fixos; apenas a área de trabalho pode rolar. */
+html, body { height:100%; }
+body.admin-body { margin:0!important; overflow:hidden!important; background:#fbfaf8!important; }
+body.admin-body .wedy-app { height:100vh!important; min-height:100vh!important; overflow:hidden!important; }
+body.admin-body .wedy-header { position:fixed!important; top:0!important; left:0!important; right:0!important; height:76px!important; z-index:1200!important; box-sizing:border-box!important; background:rgba(255,255,255,.96)!important; border-bottom:1px solid #ebe5df!important; }
+body.admin-body .wedy-brand { display:none!important; }
+body.admin-body .wedy-nav { display:none!important; }
+body.admin-body .wedy-event { position:absolute!important; right:74px!important; top:10px!important; }
+body.admin-body .wedy-menu { position:absolute!important; right:18px!important; top:17px!important; z-index:1300!important; }
+body.admin-body .admin-menu-panel { z-index:1400!important; }
+body.admin-body .admin-wrap { position:absolute!important; top:76px!important; left:0!important; right:0!important; bottom:0!important; height:auto!important; margin:0!important; padding:0!important; max-width:none!important; overflow:hidden!important; }
+body.admin-body .admin-dashboard { display:block!important; position:static!important; min-height:0!important; height:100%!important; margin:0!important; padding:0!important; background:#fbfaf8!important; }
+body.admin-body .admin-dashboard-sidebar { position:fixed!important; left:0!important; top:76px!important; bottom:0!important; width:238px!important; height:auto!important; box-sizing:border-box!important; z-index:1100!important; margin:0!important; padding:28px 16px 22px!important; background:#fff!important; border-right:1px solid #ebe5df!important; overflow:hidden!important; transform:none!important; box-shadow:none!important; }
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav { overflow:visible!important; }
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav a { transition:background .18s ease,color .18s ease; }
+body.admin-body .admin-dashboard-main { position:absolute!important; left:238px!important; right:0!important; top:0!important; bottom:0!important; margin:0!important; max-width:none!important; height:auto!important; box-sizing:border-box!important; padding:30px 34px 40px!important; overflow-y:auto!important; overflow-x:hidden!important; }
+/* O dashboard é curto por desenho; os módulos continuam independentes e ocupam a mesma área de trabalho. */
+body.admin-body .admin-view-section { display:none!important; position:absolute!important; left:238px!important; right:0!important; top:0!important; bottom:0!important; width:auto!important; max-width:none!important; height:auto!important; min-height:0!important; box-sizing:border-box!important; margin:0!important; padding:30px 34px 40px!important; overflow-y:auto!important; overflow-x:hidden!important; background:#fbfaf8!important; border:0!important; border-radius:0!important; box-shadow:none!important; }
+body.admin-body .admin-view-section.admin-view-active { display:block!important; }
+body.admin-body .admin-dashboard.is-view-hidden { display:none!important; }
+body.admin-body .admin-dashboard-main .admin-love-banner { margin-bottom:0!important; }
+/* No dashboard, o painel termina visualmente no banner; evita blocos que possam ficar depois dele. */
+@media (min-width:761px){
+  body.admin-body .admin-dashboard-main { scrollbar-width:thin; scrollbar-color:#d9d0ca transparent; }
+  body.admin-body .admin-view-section { scrollbar-width:thin; scrollbar-color:#d9d0ca transparent; }
+}
+@media (max-width:760px){
+  body.admin-body .wedy-header { height:64px!important; }
+  body.admin-body .wedy-event { right:62px!important; top:7px!important; }
+  body.admin-body .wedy-menu { right:12px!important; top:12px!important; }
+  body.admin-body .admin-wrap { top:64px!important; }
+  body.admin-body .admin-dashboard-sidebar { top:64px!important; width:min(300px,86vw)!important; padding:22px 14px 20px!important; transform:translateX(-105%)!important; transition:transform .24s ease!important; box-shadow:16px 0 42px rgba(38,30,25,.12)!important; z-index:1500!important; }
+  body.admin-body.admin-sidebar-open .admin-dashboard-sidebar { transform:translateX(0)!important; }
+  body.admin-body .admin-dashboard-main { left:0!important; padding:18px 14px 30px!important; }
+  body.admin-body .admin-view-section { left:0!important; padding:18px 14px 30px!important; }
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav { display:grid!important; gap:3px!important; }
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav a { width:100%!important; min-height:44px!important; box-sizing:border-box!important; padding:11px 10px!important; }
+  body.admin-body .admin-sidebar-note { display:block!important; }
+  body.admin-body .admin-sidebar-settings { display:flex!important; }
+  body.admin-body .admin-dashboard-top { grid-template-columns:1fr!important; }
+  body.admin-body .admin-date-card { display:none!important; }
+  body.admin-body .admin-kpis { grid-template-columns:1fr 1fr!important; gap:10px!important; }
+  body.admin-body .admin-dashboard-grid-two, body.admin-body .admin-dashboard-grid-three { grid-template-columns:1fr!important; }
+  body.admin-body .admin-dashboard-main h1 { font-size:clamp(2rem,9vw,3rem)!important; }
+  body.admin-body .admin-dashboard-main .admin-welcome { gap:12px!important; }
+  body.admin-body .admin-dashboard-main .admin-welcome .button { width:100%!important; }
+  body.admin-body .admin-dashboard-main .admin-love-banner { margin-top:18px!important; }
+  body.admin-body .admin-view-section .section-title-row { gap:14px!important; }
+  body.admin-body .admin-view-section .section-actions { width:100%!important; flex-wrap:wrap!important; }
+  body.admin-body .admin-view-section .section-actions .button { flex:1 1 140px!important; }
+}
+</style><style id="v630-mobile-overlay">
+.admin-sidebar-backdrop{display:none}
+@media(max-width:760px){.admin-sidebar-backdrop{display:block;position:fixed;inset:64px 0 0 0;z-index:1490;background:rgba(35,29,25,.24);opacity:0;pointer-events:none;transition:opacity .24s ease}.admin-body.admin-sidebar-open .admin-sidebar-backdrop{opacity:1;pointer-events:auto}}
+</style><style id="v631-centered-55">
+/* V6.31 — área administrativa centralizada: 55% ao centro + 22,5% laterais */
+@media (min-width: 761px){
+  html,body{overflow:hidden!important;background:#fff!important;}
+  body.admin-body .wedy-header{
+    left:22.5vw!important;right:auto!important;width:55vw!important;
+    height:76px!important;overflow:hidden!important;
+  }
+  body.admin-body .admin-wrap{
+    left:22.5vw!important;right:auto!important;width:55vw!important;
+    top:76px!important;bottom:0!important;height:auto!important;
+    overflow:hidden!important;
+    background:#fbfaf8!important;
+  }
+  body.admin-body .admin-dashboard-sidebar{
+    left:22.5vw!important;top:76px!important;bottom:0!important;
+    width:220px!important;
+  }
+  body.admin-body .admin-dashboard-main{
+    left:220px!important;right:0!important;top:0!important;bottom:0!important;
+    width:auto!important;max-width:none!important;
+    padding:24px 24px 24px!important;
+    overflow:hidden!important;
+  }
+  body.admin-body .admin-view-section{
+    left:220px!important;right:0!important;top:0!important;bottom:0!important;
+    width:auto!important;max-width:none!important;
+    padding:24px 24px 28px!important;
+    overflow:auto!important;
+  }
+  body.admin-body .admin-dashboard-main .admin-dashboard-top{gap:12px!important;}
+  body.admin-body .admin-global-search{width:min(52%,460px)!important;}
+  body.admin-body .admin-kpis{gap:10px!important;}
+  body.admin-body .admin-kpi{padding:13px!important;gap:8px!important;min-width:0!important;}
+  body.admin-body .admin-kpi strong{font-size:1.65rem!important;}
+  body.admin-body .admin-dashboard-grid-two{gap:10px!important;}
+  body.admin-body .admin-dashboard-grid-three{gap:10px!important;}
+  body.admin-body .admin-love-banner{padding-top:14px!important;padding-bottom:4px!important;}
+  /* Em ecrãs onde os 4 cartões já não cabem confortavelmente, passam para 2x2 sem cortar conteúdo. */
+  @media (max-width: 1550px){
+    body.admin-body .admin-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  }
+  @media (max-width: 1050px){
+    body.admin-body .admin-dashboard-top{align-items:flex-start!important;flex-direction:column!important;}
+    body.admin-body .admin-global-search{width:100%!important;max-width:none!important;}
+    body.admin-body .admin-dashboard-grid-two,
+    body.admin-body .admin-dashboard-grid-three{grid-template-columns:1fr!important;}
+  }
+}
+
+/* A área lateral é intencionalmente limpa: o sistema vive apenas no centro. */
+@media (min-width:761px){
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand{padding-left:6px!important;padding-right:6px!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav a,
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-settings{padding-left:9px!important;padding-right:9px!important;}
+}
+
+/* Mobile: 100% da largura, mantendo o mesmo princípio visual sem a área lateral de 22,5%. */
+@media (max-width:760px){
+  html,body{overflow:hidden!important;}
+  body.admin-body .wedy-header{left:0!important;right:0!important;width:100%!important;}
+  body.admin-body .admin-wrap{left:0!important;right:0!important;width:100%!important;}
+  body.admin-body .admin-dashboard-main{overflow:auto!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body .admin-view-section{left:0!important;right:0!important;width:100%!important;}
+}
+</style>
+
+</head><body class="admin-body">
 <div id="login" class="login"><div class="login-box"><p class="eyebrow">Área privada</p><h1>Painel dos noivos</h1><p class="muted">Entre com a conta de administrador criada no Supabase.</p><form id="loginForm"><label>Email<input id="email" type="email" required></label><label>Palavra-passe<input id="password" type="password" required></label><button class="button">Entrar</button><div id="loginMsg" class="status hidden"></div></form></div></div>
 <div id="app" class="wedy-app hidden">
 <header class="wedy-header">
@@ -18,15 +140,15 @@
   <button class="wedy-menu" id="adminMenuBtn" type="button" aria-label="Abrir menu de administração" aria-expanded="false">☰</button>
   <div class="admin-menu-panel hidden" id="adminMenuPanel" role="menu">
     <div class="admin-menu-profile"><span class="admin-menu-avatar" id="adminMenuAvatar">A&F</span><div><strong id="adminMenuName">Administrador</strong><small id="adminMenuEmail">—</small></div></div>
-    <nav class="admin-menu-nav" aria-label="Navegação do painel"><a href="#visao-geral">Início</a><a href="#checkin">Check-in</a><a href="#convidados">Convidados</a><a href="#presentes">Presentes</a><a href="#programa-admin">Programa</a><a href="#mesas">Mesas</a><a href="#protocolos">Protocolos</a></nav>
+    <nav class="admin-menu-nav" aria-label="Navegação do painel"><a href="#visao-geral">Início</a><a href="#checkin">Check-in</a><a href="#convidados">Convidados</a><a href="#presentes">Presentes</a><a href="#programa-admin">Programa</a><a href="#mesas">Mesas</a><a href="#protocolos">Protocolos</a><a href="checkin.html">Check-in</a></nav>
     <button type="button" class="admin-menu-item" id="openProfileSettings"><span>◌</span><div><strong>Minha conta</strong><small>Alterar nome e fotografia</small></div></button>
     <button type="button" class="admin-menu-item" id="openAdminSettings"><span>♙</span><div><strong>Administradores</strong><small>Adicionar outro administrador</small></div></button>
     <button type="button" class="admin-menu-item danger" id="menuLogout"><span>↪</span><div><strong>Sair</strong><small>Terminar sessão</small></div></button>
   </div>
 </header>
-<main class="wedy-main admin-wrap">
-  <section class="admin-dashboard" id="visao-geral">
-    <aside class="admin-dashboard-sidebar">
+<main class="wedy-main admin-wrap admin-app-main">
+<div class="admin-sidebar-backdrop" id="adminSidebarBackdrop" aria-hidden="true"></div>
+<aside class="admin-dashboard-sidebar">
       <div class="admin-sidebar-brand"><img src="monogram.svg" alt="A & F"><div><strong>Agnaldo & Fáuzia</strong><small>29 de Maio de 2027</small></div></div>
       <nav aria-label="Navegação do painel administrativo" class="admin-sidebar-nav">
         <a class="active" href="#visao-geral">▦ <span>Painel Principal</span></a>
@@ -36,6 +158,7 @@
         <a href="#programa-admin">◷ <span>Programa</span></a>
         <a href="#checkin">✓ <span>Recepção</span></a>
         <a href="#presentes">◇ <span>Presentes</span></a>
+        <a href="checkin.html">▦ <span>Check-in</span></a>
       </nav>
       <div class="admin-sidebar-note">
         <p>“Tudo tem o seu tempo,<br>e tudo o que se quer<br>debaixo do céu tem a sua hora.”</p>
@@ -43,6 +166,8 @@
       </div>
       <button type="button" class="admin-sidebar-settings" id="openAdminSettingsDashboard">⚙ <span>Administradores</span></button>
     </aside>
+  <section class="admin-dashboard" id="visao-geral">
+    
 
     <div class="admin-dashboard-main">
       <div class="admin-dashboard-top">
@@ -81,16 +206,16 @@
     </div>
   </section>
   <input id="exportBtn" type="button" class="hidden"><input id="csvBtn" type="button" class="hidden"><input id="csvFile" type="file" accept=".csv" class="hidden">
-  <section class="wedy-section" id="checkin"><div class="section-title-row"><div><p class="section-kicker">ENTRADAS</p><h2>Check-in dos convidados</h2><p class="muted">No dia do casamento, leia o QR Code ou procure pelo código do convite.</p></div><a class="button secondary" href="checkin.html">Abrir recepção ↗</a></div>
+  <section class="wedy-section admin-view-section" id="checkin"><div class="section-title-row"><div><p class="section-kicker">ENTRADAS</p><h2>Check-in dos convidados</h2><p class="muted">No dia do casamento, leia o QR Code ou procure pelo código do convite.</p></div><a class="button secondary" href="checkin.html">Abrir recepção ↗</a></div>
     <div class="checkin-layout"><div class="checkin-main-card"><div class="scan-title"><span class="scan-icon">⌁</span><div><h3>Ler convite</h3><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="checkin-tools"><div class="checkin-manual"><label>Código do convite<input id="checkinCode" placeholder="Ex.: AF-TESTE01" autocomplete="off"></label><button class="button" id="checkinSearchBtn">Pesquisar convite</button></div><div id="checkinResult" class="checkin-result hidden"></div><button class="button secondary" id="startScannerBtn">▣ Ler QR Code</button><button class="button secondary hidden" id="stopScannerBtn">Parar leitura</button><div id="qrReader" class="qr-reader hidden"></div></div></div><div class="checkin-summary"><div><strong id="stCheckedIn2">0</strong><span>Entraram</span></div><div><strong id="stNotCheckedIn2">0</strong><span>Por entrar</span></div><div><strong id="stPresentPeople">0</strong><span>Pessoas presentes</span></div></div></div>
   </section>
 
-  <section class="wedy-section admin-extra" id="programa-admin"><div class="section-title-row"><div><p class="section-kicker">O GRANDE DIA</p><h2>Programa</h2><p class="muted">Defina o dia, a hora, o nome, a descrição e a localização de cada momento.</p></div><button class="button" id="addProgramBtn" type="button">＋ Adicionar momento</button></div><div class="program-admin-list" id="programAdminList"></div></section>
+  <section class="wedy-section admin-extra admin-view-section" id="programa-admin"><div class="section-title-row"><div><p class="section-kicker">O GRANDE DIA</p><h2>Programa</h2><p class="muted">Defina o dia, a hora, o nome, a descrição e a localização de cada momento.</p></div><button class="button" id="addProgramBtn" type="button">＋ Adicionar momento</button></div><div class="program-admin-list" id="programAdminList"></div></section>
 
-<section class="wedy-section" id="convidados"><div class="section-title-row"><div><p class="section-kicker">CONVIDADOS</p><h2>Lista de convidados</h2><p class="muted">Pesquise, filtre, edite e acompanhe cada convite.</p></div><div class="section-actions"><button class="button secondary" type="button" id="adminExportTrigger">⇩ Exportar</button><button class="button secondary" type="button" id="adminImportTrigger">▦ Importar CSV</button><button class="button" id="addBtn2" type="button">＋ Adicionar convite</button></div></div><div class="guest-tools"><div class="guest-search"><span>⌕</span><input id="guestSearch" type="search" placeholder="Pesquisar por nome, código ou WhatsApp…"></div><div class="guest-filters"><button class="guest-filter active" data-guest-filter="all">Todos</button><button class="guest-filter" data-guest-filter="confirmed">Confirmados</button><button class="guest-filter" data-guest-filter="pending">Pendentes</button><button class="guest-filter" data-guest-filter="declined">Recusados</button><button class="guest-filter" data-guest-filter="checked">Já entraram</button><button class="guest-filter" data-guest-filter="waiting">Por entrar</button></div></div><div id="guestCount" class="guest-count"></div><div class="table-wrap guest-list-scroll"><table class="table"><thead><tr><th>Nome</th><th>Código</th><th>WhatsApp</th><th>Lotação</th><th>Estado</th><th>Pessoas</th><th>Confirmado em</th><th>Entrada</th><th>Mesa</th><th>Acções</th></tr></thead><tbody id="guestRows"></tbody></table></div></section>
+<section class="wedy-section admin-view-section" id="convidados"><div class="section-title-row"><div><p class="section-kicker">CONVIDADOS</p><h2>Lista de convidados</h2><p class="muted">Pesquise, filtre, edite e acompanhe cada convite.</p></div><div class="section-actions"><button class="button secondary" type="button" id="adminExportTrigger">⇩ Exportar</button><button class="button secondary" type="button" id="adminImportTrigger">▦ Importar CSV</button><button class="button" id="addBtn2" type="button">＋ Adicionar convite</button></div></div><div class="guest-tools"><div class="guest-search"><span>⌕</span><input id="guestSearch" type="search" placeholder="Pesquisar por nome, código ou WhatsApp…"></div><div class="guest-filters"><button class="guest-filter active" data-guest-filter="all">Todos</button><button class="guest-filter" data-guest-filter="confirmed">Confirmados</button><button class="guest-filter" data-guest-filter="pending">Pendentes</button><button class="guest-filter" data-guest-filter="declined">Recusados</button><button class="guest-filter" data-guest-filter="checked">Já entraram</button><button class="guest-filter" data-guest-filter="waiting">Por entrar</button></div></div><div id="guestCount" class="guest-count"></div><div class="table-wrap guest-list-scroll"><table class="table"><thead><tr><th>Nome</th><th>Código</th><th>WhatsApp</th><th>Lotação</th><th>Estado</th><th>Pessoas</th><th>Confirmado em</th><th>Entrada</th><th>Mesa</th><th>Acções</th></tr></thead><tbody id="guestRows"></tbody></table></div></section>
 
-  <section class="wedy-section" id="presentes"><div class="section-title-row"><div><p class="section-kicker">PRESENTES</p><h2>Lista de presentes</h2><p class="muted">Adicione, edite ou remova presentes e respectivas fotografias.</p></div><button class="button" id="addGiftBtn">＋ Adicionar presente</button></div><div class="table-wrap gift-list-scroll"><table class="table"><thead><tr><th>Foto</th><th>#</th><th>Presente</th><th>Estado</th><th>Reservado por</th><th>Acções</th></tr></thead><tbody id="giftRows"></tbody></table></div></section>
-<section class="wedy-section admin-extra" id="mesas"><div class="section-title-row"><div><p class="section-kicker">RECEPÇÃO</p><h2>Mesas e lugares</h2><p class="muted">Crie as mesas, defina a capacidade e organize os convidados de forma visual.</p></div><div class="section-actions"><button class="button secondary" id="organizeTablesBtn">♧ Organizar mesas</button><button class="button" id="addTableBtn">＋ Adicionar mesa</button></div></div><div class="seating-summary" id="seatingSummary"></div><div class="seating-layout"><div class="table-list" id="tableList"></div><div class="unassigned-panel"><div class="section-admin-head"><div><h3>Convidados sem mesa</h3><p class="muted">Escolha uma mesa para cada convidado confirmado.</p></div></div><div id="unassignedGuests"></div></div></div></section><section class="wedy-section admin-extra" id="protocolos"><div class="section-title-row"><div><p class="section-kicker">EQUIPA</p><h2>Protocolos</h2><p class="muted">Adicione pessoas da equipa que terão acesso ao painel de recepção.</p></div><button class="button" id="addProtocolBtn">＋ Adicionar protocolo</button></div><div class="protocol-grid" id="protocolList"></div></section>
+  <section class="wedy-section admin-view-section" id="presentes"><div class="section-title-row"><div><p class="section-kicker">PRESENTES</p><h2>Lista de presentes</h2><p class="muted">Adicione, edite ou remova presentes e respectivas fotografias.</p></div><button class="button" id="addGiftBtn">＋ Adicionar presente</button></div><div class="table-wrap gift-list-scroll"><table class="table"><thead><tr><th>Foto</th><th>#</th><th>Presente</th><th>Estado</th><th>Reservado por</th><th>Acções</th></tr></thead><tbody id="giftRows"></tbody></table></div></section>
+<section class="wedy-section admin-extra admin-view-section" id="mesas"><div class="section-title-row"><div><p class="section-kicker">RECEPÇÃO</p><h2>Mesas e lugares</h2><p class="muted">Crie as mesas, defina a capacidade e organize os convidados de forma visual.</p></div><div class="section-actions"><button class="button secondary" id="organizeTablesBtn">♧ Organizar mesas</button><button class="button" id="addTableBtn">＋ Adicionar mesa</button></div></div><div class="seating-summary" id="seatingSummary"></div><div class="seating-layout"><div class="table-list" id="tableList"></div><div class="unassigned-panel"><div class="section-admin-head"><div><h3>Convidados sem mesa</h3><p class="muted">Escolha uma mesa para cada convidado confirmado.</p></div></div><div id="unassignedGuests"></div></div></div></section><section class="wedy-section admin-extra admin-view-section" id="protocolos"><div class="section-title-row"><div><p class="section-kicker">EQUIPA</p><h2>Protocolos</h2><p class="muted">Adicione pessoas da equipa que terão acesso ao painel de recepção.</p></div><button class="button" id="addProtocolBtn">＋ Adicionar protocolo</button></div><div class="protocol-grid" id="protocolList"></div></section>
 </main></div>
 <div id="programModal" class="modal hidden"><div class="modal-box"><div class="modal-hero"><div class="modal-hero-copy"><p class="modal-kicker">O GRANDE DIA</p><h2 id="programModalTitle">Novo momento</h2><p>Preencha o dia e a hora, o nome do momento, o texto descritivo e, se desejar, a localização.</p></div><span class="modal-symbol">◷</span></div><div class="modal-form-body"><form id="programForm"><input type="hidden" id="programId"><div class="modal-grid equal"><label>Dia<input id="programDate" required maxlength="40" placeholder="Ex.: 29 MAIO"></label><label>Hora<input id="programTime" required maxlength="40" placeholder="Ex.: 09:00"></label></div><label>Nome do programa<input id="programTitle" required maxlength="120" placeholder="Ex.: Cerimónia religiosa"></label><label>Texto descritivo<textarea id="programDescription" rows="5" required maxlength="1000" placeholder="Descreva este momento do casamento…"></textarea></label><label>Localização <small>(opcional)</small><input id="programLocation" maxlength="180" placeholder="Ex.: Igreja Universal — Jardim, Maputo"></label><label>Link da localização <small>(opcional)</small><input id="programMapUrl" type="url" maxlength="500" placeholder="https://maps.google.com/…"><small class="muted">Se preencher o link, o convite mostrará “Ver localização ↗”.</small></label><div class="modal-actions"><button type="submit" class="button primary-modal" id="programSaveBtn">Guardar momento</button><button type="button" class="button secondary" id="deleteProgramBtn">Eliminar</button><button type="button" class="button secondary" id="closeProgramModal">Cancelar</button></div><div id="programFormMsg" class="status modal-status hidden"></div></form></div></div></div>
 <div id="imageSettingsModal" class="modal hidden"><div class="modal-box image-settings-box"><div class="modal-hero"><div class="modal-hero-copy"><p class="modal-kicker">IMAGENS DO CONVITE</p><h2 id="imageSettingsTitle">Alterar imagem</h2><p id="imageSettingsDescription">Escolha a imagem que será apresentada no convite.</p></div><span class="modal-symbol">▧</span></div><div class="modal-form-body"><form id="imageSettingsForm"><div class="image-settings-current"><p class="muted">Imagem actualmente em utilização:</p><div class="image-settings-preview"><img id="imageSettingsPreview" src="foto-capa.png" alt="Pré-visualização actual"></div></div><label id="imageSettingsFileLabel">Nova imagem<input id="imageSettingsFile" type="file" accept="image/jpeg,image/png,image/webp"><small class="muted">JPG, PNG ou WebP. A imagem será optimizada automaticamente.</small></label><div id="imageSettingsNewPreview" class="image-settings-preview hidden"></div><div id="storyTextEditor" class="story-text-editor hidden"><label>Texto da nossa história<textarea id="storyTextInput" rows="10" maxlength="5000" placeholder="Escreva a história do casal…"></textarea><small class="muted">Pode escrever os parágrafos separados por uma linha em branco.</small></label></div><div class="modal-actions"><button type="submit" class="button primary-modal" id="imageSettingsSaveBtn">Guardar alterações</button><button type="button" class="button secondary" id="closeImageSettingsModal">Cancelar</button></div><div id="imageSettingsMsg" class="status modal-status hidden"></div></form></div></div></div>
@@ -109,7 +234,7 @@
 <div id="modal" class="modal hidden"><div class="modal-box"><div class="modal-hero"><div class="modal-hero-copy"><p class="modal-kicker">LISTA DE CONVIDADOS</p><h2 id="modalTitle">Novo convidado</h2><p>Crie ou edite o convite, defina quantas pessoas podem participar e prepare a mensagem personalizada.</p></div><span class="modal-symbol" aria-hidden="true">✉</span></div><div class="modal-form-body"><form id="guestForm"><input type="hidden" id="guestId"><div class="modal-grid"><label>Nome completo<input id="gName" required maxlength="120" placeholder="Ex.: João Manuel"></label><label>WhatsApp<input id="gPhone" maxlength="30" placeholder="258 84 000 0000"></label></div><div class="modal-grid equal"><label>Pessoas permitidas<input id="gAllowed" type="number" min="1" max="20" value="1" required></label><label>Código do convite<input id="gCode" class="modal-readonly" readonly></label></div><div class="modal-divider"></div><label>Mensagem personalizada<textarea id="gMessage" rows="5" readonly></textarea></label><div class="modal-actions"><button type="submit" class="button primary-modal">Guardar convite</button><button type="button" class="button secondary guest-message-action" id="copyMsg">Copiar mensagem</button><a class="button secondary" id="waLink" target="_blank">Abrir WhatsApp</a><button type="button" class="button secondary" id="closeModal">Cancelar</button></div><div id="formMsg" class="status modal-status hidden"></div></form></div></div></div>
 <script>
 (function(){const btn=document.querySelector('.dash-mobile-toggle'),side=document.getElementById('adminSidebar'); if(btn&&side){btn.addEventListener('click',()=>{const open=side.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');});side.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{side.classList.remove('is-open');btn.setAttribute('aria-expanded','false');}));}})();
-</script><script>(function(){const b=document.querySelector('.wedy-menu'),n=document.querySelector('.wedy-nav'),p=document.getElementById('adminMenuPanel');if(b&&p){b.addEventListener('click',e=>{e.stopPropagation();const open=p.classList.toggle('hidden')===false;b.setAttribute('aria-expanded',String(open));if(open&&n)n.classList.remove('is-open');});document.addEventListener('click',e=>{if(!p.contains(e.target)&&e.target!==b){p.classList.add('hidden');b.setAttribute('aria-expanded','false')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){p.classList.add('hidden');b.setAttribute('aria-expanded','false')}})}if(n){n.addEventListener('click',e=>{if(e.target.closest('a'))n.classList.remove('is-open')})}})();</script><script>
+</script><script>(function(){const identity=document.getElementById('adminIdentity'),panel=document.getElementById('adminMenuPanel');if(identity&&panel){identity.setAttribute('role','button');identity.setAttribute('tabindex','0');const toggle=()=>{const open=panel.classList.toggle('hidden')===false;identity.setAttribute('aria-expanded',String(open));};identity.addEventListener('click',e=>{e.stopPropagation();toggle()});identity.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});document.addEventListener('click',e=>{if(!panel.contains(e.target)&&e.target!==identity){panel.classList.add('hidden');identity.setAttribute('aria-expanded','false')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){panel.classList.add('hidden');identity.setAttribute('aria-expanded','false')}})}})();</script><script>
 (function(){
   const pairs=[['modal','closeModal'],['giftModal','closeGiftModal'],['qrModal','closeQrModal']];
   pairs.forEach(([mid,cid])=>{const m=document.getElementById(mid),c=document.getElementById(cid);if(m&&c){m.addEventListener('mousedown',e=>{if(e.target===m)c.click()});}});
@@ -125,4 +250,50 @@
  document.getElementById('openAdminSettingsDashboard')?.addEventListener('click',()=>document.getElementById('openAdminSettings')?.click());
  document.querySelectorAll('.admin-sidebar-nav a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.admin-sidebar-nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
 })();
-</script><script>document.getElementById('adminExportTrigger')?.addEventListener('click',()=>document.getElementById('exportBtn')?.click());document.getElementById('adminImportTrigger')?.addEventListener('click',()=>document.getElementById('csvFile')?.click());</script><script src="admin.js"></script></body></html>
+</script><script>document.getElementById('adminExportTrigger')?.addEventListener('click',()=>document.getElementById('exportBtn')?.click());document.getElementById('adminImportTrigger')?.addEventListener('click',()=>document.getElementById('csvFile')?.click());</script><script src="admin.js"></script>
+<script id="v630-view-controller">
+(function(){
+  const body=document.body;
+  const dashboard=document.getElementById('visao-geral');
+  const sections=[...document.querySelectorAll('.admin-view-section')];
+  const links=[...document.querySelectorAll('.admin-sidebar-nav a')];
+  const mobileMenu=document.getElementById('adminMenuBtn');
+  const backdrop=document.getElementById('adminSidebarBackdrop');
+  const setView=(id,updateHash=true)=>{
+    const target=id && document.getElementById(id);
+    const isDash=!target || id==='visao-geral';
+    dashboard.classList.toggle('is-view-hidden',!isDash);
+    sections.forEach(s=>s.classList.toggle('admin-view-active',!isDash && s.id===id));
+    links.forEach(a=>{
+      const href=a.getAttribute('href');
+      a.classList.toggle('active',(isDash&&href==='#visao-geral')||(!isDash&&href==='#'+id));
+    });
+    if(updateHash){try{history.replaceState(null,'','#'+(isDash?'visao-geral':id));}catch(e){}}
+    body.classList.remove('admin-sidebar-open');
+    if(mobileMenu) mobileMenu.setAttribute('aria-expanded','false');
+    const active=isDash?dashboard:document.getElementById(id);
+    if(active && !isDash){active.scrollTop=0;}
+    else if(isDash){const main=dashboard.querySelector('.admin-dashboard-main'); if(main) main.scrollTop=0;}
+  };
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#"]');
+    if(!a) return;
+    const id=a.getAttribute('href').slice(1);
+    if(!id || !document.getElementById(id)) return;
+    if(id==='visao-geral' || document.querySelector('.admin-view-section#'+CSS.escape(id))){
+      e.preventDefault(); setView(id);
+    }
+  });
+  if(mobileMenu){mobileMenu.addEventListener('click',e=>{e.stopPropagation();const open=body.classList.toggle('admin-sidebar-open');mobileMenu.setAttribute('aria-expanded',String(open));});}
+  backdrop?.addEventListener('click',()=>{body.classList.remove('admin-sidebar-open');mobileMenu?.setAttribute('aria-expanded','false');});
+  document.addEventListener('click',e=>{
+    if(!body.classList.contains('admin-sidebar-open')) return;
+    const sidebar=document.querySelector('.admin-dashboard-sidebar');
+    if(sidebar && !sidebar.contains(e.target) && e.target!==mobileMenu){body.classList.remove('admin-sidebar-open');mobileMenu?.setAttribute('aria-expanded','false');}
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){body.classList.remove('admin-sidebar-open');mobileMenu?.setAttribute('aria-expanded','false');}});
+  const initial=(location.hash||'#visao-geral').slice(1);
+  setView(document.getElementById(initial)?initial:'visao-geral',false);
+})();
+</script>
+</body></html>
