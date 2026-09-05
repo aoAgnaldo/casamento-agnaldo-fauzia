@@ -9,6 +9,98 @@ async function init(){const {data}=await supabaseClient.auth.getSession();if(dat
 
 const ADMIN_CREATE_FUNCTION_URL = SUPABASE_URL + '/functions/v1/create-admin';
 let currentAdminProfile = {display_name:'', avatar_url:''};
+let weddingImages = {cover_image_url:'foto-capa.png', story_image_url:'foto-capa.png', details_image_url:'foto-capa.png', story_text:''};
+let imageSettingsTarget = 'cover';
+
+async function loadWeddingImagesAdmin(){
+  const {data,error}=await supabaseClient.from('wedding_settings').select('cover_image_url,story_image_url,details_image_url,story_text').eq('id',1).maybeSingle();
+  if(!error && data){
+    weddingImages={
+      cover_image_url:data.cover_image_url||'foto-capa.png',
+      story_image_url:data.story_image_url||data.cover_image_url||'foto-capa.png',
+      details_image_url:data.details_image_url||data.cover_image_url||'foto-capa.png',
+      story_text:data.story_text||''
+    };
+  }
+  applyWeddingImagesAdmin();
+}
+function applyWeddingImagesAdmin(){
+  const img=A('.wedy-cover img');
+  if(img)img.src=weddingImages.cover_image_url||'foto-capa.png';
+}
+function imagePathFromUrl(url){
+  const marker='/storage/v1/object/public/wedding-images/';
+  const i=String(url||'').indexOf(marker);
+  return i>=0?String(url).slice(i+marker.length):null;
+}
+async function compressWeddingImage(file){
+  const img=new Image(),src=URL.createObjectURL(file);
+  try{
+    await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('Não foi possível ler a imagem.'));img.src=src});
+    const max=1800,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));
+    const w=Math.max(1,Math.round(img.naturalWidth*scale)),h=Math.max(1,Math.round(img.naturalHeight*scale));
+    const c=document.createElement('canvas');c.width=w;c.height=h;
+    const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
+    const b=await new Promise(r=>c.toBlob(r,'image/webp',.86));
+    if(!b)throw new Error('Não foi possível preparar a imagem.');
+    return new File([b],`wedding-${Date.now()}.webp`,{type:'image/webp'});
+  }finally{URL.revokeObjectURL(src)}
+}
+function openImageSettings(target){
+  imageSettingsTarget=target;
+  const isCover=target==='cover', isStory=target==='story';
+  A('#imageSettingsTitle').textContent=isCover?'Alterar imagem da capa':isStory?'Alterar imagem e texto da nossa história':'Alterar imagem de alguns detalhes importantes';
+  A('#imageSettingsDescription').textContent=isCover?'Esta imagem aparece na capa do convite.':isStory?'Altere a fotografia e o texto apresentados em “A nossa história”.':'Esta imagem aparece na secção “Alguns detalhes importantes”.';
+  A('#imageSettingsPreview').src=isCover?weddingImages.cover_image_url:isStory?weddingImages.story_image_url:weddingImages.details_image_url;
+  A('#storyTextEditor').classList.toggle('hidden',!isStory);
+  if(isStory)A('#storyTextInput').value=weddingImages.story_text||'';
+  A('#imageSettingsFile').value='';A('#imageSettingsNewPreview').classList.add('hidden');A('#imageSettingsNewPreview').innerHTML='';A('#imageSettingsMsg').classList.add('hidden');
+  A('#imageSettingsModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');
+}
+function closeImageSettings(){A('#imageSettingsModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')}
+A('#editCoverBtn')?.addEventListener('click',()=>openImageSettings('cover'));
+A('#editStoryBtn')?.addEventListener('click',()=>openImageSettings('story'));
+A('#editDetailsBtn')?.addEventListener('click',()=>openImageSettings('details'));
+A('#closeImageSettingsModal')?.addEventListener('click',closeImageSettings);
+A('#imageSettingsModal')?.addEventListener('mousedown',e=>{if(e.target===A('#imageSettingsModal'))closeImageSettings()});
+A('#imageSettingsFile')?.addEventListener('change',e=>{
+  const f=e.target.files?.[0],box=A('#imageSettingsNewPreview');
+  if(!f){box.classList.add('hidden');return}
+  if(!/^image\/(jpeg|png|webp)$/.test(f.type)){showMsg(A('#imageSettingsMsg'),'Escolha uma imagem JPG, PNG ou WebP válida.');e.target.value='';return}
+  if(f.size>20*1024*1024){showMsg(A('#imageSettingsMsg'),'A imagem é demasiado grande. Escolha uma imagem com menos de 20 MB.');e.target.value='';return}
+  const u=URL.createObjectURL(f);box.innerHTML=`<img src="${u}" alt="Nova imagem">`;box.classList.remove('hidden');A('#imageSettingsMsg').classList.add('hidden');
+});
+A('#imageSettingsForm')?.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const file=A('#imageSettingsFile').files?.[0],btn=A('#imageSettingsSaveBtn'),msg=A('#imageSettingsMsg'),storyText=A('#storyTextInput')?.value.trim()||'';
+  const isStory=imageSettingsTarget==='story';
+  if(!file && !isStory){showMsg(msg,'Escolha uma nova imagem antes de guardar.');return}
+  if(isStory && !file && !storyText){showMsg(msg,'Altere a imagem, o texto, ou ambos antes de guardar.');return}
+  btn.disabled=true;btn.textContent='A guardar…';msg.classList.add('hidden');
+  let newPath=null;
+  try{
+    let url=null;
+    if(file){
+      const compressed=await compressWeddingImage(file);
+      const folder=imageSettingsTarget==='cover'?'cover':imageSettingsTarget==='story'?'story':'details';
+      newPath=`${folder}/${crypto.randomUUID()}.webp`;
+      const up=await supabaseClient.storage.from('wedding-images').upload(newPath,compressed,{cacheControl:'31536000',upsert:false,contentType:'image/webp'});
+      if(up.error)throw new Error('A imagem não pôde ser carregada: '+up.error.message);
+      url=supabaseClient.storage.from('wedding-images').getPublicUrl(newPath).data.publicUrl;
+    }
+    const oldUrl=imageSettingsTarget==='cover'?weddingImages.cover_image_url:imageSettingsTarget==='story'?weddingImages.story_image_url:weddingImages.details_image_url;
+    const args={p_cover_image_url:imageSettingsTarget==='cover'?url:null,p_story_image_url:imageSettingsTarget==='story'?url:null,p_details_image_url:imageSettingsTarget==='details'?url:null,p_story_text:isStory?storyText:null};
+    const {error}=await supabaseClient.rpc('admin_update_wedding_images',args);
+    if(error){if(newPath)await supabaseClient.storage.from('wedding-images').remove([newPath]);throw error}
+    if(imageSettingsTarget==='cover'&&url)weddingImages.cover_image_url=url;
+    if(imageSettingsTarget==='story'){if(url)weddingImages.story_image_url=url;weddingImages.story_text=storyText}
+    if(imageSettingsTarget==='details'&&url)weddingImages.details_image_url=url;
+    applyWeddingImagesAdmin();closeImageSettings();
+    toast(isStory?'Imagem e texto da história actualizados. ❤️':imageSettingsTarget==='cover'?'Imagem da capa actualizada. ❤️':'Imagem dos detalhes actualizada. ❤️');
+    if(url && oldUrl&&imagePathFromUrl(oldUrl))await supabaseClient.storage.from('wedding-images').remove([imagePathFromUrl(oldUrl)]);
+  }catch(err){showMsg(msg,err?.message||String(err))}
+  finally{btn.disabled=false;btn.textContent='Guardar alterações'}
+});
 
 function fallbackAdminName(user){
  const meta=user?.user_metadata||{};
@@ -80,7 +172,7 @@ async function loadAdmins(){
 }
 A('#adminCreateForm')?.addEventListener('submit',async e=>{e.preventDefault();const btn=A('#createAdminBtn'),msg=A('#adminCreateMsg');btn.disabled=true;msg.classList.add('hidden');try{const body={email:A('#newAdminEmail').value.trim(),password:A('#newAdminPassword').value,display_name:A('#newAdminName').value.trim()};if(body.password.length<6)throw new Error('A palavra-passe deve ter pelo menos 6 caracteres.');const {data:sd}=await supabaseClient.auth.getSession();const token=sd?.session?.access_token;if(!token)throw new Error('A sessão expirou. Entre novamente no painel.');const res=await fetch(ADMIN_CREATE_FUNCTION_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},body:JSON.stringify(body)});let payload={};try{payload=await res.json()}catch(_){}if(!res.ok)throw new Error(payload.error||'Não foi possível criar o administrador.');A('#adminCreateForm').reset();await loadAdmins();toast(`Administrador ${body.display_name} criado com sucesso.`)}catch(err){showMsg(msg,err?.message||String(err))}finally{btn.disabled=false}});
 
-async function enter(){A('#login').classList.add('hidden');A('#app').classList.remove('hidden');await loadAdminProfile();await refresh()}
+async function enter(){A('#login').classList.add('hidden');A('#app').classList.remove('hidden');await loadAdminProfile();await loadWeddingImagesAdmin();await refresh()}
 
 A('#loginForm').addEventListener('submit',async e=>{e.preventDefault();const form=e.currentTarget,btn=form.querySelector('button[type=submit]'),msgEl=A('#loginMsg');const email=A('#email')?.value.trim()||'',password=A('#password')?.value||'';if(!email||!password){showMsg(msgEl,'Introduza o email e a palavra-passe.');return}if(btn)btn.disabled=true;msgEl.classList.add('hidden');try{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){showMsg(msgEl,error.message||'Não foi possível iniciar sessão.');return}session=data?.session||null;await enter()}catch(err){showMsg(msgEl,err?.message||'Não foi possível iniciar sessão.')}finally{if(btn)btn.disabled=false}});
 A('#logout')?.addEventListener('click',()=>supabaseClient.auth.signOut().then(()=>location.reload()));
@@ -436,3 +528,62 @@ A('#protocolForm').onsubmit=async e=>{e.preventDefault();const r=await supabaseC
 window.toggleProtocol=async(id,active)=>{const r=await supabaseClient.rpc('admin_toggle_protocol',{p_id:id,p_active:active});if(r.error){toast(r.error.message);return}await refresh()};window.deleteProtocol=async id=>{const p=protocols.find(x=>x.id===id);if(!p)return;if(!confirm(`Remover o acesso de “${p.full_name}”?`))return;const r=await supabaseClient.rpc('admin_delete_protocol',{p_id:id});if(r.error){toast(r.error.message);return}await refresh();toast('Acesso removido.')};
 
 init();
+// ---------------- PROGRAMA ----------------
+let programItems=[];
+function normaliseProgramItem(x){
+  return {date:String(x?.date||''),time:String(x?.time||''),title:String(x?.title||''),description:String(x?.description||''),location:String(x?.location||''),map_url:String(x?.map_url||'')};
+}
+async function loadProgramAdmin(){
+  const {data,error}=await supabaseClient.from('wedding_settings').select('program_items').eq('id',1).maybeSingle();
+  if(error){toast(error.message);return}
+  programItems=Array.isArray(data?.program_items)?data.program_items.map(normaliseProgramItem):[];
+  renderProgramAdmin();
+}
+function renderProgramAdmin(){
+  const box=A('#programAdminList'); if(!box)return;
+  if(!programItems.length){box.innerHTML='<div class="empty-state">Ainda não existem momentos no programa.</div>';return}
+  box.innerHTML=programItems.map((p,i)=>`<article class="program-admin-card"><div class="program-admin-number">${String(i+1).padStart(2,'0')}</div><div class="program-admin-info"><p class="program-time">${esc(p.date)}${p.time?' · '+esc(p.time):''}</p><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p>${p.location?`<small>⌖ ${esc(p.location)}</small>`:''}</div><div class="program-admin-actions"><button class="icon-btn" type="button" onclick="editProgram(${i})">✎ Editar</button><button class="icon-btn danger" type="button" onclick="deleteProgram(${i})">Remover</button></div></article>`).join('');
+}
+function resetProgramModal(){
+  A('#programForm').reset(); A('#programId').value=''; A('#programModalTitle').textContent='Novo momento'; A('#deleteProgramBtn').classList.add('hidden'); A('#programFormMsg').classList.add('hidden');
+}
+function openProgramModal(item=null,index=null){
+  resetProgramModal();
+  if(item){A('#programId').value=String(index);A('#programModalTitle').textContent='Editar momento';A('#programDate').value=item.date;A('#programTime').value=item.time;A('#programTitle').value=item.title;A('#programDescription').value=item.description;A('#programLocation').value=item.location;A('#programMapUrl').value=item.map_url;A('#deleteProgramBtn').classList.remove('hidden')}
+  A('#programModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#programDate').focus(),80);
+}
+A('#addProgramBtn')?.addEventListener('click',()=>openProgramModal());
+A('#closeProgramModal')?.addEventListener('click',()=>{A('#programModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')});
+A('#programModal')?.addEventListener('mousedown',e=>{if(e.target===A('#programModal')){A('#programModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')}});
+window.editProgram=i=>openProgramModal(programItems[i],i);
+window.deleteProgram=async i=>{
+  if(!programItems[i])return;
+  if(!confirm(`Remover “${programItems[i].title}” do programa?`))return;
+  programItems.splice(i,1);
+  const {error}=await supabaseClient.rpc('admin_update_program',{p_program_items:programItems});
+  if(error){toast(error.message);return}
+  renderProgramAdmin();toast('Momento removido do programa.');
+};
+A('#deleteProgramBtn')?.addEventListener('click',async()=>{
+  const i=Number(A('#programId').value); if(!Number.isInteger(i)||!programItems[i])return;
+  if(!confirm(`Remover “${programItems[i].title}” do programa?`))return;
+  programItems.splice(i,1);
+  const {error}=await supabaseClient.rpc('admin_update_program',{p_program_items:programItems});
+  if(error){showMsg(A('#programFormMsg'),error.message);return}
+  A('#programModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock');renderProgramAdmin();toast('Momento removido do programa.');
+});
+A('#programForm')?.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const item=normaliseProgramItem({date:A('#programDate').value.trim(),time:A('#programTime').value.trim(),title:A('#programTitle').value.trim(),description:A('#programDescription').value.trim(),location:A('#programLocation').value.trim(),map_url:A('#programMapUrl').value.trim()});
+  const i=A('#programId').value===''?null:Number(A('#programId').value);
+  if(i===null)programItems.push(item);else programItems[i]=item;
+  const btn=A('#programSaveBtn');btn.disabled=true;btn.textContent='A guardar…';
+  try{
+    const {error}=await supabaseClient.rpc('admin_update_program',{p_program_items:programItems});
+    if(error)throw error;
+    A('#programModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock');renderProgramAdmin();toast('Programa actualizado com sucesso. ❤️');
+  }catch(err){if(i===null)programItems.pop();else await loadProgramAdmin();showMsg(A('#programFormMsg'),err?.message||String(err));}
+  finally{btn.disabled=false;btn.textContent='Guardar momento'}
+});
+const _refreshOriginal=refresh;
+refresh=async function(){await _refreshOriginal();await loadProgramAdmin()};

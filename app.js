@@ -65,10 +65,31 @@ const menuToggle=$('#menuToggle'), navLinks=$('#navLinks');
 menuToggle?.addEventListener('click',()=>navLinks.classList.toggle('nav-links--open'));
 $$('.nav-links a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('nav-links--open')));
 
-/* Program modal */
+/* Program modal + programa editável */
 $('#programOpen')?.addEventListener('click',()=>$('#programOverlay').classList.remove('hidden'));
 $('#programClose')?.addEventListener('click',()=>$('#programOverlay').classList.add('hidden'));
 $('#programOverlay')?.addEventListener('click',e=>{if(e.target.id==='programOverlay')e.currentTarget.classList.add('hidden')});
+
+const fallbackProgram=[
+ {date:'29 MAIO',time:'09:00',title:'Cerimónia religiosa',description:'Na Igreja Universal — Jardim, vamos celebrar a nossa união perante Deus, a família e os amigos.',location:'Igreja Universal — Jardim, Maputo',map_url:'https://www.google.com/maps/search/?api=1&query=Igreja%20Universal%20Jardim%20Maputo'},
+ {date:'29 MAIO',time:'Depois da cerimónia',title:'Sessão de fotos',description:'Após a cerimónia, teremos um momento reservado para fotografias e para guardar memórias deste dia especial.',location:'',map_url:''},
+ {date:'29 MAIO',time:'15:00',title:'Recepção',description:'Receberemos os nossos convidados na Sala de Eventos do Kaya Kwanga Residence.',location:'Sala de Eventos do Kaya Kwanga Residence, Maputo',map_url:'https://www.google.com/maps/search/?api=1&query=Kaya%20Kwanga%20Residence%20Maputo'}
+];
+function renderProgramItems(items){
+  const compact=document.querySelector('#programCompactList'), modal=document.querySelector('#programModalList');
+  if(!compact&&!modal)return;
+  const list=(Array.isArray(items)&&items.length?items:fallbackProgram);
+  const html=list.map((p,i)=>`<article class="program-item"><span class="program-number">${String(i+1).padStart(2,'0')}</span><div><p class="program-time">${escapeHtml(p.date||'')}${p.time?' · '+escapeHtml(p.time):''}</p><h3>${escapeHtml(p.title||'')}</h3><p>${escapeHtml(p.description||'')}</p>${p.location?`<p class="program-location">⌖ ${escapeHtml(p.location)}</p>`:''}${p.map_url?`<a href="${escapeHtml(p.map_url)}" target="_blank" rel="noreferrer">Ver localização ↗</a>`:''}</div></article>`).join('');
+  if(compact)compact.innerHTML=html; if(modal)modal.innerHTML=html;
+}
+async function loadProgram(){
+  try{
+    const {data,error}=await supabaseClient.from('wedding_settings').select('program_items').eq('id',1).maybeSingle();
+    if(error||!data?.program_items){renderProgramItems(fallbackProgram);return}
+    renderProgramItems(data.program_items);
+  }catch(_){renderProgramItems(fallbackProgram)}
+}
+loadProgram();
 
 /* Accounts */
 $$('.copy-account').forEach(btn=>btn.addEventListener('click',async()=>{
@@ -78,6 +99,28 @@ $$('.copy-account').forEach(btn=>btn.addEventListener('click',async()=>{
     setTimeout(()=>btn.textContent=old,1600);
   }catch{toast('Não foi possível copiar.');}
 }));
+
+/* Imagens do convite — geridas pelo painel Admin */
+async function loadWeddingImages(){
+  try{
+    const {data,error}=await supabaseClient.from('wedding_settings').select('cover_image_url,story_image_url,details_image_url,story_text').eq('id',1).maybeSingle();
+    if(error || !data) return;
+    const cover=data.cover_image_url || 'foto-capa.png';
+    const story=data.story_image_url || cover;
+    const details=data.details_image_url || cover;
+    const coverImg=document.querySelector('.hero-image img');
+    const storyImg=document.querySelector('.story-image img');
+    const detailsImg=document.querySelector('.details-image img');
+    if(coverImg) coverImg.src=cover;
+    if(storyImg) storyImg.src=story;
+    if(detailsImg) detailsImg.src=details;
+    if(data.story_text){
+      const box=document.querySelector('#storyTextContent');
+      if(box) box.innerHTML=String(data.story_text).split(/\n\s*\n/).filter(Boolean).map(p=>`<p>${escapeHtml(p).replace(/\n/g,'<br>')}</p>`).join('');
+    }
+  }catch(_){/* mantém as imagens de fallback */}
+}
+loadWeddingImages();
 
 /* RSVP */
 async function findInvitation(presetKey=null){

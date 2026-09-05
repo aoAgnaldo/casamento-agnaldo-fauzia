@@ -70,12 +70,12 @@
   <div class="story-text">
     <p class="section-label"><span></span>Capítulo um</p>
     <h2>A nossa<br><i>história</i></h2>
-    <p>Tudo começou num casamento, num daqueles encontros em que a vida parece preparar, silenciosamente, algo muito especial. Naquele dia, uma amiga comentou que já tinha sido a ponte para a união de vários casais. A Fáuzia, em tom de brincadeira, perguntou-lhe: “Você vive juntando as pessoas, mas quando chegará a minha vez?”</p>
+    <div id="storyTextContent"><p>Tudo começou num casamento, num daqueles encontros em que a vida parece preparar, silenciosamente, algo muito especial. Naquele dia, uma amiga comentou que já tinha sido a ponte para a união de vários casais. A Fáuzia, em tom de brincadeira, perguntou-lhe: “Você vive juntando as pessoas, mas quando chegará a minha vez?”</p>
     <p>Pouco tempo depois, essa amiga falou-lhe sobre um amigo querido, descrevendo as suas qualidades e dizendo que talvez houvesse ali uma história bonita para começar. Sem avisar a Fáuzia, entrou em contacto com o Agnaldo e escreveu-lhe: “Agnaldo, tenho uma amiga enviada por Deus que está interessada em conhecer-te.”</p>
-    <p>Entre fotografias, mensagens e boas conversas, os nossos caminhos começaram a aproximar-se. No dia 23 de Outubro de 2025, começámos a conversar e demos o primeiro passo para uma história que se tornaria cada vez mais bonita. Hoje, percebemos que aquele encontro não foi por acaso: Deus usou uma amiga como ponte para escrever a nossa história de amor.</p>
+    <p>Entre fotografias, mensagens e boas conversas, os nossos caminhos começaram a aproximar-se. No dia 23 de Outubro de 2025, começámos a conversar e demos o primeiro passo para uma história que se tornaria cada vez mais bonita. Hoje, percebemos que aquele encontro não foi por acaso: Deus usou uma amiga como ponte para escrever a nossa história de amor.</p></div>
     <span class="signature">Com carinho, A &amp; F</span>
   </div>
-  <div class="story-image"><img src="foto-capa.png" alt="Agnaldo e Fáuzia"><span class="image-caption">Onde tudo faz sentido</span></div>
+  <div class="story-image"><img src="foto-capa.png" id="storyImage" alt="Agnaldo e Fáuzia"><span class="image-caption">Onde tudo faz sentido</span></div>
 </section>
 
 <section class="program-section section-pad" id="programa">
@@ -89,11 +89,7 @@
       <p class="program-list-title">O programa:</p>
     </div>
     <p class="program-scroll-hint">Faz o scroll para ver todo o programa</p>
-    <div class="program-list program-list--compact">
-      <article class="program-item"><span class="program-number">01</span><div><p class="program-time">29 MAIO · 09:00</p><h3>Cerimónia religiosa</h3><p>Na Igreja Universal — Jardim, vamos celebrar a nossa união perante Deus, a família e os amigos.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Igreja%20Universal%20Jardim%20Maputo" target="_blank" rel="noreferrer">Ver localização ↗</a></div></article>
-      <article class="program-item"><span class="program-number">02</span><div><p class="program-time">Depois da igreja</p><h3>Sessão de fotos</h3><p>Após a cerimónia, teremos um momento reservado para fotografias e para guardar memórias deste dia especial.</p></div></article>
-      <article class="program-item"><span class="program-number">03</span><div><p class="program-time">15:00</p><h3>Recepção</h3><p>Receberemos os nossos convidados na Sala de Eventos do Kaya Kwanga Residence.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Kaya%20Kwanga%20Residence%20Maputo" target="_blank" rel="noreferrer">Ver localização ↗</a></div></article>
-    </div>
+    <div class="program-list program-list--compact" id="programCompactList"></div>
     <button class="program-open-button" id="programOpen" type="button">Ver programa completo <span>⌄</span></button>
   </div>
 </section>
@@ -102,11 +98,7 @@
   <div class="program-modal">
     <button class="modal-close" id="programClose" type="button">×</button>
     <p class="section-label"><span></span>O grande dia</p><h2>Programa<br><i>completo</i></h2>
-    <div class="program-modal-list">
-      <article class="program-item"><span class="program-number">01</span><div><p class="program-time">29 MAIO · 09:00</p><h3>Cerimónia religiosa</h3><p>Na Igreja Universal — Jardim, vamos celebrar a nossa união perante Deus, a família e os amigos.</p></div></article>
-      <article class="program-item"><span class="program-number">02</span><div><p class="program-time">Depois da cerimónia</p><h3>Sessão de fotos</h3><p>Um momento reservado para fotografias e para guardar memórias deste dia especial.</p></div></article>
-      <article class="program-item"><span class="program-number">03</span><div><p class="program-time">15:00</p><h3>Recepção</h3><p>Sala de Eventos do Kaya Kwanga Residence.</p></div></article>
-    </div>
+    <div class="program-modal-list" id="programModalList"></div>
   </div>
 </div>
 
@@ -118,7 +110,7 @@
     <div class="detail-row"><span style="color:var(--terra)">◷</span><div><strong>Traje</strong><p>Elegância descontraída. Cores alegres são bem-vindas.</p></div></div>
     <div class="detail-row"><span style="color:var(--terra)">□</span><div><strong>Confirmação</strong><p>Pedimos resposta até 30 de Abril de 2027.</p></div></div>
   </div>
-  <div class="details-image"><img src="foto-capa.png" alt="Detalhes do casamento"><span>Para sempre começa agora</span></div>
+  <div class="details-image"><img src="foto-capa.png" id="detailsImage" alt="Detalhes do casamento"><span>Para sempre começa agora</span></div>
 </section>
 
 <section class="gifts-section section-pad" id="presentes">
