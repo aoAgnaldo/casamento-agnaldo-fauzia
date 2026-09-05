@@ -5,7 +5,7 @@
   <a class="wedy-brand" href="index.html"><img src="monogram.svg" alt="A & F"><span>Agnaldo <i>&</i> Fáuzia</span></a>
   <nav class="wedy-nav"><a class="active" href="#recepcao">Recepção</a><a href="#scanner">Ler convite</a><a href="#entrada">Entradas</a></nav>
   <div class="wedy-event"><span class="wedy-avatar">A&F</span><span><b>Agnaldo & Fáuzia</b><small>Casamento · 29 Maio 2027</small></span></div>
-  <div class="reception-head-actions"><a class="button secondary" href="admin.html">Painel Admin</a><button class="wedy-menu" id="logout" type="button">Sair</button></div>
+  <div class="reception-head-actions"><a class="button secondary" href="admin.html">Painel Admin</a><button class="wedy-menu reception-menu-toggle" id="receptionMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button><button class="reception-logout" id="logout" type="button">Sair</button></div>
 </header>
 <main class="wedy-main reception-main" id="recepcao">
 <section class="dashboard-grid reception-grid">
@@ -15,5 +15,5 @@
 <section id="result" class="guest-result hidden"></section>
 <section class="reception-counter wedy-reception-stats" id="entrada"><div><span>ENTRADAS</span><strong id="countIn">0</strong><small>convites registados</small></div><div><span>PESSOAS</span><strong id="countPeople">0</strong><small>pessoas presentes</small></div><div><span>EVENTO</span><strong>29</strong><small>Maio de 2027</small></div></section>
 </main><div id="toastArea"></div><script>
-(function(){const btn=document.querySelector('.dash-mobile-toggle'),side=document.getElementById('receptionSidebar'); if(btn&&side){btn.addEventListener('click',()=>{const open=side.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');});side.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{side.classList.remove('is-open');btn.setAttribute('aria-expanded','false');}));}})();
+(function(){const b=document.getElementById('receptionMenuToggle'),n=document.querySelector('.wedy-nav');if(b&&n){b.addEventListener('click',()=>{const open=n.classList.toggle('is-open');b.setAttribute('aria-expanded',open?'true':'false');});n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{n.classList.remove('is-open');b.setAttribute('aria-expanded','false');}));document.addEventListener('keydown',e=>{if(e.key==='Escape'){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');}})}})();
 </script><script src="checkin.js"></script></body></html>

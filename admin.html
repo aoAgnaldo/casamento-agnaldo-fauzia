@@ -93,4 +93,4 @@
   pairs.forEach(([mid,cid])=>{const m=document.getElementById(mid),c=document.getElementById(cid);if(m&&c){m.addEventListener('mousedown',e=>{if(e.target===m)c.click()});}});
   document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;document.querySelectorAll('.modal:not(.hidden)').forEach(m=>{const c=m.querySelector('[id^="close"]');if(c)c.click();});});
 })();
-</script><script src="admin.js"></script></body></html>
+</script><script src="admin.js"></script><script>(function(){const b=document.querySelector('.wedy-menu'),n=document.querySelector('.wedy-nav');if(b&&n){document.addEventListener('keydown',e=>{if(e.key==='Escape'){n.classList.remove('is-open');b.setAttribute('aria-expanded','false')}})}})();</script></body></html>
