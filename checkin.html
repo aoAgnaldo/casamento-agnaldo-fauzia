@@ -26,6 +26,11 @@
     <div class="chief-reception-kpis"><div><span>CONFIRMADOS</span><strong id="chiefReceptionConfirmed">0</strong></div><div><span>CHEGARAM</span><strong id="chiefReceptionArrived">0</strong></div><div><span>POR CHEGAR</span><strong id="chiefReceptionRemaining">0</strong></div><div><span>PESSOAS PRESENTES</span><strong id="chiefReceptionPeople">0</strong></div></div>
     <div class="chief-reception-status"><div><b id="chiefOnlineCount">0</b><span>protocolos online</span></div><div><b id="chiefTaskProgress">0%</b><span>tarefas concluídas</span></div><div><b id="chiefTableCount">0</b><span>mesas com entradas</span></div></div>
   </article>
+  <article class="chief-tools-card chief-direct-search-card">
+    <div class="chief-overview-head"><div><p class="section-kicker">LOCALIZAÇÃO RÁPIDA</p><h3>Encontrar convidado</h3><p class="muted">Pesquise pelo nome ou código para saber imediatamente a mesa e o estado da entrada.</p></div></div>
+    <div class="chief-direct-search"><input id="chiefGuestSearch" type="search" placeholder="Nome ou código do convite…" autocomplete="off"><button class="button reception-primary" id="chiefGuestSearchBtn" type="button">Pesquisar</button></div>
+    <div id="chiefGuestSearchResult" class="chief-direct-search-result hidden"></div>
+  </article>
   <article class="chief-tools-card chief-tables-card">
     <div class="chief-overview-head"><div><p class="section-kicker">PLANTA DA RECEPÇÃO</p><h3>Mesas e lugares</h3><p class="muted">Veja a lotação, os lugares ocupados e os convidados atribuídos a cada mesa.</p></div><span class="chief-command-note">ACTUALIZAÇÃO A CADA 15 SEGUNDOS</span></div>
     <div class="chief-table-legend"><span><i class="table-dot available"></i> Disponível</span><span><i class="table-dot partial"></i> Parcial</span><span><i class="table-dot full"></i> Completa</span><span><i class="table-dot over"></i> Acima da capacidade</span></div>

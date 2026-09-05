@@ -127,6 +127,29 @@ function renderChiefTables(){
 }
 
 
+function highlightChiefTable(tableId, scroll=true){
+ const box=A('#chiefTablesGrid');
+ if(!box)return;
+ box.querySelectorAll('.chief-table-card.is-highlighted').forEach(el=>el.classList.remove('is-highlighted'));
+ const card=box.querySelector(`.chief-table-card[data-table-id="${String(tableId)}"]`);
+ if(!card)return;
+ card.classList.add('is-highlighted');
+ if(scroll) card.scrollIntoView({behavior:'smooth',block:'center'});
+ window.setTimeout(()=>card.classList.remove('is-highlighted'),5000);
+}
+
+
+function highlightChiefTable(tableId, scroll=true){
+ const box=A('#chiefTablesGrid');
+ if(!box)return;
+ box.querySelectorAll('.chief-table-card.is-highlighted').forEach(el=>el.classList.remove('is-highlighted'));
+ const card=box.querySelector(`.chief-table-card[data-table-id="${String(tableId)}"]`);
+ if(!card)return;
+ card.classList.add('is-highlighted');
+ if(scroll) card.scrollIntoView({behavior:'smooth',block:'center'});
+ window.setTimeout(()=>card.classList.remove('is-highlighted'),5000);
+}
+
 window.openChiefTable=async tableId=>{
  const modal=A('#chiefTableModal'), title=A('#chiefTableModalTitle'), meta=A('#chiefTableModalMeta'), body=A('#chiefTableModalBody');
  if(!modal||!body)return;
@@ -147,6 +170,35 @@ window.openChiefTable=async tableId=>{
  }).join('')||'<div class="empty-state">Não existem convidados atribuídos a esta mesa.</div>';
 };
 window.closeChiefTable=()=>{A('#chiefTableModal')?.classList.remove('is-open');document.body.classList.remove('modal-open')};
+
+function renderChiefGuestSearch(g){
+ const box=A('#chiefGuestSearchResult'); if(!box)return;
+ if(!g){box.classList.remove('hidden');box.innerHTML='<div class="chief-direct-empty">Nenhum convidado encontrado. Tente outro nome ou código.</div>';return}
+ const people=1+(g.companion_count||0);
+ const state=g.checked_in?`<span class="chief-direct-state arrived">✓ Já chegou${g.checked_in_at?' · '+new Date(g.checked_in_at).toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'}):''}</span>`:g.rsvp_status==='confirmed'?'<span class="chief-direct-state waiting">Por chegar</span>':'<span class="chief-direct-state warning">Presença não confirmada</span>';
+ box.innerHTML=`<div class="chief-direct-result-head"><div><p class="section-kicker">CONVIDADO ENCONTRADO</p><h4>${esc(g.full_name)}</h4><p>${esc(g.code)} · ${people} pessoa(s)</p></div>${state}</div><div class="chief-direct-result-grid"><div><small>MESA</small><strong>${g.table_name?esc(g.table_name):'Sem mesa atribuída'}</strong></div><div><small>ENTRADA</small><strong>${g.checked_in?'Registada':'Ainda não registada'}</strong></div><div><small>PRESENÇA</small><strong>${esc(g.rsvp_status||'—')}</strong></div></div><div class="chief-direct-actions"><button type="button" class="button secondary" id="chiefOpenGuest">Abrir no check-in</button>${g.table_id?`<button type="button" class="button secondary" id="chiefOpenTable">Destacar mesa</button>`:''}</div>`;
+ box.classList.remove('hidden');
+ if(g.table_id) window.setTimeout(()=>highlightChiefTable(g.table_id,false),80);
+ A('#chiefOpenGuest')?.addEventListener('click',()=>{A('#code').value=g.code;render(g);window.scrollTo({top:A('#result').getBoundingClientRect().top+window.scrollY-100,behavior:'smooth'})});
+ A('#chiefOpenTable')?.addEventListener('click',()=>{highlightChiefTable(g.table_id,true);openChiefTable(g.table_id)});
+}
+function chiefSearchGuest(){
+ const input=A('#chiefGuestSearch'); if(!input)return;
+ const q=String(input.value||'').trim().toLocaleLowerCase('pt-PT');
+ if(!q){toast('Introduza o nome ou código.');input.focus();return}
+ const exact=guests.find(g=>String(g.code||'').toLocaleLowerCase('pt-PT')===q||String(g.full_name||'').toLocaleLowerCase('pt-PT')===q);
+ if(exact){renderChiefGuestSearch(exact);return}
+ const matches=guests.filter(g=>String(g.full_name||'').toLocaleLowerCase('pt-PT').includes(q)||String(g.code||'').toLocaleLowerCase('pt-PT').includes(q));
+ if(matches.length===0){renderChiefGuestSearch(null);return}
+ if(matches.length===1){renderChiefGuestSearch(matches[0]);return}
+ const box=A('#chiefGuestSearchResult');
+ box.innerHTML=`<div class="chief-direct-match-list"><p class="section-kicker">RESULTADOS</p><h4>Escolha o convidado</h4>${matches.slice(0,20).map((g,i)=>`<button type="button" class="chief-direct-match" onclick="selectChiefGuestSearch(${i})"><span><b>${esc(g.full_name)}</b><small>${esc(g.code)} · ${1+(g.companion_count||0)} pessoa(s)</small></span><strong>${g.table_name?esc(g.table_name):'Sem mesa'} · ${g.checked_in?'Chegou':'Por chegar'}</strong></button>`).join('')}${matches.length>20?'<small>A mostrar os primeiros 20 resultados.</small>':''}</div>`;
+ box.classList.remove('hidden'); window.__chiefGuestMatches=matches;
+}
+window.selectChiefGuestSearch=i=>{const g=window.__chiefGuestMatches?.[i];if(g)renderChiefGuestSearch(g)};
+A('#chiefGuestSearchBtn')?.addEventListener('click',chiefSearchGuest);
+A('#chiefGuestSearch')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();chiefSearchGuest()}});
+
 
 function renderChiefTools(){
  const list=A('#chiefTeamList'),sel=A('#chiefTaskProtocol'),tasks=A('#chiefTaskList');
