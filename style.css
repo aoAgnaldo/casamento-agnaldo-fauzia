@@ -2289,3 +2289,99 @@ button,.button,a.wedy-menu,.cover-icon,.quick,.guest-filter,.drawer-mini-btn,.ic
 @media(max-width:1050px){.admin-dashboard{grid-template-columns:185px minmax(0,1fr)}.admin-dashboard-grid-three{grid-template-columns:1fr 1fr}.admin-quick-panel{grid-column:1/-1}.admin-kpis{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.admin-body .wedy-header{padding:10px 12px}.admin-body .wedy-brand span{display:none}.admin-body .wedy-event{display:flex}.admin-dashboard{display:block}.admin-dashboard-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid #ebe6e1;padding:12px;display:block}.admin-sidebar-brand{border:0;padding:2px 4px 12px}.admin-sidebar-nav{display:flex;overflow:auto;padding-top:0;gap:5px}.admin-sidebar-nav a{flex:0 0 auto;padding:9px 11px}.admin-sidebar-nav a span{display:none}.admin-sidebar-note,.admin-sidebar-settings{display:none}.admin-dashboard-main{padding:15px 12px 25px}.admin-dashboard-top{display:block}.admin-date-card{display:none}.admin-global-search{width:100%}.admin-welcome{padding:22px 2px 16px;align-items:flex-start}.admin-welcome .button{display:none}.admin-kpis{grid-template-columns:1fr 1fr;gap:8px}.admin-kpi{padding:12px}.admin-kpi strong{font-size:1.65rem}.admin-dashboard-grid-two,.admin-dashboard-grid-three{grid-template-columns:1fr}.admin-quick-panel{grid-column:auto}.admin-quick-grid{grid-template-columns:repeat(2,1fr)}.admin-love-banner{padding:16px}.rings{font-size:1.8rem}.admin-body .wedy-event{margin-left:auto}.admin-body .wedy-menu{display:grid}}
 @media(max-width:420px){.admin-kpis{grid-template-columns:1fr}.admin-kpi{min-height:72px}.admin-welcome h1{font-size:2.5rem}.prep-row{grid-template-columns:95px 1fr 32px}}
+
+/* V6.28 — Mobile Admin redesign: clean, compact and touch-first */
+@media (max-width:760px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .admin-body{background:#faf9f7}
+  .admin-body .wedy-header{height:62px;min-height:62px;padding:8px 12px;gap:8px;background:rgba(255,255,255,.98);box-shadow:0 1px 0 rgba(45,38,34,.05)}
+  .admin-body .wedy-brand{display:flex;align-items:center;min-width:30px;width:30px;gap:0}
+  .admin-body .wedy-brand img{width:30px;height:30px;display:block}
+  .admin-body .wedy-brand span{display:none}
+  .admin-body .wedy-event{order:2;margin-left:auto;max-width:154px;min-width:0;padding:5px 8px;border-radius:13px;background:#f5f2ef;display:flex;align-items:center;gap:7px}
+  .admin-body .wedy-event .wedy-avatar{width:30px;height:30px;flex:0 0 30px}
+  .admin-body .wedy-event span:not(.wedy-avatar){min-width:0;display:flex;flex-direction:column}
+  .admin-body .wedy-event b{font-size:.58rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .admin-body .wedy-event small{font-size:.44rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .admin-body .wedy-menu{order:3;width:40px;height:40px;min-width:40px;border-radius:12px;display:grid;place-items:center;background:#f3f0ed;border:1px solid #ebe5df;color:#403934;font-size:1.1rem}
+  .admin-body .admin-menu-panel{position:fixed;top:70px;right:12px;left:12px;width:auto;max-height:calc(100vh - 84px);overflow:auto;border-radius:18px;box-shadow:0 18px 50px rgba(38,30,25,.16);z-index:80}
+  .admin-dashboard{display:block;min-height:0}
+  .admin-dashboard-sidebar{display:none!important}
+  .admin-dashboard-main{width:100%;max-width:none;padding:14px 12px 28px;margin:0;box-sizing:border-box}
+  .admin-dashboard-top{display:block;margin:0}
+  .admin-global-search{width:100%;height:46px;border-radius:14px;padding:0 11px;background:#fff}
+  .admin-global-search span{font-size:1.15rem}
+  .admin-global-search input{font-size:.68rem;padding:0 8px}
+  .admin-global-search kbd{display:none}
+  .admin-date-card{display:none}
+  .admin-welcome{display:block;padding:22px 2px 17px}
+  .admin-welcome .section-kicker{font-size:.48rem;letter-spacing:.15em;margin-bottom:4px}
+  .admin-welcome h1{font-size:2.45rem;line-height:.96;margin:0 0 7px;letter-spacing:-.02em}
+  .admin-welcome p:not(.section-kicker){font-size:.62rem;line-height:1.45;max-width:310px}
+  .admin-welcome .button{display:none}
+  .admin-kpis{grid-template-columns:1fr 1fr;gap:8px}
+  .admin-kpi{min-width:0;min-height:112px;padding:13px;border-radius:14px;gap:9px;align-items:flex-start}
+  .admin-kpi .kpi-icon{width:34px;height:34px;border-radius:10px;font-size:1rem}
+  .admin-kpi small{font-size:.43rem;line-height:1.15;display:block;max-width:105px}
+  .admin-kpi strong{font-size:1.72rem;margin:6px 0 2px}
+  .admin-kpi span:not(.kpi-icon){font-size:.49rem;line-height:1.25}
+  .admin-kpi i{height:3px}
+  .admin-dashboard-grid-two,.admin-dashboard-grid-three{grid-template-columns:1fr;gap:9px;margin-top:9px}
+  .admin-panel{border-radius:14px;padding:15px}
+  .admin-panel-head{margin-bottom:12px;gap:8px}
+  .admin-panel h2{font-size:1.28rem}
+  .admin-panel-head p{font-size:.51rem;line-height:1.35}
+  .admin-panel-head a{font-size:.49rem}
+  .prep-row{grid-template-columns:90px minmax(0,1fr) 30px;gap:8px;margin:14px 0}
+  .prep-row span{font-size:.54rem}
+  .prep-row strong{font-size:.52rem}
+  .prep-track{height:6px}
+  .table-overview-content{min-height:120px;gap:20px}
+  .table-donut{width:100px;height:100px}
+  .table-donut:after{inset:15px}
+  .table-donut strong{font-size:1.5rem}
+  .table-legend{gap:8px}
+  .table-legend div{grid-template-columns:9px 22px auto}
+  .table-legend b{font-size:.82rem}
+  .table-legend small{font-size:.48rem}
+  .overview-protocol,.overview-arrival{padding:8px 1px}
+  .mini-avatar{width:32px;height:32px}
+  .overview-protocol b,.overview-arrival b{font-size:.58rem}
+  .overview-protocol small,.overview-arrival small{font-size:.47rem}
+  .overview-arrival time{font-size:.48rem}
+  .admin-quick-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .admin-quick{min-height:72px;border-radius:12px;font-size:.52rem;padding:8px}
+  .admin-love-banner{margin-top:9px;min-height:104px;border-radius:14px;padding:16px 17px}
+  .admin-love-banner p{font-size:.48rem;line-height:1.35;max-width:210px}
+  .admin-love-banner strong{font-size:1.08rem}
+  .rings{font-size:1.9rem;margin-right:6px}
+
+  /* Internal Admin sections: preserve all functionality while removing desktop density. */
+  .admin-body .wedy-section{margin-left:0;margin-right:0;padding:17px 14px;scroll-margin-top:72px;border-radius:15px}
+  .admin-body .admin-extra{margin-top:10px}
+  .admin-body .section-title-row{gap:12px;align-items:flex-start}
+  .admin-body .section-title-row h2{font-size:2rem;line-height:.95}
+  .admin-body .section-title-row .muted{font-size:.61rem;line-height:1.4}
+  .admin-body .section-actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .admin-body .section-actions .button:last-child{grid-column:1/-1}
+  .admin-body .section-title-row>.button{width:100%}
+  .admin-body .guest-tools{grid-template-columns:1fr;gap:8px}
+  .admin-body .guest-filters{display:flex;overflow-x:auto;gap:6px;padding-bottom:4px;scrollbar-width:none}
+  .admin-body .guest-filters::-webkit-scrollbar{display:none}
+  .admin-body .guest-filter{flex:0 0 auto;min-height:38px;padding:8px 11px}
+  .admin-body .guest-list-scroll,.admin-body .gift-list-scroll{max-height:62vh;overflow:auto!important}
+  .admin-body .table td{grid-template-columns:86px minmax(0,1fr);font-size:.59rem}
+  .admin-body .table td:before{font-size:.5rem}
+  .admin-body .seating-layout{grid-template-columns:1fr;gap:10px}
+  .admin-body .protocol-grid{grid-template-columns:1fr}
+  .admin-body .program-admin-list{gap:9px}
+  .admin-body .program-admin-card{border-radius:14px}
+}
+@media(max-width:380px){
+  .admin-body .wedy-event{max-width:126px}
+  .admin-kpi{min-height:106px;padding:11px}
+  .admin-kpi .kpi-icon{width:31px;height:31px}
+  .admin-kpi strong{font-size:1.55rem}
+  .admin-welcome h1{font-size:2.25rem}
+  .admin-dashboard-main{padding-left:10px;padding-right:10px}
+}
