@@ -6,13 +6,88 @@ function genCode(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let out='AF-';
 function inviteUrl(){return location.origin+location.pathname.replace(/admin\.html$/,'index.html')}
 function makeMessage(g){return `Olá, ${g.full_name}! ❤️\n\nÉ com muita alegria que nós, Agnaldo & Fáuzia, queremos convidar-te para o nosso casamento.\n\n📅 29 de Maio de 2027\n📍 Igreja Universal do Jardim — 09:00\n🎉 Recepção: Sala de Eventos do Kaya Kwanga Residence, às 15h\n\nPreparamos um convite especial para ti:\n👉 ${inviteUrl()}?convite=${encodeURIComponent(g.code)}\n\n🔐 Código do teu convite: ${g.code}\n\nAgradecemos que confirmes a tua presença até 30 de Abril de 2027. ❤️\n\nSerá uma alegria celebrar este momento contigo!`;}
 async function init(){const {data}=await supabaseClient.auth.getSession();if(data.session){session=data.session;await enter()}else A('#login').classList.remove('hidden')}
-async function enter(){A('#login').classList.add('hidden');A('#app').classList.remove('hidden');await refresh()}
-A('#loginForm').onsubmit=async e=>{e.preventDefault();const {error}=await supabaseClient.auth.signInWithPassword({email:A('#email').value,password:A('#password').value});if(error)showMsg(A('#loginMsg'),'Email ou palavra-passe incorrectos.');else await enter()}
+
+const ADMIN_CREATE_FUNCTION_URL = SUPABASE_URL + '/functions/v1/create-admin';
+let currentAdminProfile = {display_name:'', avatar_url:''};
+
+function fallbackAdminName(user){
+ const meta=user?.user_metadata||{};
+ if(meta.display_name) return meta.display_name;
+ const email=String(user?.email||'').toLowerCase();
+ if(email==='aoagnaldo@gmail.com') return 'Agnaldo';
+ const local=email.split('@')[0].replace(/[._-]+/g,' ').trim();
+ return local ? local.replace(/\b\w/g,c=>c.toUpperCase()) : 'Administrador';
+}
+function initials(name){return String(name||'A').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'A'}
+function applyAdminIdentity(user,profile){
+ const name=profile?.display_name||fallbackAdminName(user), avatar=profile?.avatar_url||user?.user_metadata?.avatar_url||'';
+ currentAdminProfile={display_name:name,avatar_url:avatar};
+ const hName=A('#adminHeaderName'),hMeta=A('#adminHeaderMeta'),hAvatar=A('#adminHeaderAvatar'),mName=A('#adminMenuName'),mEmail=A('#adminMenuEmail'),mAvatar=A('#adminMenuAvatar');
+ if(hName)hName.textContent=name;
+ if(hMeta)hMeta.textContent='Administrador · Casamento · 29 Maio 2027';
+ if(mName)mName.textContent=name;
+ if(mEmail)mEmail.textContent=user?.email||'—';
+ [hAvatar,mAvatar].forEach(el=>{if(!el)return;if(avatar){el.innerHTML=`<img src="${esc(avatar)}" alt="">`;el.classList.add('has-photo')}else{el.textContent=initials(name);el.classList.remove('has-photo')}});
+ const pv=A('#profileAvatarPreview');if(pv){if(avatar){pv.innerHTML=`<img src="${esc(avatar)}" alt="">`;pv.classList.add('has-photo')}else{pv.textContent=initials(name);pv.classList.remove('has-photo')}}
+ if(A('#profileName'))A('#profileName').value=name;
+ if(A('#profileAccountEmail'))A('#profileAccountEmail').textContent=user?.email||'—';
+}
+async function loadAdminProfile(){
+ const user=session?.user;if(!user)return;
+ let profile=null;
+ const {data,error}=await supabaseClient.from('admin_profiles').select('display_name,avatar_url').eq('user_id',user.id).maybeSingle();
+ if(!error&&data)profile=data;
+ applyAdminIdentity(user,profile);
+}
+async function openProfileModal(){
+ closeAdminMenu();
+ await loadAdminProfile();
+ A('#profileFormMsg').classList.add('hidden');A('#profilePhoto').value='';A('#profilePhotoPreview').classList.add('hidden');A('#profilePhotoPreview').innerHTML='';
+ A('#profileModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#profileName').focus(),80);
+}
+function closeProfileModal(){A('#profileModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')}
+async function compressAdminImage(file){
+ const img=new Image(),src=URL.createObjectURL(file);
+ try{await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('Não foi possível ler a fotografia.'));img.src=src});const max=900,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.max(1,Math.round(img.naturalWidth*scale)),h=Math.max(1,Math.round(img.naturalHeight*scale));const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);const b=await new Promise(r=>c.toBlob(r,'image/webp',.84));if(!b)throw new Error('Não foi possível preparar a fotografia.');return new File([b],`avatar-${Date.now()}.webp`,{type:'image/webp'})}finally{URL.revokeObjectURL(src)}
+}
+async function uploadAdminAvatar(file){
+ const compressed=await compressAdminImage(file),path=`${session.user.id}/${crypto.randomUUID()}.webp`;
+ const up=await supabaseClient.storage.from('admin-avatars').upload(path,compressed,{cacheControl:'31536000',upsert:false,contentType:'image/webp'});
+ if(up.error)throw new Error('A fotografia não pôde ser carregada: '+up.error.message);
+ return supabaseClient.storage.from('admin-avatars').getPublicUrl(path).data.publicUrl;
+}
+A('#profilePhoto')?.addEventListener('change',e=>{const f=e.target.files?.[0],box=A('#profilePhotoPreview');if(!f){box.classList.add('hidden');return}if(!/^image\/(jpeg|png|webp)$/.test(f.type)){showMsg(A('#profileFormMsg'),'Escolha uma imagem JPG, PNG ou WebP válida.');e.target.value='';return}const u=URL.createObjectURL(f);box.innerHTML=`<img src="${u}" alt="Pré-visualização">`;box.classList.remove('hidden')});
+A('#profileForm')?.addEventListener('submit',async e=>{e.preventDefault();const btn=A('#profileSaveBtn'),msg=A('#profileFormMsg');btn.disabled=true;msg.classList.add('hidden');try{let avatar=currentAdminProfile.avatar_url||null;const file=A('#profilePhoto').files?.[0];if(file)avatar=await uploadAdminAvatar(file);const name=A('#profileName').value.trim();const {error}=await supabaseClient.from('admin_profiles').upsert({user_id:session.user.id,display_name:name,avatar_url:avatar,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)throw error;await loadAdminProfile();closeProfileModal();toast('Perfil actualizado.');}catch(err){showMsg(msg,err?.message||String(err))}finally{btn.disabled=false}});
+
+function closeAdminMenu(){const p=A('#adminMenuPanel'),b=A('#adminMenuBtn');if(p)p.classList.add('hidden');if(b)b.setAttribute('aria-expanded','false')}
+A('#openProfileSettings')?.addEventListener('click',openProfileModal);
+A('#openAdminSettings')?.addEventListener('click',async()=>{closeAdminMenu();await openAdminsModal()});
+A('#menuLogout')?.addEventListener('click',()=>supabaseClient.auth.signOut().then(()=>location.reload()));
+A('#closeProfileModal')?.addEventListener('click',closeProfileModal);
+A('#profileModal')?.addEventListener('mousedown',e=>{if(e.target===A('#profileModal'))closeProfileModal()});
+
+async function openAdminsModal(){
+ A('#adminCreateMsg').classList.add('hidden');A('#adminCreateForm').reset();A('#adminsModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');await loadAdmins();setTimeout(()=>A('#newAdminName').focus(),80);
+}
+function closeAdminsModal(){A('#adminsModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')}
+A('#closeAdminsModal')?.addEventListener('click',closeAdminsModal);
+A('#adminsModal')?.addEventListener('mousedown',e=>{if(e.target===A('#adminsModal'))closeAdminsModal()});
+async function loadAdmins(){
+ const box=A('#adminsList');box.innerHTML='<div class="admin-list-loading">A carregar administradores…</div>';
+ const {data,error}=await supabaseClient.rpc('admin_list_admins');
+ if(error){box.innerHTML=`<div class="status">${esc(error.message)}</div>`;return}
+ box.innerHTML=(data||[]).map(a=>`<div class="admin-account-row"><div class="admin-account-avatar">${a.avatar_url?`<img src="${esc(a.avatar_url)}" alt="">`:esc(initials(a.display_name||a.email))}</div><div><strong>${esc(a.display_name||'Administrador')}</strong><small>${esc(a.email||'')}</small></div>${a.user_id===session.user.id?'<span class="admin-you">Tu</span>':''}</div>`).join('')||'<div class="empty-state">Ainda não existem administradores.</div>';
+}
+A('#adminCreateForm')?.addEventListener('submit',async e=>{e.preventDefault();const btn=A('#createAdminBtn'),msg=A('#adminCreateMsg');btn.disabled=true;msg.classList.add('hidden');try{const body={email:A('#newAdminEmail').value.trim(),password:A('#newAdminPassword').value,display_name:A('#newAdminName').value.trim()};if(body.password.length<6)throw new Error('A palavra-passe deve ter pelo menos 6 caracteres.');const {data:sd}=await supabaseClient.auth.getSession();const token=sd?.session?.access_token;if(!token)throw new Error('A sessão expirou. Entre novamente no painel.');const res=await fetch(ADMIN_CREATE_FUNCTION_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},body:JSON.stringify(body)});let payload={};try{payload=await res.json()}catch(_){}if(!res.ok)throw new Error(payload.error||'Não foi possível criar o administrador.');A('#adminCreateForm').reset();await loadAdmins();toast(`Administrador ${body.display_name} criado com sucesso.`)}catch(err){showMsg(msg,err?.message||String(err))}finally{btn.disabled=false}});
+
+async function enter(){A('#login').classList.add('hidden');A('#app').classList.remove('hidden');await loadAdminProfile();await refresh()}
+
+A('#loginForm').addEventListener('submit',async e=>{e.preventDefault();const form=e.currentTarget,btn=form.querySelector('button[type=submit]'),msgEl=A('#loginMsg');const email=A('#email')?.value.trim()||'',password=A('#password')?.value||'';if(!email||!password){showMsg(msgEl,'Introduza o email e a palavra-passe.');return}if(btn)btn.disabled=true;msgEl.classList.add('hidden');try{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){showMsg(msgEl,error.message||'Não foi possível iniciar sessão.');return}session=data?.session||null;await enter()}catch(err){showMsg(msgEl,err?.message||'Não foi possível iniciar sessão.')}finally{if(btn)btn.disabled=false}});
 A('#logout')?.addEventListener('click',()=>supabaseClient.auth.signOut().then(()=>location.reload()));
 
 async function refresh(){const [{data:g,error:ge},{data:gi,error:gie},{data:t,error:te},{data:p,error:pe}]=await Promise.all([supabaseClient.rpc('admin_list_invitations_checkin'),supabaseClient.rpc('admin_list_gifts'),supabaseClient.rpc('admin_list_tables'),supabaseClient.rpc('admin_list_protocols')]);if(ge){toast(ge.message);return}if(gie){toast(gie.message);return}if(te){toast(te.message);return}if(pe){toast(pe.message);return}guests=g||[];gifts=gi||[];receptionTables=t||[];protocols=p||[];render();renderTables();renderProtocols()}
 function render(){
- const c={total:guests.length,pending:0,confirmed:0,declined:0,people:0,checkedIn:0,notCheckedIn:0,presentPeople:0};guests.forEach(g=>{if(c[g.rsvp_status]!==undefined)c[g.rsvp_status]++;if(g.rsvp_status==='confirmed'){const people=1+(g.companion_count||0);c.people+=people;if(g.checked_in){c.checkedIn++;c.presentPeople+=people}}});c.notCheckedIn=c.confirmed-c.checkedIn;A('#stTotal').textContent=c.total;A('#stPending').textContent=c.pending;A('#stConfirmed').textContent=c.confirmed;A('#stDeclined').textContent=c.declined;A('#stPeople').textContent=c.people;A('#stCheckedIn').textContent=c.checkedIn;A('#stNotCheckedIn').textContent=c.notCheckedIn;A('#stPresentPeople').textContent=c.presentPeople;
+ const c={total:guests.length,pending:0,confirmed:0,declined:0,people:0,checkedIn:0,notCheckedIn:0,presentPeople:0};guests.forEach(g=>{if(c[g.rsvp_status]!==undefined)c[g.rsvp_status]++;if(g.rsvp_status==='confirmed'){const people=1+(g.companion_count||0);c.people+=people;if(g.checked_in){c.checkedIn++;c.presentPeople+=people}}});c.notCheckedIn=c.confirmed-c.checkedIn;A('#stTotal').textContent=c.total;A('#stPending').textContent=c.pending;A('#stConfirmed').textContent=c.confirmed;A('#stDeclined').textContent=c.declined;A('#stPeople').textContent=c.people; if(A('#stCheckedIn')) A('#stCheckedIn').textContent=c.checkedIn; if(A('#stNotCheckedIn')) A('#stNotCheckedIn').textContent=c.notCheckedIn; if(A('#stCheckedIn2')) A('#stCheckedIn2').textContent=c.checkedIn; if(A('#stNotCheckedIn2')) A('#stNotCheckedIn2').textContent=c.notCheckedIn; A('#stPresentPeople').textContent=c.presentPeople;
  const q=String(A('#guestSearch')?.value||'').trim().toLowerCase();
  const filteredGuests=guests.filter(g=>{
    const hay=[g.full_name,g.code,g.whatsapp].map(v=>String(v||'').toLowerCase()).join(' ');
@@ -24,6 +99,18 @@ function render(){
  A('#guestRows').innerHTML=filteredGuests.map(g=>`<tr><td data-label="Nome"><span class="mobile-row-title">${esc(g.full_name)}</span></td><td data-label="Código"><strong>${esc(g.code)}</strong></td><td data-label="WhatsApp">${esc(g.whatsapp||'—')}</td><td data-label="Lotação">${g.allowed_guests}</td><td data-label="Estado"><span class="badge ${g.rsvp_status}">${g.rsvp_status}</span></td><td data-label="Pessoas">${g.rsvp_status==='confirmed'?1+(g.companion_count||0):0}</td><td data-label="Confirmado em">${g.rsvp_at?new Date(g.rsvp_at).toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'}):'—'}</td><td data-label="Entrada">${g.checked_in?'<span class="badge confirmed">Entrada registada</span>':'<span class="badge pending">Por entrar</span>'}</td><td data-label="Mesa">${g.table_name?`<span class="table-badge">${esc(g.table_name)}</span>`:'<span class="muted">Sem mesa</span>'}</td><td data-label="Acções"><div class="mobile-actions"><button class="button secondary" onclick="editGuest('${g.id}')">Editar</button> <button class="button secondary" onclick="openQR('${g.id}')">▣ QR</button> <button class="button secondary" onclick="openWhats('${g.id}')">${g.invitation_sent_at?'Reenviar':'Enviar convite'}</button> <button class="button danger" onclick="removeGuest('${g.id}')">Remover</button></div></td></tr>`).join('');
  A('#giftRows').innerHTML=gifts.map(g=>`<tr><td data-label="Foto">${g.image_url?`<img class="gift-admin-thumb" src="${esc(g.image_url)}" alt="">`:'<div class="gift-admin-placeholder">♡</div>'}</td><td data-label="#">${g.item_no}</td><td data-label="Presente"><span class="mobile-row-title">${esc(g.name)}</span></td><td data-label="Estado">${g.reserved?'<span class="badge confirmed">Reservado</span>':'<span class="badge pending">Livre</span>'}</td><td data-label="Reservado por">${esc(g.reserved_by_name||'—')}</td><td data-label="Acções"><div class="gift-actions"><button class="button secondary" onclick="editGift(${g.id})">Editar</button><button class="button danger" onclick="deleteGift(${g.id})" ${g.reserved?'disabled':''}>Remover</button></div></td></tr>`).join('');
 }
+
+// ---------------- ATALHOS DO DASHBOARD ----------------
+A('#shareInviteHome')?.addEventListener('click',async()=>{
+ const url=inviteUrl();
+ try{
+  if(navigator.share){await navigator.share({title:'Agnaldo & Fáuzia',text:'O nosso convite de casamento',url});}
+  else{await navigator.clipboard.writeText(url);toast('Link do convite copiado.');}
+ }catch(e){if(e?.name!=='AbortError')toast('Não foi possível partilhar o convite.');}
+});
+const carouselTrack=document.querySelector('.carousel-track');
+A('#carouselPrev')?.addEventListener('click',()=>carouselTrack?.scrollBy({left:-260,behavior:'smooth'}));
+A('#carouselNext')?.addEventListener('click',()=>carouselTrack?.scrollBy({left:260,behavior:'smooth'}));
 
 let currentQrGuest=null;
 window.openQR=id=>{

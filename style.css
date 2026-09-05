@@ -1977,3 +1977,159 @@ button,.button,a.wedy-menu,.cover-icon,.quick,.guest-filter,.drawer-mini-btn,.ic
 @media(prefers-reduced-motion:reduce){
   .wedy-nav,.modal-box,.table-drawer,.guest-picker{scroll-behavior:auto!important;transition:none!important}
 }
+
+
+/* =========================================================
+   V6.4 — LISTAS COM SCROLL INTERNO + INTERACÇÕES REAIS
+   No mobile, convidados e presentes mostram poucos itens
+   e o restante fica dentro da própria lista.
+   ========================================================= */
+@media (max-width:820px){
+  .guest-list-scroll,
+  .gift-list-scroll{
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+    scrollbar-width:thin;
+    padding-right:2px;
+  }
+  .guest-list-scroll{max-height:min(54dvh,520px)!important;border:1px solid #ebe6e1!important;border-radius:14px!important;padding:0 5px 0 0!important;}
+  .gift-list-scroll{max-height:min(50dvh,470px)!important;border:1px solid #ebe6e1!important;border-radius:14px!important;padding:0 5px 0 0!important;}
+  .guest-list-scroll .table,
+  .gift-list-scroll .table{margin:0!important;padding:0!important;}
+  .guest-list-scroll .table tr,
+  .gift-list-scroll .table tr{box-shadow:none!important;margin:0 0 7px!important;border-left:0!important;border-right:0!important;border-top:0!important;border-radius:0!important;}
+  .guest-list-scroll .table tr:first-child,
+  .gift-list-scroll .table tr:first-child{margin-top:0!important;}
+  .guest-list-scroll .table td,
+  .gift-list-scroll .table td{padding:6px 4px!important;}
+  /* A lista de convidados fica compacta para caberem ~3 convites no ecrã. */
+  .guest-list-scroll .table td[data-label="WhatsApp"],
+  .guest-list-scroll .table td[data-label="Lotação"],
+  .guest-list-scroll .table td[data-label="Confirmado em"],
+  .guest-list-scroll .table td[data-label="Entrada"]{display:none!important;}
+  .guest-list-scroll .table td[data-label="Nome"]{padding-top:10px!important;}
+  .guest-list-scroll .table td[data-label="Nome"]:before{display:none!important;}
+  .guest-list-scroll .table td[data-label="Nome"] .mobile-row-title{font-size:.78rem!important;}
+  .guest-list-scroll .table td[data-label="Código"],
+  .guest-list-scroll .table td[data-label="Estado"],
+  .guest-list-scroll .table td[data-label="Pessoas"],
+  .guest-list-scroll .table td[data-label="Mesa"]{grid-template-columns:70px minmax(0,1fr)!important;padding-top:5px!important;padding-bottom:5px!important;}
+  .guest-list-scroll .table td[data-label="Acções"]{padding-top:9px!important;padding-bottom:10px!important;}
+  .guest-list-scroll .mobile-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important;}
+  .guest-list-scroll .mobile-actions .button{min-width:0!important;padding:8px 4px!important;font-size:.51rem!important;white-space:nowrap;}
+  /* Presentes: cartão compacto e scroll interno independente. */
+  .gift-list-scroll .table td[data-label="Reservado por"]{display:none!important;}
+  .gift-list-scroll .table td[data-label="#"]{display:none!important;}
+  .gift-list-scroll .table td[data-label="Foto"]{display:block!important;padding:9px 4px 4px!important;}
+  .gift-list-scroll .table td[data-label="Foto"]:before{display:none!important;}
+  .gift-list-scroll .gift-admin-thumb,.gift-list-scroll .gift-admin-placeholder{width:54px!important;height:54px!important;}
+  .gift-list-scroll .table td[data-label="Presente"]{padding-top:5px!important;}
+  .gift-list-scroll .table td[data-label="Presente"]:before{display:none!important;}
+  .gift-list-scroll .table td[data-label="Estado"],
+  .gift-list-scroll .table td[data-label="Acções"]{padding-top:6px!important;padding-bottom:6px!important;}
+  .gift-list-scroll .gift-actions{grid-template-columns:1fr 1fr!important;}
+  .gift-list-scroll .gift-actions .button{font-size:.54rem!important;}
+  .gift-list-scroll .gift-actions .button:last-child{grid-column:auto!important;}
+
+  /* Todas as janelas de edição seguem o mesmo padrão do organizador:
+     overlay, foco central no desktop e sheet no mobile. */
+  .modal{z-index:10000!important;}
+  .modal-box{overflow:hidden!important;display:flex!important;flex-direction:column!important;}
+  .modal-box .modal-form-body{overflow-y:auto!important;-webkit-overflow-scrolling:touch;}
+  .modal-actions .button,
+  .modal-actions a{font-weight:600!important;}
+}
+
+/* O botão de partilha é uma acção real; os controlos do carrossel também. */
+.carousel-track{scroll-behavior:smooth;overflow-x:auto;scrollbar-width:none;}
+.carousel-track::-webkit-scrollbar{display:none;}
+
+/* =========================================================
+   V6.6 — SCROLL INTERNO + POPUPS NO PADRÃO DO ORGANIZADOR
+   ========================================================= */
+@media (min-width:821px){
+  .guest-list-scroll{max-height:420px!important;overflow-y:auto!important;overflow-x:auto!important;overscroll-behavior:contain;}
+  .gift-list-scroll{max-height:360px!important;overflow-y:auto!important;overflow-x:auto!important;overscroll-behavior:contain;}
+}
+
+@media (max-width:820px){
+  /* O scroll pertence à lista, nunca à página inteira. */
+  .guest-list-scroll{height:318px!important;max-height:318px!important;overflow-y:auto!important;overflow-x:hidden!important;}
+  .gift-list-scroll{height:292px!important;max-height:292px!important;overflow-y:auto!important;overflow-x:hidden!important;}
+  .guest-list-scroll::-webkit-scrollbar,.gift-list-scroll::-webkit-scrollbar{width:5px}
+  .guest-list-scroll::-webkit-scrollbar-thumb,.gift-list-scroll::-webkit-scrollbar-thumb{border-radius:10px;background:#d8d0c9}
+
+  /* Mantém aproximadamente três cartões visíveis antes de fazer scroll. */
+  .guest-list-scroll .table tbody tr{margin-bottom:6px!important;}
+  .gift-list-scroll .table tbody tr{margin-bottom:6px!important;}
+
+  /* Todos os formulários de gestão ficam como janelas sobre a página,
+     com o mesmo overlay, foco e comportamento do Organizar mesas. */
+  .modal{position:fixed!important;inset:0!important;z-index:12000!important;}
+  .modal-box{position:relative!important;max-height:92dvh!important;overflow:hidden!important;}
+  .modal-form-body{overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;}
+}
+
+/* Fecho explícito das janelas: evita que qualquer formulário pareça parte da página. */
+.modal-box{isolation:isolate;}
+
+/* =========================================================
+   V6.7 — Perfil do administrador + gestão de administradores
+   ========================================================= */
+.wedy-event{position:relative;min-width:225px}
+.wedy-avatar,.admin-menu-avatar,.profile-editor-avatar,.admin-account-avatar{overflow:hidden}
+.wedy-avatar.has-photo,.admin-menu-avatar.has-photo,.profile-editor-avatar.has-photo{padding:0;background:#eee7e1}
+.wedy-avatar img,.admin-menu-avatar img,.profile-editor-avatar img,.admin-account-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.admin-menu-panel{position:absolute;right:0;top:calc(100% + 10px);width:min(340px,calc(100vw - 28px));background:#fffdfb;border:1px solid #e6dfd9;border-radius:18px;box-shadow:0 22px 55px rgba(35,29,25,.18);padding:10px;z-index:10001}
+.admin-menu-profile{display:flex;align-items:center;gap:11px;padding:10px 10px 13px;border-bottom:1px solid #eee8e3;margin-bottom:6px}
+.admin-menu-avatar{width:42px;height:42px;border-radius:13px;background:#d8c5bb;color:#fff;display:grid;place-items:center;font:500 1rem 'Cormorant Garamond',serif;flex:0 0 42px}
+.admin-menu-profile strong{display:block;font-size:.69rem}.admin-menu-profile small{display:block;margin-top:3px;color:#8a817a;font-size:.56rem;word-break:break-all}
+.admin-menu-item{width:100%;border:0;background:transparent;border-radius:12px;padding:11px 10px;display:flex;align-items:center;gap:11px;text-align:left;cursor:pointer;color:#302a26}
+.admin-menu-item:hover{background:#f7f3ef}.admin-menu-item>span{width:34px;height:34px;border-radius:10px;background:#f2ede8;display:grid;place-items:center;color:#775b4e;font-size:1rem;flex:0 0 34px}.admin-menu-item strong{display:block;font-size:.64rem}.admin-menu-item small{display:block;color:#8d847d;font-size:.53rem;margin-top:3px}.admin-menu-item.danger{color:#8d4e43}.admin-menu-item.danger>span{color:#8d4e43}
+.profile-editor{display:flex;align-items:center;gap:13px;margin-bottom:19px;padding:12px;border:1px solid #ebe4de;border-radius:14px;background:#faf7f3}.profile-editor-avatar{width:58px;height:58px;border-radius:16px;background:#d8c5bb;color:#fff;display:grid;place-items:center;font:500 1.25rem 'Cormorant Garamond',serif;flex:0 0 58px}.profile-editor strong{font-size:.72rem}.profile-editor p{margin:4px 0 0;font-size:.57rem}
+.profile-photo-preview{margin:7px 0 15px;padding:10px;border:1px solid #e8e0da;border-radius:13px;background:#faf7f3}.profile-photo-preview img{display:block;width:100%;max-height:180px;object-fit:cover;border-radius:9px}
+.admins-list{max-height:250px;overflow:auto;border:1px solid #ebe4de;border-radius:14px;background:#fff}.admin-account-row{display:flex;align-items:center;gap:10px;padding:11px 12px;border-bottom:1px solid #eee8e3}.admin-account-row:last-child{border-bottom:0}.admin-account-avatar{width:38px;height:38px;border-radius:12px;background:#d8c5bb;color:#fff;display:grid;place-items:center;font:500 .9rem 'Cormorant Garamond',serif;flex:0 0 38px}.admin-account-row strong{display:block;font-size:.64rem}.admin-account-row small{display:block;color:#8b827b;font-size:.53rem;margin-top:3px;word-break:break-all}.admin-you{margin-left:auto;padding:5px 7px;border-radius:8px;background:#f2ede8;color:#7c6256;font-size:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em}.admin-list-loading{padding:20px;text-align:center;color:#8d847d;font-size:.6rem}
+@media(max-width:820px){
+  .wedy-brand{display:none!important}
+  .wedy-event{display:flex!important;min-width:0!important;margin:0!important;max-width:calc(100vw - 70px);padding:6px 9px!important;border-radius:12px!important;gap:8px!important;background:#f5f3f0}
+  .wedy-event span:not(.wedy-avatar){font-size:.58rem!important}.wedy-event b{font-size:.61rem!important}.wedy-event small{font-size:.5rem!important}.wedy-avatar{width:29px!important;height:29px!important;flex:0 0 29px!important;font-size:.75rem!important}
+  .wedy-menu{margin-left:auto!important;position:relative;z-index:10002}
+  .admin-menu-panel{position:fixed;right:12px;top:74px;width:min(350px,calc(100vw - 24px));max-height:calc(100dvh - 88px);overflow:auto}
+}
+@media(max-width:380px){.wedy-event{max-width:calc(100vw - 64px)!important}.wedy-event small{display:none!important}.admin-menu-panel{right:9px;width:calc(100vw - 18px)}}
+.admin-menu-nav{display:none;padding:4px 0 7px;margin:0 2px 5px;border-bottom:1px solid #eee8e3}
+.admin-menu-nav a{display:block;padding:9px 9px;border-radius:9px;text-decoration:none;color:#645b55;font-size:.58rem;font-weight:600}
+.admin-menu-nav a:hover{background:#f7f3ef;color:#9b6857}
+@media(max-width:820px){.admin-menu-nav{display:block}.admin-menu-nav a{padding:11px 10px;font-size:.61rem}}
+
+/* V6.8 — Cabeçalhos das listas fixos durante o scroll interno */
+.guest-list-scroll,
+.gift-list-scroll{
+  max-height: min(62vh, 560px);
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.guest-list-scroll .table thead th,
+.gift-list-scroll .table thead th{
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  background: #faf9f7 !important;
+  box-shadow: 0 1px 0 #ebe6e1;
+}
+@media(max-width:820px){
+  .guest-list-scroll,
+  .gift-list-scroll{
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  .guest-list-scroll{max-height:min(54dvh,520px)!important;}
+  .gift-list-scroll{max-height:min(50dvh,470px)!important;}
+  /* No modo cartão mobile o cabeçalho da tabela é substituído pelos rótulos de cada campo. */
+  .guest-list-scroll .table thead,
+  .gift-list-scroll .table thead{display:none!important;}
+}
