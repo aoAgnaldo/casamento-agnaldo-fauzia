@@ -25,60 +25,69 @@
   </div>
 </header>
 <main class="wedy-main admin-wrap">
-  <section class="dashboard-grid" id="visao-geral">
-    <aside class="dashboard-left">
-      <div class="wedy-side-stack">
-        <article class="wedy-card wedding-card">
-          <div class="wedy-cover-wrap">
-            <div class="wedy-cover"><img src="foto-capa.png" alt="Agnaldo e Fáuzia"></div>
-            <div class="wedy-cover-overlay">
-              <div class="wedy-cover-copy"><h1>Agnaldo &amp; Fáuzia</h1><p>29 de Maio de 2027</p></div>
-              <div class="cover-actions"><button type="button" class="cover-icon" id="editCoverBtn" aria-label="Alterar imagem da capa" title="Alterar imagem da capa">✎</button><button type="button" class="cover-icon" id="editStoryBtn" aria-label="Alterar imagem e texto da nossa história" title="Alterar imagem e texto da nossa história">✎</button><button type="button" class="cover-icon" id="editDetailsBtn" aria-label="Alterar imagem de alguns detalhes importantes" title="Alterar imagem de alguns detalhes importantes">✎</button></div>
-            </div>
-          </div>
-          <div class="wedy-event-url">casamento.agnaldoefauzia.com <span>↗</span></div>
-          <div class="quick-actions">
-            <button class="quick primary" id="addBtn"><strong>＋</strong><span>Adicionar<br>convidado</span></button>
-            <a class="quick" href="#convidados"><strong>♧</strong><span>Gerir<br>convidados</span></a>
-            <a class="quick" href="#checkin"><strong>✓</strong><span>Gerir<br>entradas</span></a>
-            <a class="quick" href="#presentes"><strong>◇</strong><span>Lista de<br>presentes</span></a>
-            <button class="quick" id="exportBtn"><strong>⇩</strong><span>Exportar<br>lista</span></button>
-            <button class="quick" id="csvBtn"><strong>▦</strong><span>Importar<br>CSV</span></button>
-            <input id="csvFile" type="file" accept=".csv" class="hidden">
-          </div>
-        </article>
-
-        <article class="wedy-card wedding-carousel">
-          <div class="carousel-head"><h2>O nosso casamento</h2><div><button type="button" id="carouselPrev" aria-label="Anterior">←</button><button type="button" id="carouselNext" aria-label="Seguinte">→</button></div></div>
-          <div class="carousel-track">
-            <div class="carousel-card"><b>Convidados</b><p>Gerimos confirmações, convites e todos os detalhes da lista.</p><a href="#convidados">Abrir →</a></div>
-            <div class="carousel-card"><b>Organização das mesas</b><p>Distribuímos os convidados pelas mesas para o grande dia.</p><a href="#mesas">Organizar →</a></div>
-          </div>
-        </article>
+  <section class="admin-dashboard" id="visao-geral">
+    <aside class="admin-dashboard-sidebar">
+      <div class="admin-sidebar-brand"><img src="monogram.svg" alt="A & F"><div><strong>Agnaldo & Fáuzia</strong><small>29 de Maio de 2027</small></div></div>
+      <nav aria-label="Navegação do painel administrativo" class="admin-sidebar-nav">
+        <a class="active" href="#visao-geral">▦ <span>Painel Principal</span></a>
+        <a href="#convidados">♙ <span>Convidados</span></a>
+        <a href="#mesas">♧ <span>Mesas</span></a>
+        <a href="#protocolos">♙ <span>Equipa / Protocolos</span></a>
+        <a href="#programa-admin">◷ <span>Programa</span></a>
+        <a href="#checkin">✓ <span>Recepção</span></a>
+        <a href="#presentes">◇ <span>Presentes</span></a>
+      </nav>
+      <div class="admin-sidebar-note">
+        <p>“Tudo tem o seu tempo,<br>e tudo o que se quer<br>debaixo do céu tem a sua hora.”</p>
+        <small>Eclesiastes 3:1</small>
       </div>
+      <button type="button" class="admin-sidebar-settings" id="openAdminSettingsDashboard">⚙ <span>Administradores</span></button>
     </aside>
 
-    <section class="dashboard-right">
-      <article class="wedy-card home-checklist">
-        <div class="home-row done"><span class="home-icon">♡</span><div><b>Convite criado</b><small>O nosso convite está pronto para partilhar</small></div><span class="home-state">✓</span></div>
-        <div class="home-row done"><span class="home-icon">□</span><div><b>Data do casamento</b><small>29 de Maio de 2027 · o nosso grande dia</small></div><span class="home-state">✓</span></div>
-        <a class="home-row" href="#convidados"><span class="home-icon">☑</span><div><b>Lista de convidados</b><small><strong id="stTotal">0</strong> convites · <strong id="stConfirmed">0</strong> confirmados · <strong id="stPending">0</strong> pendentes</small></div><span class="home-state">→</span></a>
-        <a class="home-row" href="#mesas"><span class="home-icon">♧</span><div><b>Organização das mesas</b><small><strong id="stPeople">0</strong> pessoas previstas · definir lugares para a recepção</small></div><span class="home-state">→</span></a>
-        <a class="home-row" href="#presentes"><span class="home-icon">◇</span><div><b>Lista de presentes</b><small>Gerir os presentes e as respectivas fotografias</small></div><span class="home-state">→</span></a>
-        <a class="home-row" href="#checkin"><span class="home-icon">✓</span><div><b>Check-in da recepção</b><small><strong id="stCheckedIn">0</strong> entradas · <strong id="stNotCheckedIn">0</strong> convidados por chegar</small></div><span class="home-state">→</span></a>
-        <a class="home-row" href="#protocolos"><span class="home-icon">♙</span><div><b>Equipa de recepção</b><small>Gerir os Protocolos com acesso ao check-in</small></div><span class="home-state">→</span></a>
-        <span id="stDeclined" class="hidden">0</span><span id="stPresentPeople" class="hidden">0</span>
-      </article>
-    </section>
-  </section>
+    <div class="admin-dashboard-main">
+      <div class="admin-dashboard-top">
+        <div class="admin-global-search"><span>⌕</span><input id="adminGlobalSearch" type="search" placeholder="Pesquisar convidado, código ou mesa…"><kbd>Ctrl K</kbd></div>
+        <div class="admin-date-card"><span>▣</span><div><small>Sábado</small><strong>29 de Maio de 2027</strong></div></div>
+      </div>
 
+      <div class="admin-welcome">
+        <div><p class="section-kicker">PAINEL ADMINISTRATIVO</p><h1>Olá, <span id="dashboardAdminName">Administrador</span></h1><p>Uma visão simples de tudo o que precisa para preparar e acompanhar o grande dia.</p></div>
+        <button type="button" class="button secondary" id="openProfileSettingsDashboard">Editar perfil</button>
+      </div>
+
+      <div class="admin-kpis">
+        <a href="#convidados" class="admin-kpi"><span class="kpi-icon green">♙</span><div><small>CONVIDADOS CONFIRMADOS</small><strong id="stConfirmed">0</strong><span>de <b id="stTotal">0</b> convites</span></div><i id="kpiConfirmedBar"></i></a>
+        <a href="#mesas" class="admin-kpi"><span class="kpi-icon rose">♧</span><div><small>PESSOAS ESPERADAS</small><strong id="stPeople">0</strong><span>lugares previstos</span></div><i id="kpiPeopleBar"></i></a>
+        <a href="#checkin" class="admin-kpi"><span class="kpi-icon sage">✓</span><div><small>JÁ CHEGARAM</small><strong id="stPresentPeopleDashboard">0</strong><span>pessoas presentes</span></div><i id="kpiArrivedBar"></i></a>
+        <a href="#checkin" class="admin-kpi"><span class="kpi-icon sand">↗</span><div><small>AINDA POR CHEGAR</small><strong id="stNotCheckedIn">0</strong><span>convites confirmados</span></div><i id="kpiWaitingBar"></i></a>
+      </div>
+
+      <div class="admin-dashboard-grid-two">
+        <article class="admin-panel admin-preparation"><div class="admin-panel-head"><div><h2>Estado da organização</h2><p>Acompanhe rapidamente o que já está preparado.</p></div><a href="#convidados">Ver convidados →</a></div>
+          <div class="prep-row"><span>Confirmações</span><div class="prep-track"><i id="prepConfirmed"></i></div><strong id="prepConfirmedText">0%</strong></div>
+          <div class="prep-row"><span>Mesas organizadas</span><div class="prep-track"><i id="prepTables"></i></div><strong id="prepTablesText">0%</strong></div>
+          <div class="prep-row"><span>Presentes definidos</span><div class="prep-track"><i id="prepGifts"></i></div><strong id="prepGiftsText">0%</strong></div>
+        </article>
+        <article class="admin-panel admin-tables-overview"><div class="admin-panel-head"><div><h2>Ocupação das mesas</h2><p>Estado actual da organização.</p></div><a href="#mesas">Gerir mesas →</a></div><div class="table-overview-content"><div class="table-donut"><div><strong id="overviewTableCount">0</strong><span>mesas</span></div></div><div class="table-legend"><div><span class="dot full"></span><b id="overviewFullTables">0</b><small>Completas</small></div><div><span class="dot partial"></span><b id="overviewPartialTables">0</b><small>Parciais</small></div><div><span class="dot empty"></span><b id="overviewEmptyTables">0</b><small>Disponíveis</small></div></div></div></article>
+      </div>
+
+      <div class="admin-dashboard-grid-three">
+        <article class="admin-panel"><div class="admin-panel-head"><div><h2>Equipa de protocolo</h2><p>Quem tem acesso à recepção.</p></div><a href="#protocolos">Ver todos →</a></div><div id="overviewProtocolList" class="overview-protocol-list"></div></article>
+        <article class="admin-panel"><div class="admin-panel-head"><div><h2>Últimas entradas</h2><p>Movimento recente da recepção.</p></div><a href="#checkin">Ver recepção →</a></div><div id="overviewArrivals" class="overview-arrivals"></div></article>
+        <article class="admin-panel admin-quick-panel"><div class="admin-panel-head"><div><h2>Acesso rápido</h2><p>As acções mais usadas.</p></div></div><div class="admin-quick-grid"><button type="button" id="addBtn" class="admin-quick">♙<span>Adicionar<br>convidado</span></button><a href="#mesas" class="admin-quick">♧<span>Gerir<br>mesas</span></a><a href="#protocolos" class="admin-quick">♙<span>Equipa de<br>protocolo</span></a><a href="#checkin" class="admin-quick">✓<span>Abrir<br>recepção</span></a><a href="#presentes" class="admin-quick">◇<span>Lista de<br>presentes</span></a></div></article>
+      </div>
+
+      <article class="admin-love-banner"><div><p>CADA DETALHE FAZ PARTE DE UM GRANDE PROPÓSITO.</p><strong>Agnaldo & Fáuzia</strong></div><div class="rings">◯ ◯</div></article>
+    </div>
+  </section>
+  <input id="exportBtn" type="button" class="hidden"><input id="csvBtn" type="button" class="hidden"><input id="csvFile" type="file" accept=".csv" class="hidden">
   <section class="wedy-section" id="checkin"><div class="section-title-row"><div><p class="section-kicker">ENTRADAS</p><h2>Check-in dos convidados</h2><p class="muted">No dia do casamento, leia o QR Code ou procure pelo código do convite.</p></div><a class="button secondary" href="checkin.html">Abrir recepção ↗</a></div>
     <div class="checkin-layout"><div class="checkin-main-card"><div class="scan-title"><span class="scan-icon">⌁</span><div><h3>Ler convite</h3><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="checkin-tools"><div class="checkin-manual"><label>Código do convite<input id="checkinCode" placeholder="Ex.: AF-TESTE01" autocomplete="off"></label><button class="button" id="checkinSearchBtn">Pesquisar convite</button></div><div id="checkinResult" class="checkin-result hidden"></div><button class="button secondary" id="startScannerBtn">▣ Ler QR Code</button><button class="button secondary hidden" id="stopScannerBtn">Parar leitura</button><div id="qrReader" class="qr-reader hidden"></div></div></div><div class="checkin-summary"><div><strong id="stCheckedIn2">0</strong><span>Entraram</span></div><div><strong id="stNotCheckedIn2">0</strong><span>Por entrar</span></div><div><strong id="stPresentPeople">0</strong><span>Pessoas presentes</span></div></div></div>
   </section>
 
   <section class="wedy-section admin-extra" id="programa-admin"><div class="section-title-row"><div><p class="section-kicker">O GRANDE DIA</p><h2>Programa</h2><p class="muted">Defina o dia, a hora, o nome, a descrição e a localização de cada momento.</p></div><button class="button" id="addProgramBtn" type="button">＋ Adicionar momento</button></div><div class="program-admin-list" id="programAdminList"></div></section>
 
-<section class="wedy-section" id="convidados"><div class="section-title-row"><div><p class="section-kicker">CONVIDADOS</p><h2>Lista de convidados</h2><p class="muted">Pesquise, filtre, edite e acompanhe cada convite.</p></div><button class="button" id="addBtn2" type="button">＋ Adicionar convite</button></div><div class="guest-tools"><div class="guest-search"><span>⌕</span><input id="guestSearch" type="search" placeholder="Pesquisar por nome, código ou WhatsApp…"></div><div class="guest-filters"><button class="guest-filter active" data-guest-filter="all">Todos</button><button class="guest-filter" data-guest-filter="confirmed">Confirmados</button><button class="guest-filter" data-guest-filter="pending">Pendentes</button><button class="guest-filter" data-guest-filter="declined">Recusados</button><button class="guest-filter" data-guest-filter="checked">Já entraram</button><button class="guest-filter" data-guest-filter="waiting">Por entrar</button></div></div><div id="guestCount" class="guest-count"></div><div class="table-wrap guest-list-scroll"><table class="table"><thead><tr><th>Nome</th><th>Código</th><th>WhatsApp</th><th>Lotação</th><th>Estado</th><th>Pessoas</th><th>Confirmado em</th><th>Entrada</th><th>Mesa</th><th>Acções</th></tr></thead><tbody id="guestRows"></tbody></table></div></section>
+<section class="wedy-section" id="convidados"><div class="section-title-row"><div><p class="section-kicker">CONVIDADOS</p><h2>Lista de convidados</h2><p class="muted">Pesquise, filtre, edite e acompanhe cada convite.</p></div><div class="section-actions"><button class="button secondary" type="button" id="adminExportTrigger">⇩ Exportar</button><button class="button secondary" type="button" id="adminImportTrigger">▦ Importar CSV</button><button class="button" id="addBtn2" type="button">＋ Adicionar convite</button></div></div><div class="guest-tools"><div class="guest-search"><span>⌕</span><input id="guestSearch" type="search" placeholder="Pesquisar por nome, código ou WhatsApp…"></div><div class="guest-filters"><button class="guest-filter active" data-guest-filter="all">Todos</button><button class="guest-filter" data-guest-filter="confirmed">Confirmados</button><button class="guest-filter" data-guest-filter="pending">Pendentes</button><button class="guest-filter" data-guest-filter="declined">Recusados</button><button class="guest-filter" data-guest-filter="checked">Já entraram</button><button class="guest-filter" data-guest-filter="waiting">Por entrar</button></div></div><div id="guestCount" class="guest-count"></div><div class="table-wrap guest-list-scroll"><table class="table"><thead><tr><th>Nome</th><th>Código</th><th>WhatsApp</th><th>Lotação</th><th>Estado</th><th>Pessoas</th><th>Confirmado em</th><th>Entrada</th><th>Mesa</th><th>Acções</th></tr></thead><tbody id="guestRows"></tbody></table></div></section>
 
   <section class="wedy-section" id="presentes"><div class="section-title-row"><div><p class="section-kicker">PRESENTES</p><h2>Lista de presentes</h2><p class="muted">Adicione, edite ou remova presentes e respectivas fotografias.</p></div><button class="button" id="addGiftBtn">＋ Adicionar presente</button></div><div class="table-wrap gift-list-scroll"><table class="table"><thead><tr><th>Foto</th><th>#</th><th>Presente</th><th>Estado</th><th>Reservado por</th><th>Acções</th></tr></thead><tbody id="giftRows"></tbody></table></div></section>
 <section class="wedy-section admin-extra" id="mesas"><div class="section-title-row"><div><p class="section-kicker">RECEPÇÃO</p><h2>Mesas e lugares</h2><p class="muted">Crie as mesas, defina a capacidade e organize os convidados de forma visual.</p></div><div class="section-actions"><button class="button secondary" id="organizeTablesBtn">♧ Organizar mesas</button><button class="button" id="addTableBtn">＋ Adicionar mesa</button></div></div><div class="seating-summary" id="seatingSummary"></div><div class="seating-layout"><div class="table-list" id="tableList"></div><div class="unassigned-panel"><div class="section-admin-head"><div><h3>Convidados sem mesa</h3><p class="muted">Escolha uma mesa para cada convidado confirmado.</p></div></div><div id="unassignedGuests"></div></div></div></section><section class="wedy-section admin-extra" id="protocolos"><div class="section-title-row"><div><p class="section-kicker">EQUIPA</p><h2>Protocolos</h2><p class="muted">Adicione pessoas da equipa que terão acesso ao painel de recepção.</p></div><button class="button" id="addProtocolBtn">＋ Adicionar protocolo</button></div><div class="protocol-grid" id="protocolList"></div></section>
@@ -106,4 +115,14 @@
   pairs.forEach(([mid,cid])=>{const m=document.getElementById(mid),c=document.getElementById(cid);if(m&&c){m.addEventListener('mousedown',e=>{if(e.target===m)c.click()});}});
   document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;document.querySelectorAll('.modal:not(.hidden)').forEach(m=>{const c=m.querySelector('[id^="close"]');if(c)c.click();});});
 })();
-</script><script src="admin.js"></script></body></html>
+</script><script>
+(function(){
+ const focusSearch=()=>{const i=document.getElementById('guestSearch');if(i){i.focus();i.scrollIntoView({behavior:'smooth',block:'center');}}};
+ document.getElementById('adminGlobalSearch')?.addEventListener('input',e=>{const q=e.target.value;const i=document.getElementById('guestSearch');if(i){i.value=q; i.dispatchEvent(new Event('input'));}});
+ document.getElementById('adminGlobalSearch')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();focusSearch();}});
+ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k' && !/input|textarea|select/i.test(document.activeElement?.tagName||'')){e.preventDefault();document.getElementById('adminGlobalSearch')?.focus();}});
+ document.getElementById('openProfileSettingsDashboard')?.addEventListener('click',()=>document.getElementById('openProfileSettings')?.click());
+ document.getElementById('openAdminSettingsDashboard')?.addEventListener('click',()=>document.getElementById('openAdminSettings')?.click());
+ document.querySelectorAll('.admin-sidebar-nav a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.admin-sidebar-nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
+})();
+</script><script>document.getElementById('adminExportTrigger')?.addEventListener('click',()=>document.getElementById('exportBtn')?.click());document.getElementById('adminImportTrigger')?.addEventListener('click',()=>document.getElementById('csvFile')?.click());</script><script src="admin.js"></script></body></html>

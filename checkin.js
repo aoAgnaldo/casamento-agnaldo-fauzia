@@ -1,9 +1,9 @@
-let guests=[], scanner=null, busy=false, protocolToken=null, protocolName='', protocolRole='protocol', chiefTeam=[], chiefTasks=[], myTasks=[], chiefTables=[];
+let guests=[], scanner=null, busy=false, protocolToken=null, protocolName='', protocolRole='protocol', operatorProfile={display_name:'',photo_url:'',role:'protocol'}, chiefTeam=[], chiefTasks=[], myTasks=[], chiefTables=[];
 const A=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 function msg(t){A('#loginMsg').textContent=t;A('#loginMsg').classList.remove('hidden')}
 function toast(t){const x=document.createElement('div');x.className='reception-toast';x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),2800)}
 async function init(){try{protocolToken=sessionStorage.getItem('protocolToken');protocolName=sessionStorage.getItem('protocolName')||'';protocolRole=sessionStorage.getItem('protocolRole')||'protocol'}catch(_){} if(protocolToken){const ok=await loadGuests(true);if(ok){await enter();return}try{sessionStorage.removeItem('protocolToken');sessionStorage.removeItem('protocolName');sessionStorage.removeItem('protocolRole')}catch(_){}} const {data}=await supabaseClient.auth.getSession();if(data.session){await enter()}else A('#login').classList.remove('hidden')}
-async function enter(){A('#login').classList.add('hidden');A('#reception').classList.remove('hidden');A('#chiefTools')?.classList.toggle('hidden',protocolRole!=='chief');A('#myTasks')?.classList.remove('hidden');A('#liveDashboard')?.classList.toggle('hidden',protocolRole!=='chief');await loadGuests();await loadMyTasks();if(protocolRole==='chief')await loadChiefTools();startLiveRefresh();A('#code').focus()}
+async function enter(){A('#login').classList.add('hidden');A('#reception').classList.remove('hidden');await loadOperatorProfile();A('#chiefTools')?.classList.toggle('hidden',protocolRole!=='chief');A('#myTasks')?.classList.remove('hidden');A('#liveDashboard')?.classList.toggle('hidden',protocolRole!=='chief');await loadGuests();await loadMyTasks();if(protocolRole==='chief')await loadChiefTools();startLiveRefresh();A('#code').focus()}
 async function loadGuests(protocol=!!protocolToken){const r=protocol?await supabaseClient.rpc('protocol_checkin_list',{p_token:protocolToken}):await supabaseClient.rpc('admin_list_invitations_checkin');if(r.error){if(protocol)return false;toast(r.error.message);return false}guests=r.data||[];updateCounter();return true}
 function updateCounter(){
  let arrived=0,people=0,confirmed=0;
@@ -70,6 +70,50 @@ window.toggleMyTask=async(id,done)=>{
  await loadMyTasks();
  if(protocolRole==='chief')await loadChiefTools();
 };
+
+function operatorInitials(name){return String(name||'').trim().split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase()||'—'}
+function renderOperatorProfile(){
+ const name=operatorProfile.display_name||protocolName||'Operador';
+ const role=operatorProfile.role==='chief'?'Protocolo Chefe · Recepção':operatorProfile.role==='admin'?'Administrador · Recepção':'Protocolo · Recepção';
+ const els=[A('#operatorHeaderName'),A('#operatorMenuName')];els.forEach(x=>{if(x)x.textContent=name});
+ [A('#operatorHeaderMeta'),A('#operatorMenuMeta'),A('#operatorProfileRole')].forEach(x=>{if(x)x.textContent=role});
+ const avatars=[A('#operatorHeaderAvatar'),A('#operatorMenuAvatar'),A('#operatorProfilePreview')];
+ avatars.forEach(el=>{if(!el)return;if(operatorProfile.photo_url){el.innerHTML=`<img src="${esc(operatorProfile.photo_url)}" alt="">`;el.classList.add('has-photo')}else{el.textContent=operatorInitials(name);el.classList.remove('has-photo')}});
+ const n=A('#operatorProfileName');if(n)n.value=name;
+}
+async function loadOperatorProfile(){
+ try{
+   if(protocolToken){
+     const r=await supabaseClient.rpc('protocol_profile',{p_token:protocolToken});
+     if(!r.error&&r.data?.length){const p=r.data[0];operatorProfile={display_name:p.display_name||p.full_name,photo_url:p.photo_url||'',role:p.role||protocolRole};protocolName=operatorProfile.display_name;renderOperatorProfile();return}
+   }
+   const {data}=await supabaseClient.auth.getSession();
+   if(data.session){
+     const r=await supabaseClient.from('admin_profiles').select('display_name,avatar_url').eq('user_id',data.session.user.id).maybeSingle();
+     if(!r.error){operatorProfile={display_name:r.data?.display_name||data.session.user.user_metadata?.name||data.session.user.email?.split('@')[0]||'Administrador',photo_url:r.data?.avatar_url||data.session.user.user_metadata?.avatar_url||'',role:'admin'};renderOperatorProfile();return}
+   }
+ }catch(_){}
+ operatorProfile={display_name:protocolName||'Operador',photo_url:'',role:protocolRole||'protocol'};renderOperatorProfile();
+}
+function openOperatorProfile(){
+ renderOperatorProfile();A('#operatorProfileFormMsg')?.classList.add('hidden');A('#operatorProfilePhoto').value='';A('#operatorProfileModal')?.classList.remove('hidden');document.body.classList.add('modal-scroll-lock');
+}
+function closeOperatorProfile(){A('#operatorProfileModal')?.classList.add('hidden');document.body.classList.remove('modal-scroll-lock')}
+async function compressOperatorPhoto(file){
+ if(!file)return null;
+ if(!/^image\/(jpeg|png|webp)$/i.test(file.type))throw new Error('Escolha uma fotografia JPG, PNG ou WEBP.');
+ if(file.size>6*1024*1024)throw new Error('A fotografia deve ter no máximo 6 MB.');
+ const src=URL.createObjectURL(file);
+ try{const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('Não foi possível ler a fotografia.'));img.src=src});const max=420,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight)),w=Math.max(1,Math.round(img.naturalWidth*scale)),h=Math.max(1,Math.round(img.naturalHeight*scale));const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);const blob=await new Promise(r=>c.toBlob(r,'image/webp',.78));if(!blob)throw new Error('Não foi possível preparar a fotografia.');return await new Promise((resolve,reject)=>{const rd=new FileReader();rd.onload=()=>resolve(rd.result);rd.onerror=()=>reject(new Error('Não foi possível preparar a fotografia.'));rd.readAsDataURL(blob)})}finally{URL.revokeObjectURL(src)}
+}
+A('#operatorProfileToggle')?.addEventListener('click',()=>{const m=A('#operatorMenu'),b=A('#operatorProfileToggle');const open=m?.classList.toggle('hidden')===false;b?.setAttribute('aria-expanded',open?'true':'false')});
+A('#openOperatorProfile')?.addEventListener('click',()=>{A('#operatorMenu')?.classList.add('hidden');A('#operatorProfileToggle')?.setAttribute('aria-expanded','false');openOperatorProfile()});
+A('#closeOperatorProfile')?.addEventListener('click',closeOperatorProfile);A('#closeOperatorProfile2')?.addEventListener('click',closeOperatorProfile);
+A('#operatorProfilePhoto')?.addEventListener('change',async e=>{try{const data=await compressOperatorPhoto(e.target.files?.[0]);if(data){const p=A('#operatorProfilePreview');p.innerHTML=`<img src="${data}" alt="">`;p.classList.add('has-photo')}}catch(err){const m=A('#operatorProfileFormMsg');if(m){m.textContent=err.message;m.classList.remove('hidden')}}});
+A('#operatorProfileForm')?.addEventListener('submit',async e=>{e.preventDefault();const btn=A('#operatorProfileSave'),msg=A('#operatorProfileFormMsg');btn.disabled=true;msg.classList.add('hidden');try{const name=A('#operatorProfileName').value.trim();let photo=operatorProfile.photo_url||null;const file=A('#operatorProfilePhoto').files?.[0];if(file)photo=await compressOperatorPhoto(file);if(protocolToken){const r=await supabaseClient.rpc('protocol_update_profile',{p_token:protocolToken,p_display_name:name,p_photo_url:photo});if(r.error)throw r.error;const p=r.data?.[0];if(p)operatorProfile={display_name:p.display_name||name,photo_url:p.photo_url||photo||'',role:p.role||protocolRole};protocolName=operatorProfile.display_name;try{sessionStorage.setItem('protocolName',protocolName)}catch(_){} }else{const {data}=await supabaseClient.auth.getSession();if(!data.session)throw new Error('Sessão inválida.');const {error}=await supabaseClient.from('admin_profiles').upsert({user_id:data.session.user.id,display_name:name,avatar_url:photo,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)throw error;operatorProfile={display_name:name,photo_url:photo||'',role:'admin'}}renderOperatorProfile();closeOperatorProfile();toast('Perfil actualizado.')}catch(err){msg.textContent=err?.message||String(err);msg.classList.remove('hidden')}finally{btn.disabled=false}});
+document.addEventListener('click',e=>{const wrap=document.querySelector('.operator-profile-wrap');if(wrap&&!wrap.contains(e.target)){A('#operatorMenu')?.classList.add('hidden');A('#operatorProfileToggle')?.setAttribute('aria-expanded','false')}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){A('#operatorMenu')?.classList.add('hidden');closeOperatorProfile()}});
+
 A('#protocolLoginForm').onsubmit=async e=>{e.preventDefault();const {data,error}=await supabaseClient.rpc('verify_protocol',{p_access_code:A('#protocolAccessCode').value.trim(),p_pin:A('#protocolAccessPin').value.trim()});if(error||!data?.length){A('#protocolLoginMsg').textContent='Código ou PIN incorrecto.';A('#protocolLoginMsg').classList.remove('hidden');return}protocolToken=data[0].session_token;protocolName=data[0].full_name;protocolRole=data[0].role||'protocol';try{sessionStorage.setItem('protocolToken',protocolToken);sessionStorage.setItem('protocolName',protocolName);sessionStorage.setItem('protocolRole',protocolRole)}catch(_){}await enter()};
 A('#loginForm').onsubmit=async e=>{e.preventDefault();const {error}=await supabaseClient.auth.signInWithPassword({email:A('#email').value,password:A('#password').value});if(error)msg('Email ou palavra-passe incorrectos.');else await enter()};
 let liveRefreshTimer=null;
