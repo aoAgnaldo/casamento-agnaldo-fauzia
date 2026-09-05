@@ -1475,3 +1475,297 @@ body.reception-body {
 @media(max-width:1000px){.wedy-header{gap:18px;padding:0 20px}.wedy-brand{min-width:auto}.wedy-nav{gap:18px}.wedy-event{min-width:0}.dashboard-grid,.reception-grid{grid-template-columns:1fr}.dashboard-left{max-width:560px}.checkin-layout{grid-template-columns:1fr 250px}}
 @media(max-width:720px){.wedy-header{height:62px;padding:0 14px;gap:10px}.wedy-brand span{font-size:1.1rem}.wedy-brand img{width:29px}.wedy-nav{display:none}.wedy-event{margin-left:auto;max-width:155px;padding:5px 8px}.wedy-event span:not(.wedy-avatar){font-size:.56rem;overflow:hidden}.wedy-event b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wedy-event small{white-space:nowrap}.wedy-avatar{width:28px;height:28px;font-size:.75rem}.wedy-menu{width:40px;height:40px}.wedy-main{padding:18px 13px 45px}.wedy-card,.wedy-section{border-radius:16px}.wedding-card{padding:12px}.wedy-cover{height:190px}.wedy-cover-copy h1{font-size:2.1rem}.quick-actions{grid-template-columns:repeat(2,1fr)}.quick{min-height:72px}.welcome-card,.wedy-section,.scanner-card,.reception-hero-card{padding:18px}.card-head,.section-title-row{flex-direction:column}.card-head h2,.section-title-row h2{font-size:2rem}.text-action{align-self:flex-start}.wedy-stats{grid-template-columns:repeat(2,1fr)!important}.wedy-stats .stat{border-bottom:1px solid #ebe6e1}.wedy-stats .stat:nth-child(2n){border-right:0}.wedy-stats .stat:last-child{grid-column:1/-1}.overview-list a{padding:13px}.guest-tools{grid-template-columns:1fr}.guest-filters{padding-bottom:3px}.checkin-layout{grid-template-columns:1fr}.checkin-summary{grid-template-columns:repeat(3,1fr);margin-top:12px}.checkin-summary div{padding:12px 9px;border-bottom:0;border-right:1px solid #ebe6e1}.checkin-summary div:last-child{border-right:0}.checkin-summary strong{font-size:1.7rem}.checkin-summary span{font-size:.52rem}.checkin-manual,.manual-reception{grid-template-columns:1fr}.checkin-manual .button,.manual-reception .button{width:100%}.table-wrap{overflow:visible!important;border:0!important}.table{min-width:0}.table thead{display:none}.table,.table tbody,.table tr,.table td{display:block;width:100%;box-sizing:border-box}.table tr{border:1px solid #ebe6e1;border-radius:13px;margin-bottom:9px;padding:8px;background:#fff}.table td{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;padding:8px 4px;border:0;font-size:.61rem}.table td:before{content:attr(data-label);color:#938b84;font-size:.55rem}.mobile-actions,.gift-actions{justify-content:flex-start}.reception-head-actions .button{display:none}.reception-hero-card h1{font-size:3rem}.wedy-reception-stats{grid-template-columns:1fr 1fr}.wedy-reception-stats div{padding:16px;border-bottom:1px solid #ebe6e1}.wedy-reception-stats div:nth-child(2){border-right:0}.wedy-reception-stats div:last-child{grid-column:1/-1;border-right:0}.wedy-reception-stats strong{font-size:2.1rem}.modal-box{width:calc(100% - 24px)!important;margin:12px!important}.toolbar{flex-wrap:wrap}.toolbar .button,.toolbar a{flex:1 1 140px}}
 @media(max-width:380px){.wedy-event{display:none}.wedy-brand{margin-right:auto}.wedy-cover{height:165px}.quick{min-height:68px}.wedy-stats .stat{padding:13px 9px}.wedy-stats strong{font-size:1.75rem}}
+
+/* V5.5 — QR Code: composição central e alinhada */
+.qr-box{
+  width:min(560px, calc(100vw - 32px)) !important;
+  max-width:560px !important;
+  padding:36px 34px 30px !important;
+  box-sizing:border-box !important;
+  text-align:center !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  gap:0 !important;
+}
+.qr-box h2{
+  width:100%;
+  margin:0 !important;
+  text-align:center !important;
+  font-size:clamp(2rem,5vw,2.65rem) !important;
+  line-height:1 !important;
+}
+#qrGuestName{
+  width:100%;
+  margin:9px 0 0 !important;
+  text-align:center !important;
+  font-size:.76rem !important;
+  letter-spacing:.08em !important;
+}
+#qrCode{
+  width:210px !important;
+  height:210px !important;
+  min-width:210px !important;
+  min-height:210px !important;
+  margin:25px auto 20px !important;
+  padding:12px !important;
+  box-sizing:content-box !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:#fff !important;
+  border:1px solid rgba(55,52,46,.18) !important;
+  box-shadow:0 8px 24px rgba(55,52,46,.08) !important;
+}
+#qrCode img,#qrCode canvas{
+  display:block !important;
+  width:210px !important;
+  height:210px !important;
+  max-width:100% !important;
+  object-fit:contain !important;
+}
+#qrUrl{
+  width:100% !important;
+  max-width:450px !important;
+  margin:0 auto !important;
+  padding:10px 12px !important;
+  box-sizing:border-box !important;
+  border:1px solid rgba(55,52,46,.12) !important;
+  background:#eee9df !important;
+  color:#716960 !important;
+  font-size:9px !important;
+  line-height:1.45 !important;
+  overflow-wrap:anywhere !important;
+  text-align:center !important;
+}
+.qr-box > .toolbar{
+  width:100% !important;
+  display:grid !important;
+  grid-template-columns:1.25fr 1fr .8fr !important;
+  gap:8px !important;
+  margin-top:20px !important;
+  padding:0 !important;
+  align-items:stretch !important;
+}
+.qr-box > .toolbar .button{
+  width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  white-space:nowrap !important;
+  padding:12px 9px !important;
+}
+@media(max-width:560px){
+  .qr-box{padding:28px 18px 22px !important;width:calc(100vw - 22px) !important;}
+  #qrCode{width:180px !important;height:180px !important;min-width:180px !important;min-height:180px !important;margin:20px auto 16px !important;}
+  #qrCode img,#qrCode canvas{width:180px !important;height:180px !important;}
+  .qr-box > .toolbar{grid-template-columns:1fr !important;gap:7px !important;}
+  .qr-box > .toolbar .button{white-space:normal !important;min-height:42px !important;}
+}
+/* V5.6 — Mesas e Protocolos */
+.admin-extra{border-top:1px solid #ebe5df;margin-top:20px}.seating-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.seat-stat{background:#fff;border:1px solid #e8e1db;border-radius:16px;padding:18px 20px}.seat-stat strong{display:block;font:500 2rem/1 'Cormorant Garamond',serif;color:#302a26}.seat-stat span{display:block;margin-top:7px;font-size:.62rem;text-transform:uppercase;letter-spacing:.11em;color:#857a72}.seating-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.8fr);gap:18px;align-items:start}.table-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.table-card,.unassigned-panel,.protocol-card{background:#fff;border:1px solid #e7dfd8;border-radius:18px;padding:18px}.table-card-head{display:flex;justify-content:space-between;gap:12px}.table-card h3,.protocol-card h3{font:500 1.65rem/1 'Cormorant Garamond',serif;margin:2px 0 5px;color:#302a26}.table-card small{color:#91867e;font-size:.68rem}.table-card-actions,.protocol-actions{display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap;justify-content:flex-end}.icon-btn{border:1px solid #e1dad4;background:#faf8f5;border-radius:9px;padding:7px 9px;font:500 .58rem Montserrat,sans-serif;cursor:pointer;color:#645b55}.icon-btn.danger{color:#8c5e52}.capacity-line{display:flex;justify-content:space-between;margin:18px 0 7px;font-size:.64rem;color:#746a63}.capacity-track{height:5px;background:#eee8e3;border-radius:10px;overflow:hidden}.capacity-track i{display:block;height:100%;background:#8c7468;border-radius:10px}.table-guests{margin-top:14px;display:grid;gap:7px}.seat-guest{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:#faf8f5;border-radius:9px;font-size:.68rem}.seat-guest small{color:#9a8e86}.seat-guest button{border:0;background:transparent;color:#9b6857;cursor:pointer;font-size:1rem}.empty-seat,.empty-state{padding:18px;text-align:center;font-size:.7rem;color:#978d85}.unassigned-panel{position:sticky;top:20px}.unassigned-guest{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #eee8e3;padding:12px 0}.unassigned-guest b{display:block;font-size:.7rem}.unassigned-guest small{display:block;color:#9a9088;font-size:.58rem;margin-top:3px}.unassigned-guest select{max-width:145px;border:1px solid #ddd5ce;border-radius:9px;background:#fff;padding:8px;font:500 .62rem Montserrat,sans-serif}.protocol-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.protocol-card{display:grid;grid-template-columns:46px 1fr;gap:13px}.protocol-avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#eee7e1;color:#806354;font:500 1.35rem 'Cormorant Garamond',serif}.protocol-info p{margin:0 0 7px;color:#8b8179;font-size:.63rem}.protocol-code{display:inline-block;background:#f4efeb;border-radius:7px;padding:5px 7px;font:600 .57rem Montserrat,sans-serif;letter-spacing:.08em}.protocol-actions{grid-column:1/-1;justify-content:flex-start;border-top:1px solid #eee8e3;padding-top:12px}.protocol-actions .badge{margin-right:auto}@media(max-width:900px){.seating-layout{grid-template-columns:1fr}.unassigned-panel{position:static}.table-list,.protocol-grid{grid-template-columns:1fr}}@media(max-width:620px){.seating-summary{grid-template-columns:1fr 1fr}.table-card-head{display:block}.table-card-actions{justify-content:flex-start;margin-top:12px}.unassigned-guest{align-items:flex-start;flex-direction:column}.unassigned-guest select{max-width:none;width:100%}.protocol-card{grid-template-columns:40px 1fr}.protocol-avatar{width:40px;height:40px}.protocol-actions{display:grid;grid-template-columns:1fr 1fr}.protocol-actions .badge{grid-column:1/-1;margin:0}.protocol-actions .icon-btn{width:100%}}
+/* V5.6 reception seating */
+.assigned-table{margin:16px 0;padding:14px 16px;border-radius:14px;background:#f5f0eb;border:1px solid #e5dbd3;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px}.assigned-table small{font:600 .54rem Montserrat,sans-serif;letter-spacing:.14em;color:#9b6857}.assigned-table strong{font:500 1.35rem 'Cormorant Garamond',serif;color:#302a26}.assigned-table span{font-size:.58rem;color:#91867e}.assigned-table.no-table{display:block}.assigned-table.no-table strong{display:block;margin-top:4px;font-size:1.05rem}@media(max-width:600px){.assigned-table{grid-template-columns:1fr;gap:4px}.assigned-table span{margin-top:3px}}
+.table-badge{display:inline-flex;align-items:center;padding:6px 9px;border-radius:8px;background:#f1ebe6;color:#765d50;font-size:.6rem;font-weight:600;white-space:nowrap}
+
+/* V5.7 — Organizador visual de mesas inspirado no fluxo Wedy */
+.section-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.button.secondary{background:#fff!important;color:#5e554f!important;border:1px solid #ddd5ce!important}
+.table-drawer-overlay{position:fixed;inset:0;z-index:11000;background:rgba(28,24,21,.52);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:flex;justify-content:flex-end}
+.table-drawer-overlay.hidden{display:none}
+.table-drawer{height:100%;width:min(560px,94vw);background:#fffdfb;box-shadow:-24px 0 70px rgba(24,20,17,.22);display:flex;flex-direction:column;color:#302a26}
+.table-drawer-head{padding:20px 22px 17px;border-bottom:1px solid #ebe5df;display:flex;gap:15px;align-items:flex-start}
+.drawer-close{order:2;margin-left:auto;width:38px;height:38px;border:1px solid #e4ddd7;background:#f7f3ef;border-radius:11px;font:400 23px/1 Montserrat,sans-serif;color:#625850;cursor:pointer;flex:0 0 auto}
+.drawer-kicker{margin:2px 0 4px;font:600 .56rem Montserrat,sans-serif;letter-spacing:.16em;color:#9b6857;text-transform:uppercase}
+.table-drawer-head h2{margin:0;font:500 2rem/.95 'Cormorant Garamond',serif;letter-spacing:-.02em}
+.table-drawer-head p:not(.drawer-kicker){margin:7px 0 0;font-size:.68rem;color:#887e76;line-height:1.45}
+.table-drawer-tools{padding:14px 20px 10px;border-bottom:1px solid #eee8e3}
+.drawer-search{display:flex;align-items:center;gap:8px;background:#f5f3f1;border-radius:13px;padding:0 13px;height:42px}
+.drawer-search span{font-size:1.25rem;color:#9a8f87}.drawer-search input{border:0;background:transparent;outline:0;width:100%;font:400 .68rem Montserrat,sans-serif;color:#302a26}.drawer-search input::placeholder{color:#9b938d}
+.drawer-hint{margin-top:9px;font-size:.58rem;color:#91877f}.drawer-hint b{font-size:.85rem;color:#776b63}
+.drawer-content{overflow:auto;flex:1;padding-bottom:18px}.drawer-unassigned,.drawer-tables{padding:0 20px}.drawer-section-title{display:flex;justify-content:space-between;align-items:end;padding:15px 0 9px}.drawer-section-title h3{margin:0;font:600 .72rem Montserrat,sans-serif;color:#302a26}.drawer-section-title span{font-size:.56rem;color:#958a82}
+.drawer-person{display:flex;align-items:center;gap:10px;border-top:1px solid #eee8e3;padding:11px 3px;min-height:48px}.drag-handle{margin-left:auto;color:#8f98b2;font-size:1.1rem;cursor:grab;letter-spacing:-2px}.drawer-person-dot{width:7px;height:7px;border-radius:50%;background:#10b981;flex:0 0 auto}.drawer-person-main{min-width:0}.drawer-person-main strong{display:block;font-size:.67rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.drawer-person-main small{display:block;margin-top:3px;color:#968c84;font-size:.55rem}
+.drawer-table{border-top:1px solid #e8e1db;padding:14px 2px 16px}.drawer-table-head{display:flex;align-items:center;gap:8px}.drawer-table-head h4{margin:0;font:600 .72rem Montserrat,sans-serif}.drawer-table-meta{font-size:.55rem;color:#8d837b}.drawer-table-actions{margin-left:auto;display:flex;gap:4px}.drawer-mini-btn{width:31px;height:31px;border:1px solid #e3ddd7;background:#f7f4f1;border-radius:9px;cursor:pointer;color:#6e625a}.drawer-mini-btn.danger{color:#9a6657}.drawer-slots{display:grid;gap:7px;margin-top:10px}.drawer-slot{min-height:36px;border:1px dashed #d6dce8;border-radius:8px;background:#fcfcfd;display:flex;align-items:center;padding:0 9px;transition:.15s}.drawer-slot.drag-over{background:#f3eee9;border-color:#9b6857;transform:scale(1.01)}.drawer-slot.filled{border-style:solid;border-color:#ebe4de;background:#faf8f5}.drawer-slot span{font-size:.62rem}.drawer-slot .slot-empty{color:#b0b5c1}.drawer-slot .slot-remove{margin-left:auto;border:0;background:transparent;color:#9a6a5b;cursor:pointer;font-size:.95rem}.drawer-add-guests{display:flex;align-items:center;gap:7px;margin:9px auto 0;border:0;background:#f5f2ef;border-radius:10px;padding:9px 12px;font:500 .59rem Montserrat,sans-serif;color:#615851;cursor:pointer}.drawer-add-guests:hover{background:#eee8e3}
+.table-drawer-foot{padding:13px 20px 17px;border-top:1px solid #e9e3de;background:#fffdfb}.drawer-add-table{width:100%;height:50px;border:0;border-radius:13px;background:#f4f2f0;font:600 .68rem Montserrat,sans-serif;color:#554c46;cursor:pointer}.drawer-add-table:hover{background:#ece8e4}
+.drawer-empty{padding:22px 5px;text-align:center;color:#9b9189;font-size:.62rem;line-height:1.5}
+.guest-picker-modal{position:fixed;inset:0;z-index:12000;background:rgba(28,24,21,.56);display:flex;align-items:flex-end;justify-content:center}.guest-picker-modal.hidden{display:none}.guest-picker{width:min(620px,calc(100vw - 24px));max-height:min(70vh,650px);background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -20px 60px rgba(24,20,17,.22);overflow:hidden;display:flex;flex-direction:column}.guest-picker-head{padding:18px 20px;border-bottom:1px solid #ece7e2;display:flex;align-items:center;gap:10px}.guest-picker-head h3{margin:0;font:600 .82rem Montserrat,sans-serif}.guest-picker-head button{margin-left:auto;border:0;background:#f4f1ee;border-radius:9px;width:34px;height:34px;cursor:pointer}.guest-picker-search{padding:10px 16px}.guest-picker-search input{width:100%;box-sizing:border-box;border:1px solid #e3ddd7;border-radius:11px;padding:11px 12px;font:400 .67rem Montserrat,sans-serif}.guest-picker-list{overflow:auto}.picker-guest{display:flex;align-items:center;gap:10px;border-top:1px solid #eee8e3;padding:12px 17px;cursor:grab}.picker-guest:hover{background:#faf8f5}.picker-guest strong{font-size:.66rem}.picker-guest small{display:block;color:#978d85;font-size:.55rem;margin-top:3px}.picker-add{margin-left:auto;border:1px solid #ded6cf;background:#fff;border-radius:8px;padding:7px 9px;font:600 .56rem Montserrat,sans-serif;cursor:pointer;color:#665b54}
+@media(max-width:620px){.table-drawer{width:100%}.table-drawer-head{padding:17px}.drawer-content,.drawer-unassigned,.drawer-tables{padding-left:15px;padding-right:15px}.table-drawer-tools{padding-left:15px;padding-right:15px}.table-drawer-foot{padding-left:15px;padding-right:15px}.section-actions{width:100%}.section-actions .button{flex:1}}
+.drawer-table.drag-target{background:#faf7f3;border-radius:12px;outline:1px solid #d8c7bc}.drawer-person.dragging,.drawer-draggable.dragging{opacity:.45}.drawer-table .drawer-slot.filled{cursor:grab}.drawer-table .drawer-slot.filled:active{cursor:grabbing}
+
+/* =========================================================
+   V5.8 — Alinhamento Wedy / Identidade Agnaldo & Fáuzia
+   Estrutura: header + conteúdo central consistente + cartões
+   ========================================================= */
+.admin-body{background:#faf9f7;color:#2d2824}
+.wedy-app{min-height:100vh;background:#faf9f7}
+.wedy-header{
+  height:68px;
+  padding:0 max(28px,calc((100vw - 1240px)/2));
+  gap:28px;
+  box-sizing:border-box;
+}
+.wedy-brand{min-width:205px}
+.wedy-nav{gap:26px}
+.wedy-event{min-width:225px}
+.wedy-main{
+  width:100%;
+  max-width:1240px;
+  box-sizing:border-box;
+  margin:0 auto;
+  padding:32px 28px 80px;
+}
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:390px minmax(0,1fr);
+  gap:30px;
+  align-items:start;
+}
+.dashboard-left,.dashboard-right{min-width:0}
+.wedy-card,.wedy-section{
+  box-sizing:border-box;
+  border-radius:20px;
+}
+.wedding-card{padding:20px}
+.wedy-cover{height:218px}
+.wedy-cover-copy{padding:16px 3px 9px}
+.wedy-cover-copy h1{font-size:2.45rem}
+.quick-actions{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+  margin-top:13px;
+}
+.quick{
+  min-width:0;
+  min-height:78px;
+  padding:11px;
+  border-radius:12px;
+}
+.welcome-card{padding:24px}
+.wedy-stats{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:0!important;
+}
+.wedy-stats .stat{
+  min-width:0;
+  padding:15px 12px;
+}
+.wedy-stats .stat+ .stat{border-left:1px solid #ebe6e1}
+.overview-list{margin-top:18px}
+.overview-list a{padding:14px 15px}
+.wedy-section{
+  margin-top:28px;
+  padding:24px;
+}
+.section-title-row{
+  align-items:center;
+  margin-bottom:18px;
+}
+.section-title-row>div{min-width:0}
+.section-title-row h2{margin:6px 0 5px}
+.section-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.checkin-layout{
+  grid-template-columns:minmax(0,1fr) 300px;
+  gap:14px;
+}
+.guest-tools{
+  grid-template-columns:minmax(0,1fr);
+  gap:9px;
+}
+.guest-filters{padding-bottom:1px}
+.table-wrap{width:100%}
+.admin-extra .seating-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
+  gap:16px;
+  align-items:start;
+}
+.admin-extra .table-list{min-width:0}
+.admin-extra .unassigned-panel{min-width:0}
+.protocol-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+@media(max-width:1050px){
+  .wedy-header{padding:0 22px}
+  .wedy-nav{gap:18px}
+  .wedy-event{min-width:190px}
+  .dashboard-grid{grid-template-columns:340px minmax(0,1fr);gap:22px}
+  .checkin-layout{grid-template-columns:1fr}
+  .protocol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:820px){
+  .wedy-header{height:62px;padding:0 16px;gap:12px}
+  .wedy-brand{min-width:0}
+  .wedy-brand span{font-size:1.15rem}
+  .wedy-nav,.wedy-event{display:none}
+  .wedy-menu{margin-left:auto}
+  .wedy-main{padding:20px 16px 60px}
+  .dashboard-grid{grid-template-columns:1fr;gap:16px}
+  .wedy-cover{height:240px}
+  .welcome-card{padding:20px}
+  .wedy-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .wedy-stats .stat{border-bottom:1px solid #ebe6e1}
+  .wedy-stats .stat:nth-child(odd){border-left:0}
+  .wedy-section{padding:18px;margin-top:18px}
+  .section-title-row{align-items:flex-start;flex-direction:column}
+  .section-actions{width:100%;justify-content:flex-start}
+  .admin-extra .seating-layout{grid-template-columns:1fr}
+  .protocol-grid{grid-template-columns:1fr}
+}
+
+/* V6.0 — Estrutura fiel ao workspace do Wedy; identidade A&F preservada */
+.wedy-header{height:68px;padding:0 max(20px,calc((100vw - 1112px)/2));gap:24px}
+.wedy-main{max-width:1136px;margin:0 auto;padding:32px 32px 80px}
+.dashboard-grid{display:grid;grid-template-columns:400px minmax(0,1fr);gap:32px;align-items:start}
+.dashboard-left{width:400px;position:sticky;top:100px}
+.dashboard-right{min-width:0}
+.wedy-side-stack{display:flex;flex-direction:column;gap:32px}
+.wedding-card{padding:0;overflow:hidden;border-radius:24px}
+.wedy-cover-wrap{position:relative;aspect-ratio:16/9;background:#eee6df}
+.wedy-cover{height:100%;border-radius:0;overflow:hidden}
+.wedy-cover img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.wedy-cover-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;gap:16px;padding:20px;background:linear-gradient(180deg,transparent 35%,rgba(25,20,17,.78) 100%);color:#fff}
+.wedy-cover-copy{padding:0;min-width:0;flex:1}.wedy-cover-copy h1{font-size:2rem;line-height:1;margin:0 0 4px;color:#fff}.wedy-cover-copy p{font-size:.68rem;color:rgba(255,255,255,.88);margin:0}
+.cover-actions{display:flex;gap:8px;align-items:flex-end}.cover-icon{width:36px;height:36px;border:0;border-radius:10px;background:#fff;color:#332b27;display:grid;place-items:center;text-decoration:none;cursor:pointer;font-size:.9rem}
+.wedy-event-url{padding:13px 18px;border-bottom:1px solid #ebe6e1;font-size:.62rem;color:#6e665f;display:flex;justify-content:space-between}
+.quick-actions{grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 12px 14px;margin:0}.quick{min-height:70px;border-radius:12px;padding:10px;background:#f3f1ef}.quick.primary{background:#9b6857}.quick strong{font-size:1.15rem}.quick span{font-size:.61rem}
+.wedding-carousel{overflow:hidden;border-radius:24px;padding:0}.carousel-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 10px}.carousel-head h2{font:500 1rem/1.2 Montserrat,sans-serif;margin:0}.carousel-head button{width:30px;height:30px;border:0;background:transparent;color:#554b45;cursor:pointer;font-size:1rem}.carousel-track{display:flex;gap:12px;overflow:hidden;padding:0 18px 18px}.carousel-card{flex:0 0 260px;min-height:126px;background:#f3f1ef;border-radius:13px;padding:15px;box-sizing:border-box;display:flex;flex-direction:column}.carousel-card:nth-child(2){background:#302a27;color:#fff}.carousel-card b{font-size:.74rem;line-height:1.2}.carousel-card p{font-size:.61rem;line-height:1.45;margin:7px 0 12px;opacity:.82}.carousel-card a{margin-top:auto;align-self:flex-start;border-radius:8px;background:#fff;color:#3a332f;text-decoration:none;padding:7px 9px;font-size:.57rem;font-weight:600}.carousel-card:nth-child(2) a{color:#302a27}
+.home-checklist{overflow:hidden;border-radius:24px}.home-row{min-height:86px;box-sizing:border-box;display:flex;align-items:center;gap:14px;padding:17px 18px;text-decoration:none;color:#2d2824;border-bottom:1px solid #ebe6e1}.home-row:last-of-type{border-bottom:0}.home-row:hover{background:#fcfbf9}.home-row.done{color:#928a83}.home-row.done b,.home-row.done small{color:#aaa29b;text-decoration:line-through}.home-icon{width:42px;height:42px;border-radius:14px;background:#f3f1ef;display:grid;place-items:center;flex:0 0 42px;font-size:1.15rem;color:#625851}.home-row div{min-width:0;flex:1}.home-row b{display:block;font-size:.75rem;line-height:1.25}.home-row small{display:block;font-size:.61rem;line-height:1.35;color:#817a74;margin-top:3px}.home-state{width:32px;height:32px;border-radius:10px;background:#f3f1ef;display:grid;place-items:center;flex:0 0 32px;color:#6c625b;font-size:.9rem}.home-row.done .home-state{color:#4f4a45}
+@media(max-width:1050px){.wedy-main{max-width:100%;padding-left:22px;padding-right:22px}.dashboard-grid{grid-template-columns:340px minmax(0,1fr);gap:22px}.dashboard-left{width:340px}}
+@media(max-width:820px){.wedy-main{padding:20px 16px 60px}.dashboard-grid{grid-template-columns:1fr;gap:16px}.dashboard-left{width:auto;position:static}.wedy-side-stack{gap:16px}.wedding-carousel{display:none}.home-row{min-height:78px}.wedy-header{padding:0 16px}}
+
+/* V6.2 — área central = 55vw, com 22.5vw de cada lado */
+@media (min-width:821px){
+  .wedy-header{
+    width:55vw!important;
+    max-width:55vw!important;
+    margin:0 auto!important;
+    padding:0!important;
+    gap:16px!important;
+    box-sizing:border-box!important;
+  }
+  .wedy-main{
+    width:55vw!important;
+    max-width:55vw!important;
+    margin:0 auto!important;
+    padding:32px 0 80px!important;
+    box-sizing:border-box!important;
+  }
+  .dashboard-grid{
+    grid-template-columns:minmax(0,37.5fr) minmax(0,62.5fr)!important;
+    gap:20px!important;
+    width:100%!important;
+  }
+  .dashboard-left,.dashboard-right{width:auto!important;}
+  .wedy-side-stack{gap:20px!important;}
+  .wedy-brand{min-width:72px!important;gap:7px!important;}
+  .wedy-brand span{font-size:1rem!important;}
+  .wedy-brand img{width:30px!important;height:30px!important;}
+  .wedy-nav{gap:15px!important;flex:1 1 auto!important;min-width:0!important;overflow:hidden!important;}
+  .wedy-nav a{font-size:.62rem!important;}
+  .wedy-event{min-width:145px!important;padding:5px 8px!important;gap:6px!important;}
+  .wedy-event span:not(.wedy-avatar){font-size:.54rem!important;}
+  .wedy-event small{font-size:.48rem!important;}
+  .wedy-avatar{width:27px!important;height:27px!important;font-size:.72rem!important;}
+  .wedy-menu{width:38px!important;height:38px!important;flex:0 0 38px!important;}
+}

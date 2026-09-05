@@ -1,4 +1,4 @@
-let session=null, guests=[], gifts=[];
+let session=null, guests=[], gifts=[], receptionTables=[], protocols=[];
 let guestFilter='all';
 const A=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 function showMsg(el,t){el.textContent=t;el.classList.remove('hidden')}
@@ -10,7 +10,7 @@ async function enter(){A('#login').classList.add('hidden');A('#app').classList.r
 A('#loginForm').onsubmit=async e=>{e.preventDefault();const {error}=await supabaseClient.auth.signInWithPassword({email:A('#email').value,password:A('#password').value});if(error)showMsg(A('#loginMsg'),'Email ou palavra-passe incorrectos.');else await enter()}
 A('#logout')?.addEventListener('click',()=>supabaseClient.auth.signOut().then(()=>location.reload()));
 
-async function refresh(){const [{data:g,error:ge},{data:gi,error:gie}]=await Promise.all([supabaseClient.rpc('admin_list_invitations_checkin'),supabaseClient.rpc('admin_list_gifts')]);if(ge){toast(ge.message);return}if(gie){toast(gie.message);return}guests=g||[];gifts=gi||[];render()}
+async function refresh(){const [{data:g,error:ge},{data:gi,error:gie},{data:t,error:te},{data:p,error:pe}]=await Promise.all([supabaseClient.rpc('admin_list_invitations_checkin'),supabaseClient.rpc('admin_list_gifts'),supabaseClient.rpc('admin_list_tables'),supabaseClient.rpc('admin_list_protocols')]);if(ge){toast(ge.message);return}if(gie){toast(gie.message);return}if(te){toast(te.message);return}if(pe){toast(pe.message);return}guests=g||[];gifts=gi||[];receptionTables=t||[];protocols=p||[];render();renderTables();renderProtocols()}
 function render(){
  const c={total:guests.length,pending:0,confirmed:0,declined:0,people:0,checkedIn:0,notCheckedIn:0,presentPeople:0};guests.forEach(g=>{if(c[g.rsvp_status]!==undefined)c[g.rsvp_status]++;if(g.rsvp_status==='confirmed'){const people=1+(g.companion_count||0);c.people+=people;if(g.checked_in){c.checkedIn++;c.presentPeople+=people}}});c.notCheckedIn=c.confirmed-c.checkedIn;A('#stTotal').textContent=c.total;A('#stPending').textContent=c.pending;A('#stConfirmed').textContent=c.confirmed;A('#stDeclined').textContent=c.declined;A('#stPeople').textContent=c.people;A('#stCheckedIn').textContent=c.checkedIn;A('#stNotCheckedIn').textContent=c.notCheckedIn;A('#stPresentPeople').textContent=c.presentPeople;
  const q=String(A('#guestSearch')?.value||'').trim().toLowerCase();
@@ -21,7 +21,7 @@ function render(){
    return matchesQ&&matchesF;
  });
  A('#guestCount').textContent=`${filteredGuests.length} de ${guests.length} convite(s)`;
- A('#guestRows').innerHTML=filteredGuests.map(g=>`<tr><td data-label="Nome"><span class="mobile-row-title">${esc(g.full_name)}</span></td><td data-label="Código"><strong>${esc(g.code)}</strong></td><td data-label="WhatsApp">${esc(g.whatsapp||'—')}</td><td data-label="Lotação">${g.allowed_guests}</td><td data-label="Estado"><span class="badge ${g.rsvp_status}">${g.rsvp_status}</span></td><td data-label="Pessoas">${g.rsvp_status==='confirmed'?1+(g.companion_count||0):0}</td><td data-label="Confirmado em">${g.rsvp_at?new Date(g.rsvp_at).toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'}):'—'}</td><td data-label="Entrada">${g.checked_in?'<span class="badge confirmed">Entrada registada</span>':'<span class="badge pending">Por entrar</span>'}</td><td data-label="Acções"><div class="mobile-actions"><button class="button secondary" onclick="editGuest('${g.id}')">Editar</button> <button class="button secondary" onclick="openQR('${g.id}')">▣ QR</button> <button class="button secondary" onclick="openWhats('${g.id}')">${g.invitation_sent_at?'Reenviar':'Enviar convite'}</button> <button class="button danger" onclick="removeGuest('${g.id}')">Remover</button></div></td></tr>`).join('');
+ A('#guestRows').innerHTML=filteredGuests.map(g=>`<tr><td data-label="Nome"><span class="mobile-row-title">${esc(g.full_name)}</span></td><td data-label="Código"><strong>${esc(g.code)}</strong></td><td data-label="WhatsApp">${esc(g.whatsapp||'—')}</td><td data-label="Lotação">${g.allowed_guests}</td><td data-label="Estado"><span class="badge ${g.rsvp_status}">${g.rsvp_status}</span></td><td data-label="Pessoas">${g.rsvp_status==='confirmed'?1+(g.companion_count||0):0}</td><td data-label="Confirmado em">${g.rsvp_at?new Date(g.rsvp_at).toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'}):'—'}</td><td data-label="Entrada">${g.checked_in?'<span class="badge confirmed">Entrada registada</span>':'<span class="badge pending">Por entrar</span>'}</td><td data-label="Mesa">${g.table_name?`<span class="table-badge">${esc(g.table_name)}</span>`:'<span class="muted">Sem mesa</span>'}</td><td data-label="Acções"><div class="mobile-actions"><button class="button secondary" onclick="editGuest('${g.id}')">Editar</button> <button class="button secondary" onclick="openQR('${g.id}')">▣ QR</button> <button class="button secondary" onclick="openWhats('${g.id}')">${g.invitation_sent_at?'Reenviar':'Enviar convite'}</button> <button class="button danger" onclick="removeGuest('${g.id}')">Remover</button></div></td></tr>`).join('');
  A('#giftRows').innerHTML=gifts.map(g=>`<tr><td data-label="Foto">${g.image_url?`<img class="gift-admin-thumb" src="${esc(g.image_url)}" alt="">`:'<div class="gift-admin-placeholder">♡</div>'}</td><td data-label="#">${g.item_no}</td><td data-label="Presente"><span class="mobile-row-title">${esc(g.name)}</span></td><td data-label="Estado">${g.reserved?'<span class="badge confirmed">Reservado</span>':'<span class="badge pending">Livre</span>'}</td><td data-label="Reservado por">${esc(g.reserved_by_name||'—')}</td><td data-label="Acções"><div class="gift-actions"><button class="button secondary" onclick="editGift(${g.id})">Editar</button><button class="button danger" onclick="deleteGift(${g.id})" ${g.reserved?'disabled':''}>Remover</button></div></td></tr>`).join('');
 }
 
@@ -252,4 +252,100 @@ window.deleteGift=async id=>{
 function toast(t){const x=document.createElement('div');x.className='toast';x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),3000)}
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m){m.classList.add('hidden');document.body.classList.remove('modal-scroll-lock')}}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal:not(.hidden)').forEach(m=>m.classList.add('hidden'));document.body.classList.remove('modal-scroll-lock')}});
+
+// ---------------- MESAS ----------------
+let drawerGuestSearch='';
+let pickerTableId=null;
+
+function peopleForGuest(g){return 1+Number(g?.companion_count||0)}
+function confirmedGuests(){return guests.filter(g=>g.rsvp_status==='confirmed')}
+function unassignedGuests(){return confirmedGuests().filter(g=>!g.table_id)}
+
+function renderTables(){
+ const totalSeats=receptionTables.reduce((n,t)=>n+Number(t.capacity||0),0);
+ const confirmed=confirmedGuests().reduce((n,g)=>n+peopleForGuest(g),0);
+ const assigned=confirmedGuests().filter(g=>g.table_id).reduce((n,g)=>n+peopleForGuest(g),0);
+ A('#seatingSummary').innerHTML=`<div class="seat-stat"><strong>${receptionTables.length}</strong><span>Mesas</span></div><div class="seat-stat"><strong>${totalSeats}</strong><span>Lugares</span></div><div class="seat-stat"><strong>${assigned}</strong><span>Distribuídos</span></div><div class="seat-stat"><strong>${Math.max(0,confirmed-assigned)}</strong><span>Sem mesa</span></div>`;
+
+ A('#tableList').innerHTML=receptionTables.map(t=>{
+   const people=t.guests.reduce((n,g)=>n+peopleForGuest(g),0);
+   const pct=Math.min(100,Math.round(people/t.capacity*100));
+   return `<article class="table-card" onclick="openTableOrganizer(${t.id})">
+     <div class="table-card-head"><div><p class="section-kicker">MESA</p><h3>${esc(t.name)}</h3><small>${esc(t.description||'')}</small></div>
+     <div class="table-card-actions"><button class="icon-btn" onclick="event.stopPropagation();editTable(${t.id})">Editar</button><button class="icon-btn danger" onclick="event.stopPropagation();deleteTable(${t.id})">Remover</button></div></div>
+     <div class="capacity-line"><span>${people} / ${t.capacity} lugares</span><span>${pct}%</span></div><div class="capacity-track"><i style="width:${pct}%"></i></div>
+     <div class="table-guests">${t.guests.length?t.guests.map(g=>`<div class="seat-guest"><span>${esc(g.full_name)} <small>${peopleForGuest(g)}p</small></span><button onclick="event.stopPropagation();assignTable('${g.id}','')">×</button></div>`).join(''):'<p class="muted empty-seat">Clique para organizar esta mesa.</p>'}</div>
+   </article>`;
+ }).join('')||'<div class="empty-state">Ainda não existem mesas. Crie a primeira mesa.</div>';
+
+ const un=unassignedGuests();
+ A('#unassignedGuests').innerHTML=un.length?un.map(g=>`<div class="unassigned-guest"><div><b>${esc(g.full_name)}</b><small>${peopleForGuest(g)} pessoa(s) · ${esc(g.code)}</small></div><button class="icon-btn" onclick="openTableOrganizer();openGuestPicker(null,'${g.id}')">Adicionar</button></div>`).join(''):'<div class="empty-state">Todos os convidados confirmados já têm mesa.</div>';
+ renderTableDrawer();
+}
+
+function renderTableDrawer(){
+ const q=drawerGuestSearch.trim().toLowerCase();
+ const un=unassignedGuests().filter(g=>!q || `${g.full_name} ${g.code} ${g.whatsapp||''}`.toLowerCase().includes(q));
+ A('#drawerUnassignedCount').textContent=`${unassignedGuests().length} ${unassignedGuests().length===1?'convidado':'convidados'} sem mesa`;
+ A('#drawerUnassignedGuests').innerHTML=un.length?un.map(g=>`<div class="drawer-person" draggable="true" data-guest-id="${g.id}"><span class="drawer-person-dot"></span><div class="drawer-person-main"><strong>${esc(g.full_name)}</strong><small>${peopleForGuest(g)} ${peopleForGuest(g)===1?'pessoa':'pessoas'} · ${esc(g.code)}</small></div><button class="drawer-mini-btn" title="Escolher mesa" onclick="openGuestPicker(null,'${g.id}')">＋</button><span class="drag-handle" title="Arrastar">⠿</span></div>`).join(''):`<div class="drawer-empty">Não há convidados confirmados sem mesa${q?' para esta pesquisa':''}.</div>`;
+
+ A('#drawerTableList').innerHTML=receptionTables.length?receptionTables.map(t=>{
+   const people=t.guests.reduce((n,g)=>n+peopleForGuest(g),0);
+   const remaining=Math.max(0,t.capacity-people);
+   let slots='';
+   for(let i=0;i<t.capacity;i++){
+     const g=t.guests[i];
+     if(g) slots+=`<div class="drawer-slot filled drawer-draggable" draggable="true" data-guest-id="${g.id}" data-table-id="${t.id}"><span>${esc(g.full_name)} <small>· ${peopleForGuest(g)}p</small></span><button class="slot-remove" title="Retirar da mesa" onclick="assignTable('${g.id}','')">×</button></div>`;
+     else slots+=`<div class="drawer-slot" data-table-id="${t.id}"><span class="slot-empty">Lugar ${i+1}</span></div>`;
+   }
+   return `<div class="drawer-table" data-table-id="${t.id}"><div class="drawer-table-head"><div><h4>${esc(t.name)}</h4><span class="drawer-table-meta">${people}/${t.capacity} lugares ocupados${t.description?' · '+esc(t.description):''}</span></div><div class="drawer-table-actions"><button class="drawer-mini-btn" onclick="editTable(${t.id})" title="Editar mesa">✎</button><button class="drawer-mini-btn danger" onclick="deleteTable(${t.id})" title="Remover mesa">♲</button></div></div><div class="drawer-slots">${slots}</div><button class="drawer-add-guests" onclick="openGuestPicker(${t.id})">♙ &nbsp;Adicionar convidados em “${esc(t.name)}”</button></div>`;
+ }).join(''):'<div class="drawer-empty">Adicione a primeira mesa para começar a organização.</div>';
+ bindDrawerDnD();
+}
+
+function bindDrawerDnD(){
+ document.querySelectorAll('#drawerUnassignedGuests [draggable],#drawerTableList [draggable]').forEach(el=>{
+   el.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',el.dataset.guestId);e.dataTransfer.effectAllowed='move';el.classList.add('dragging')});
+   el.addEventListener('dragend',()=>el.classList.remove('dragging'));
+ });
+ document.querySelectorAll('#drawerTableList .drawer-table').forEach(table=>{
+   table.addEventListener('dragover',e=>{e.preventDefault();table.classList.add('drag-target')});
+   table.addEventListener('dragleave',()=>table.classList.remove('drag-target'));
+   table.addEventListener('drop',async e=>{e.preventDefault();table.classList.remove('drag-target');const id=e.dataTransfer.getData('text/plain');if(id)await assignTable(id,table.dataset.tableId)});
+ });
+}
+
+function openTableOrganizer(tableId){
+ A('#tableOrganizer').classList.remove('hidden');A('#tableOrganizer').setAttribute('aria-hidden','false');document.body.classList.add('modal-scroll-lock');
+ if(tableId) document.querySelector(`#drawerTableList [data-table-id="${tableId}"]`)?.scrollIntoView({block:'nearest'});
+ renderTableDrawer();
+}
+function closeTableOrganizer(){A('#tableOrganizer').classList.add('hidden');A('#tableOrganizer').setAttribute('aria-hidden','true');document.body.classList.remove('modal-scroll-lock')}
+
+function openGuestPicker(tableId,focusGuestId){
+ pickerTableId=tableId?Number(tableId):null;
+ let m=A('#guestPickerModal');
+ if(!m){m=document.createElement('div');m.id='guestPickerModal';m.className='guest-picker-modal hidden';m.innerHTML=`<div class="guest-picker"><header class="guest-picker-head"><div><p class="drawer-kicker">CONVIDADOS</p><h3 id="guestPickerTitle">Adicionar convidados</h3></div><button id="closeGuestPicker" type="button">×</button></header><div class="guest-picker-search"><input id="guestPickerSearch" type="search" placeholder="Buscar convidado sem mesa"></div><div class="guest-picker-list" id="guestPickerList"></div></div>`;document.body.appendChild(m);m.addEventListener('mousedown',e=>{if(e.target===m)closeGuestPicker()});A('#closeGuestPicker').onclick=closeGuestPicker;A('#guestPickerSearch').addEventListener('input',renderGuestPicker)}
+ const table=receptionTables.find(t=>t.id===pickerTableId);A('#guestPickerTitle').textContent=table?`Adicionar convidados em “${table.name}”`:'Escolher uma mesa';A('#guestPickerSearch').value=focusGuestId?(unassignedGuests().find(g=>g.id===focusGuestId)?.full_name||''):'';m.classList.remove('hidden');renderGuestPicker();setTimeout(()=>A('#guestPickerSearch').focus(),50);
+}
+function closeGuestPicker(){const m=A('#guestPickerModal');if(m)m.classList.add('hidden');pickerTableId=null}
+function renderGuestPicker(){const q=(A('#guestPickerSearch')?.value||'').trim().toLowerCase();const list=unassignedGuests().filter(g=>!q||`${g.full_name} ${g.code}`.toLowerCase().includes(q));A('#guestPickerList').innerHTML=list.length?list.map(g=>`<div class="picker-guest" draggable="true" data-guest-id="${g.id}"><span class="drawer-person-dot"></span><div><strong>${esc(g.full_name)}</strong><small>${peopleForGuest(g)} ${peopleForGuest(g)===1?'pessoa':'pessoas'} · ${esc(g.code)}</small></div><button class="picker-add" onclick="pickerAssign('${g.id}')">${pickerTableId?'Adicionar':'Escolher'}</button></div>`).join(''):'<div class="drawer-empty">Nenhum convidado disponível.</div>';document.querySelectorAll('#guestPickerList [draggable]').forEach(el=>{el.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',el.dataset.guestId)})});}
+window.pickerAssign=async id=>{if(pickerTableId){await assignTable(id,String(pickerTableId));if(!unassignedGuests().length)closeGuestPicker();else renderGuestPicker()}else{openTableOrganizer();closeGuestPicker();toast('Escolha uma mesa para este convidado.')}};
+
+window.assignTable=async(id,tableId)=>{const r=await supabaseClient.rpc('admin_assign_guest_table',{p_invitation_id:id,p_table_id:tableId?Number(tableId):null});if(r.error){toast(r.error.message);await refresh();return false}await refresh();toast(tableId?'Mesa atribuída.':'Convidado retirado da mesa.');return true};
+function openTableModal(t){A('#tableModalTitle').textContent=t?'Editar mesa':'Nova mesa';A('#tableName').value=t?.name||'';A('#tableCapacity').value=t?.capacity||8;A('#tableDescription').value=t?.description||'';A('#tableModal').dataset.id=t?.id||'';A('#tableFormMsg').classList.add('hidden');A('#tableModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#tableName').focus(),80)}
+window.editTable=id=>openTableModal(receptionTables.find(t=>t.id===id));
+window.deleteTable=async id=>{const t=receptionTables.find(x=>x.id===id);if(!t)return;if(!confirm(`Remover a mesa “${t.name}”? Os convidados ficarão sem mesa.`))return;const r=await supabaseClient.rpc('admin_delete_table',{p_id:id});if(r.error){toast(r.error.message);return}await refresh();toast('Mesa removida.')};
+A('#addTableBtn').onclick=()=>openTableModal();
+A('#organizeTablesBtn').onclick=()=>openTableOrganizer();
+A('#closeTableOrganizer').onclick=closeTableOrganizer;
+A('#drawerAddTable').onclick=()=>openTableModal();
+A('#drawerGuestSearch').addEventListener('input',e=>{drawerGuestSearch=e.target.value;renderTableDrawer()});
+A('#tableForm').onsubmit=async e=>{e.preventDefault();const id=A('#tableModal').dataset.id,name=A('#tableName').value.trim(),capacity=Number(A('#tableCapacity').value),description=A('#tableDescription').value.trim();if(!name||capacity<1){showMsg(A('#tableFormMsg'),'Preencha o nome e uma capacidade válida.');return}const fn=id?'admin_update_table':'admin_create_table';const args=id?{p_id:Number(id),p_name:name,p_capacity:capacity,p_description:description}:{p_name:name,p_capacity:capacity,p_description:description};const r=await supabaseClient.rpc(fn,args);if(r.error){showMsg(A('#tableFormMsg'),r.error.message);return}A('#tableModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock');await refresh();toast(id?'Mesa actualizada.':'Mesa criada.');if(!id)openTableOrganizer()};
+// ---------------- PROTOCOLOS ----------------
+function renderProtocols(){A('#protocolList').innerHTML=protocols.map(p=>`<article class="protocol-card"><div class="protocol-avatar">${esc((p.full_name||'?').slice(0,1).toUpperCase())}</div><div class="protocol-info"><h3>${esc(p.full_name)}</h3><p>${esc(p.whatsapp||'Sem WhatsApp')}</p><span class="protocol-code">${esc(p.access_code)}</span></div><div class="protocol-actions"><span class="badge ${p.active?'confirmed':'pending'}">${p.active?'Activo':'Inactivo'}</span><button class="icon-btn" onclick="toggleProtocol('${p.id}',${!p.active})">${p.active?'Desactivar':'Activar'}</button><button class="icon-btn danger" onclick="deleteProtocol('${p.id}')">Remover</button></div></article>`).join('')||'<div class="empty-state">Ainda não existem protocolos adicionados.</div>'}
+A('#addProtocolBtn').onclick=()=>{A('#protocolForm').reset();A('#protocolFormMsg').classList.add('hidden');A('#protocolModal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#protocolName').focus(),80)};A('#closeProtocolModal').onclick=()=>{A('#protocolModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock')};
+A('#protocolForm').onsubmit=async e=>{e.preventDefault();const r=await supabaseClient.rpc('admin_create_protocol',{p_full_name:A('#protocolName').value.trim(),p_whatsapp:A('#protocolPhone').value.trim(),p_access_code:A('#protocolCode').value.trim(),p_pin:A('#protocolPin').value.trim()});if(r.error){showMsg(A('#protocolFormMsg'),r.error.message);return}A('#protocolModal').classList.add('hidden');document.body.classList.remove('modal-scroll-lock');await refresh();toast('Acesso de protocolo criado.')};
+window.toggleProtocol=async(id,active)=>{const r=await supabaseClient.rpc('admin_toggle_protocol',{p_id:id,p_active:active});if(r.error){toast(r.error.message);return}await refresh()};window.deleteProtocol=async id=>{const p=protocols.find(x=>x.id===id);if(!p)return;if(!confirm(`Remover o acesso de “${p.full_name}”?`))return;const r=await supabaseClient.rpc('admin_delete_protocol',{p_id:id});if(r.error){toast(r.error.message);return}await refresh();toast('Acesso removido.')};
+
 init();
