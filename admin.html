@@ -117,7 +117,7 @@
 })();
 </script><script>
 (function(){
- const focusSearch=()=>{const i=document.getElementById('guestSearch');if(i){i.focus();i.scrollIntoView({behavior:'smooth',block:'center');}}};
+ const focusSearch=()=>{const i=document.getElementById('guestSearch');if(i){i.focus();i.scrollIntoView({behavior:'smooth',block:'center'});}};
  document.getElementById('adminGlobalSearch')?.addEventListener('input',e=>{const q=e.target.value;const i=document.getElementById('guestSearch');if(i){i.value=q; i.dispatchEvent(new Event('input'));}});
  document.getElementById('adminGlobalSearch')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();focusSearch();}});
  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k' && !/input|textarea|select/i.test(document.activeElement?.tagName||'')){e.preventDefault();document.getElementById('adminGlobalSearch')?.focus();}});
