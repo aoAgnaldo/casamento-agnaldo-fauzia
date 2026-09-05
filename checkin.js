@@ -28,7 +28,26 @@ function renderReceptionLive(){
 }
 
 function render(g){const box=A('#result');if(!g){box.classList.add('hidden');return}const people=1+(g.companion_count||0);let state;if(g.checked_in){state=`<div class="result-already"><b>✓ Entrada já registada</b><span>${g.checked_in_at?new Date(g.checked_in_at).toLocaleString('pt-PT'):''}</span></div>`}else if(g.rsvp_status==='confirmed'){state='<div class="result-valid"><b>✓ Presença confirmada</b><span>Convite válido para a recepção.</span></div>'}else{state=`<div class="result-warning"><b>⚠ Estado: ${esc(g.rsvp_status)}</b><span>Este convidado ainda não confirmou a presença.</span></div>`}box.innerHTML=`<div class="guest-result-inner"><div class="guest-main"><p class="eyebrow">Convidado</p><h2>${esc(g.full_name)}</h2><div class="guest-meta"><span><b>${esc(g.code)}</b></span><span>${people} pessoa(s)</span><span>Permitido: ${g.allowed_guests}</span></div>${g.table_name?`<div class="assigned-table"><small>MESA</small><strong>${esc(g.table_name)}</strong><span>${g.table_capacity?`Capacidade ${g.table_capacity} lugares`:''}</span></div>`:'<div class="assigned-table no-table"><small>ASSENTO</small><strong>Mesa ainda não atribuída</strong></div>'}${state}</div><div class="guest-action">${g.checked_in?'<button class="button secondary" id="again">Próximo convidado</button>':`<button class="button reception-confirm" id="confirm">Confirmar entrada</button>`}</div></div>`;box.classList.remove('hidden');A('#again')?.addEventListener('click',next);A('#confirm')?.addEventListener('click',()=>confirmEntry(g.id));}
-async function search(raw){const key=String(raw||'').trim();if(!key){toast('Introduza o código do convite.');A('#code').focus();return}const g=guests.find(x=>x.code.toLowerCase()===key.toLowerCase());if(!g){render(null);toast('Convite não encontrado.');return}render(g)}
+async function search(raw){
+ const key=String(raw||'').trim();
+ if(!key){toast('Introduza o nome ou código do convite.');A('#code').focus();return}
+ const q=key.toLocaleLowerCase('pt-PT');
+ const exactCode=guests.find(x=>String(x.code||'').toLocaleLowerCase('pt-PT')===q);
+ const exactName=guests.find(x=>String(x.full_name||'').toLocaleLowerCase('pt-PT')===q);
+ if(exactCode||exactName){render(exactCode||exactName);return}
+ const matches=guests.filter(x=>String(x.full_name||'').toLocaleLowerCase('pt-PT').includes(q)||String(x.code||'').toLocaleLowerCase('pt-PT').includes(q));
+ if(matches.length===0){render(null);toast('Nenhum convidado encontrado.');return}
+ if(matches.length===1){render(matches[0]);return}
+ renderSearchMatches(matches);
+}
+function renderSearchMatches(matches){
+ const box=A('#result');
+ if(!box)return;
+ box.innerHTML=`<div class="search-matches"><div class="search-matches-head"><div><p class="eyebrow">RESULTADOS</p><h2>Escolher convidado</h2><p>Encontrámos ${matches.length} pessoas. Seleccione o convidado correcto.</p></div></div><div class="search-match-list">${matches.slice(0,30).map((g,i)=>{const people=1+(g.companion_count||0);return `<button type="button" class="search-match" onclick="selectSearchMatch(${i})"><span class="search-match-name"><b>${esc(g.full_name)}</b><small>${esc(g.code)} · ${people} pessoa(s)</small></span><span class="search-match-side"><strong>${g.table_name?esc(g.table_name):'Sem mesa'}</strong><small>${g.checked_in?'✓ Já chegou':'Por chegar'}</small></span></button>`}).join('')}</div>${matches.length>30?'<p class="search-match-note">A mostrar os primeiros 30 resultados. Refine a pesquisa pelo nome ou código.</p>':''}</div>`;
+ box.classList.remove('hidden');
+ window.__searchMatches=matches;
+}
+window.selectSearchMatch=i=>{const g=window.__searchMatches?.[i];if(g)render(g)};
 async function confirmEntry(id){if(busy)return;const g=guests.find(x=>x.id===id);if(!g||g.checked_in)return;busy=true;const b=A('#confirm');if(b){b.disabled=true;b.textContent='A confirmar…'}const {error}=protocolToken?await supabaseClient.rpc('protocol_check_in',{p_token:protocolToken,p_invitation_id:id}):await supabaseClient.rpc('admin_check_in_invitation',{invitation_id:id});if(error){toast(error.message);busy=false;if(b){b.disabled=false;b.textContent='Confirmar entrada'}return}await loadGuests();toast(`✓ Entrada confirmada — ${g.full_name}`);render(guests.find(x=>x.id===id));setTimeout(next,1800);busy=false}
 function next(){A('#result').classList.add('hidden');A('#code').value='';A('#code').focus()}
 
@@ -103,9 +122,31 @@ function renderChiefTables(){
    const names=String(t.guest_names||'').split(', ').filter(Boolean);
    const visible=names.slice(0,5).map(n=>`<span>${esc(n)}</span>`).join('');
    const more=names.length>5?`<em>+${names.length-5} convidados</em>`:'';
-   return `<div class="chief-table-card ${cls}"><div class="chief-table-top"><div class="table-circle"><b>${esc(t.name)}</b><small>${arrived}/${cap||'—'}</small></div><div class="chief-table-status"><strong>${arrived} / ${cap||'—'}</strong><span>${cap&&arrived>cap?'Acima da capacidade':cap&&arrived>=cap?'Completa':arrived?'Parcial':'Disponível'}</span></div></div><div class="chief-table-bar"><i style="width:${Math.min(100,pct)}%"></i></div><div class="chief-table-meta"><span>${invited} pessoa(s) atribuída(s)</span><span>${Number(t.arrived_groups||0)} grupo(s) chegou/chegaram</span></div><div class="chief-table-guests">${visible||'<small>Nenhum convidado atribuído</small>'}${more}</div></div>`;
+   return `<button type="button" class="chief-table-card ${cls}" data-table-id="${t.id}" data-table-name="${esc(t.name)}" onclick="openChiefTable(${t.id})"><div class="chief-table-top"><div class="table-circle"><b>${esc(t.name)}</b><small>${arrived}/${cap||'—'}</small></div><div class="chief-table-status"><strong>${arrived} / ${cap||'—'}</strong><span>${cap&&arrived>cap?'Acima da capacidade':cap&&arrived>=cap?'Completa':arrived?'Parcial':'Disponível'}</span></div></div><div class="chief-table-bar"><i style="width:${Math.min(100,pct)}%"></i></div><div class="chief-table-meta"><span>${invited} pessoa(s) atribuída(s)</span><span>${Number(t.arrived_groups||0)} grupo(s) chegou/chegaram</span></div><div class="chief-table-guests">${visible||'<small>Nenhum convidado atribuído</small>'}${more}</div><div class="chief-table-open">Ver convidados da mesa <span>↗</span></div></button>`;
  }).join('')||'<div class="empty-state">Ainda não existem mesas cadastradas.</div>';
 }
+
+
+window.openChiefTable=async tableId=>{
+ const modal=A('#chiefTableModal'), title=A('#chiefTableModalTitle'), meta=A('#chiefTableModalMeta'), body=A('#chiefTableModalBody');
+ if(!modal||!body)return;
+ const table=chiefTables.find(t=>Number(t.id)===Number(tableId));
+ if(!table)return;
+ title.textContent=table.name;
+ meta.textContent=`${Number(table.arrived_people||0)} de ${Number(table.invited_people||0)} pessoa(s) já chegaram · capacidade ${table.capacity||'—'}`;
+ body.innerHTML='<div class="loading-state">A carregar convidados…</div>';
+ modal.classList.add('is-open');
+ document.body.classList.add('modal-open');
+ const r=await supabaseClient.rpc('chief_table_guests',{p_token:protocolToken,p_table_id:tableId});
+ if(r.error){body.innerHTML=`<div class="empty-state">Não foi possível carregar os convidados.<br><small>${esc(r.error.message)}</small></div>`;return}
+ const rows=r.data||[];
+ body.innerHTML=rows.map(g=>{
+   const people=1+(g.companion_count||0);
+   const status=g.checked_in?`<span class="table-guest-status arrived">✓ Chegou${g.checked_in_at?' · '+new Date(g.checked_in_at).toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'}):''}</span>`:`<span class="table-guest-status waiting">Ainda não chegou</span>`;
+   return `<div class="table-guest-row"><div class="table-guest-main"><b>${esc(g.full_name)}</b><small>${esc(g.code)} · ${people} pessoa(s) · ${g.rsvp_status==='confirmed'?'Presença confirmada':esc(g.rsvp_status||'')}</small></div>${status}</div>`;
+ }).join('')||'<div class="empty-state">Não existem convidados atribuídos a esta mesa.</div>';
+};
+window.closeChiefTable=()=>{A('#chiefTableModal')?.classList.remove('is-open');document.body.classList.remove('modal-open')};
 
 function renderChiefTools(){
  const list=A('#chiefTeamList'),sel=A('#chiefTaskProtocol'),tasks=A('#chiefTaskList');
