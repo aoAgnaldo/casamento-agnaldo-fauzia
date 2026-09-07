@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="v7.5-polish.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 </head>
@@ -106,9 +107,9 @@
   <div class="details-copy">
     <p class="section-label"><span></span>Para ajudar</p>
     <h2>Alguns detalhes<br><i>importantes</i></h2>
-    <div class="detail-row"><span style="color:var(--terra)">⌖</span><div><strong>Kaya Kwanga</strong><p>Avenida da Marginal · Maputo · Plus Code: 2JW6+WGC</p></div></div>
-    <div class="detail-row"><span style="color:var(--terra)">◷</span><div><strong>Traje</strong><p>Elegância descontraída. Cores alegres são bem-vindas.</p></div></div>
-    <div class="detail-row"><span style="color:var(--terra)">□</span><div><strong>Confirmação</strong><p>Pedimos resposta até 30 de Abril de 2027.</p></div></div>
+    <div class="detail-row"><span class="detail-icon" aria-hidden="true">⌖</span><div><strong>Kaya Kwanga</strong><p>Avenida da Marginal · Maputo · Plus Code: 2JW6+WGC</p></div></div>
+    <div class="detail-row"><span class="detail-icon" aria-hidden="true">◷</span><div><strong>Traje</strong><p>Elegância descontraída. Cores alegres são bem-vindas.</p></div></div>
+    <div class="detail-row"><span class="detail-icon" aria-hidden="true">□</span><div><strong>Confirmação</strong><p>Pedimos resposta até 30 de Abril de 2027.</p></div></div>
   </div>
   <div class="details-image"><img src="monogram.svg" id="detailsImage" alt="Detalhes do casamento"><span>Para sempre começa agora</span></div>
 </section>
@@ -178,7 +179,7 @@
       <div id="companionInputs"></div>
     </div>
     <button type="button" class="button button--primary rsvp-confirm hidden" id="rsvpConfirm">Confirmar resposta</button>
-    <button type="button" class="button button--quiet" id="changeGuest" style="margin-top:.7rem">Escolher outro convite</button>
+    <button type="button" class="button button--quiet rsvp-change-guest" id="changeGuest">Escolher outro convite</button>
    </div>
    <p class="status hidden" id="rsvpMsg"></p>
   </div>

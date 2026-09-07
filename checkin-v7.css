@@ -1,5 +1,10 @@
-/* V7 — Check-in supplemental styles (moved out of HTML). */
-
+/* V7.4 — estilos do check-in movidos e consolidados */
 .modal .modal-actions button[id^="close"],
 .modal .modal-actions button.modal-close,
-.modal .modal-actions button.modal-cancel { display:none!important; }
+.modal .modal-actions button.modal-cancel{display:none!important;}
+
+@media(max-width:760px){
+  .modal-box.operator-profile-modal-box{width:calc(100vw - 20px)!important;max-height:calc(100dvh - 20px)!important;border-radius:18px!important;}
+  .operator-profile-editor{gap:10px!important;}
+  .operator-editor-avatar{width:46px!important;height:46px!important;flex:0 0 46px!important;}
+}

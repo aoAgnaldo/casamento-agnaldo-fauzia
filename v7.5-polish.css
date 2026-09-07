@@ -1,0 +1,126 @@
+/* V7.5 — Final UX/UI polish layer
+   Purpose: visual consistency without changing business logic or data flows. */
+:root{
+  --v75-ink:#342c29;
+  --v75-muted:#796f68;
+  --v75-paper:#f7f3ed;
+  --v75-cream:#fbf8f3;
+  --v75-terra:#a96e5b;
+  --v75-sage:#617463;
+  --v75-line:rgba(67,55,48,.13);
+  --v75-focus:0 0 0 3px rgba(169,110,91,.16);
+}
+
+/* Global */
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,a,input,select,textarea{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:0;box-shadow:var(--v75-focus)}
+
+/* Public invite */
+.topbar{min-height:64px}
+.nav-links a,.music-button,.menu-toggle{min-height:44px}
+.brand{min-height:44px;display:inline-flex;align-items:center}
+.hero-content{max-width:min(520px,80vw)}
+.hero h2,.story-text h2,.program-heading h2,.details-copy h2,.gifts-heading h2,.rsvp-inner h2{ text-wrap:balance }
+.section-label{min-height:16px}
+.program-list-panel,.gift-list-wrap{min-width:0}
+.program-open-button,.copy-account,.reserve-button,.gift-filter,.rsvp-choice button,.rsvp-search-row .button{min-height:44px}
+.program-item p:not(.program-time),.detail-row p,.gifts-heading>p,.rsvp-inner p{line-height:1.55}
+.account-row{min-height:44px}
+.copy-account{padding:.55rem .85rem}
+.gift-filter-row{display:flex;flex-wrap:wrap;gap:.45rem}
+.gift-filter{padding:.5rem .8rem}
+.gift-search-bar input,.rsvp-search input{width:100%;min-height:48px}
+.program-overlay,.reservation-overlay,.private-access-modal{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))}
+.program-modal,.reservation-modal,.private-access-dialog{overscroll-behavior:contain;scrollbar-gutter:stable}
+.modal-close,.private-access-close{z-index:3}
+
+/* Avoid accidental horizontal overflow caused by long guest/account text. */
+.account-row>span,.gift-name,.gift-description,.rsvp-guest-name{min-width:0;overflow-wrap:anywhere}
+
+/* Admin — visual rhythm, not logic */
+body.admin-body .admin-dashboard-main,
+body.admin-body .admin-view-section{
+  scrollbar-width:thin;
+  scrollbar-color:#d5cbc3 transparent;
+}
+body.admin-body .admin-dashboard-main::-webkit-scrollbar,
+body.admin-body .admin-view-section::-webkit-scrollbar{width:7px}
+body.admin-body .admin-dashboard-main::-webkit-scrollbar-thumb,
+body.admin-body .admin-view-section::-webkit-scrollbar-thumb{background:#d5cbc3;border-radius:999px}
+body.admin-body .section-title-row{align-items:center}
+body.admin-body .section-title-row h2{margin:0;line-height:1}
+body.admin-body .section-actions{gap:8px}
+body.admin-body .section-actions .button{min-height:44px}
+body.admin-body .guest-tools,
+body.admin-body .gift-tools,
+body.admin-body .protocol-tools{padding:14px}
+body.admin-body .guest-tools input,
+body.admin-body .gift-tools input,
+body.admin-body .protocol-tools input,
+body.admin-body .guest-tools select,
+body.admin-body .gift-tools select,
+body.admin-body .protocol-tools select{min-height:44px}
+body.admin-body .table-wrap{border-radius:14px}
+body.admin-body .table th{white-space:nowrap}
+body.admin-body .table td{vertical-align:middle}
+body.admin-body .guest-card,
+body.admin-body .protocol-card,
+body.admin-body .table-card{overflow:hidden}
+body.admin-body .modal-box{scrollbar-gutter:stable;overscroll-behavior:contain}
+body.admin-body .modal-hero{gap:18px}
+body.admin-body .modal-actions{gap:8px}
+body.admin-body .modal-actions .button{min-height:44px}
+body.admin-body .icon-btn,.ui-icon-btn{min-width:44px;min-height:44px}
+body.admin-body .status{line-height:1.4}
+body.admin-body .admin-menu-item{min-height:48px}
+
+/* Reception — operational hierarchy */
+body.reception-body .reception-main{scroll-margin-top:76px}
+body.reception-body .button{min-height:44px}
+body.reception-body input,body.reception-body select{min-height:46px}
+body.reception-body .guest-result{overflow:hidden}
+body.reception-body .guest-result-inner{gap:14px}
+body.reception-body .reception-confirm{min-height:52px}
+body.reception-body .recent-public-item{min-height:52px}
+body.reception-body .reception-mobile-nav{padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right))}
+body.reception-body .reception-mobile-nav a,body.reception-body .reception-mobile-nav button{touch-action:manipulation}
+
+@media (max-width:800px){
+  html{scroll-padding-top:62px}
+  .topbar{min-height:60px;padding-inline:clamp(14px,5vw,28px)}
+  .brand{max-width:42vw}
+  .hero{min-height:100svh;height:100svh}
+  .hero-content{left:7vw;right:7vw;max-width:none}
+  .hero h2{font-size:clamp(3.6rem,16vw,6rem);max-width:8ch}
+  .hero-copy{max-width:29ch}
+  .hero-date span{font-size:clamp(4.5rem,20vw,7rem)}
+  .section-pad{padding-inline:7vw}
+  .date-section,.story-section,.program-section,.details-section,.gifts-section,.rsvp-section{scroll-margin-top:62px}
+  .countdown{width:100%}
+  .count-item{min-width:0}
+  .program-list--compact{max-height:45svh}
+  .gift-list{max-height:50svh}
+  .account-row{gap:.6rem;align-items:center}
+  .account-row>span{flex:1}
+  .copy-account{flex:0 0 auto}
+  .rsvp-choice button{padding:.7rem .8rem}
+  .program-modal,.reservation-modal{width:100%;max-width:680px}
+}
+
+@media (max-width:480px){
+  .hero-kicker{font-size:11px}
+  .hero-copy{font-size:1rem}
+  .scroll-cue span:first-child{font-size:8px}
+  .section-pad{padding-top:4.5rem;padding-bottom:4.5rem}
+  .story-text h2,.program-heading h2,.details-copy h2,.gifts-heading h2,.rsvp-inner h2{font-size:clamp(3.25rem,15vw,4.7rem)}
+  .date-main h2{font-size:clamp(3rem,14vw,4.5rem)}
+  .account-row{align-items:flex-start}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+.detail-icon{color:var(--terra);display:inline-block;flex:0 0 auto}.qr-title{font-size:2.5rem}.gift-photo-label{margin-bottom:0}
