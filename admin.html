@@ -1811,3 +1811,84 @@ body.admin-body .gifts-admin-view .gift-pagination{
   if(input){input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();window.__v667SearchCheckin(input.value);}},true);}
 })();
 </script>
+<style id="v668-mobile-gifts-final">
+/* V6.68 — Mobile Presentes: cartões compactos, leitura imediata e scroll apenas na lista. */
+@media (max-width:760px){
+  body.admin-body .gifts-admin-view.admin-view-active{
+    display:flex!important;flex-direction:column!important;min-height:0!important;
+    height:calc(100dvh - 68px)!important;max-height:calc(100dvh - 68px)!important;
+    overflow:hidden!important;padding-bottom:72px!important;box-sizing:border-box!important;
+  }
+  body.admin-body .gifts-admin-view .gifts-title-row{
+    display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:10px!important;align-items:start!important;
+  }
+  body.admin-body .gifts-admin-view .gifts-title-row h2{font-size:2rem!important;line-height:.98!important;margin:2px 0 5px!important;}
+  body.admin-body .gifts-admin-view .gifts-title-row .muted{font-size:.62rem!important;line-height:1.4!important;max-width:210px!important;}
+  body.admin-body .gifts-admin-view .gifts-add-btn{height:43px!important;min-height:43px!important;padding:0 13px!important;white-space:nowrap!important;border-radius:11px!important;}
+
+  /* quatro indicadores compactos */
+  body.admin-body .gifts-admin-view .gift-stats{
+    display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important;margin:0 0 10px!important;
+  }
+  body.admin-body .gifts-admin-view .gift-stat-card{
+    min-width:0!important;min-height:76px!important;padding:9px 7px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:5px!important;border-radius:12px!important;
+  }
+  body.admin-body .gifts-admin-view .gift-stat-icon{width:27px!important;height:27px!important;flex-basis:27px!important;border-radius:8px!important;font-size:.82rem!important;}
+  body.admin-body .gifts-admin-view .gift-stat-card strong{font-size:1.08rem!important;line-height:1!important;}
+  body.admin-body .gifts-admin-view .gift-stat-card small{font-size:.47rem!important;line-height:1.15!important;margin-top:2px!important;white-space:normal!important;}
+  body.admin-body .gifts-admin-view .gift-stat-progress{display:none!important;}
+
+  /* pesquisa + ordenação */
+  body.admin-body .gifts-admin-view .gift-tools{
+    display:grid!important;grid-template-columns:minmax(0,1fr) 42px!important;gap:8px!important;margin:0 0 8px!important;
+  }
+  body.admin-body .gifts-admin-view .gift-search{grid-column:1/-1!important;height:44px!important;min-height:44px!important;border-radius:12px!important;padding:0 12px!important;}
+  body.admin-body .gifts-admin-view .gift-tools select{
+    height:42px!important;min-height:42px!important;font-size:.58rem!important;padding:0 10px!important;border-radius:11px!important;
+  }
+  body.admin-body .gifts-admin-view #giftStatusFilter{grid-column:1!important;}
+  body.admin-body .gifts-admin-view #giftSort{grid-column:2!important;width:42px!important;font-size:0!important;padding:0!important;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23705d52' stroke-width='1.8'%3E%3Cpath d='M4 6h16M7 12h10M10 18h4'/%3E%3C/svg%3E") center/16px no-repeat!important;}
+  body.admin-body .gifts-admin-view .gift-view-toggle{display:none!important;}
+  body.admin-body .gifts-admin-view .gift-list-meta{font-size:.54rem!important;padding:2px 1px 7px!important;}
+
+  /* moldura da lista; cabeçalho não aparece no mobile, cada cartão é auto-explicativo */
+  body.admin-body .gifts-admin-view .gift-list-scroll{
+    flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;
+    overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;
+    border:1px solid #e7dfd8!important;border-radius:14px!important;background:#fffdfb!important;
+    box-sizing:border-box!important;padding:0!important;
+  }
+  body.admin-body .gifts-admin-view .gift-list-scroll > #giftRows{height:auto!important;overflow:visible!important;}
+  body.admin-body .gifts-admin-view .gift-table{display:block!important;width:100%!important;height:auto!important;border:0!important;}
+  body.admin-body .gifts-admin-view .gift-table thead{display:none!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody{display:block!important;width:100%!important;height:auto!important;max-height:none!important;overflow:visible!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody tr{
+    display:grid!important;grid-template-columns:54px minmax(0,1fr) auto!important;grid-template-areas:
+      'photo main actions' 'photo reserved actions'!important;
+    gap:0 9px!important;width:100%!important;min-height:76px!important;padding:10px 10px!important;margin:0!important;
+    border:0!important;border-bottom:1px solid #eee7e2!important;background:#fffdfb!important;box-sizing:border-box!important;
+  }
+  body.admin-body .gifts-admin-view .gift-table tbody tr:last-child{border-bottom:0!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td{border:0!important;padding:0!important;min-width:0!important;text-align:left!important;background:transparent!important;}
+  body.admin-body .gifts-admin-view .gift-photo-cell{grid-area:photo!important;align-self:center!important;}
+  body.admin-body .gifts-admin-view .gift-photo,.body.admin-body .gifts-admin-view .gift-photo.placeholder{width:50px!important;height:50px!important;border-radius:10px!important;object-fit:cover!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label="#"]{display:none!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label="Presente"]{grid-area:main!important;align-self:center!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label="Presente"] .gift-name{
+    font:500 1rem/1.05 'Cormorant Garamond',serif!important;color:#2f2824!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  }
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label="Estado"]{grid-area:reserved!important;align-self:start!important;padding-top:4px!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label="Reservado por"]{grid-area:reserved!important;align-self:end!important;padding-bottom:1px!important;font-size:.51rem!important;color:#8a8079!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label="Estado"] + td[data-label="Reservado por"]{margin-top:1px!important;}
+  body.admin-body .gifts-admin-view .gift-actions-cell{grid-area:actions!important;align-self:center!important;padding:0!important!important;}
+  body.admin-body .gifts-admin-view .gift-actions{display:flex!important;flex-direction:row!important;gap:6px!important;align-items:center!important;justify-content:flex-end!important;}
+  body.admin-body .gifts-admin-view .gift-actions .ui-icon-btn{width:38px!important;height:38px!important;border-radius:10px!important;}
+  body.admin-body .gifts-admin-view .gift-pagination{flex:0 0 auto!important;justify-content:center!important;margin:8px 0 0!important;padding:0!important;}
+  body.admin-body .gifts-admin-view .gift-pagination button{min-width:34px!important;height:34px!important;}
+
+  /* Convidados: CSV lado a lado e compacto */
+  body.admin-body #convidados .section-title-row .section-actions{display:grid!important;grid-template-columns:42px 42px minmax(0,1fr)!important;gap:7px!important;align-items:center!important;}
+  body.admin-body #convidados #adminExportTrigger,body.admin-body #convidados #adminImportTrigger{width:42px!important;height:42px!important;padding:0!important;}
+  body.admin-body #convidados #addBtn2{min-width:0!important;height:42px!important;padding:0 10px!important;white-space:nowrap!important;}
+}
+</style>
