@@ -519,6 +519,126 @@ body.admin-body.admin-modal-open .admin-menu-panel {
   pointer-events:none!important;
 }
 </style>
+
+<style id="v665-mobile-admin-ux">
+/* V6.65 — UX/UI mobile exclusivo do painel Admin. Desktop permanece intacto. */
+@media (max-width:760px){
+  html,body{height:100%;overflow:hidden!important;}
+  body.admin-body{background:#f7f4f1!important;}
+  body.admin-body .wedy-header{height:64px!important;display:flex!important;align-items:center!important;padding:0 12px!important;background:rgba(255,253,250,.98)!important;}
+  body.admin-body .admin-header-search{display:none!important;}
+  body.admin-body .admin-header-actions{margin-left:auto!important;width:auto!important;gap:8px!important;}
+  body.admin-body .admin-notification{width:34px!important;height:34px!important;padding:0!important;display:grid!important;place-items:center!important;}
+  body.admin-body .wedy-event{position:static!important;right:auto!important;top:auto!important;display:flex!important;align-items:center!important;gap:8px!important;max-width:170px!important;}
+  body.admin-body .wedy-event>span:last-child{min-width:0!important;}
+  body.admin-body #adminHeaderName{font-size:.65rem!important;white-space:nowrap!important;}
+  body.admin-body #adminHeaderMeta{font-size:.46rem!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:125px!important;display:block!important;}
+  body.admin-body .wedy-avatar{width:36px!important;height:36px!important;flex:0 0 36px!important;}
+  body.admin-body .wedy-menu{position:static!important;width:42px!important;height:42px!important;margin:0!important;border-radius:13px!important;display:grid!important;place-items:center!important;font-size:1.15rem!important;}
+  body.admin-body .admin-wrap{top:64px!important;bottom:0!important;height:calc(100dvh - 64px)!important;overflow:hidden!important;}
+  body.admin-body .admin-dashboard-main,body.admin-body .admin-view-section{padding:16px 12px calc(84px + env(safe-area-inset-bottom))!important;min-height:0!important;height:100%!important;box-sizing:border-box!important;}
+  body.admin-body .admin-dashboard-main{overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body .admin-view-section.admin-view-active{overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;}
+
+  /* Drawer */
+  body.admin-body .admin-dashboard-sidebar{top:64px!important;bottom:0!important;width:min(318px,88vw)!important;padding:22px 16px calc(28px + env(safe-area-inset-bottom))!important;border-radius:0 22px 22px 0!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body .admin-sidebar-backdrop{inset:64px 0 0 0!important;background:rgba(40,32,27,.34)!important;backdrop-filter:blur(2px)!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand{padding:4px 8px 18px!important;margin-bottom:14px!important;gap:10px!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand img{width:38px!important;height:38px!important;flex-basis:38px!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand strong{font-size:1.35rem!important;line-height:1!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand small{font-size:.52rem!important;}
+  body.admin-body .admin-sidebar-section-label,.admin-sidebar-content-title,.admin-sidebar-planning-title{margin-top:12px!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav a,body.admin-body .admin-dashboard-sidebar .sidebar-group-toggle,body.admin-body .admin-sidebar-subnav a{min-height:46px!important;padding:11px 12px!important;border-radius:12px!important;font-size:.69rem!important;gap:10px!important;}
+  body.admin-body .admin-sidebar-subnav{padding-left:8px!important;margin-left:8px!important;border-left:1px solid #e9e0d9!important;}
+  body.admin-body .admin-sidebar-note{margin-top:18px!important;padding-top:16px!important;}
+
+  /* Cabeçalhos das páginas */
+  body.admin-body .admin-view-section .section-title-row{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin-bottom:16px!important;}
+  body.admin-body .admin-view-section .section-title-row h2{font-size:2.15rem!important;line-height:.95!important;margin:0!important;}
+  body.admin-body .admin-view-section .section-kicker{font-size:.55rem!important;letter-spacing:.16em!important;margin-bottom:6px!important;}
+  body.admin-body .admin-view-section .section-title-row>.section-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  body.admin-body .admin-view-section .section-title-row>.section-actions .button{width:100%!important;min-height:44px!important;}
+  body.admin-body .admin-view-section .section-title-row>.button{width:100%!important;min-height:44px!important;}
+  body.admin-body .admin-view-section .muted{font-size:.65rem!important;line-height:1.45!important;}
+
+  /* Dashboard cards */
+  body.admin-body .admin-kpis{grid-template-columns:1fr 1fr!important;gap:9px!important;}
+  body.admin-body .admin-kpi{min-height:96px!important;padding:13px!important;border-radius:15px!important;}
+  body.admin-body .admin-kpi strong{font-size:1.25rem!important;}
+  body.admin-body .admin-modern-dashboard .admin-dashboard-grid,.admin-v624-main .dashboard-grid{grid-template-columns:1fr!important;gap:12px!important;}
+  body.admin-body .admin-modern-dashboard .dashboard-left,.admin-v624-main .dashboard-left,body.admin-body .admin-modern-dashboard .dashboard-right,.admin-v624-main .dashboard-right{width:100%!important;min-width:0!important;}
+  body.admin-body .admin-love-banner{padding:15px!important;border-radius:16px!important;}
+
+  /* Convidados: cartões, nunca tabela comprimida */
+  body.admin-body .guest-tools{display:flex!important;flex-direction:column!important;gap:9px!important;}
+  body.admin-body .guest-search{width:100%!important;min-height:44px!important;}
+  body.admin-body .guest-filters{display:flex!important;overflow-x:auto!important;gap:7px!important;padding-bottom:3px!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important;}
+  body.admin-body .guest-filters::-webkit-scrollbar{display:none!important;}
+  body.admin-body .guest-filter{flex:0 0 auto!important;min-height:36px!important;padding:8px 11px!important;border-radius:999px!important;}
+  body.admin-body .guest-list-scroll{overflow-y:auto!important;overflow-x:hidden!important;max-height:none!important;}
+  body.admin-body .guest-card-list .guest-card{padding:13px!important;border-radius:15px!important;margin-bottom:8px!important;}
+  body.admin-body .guest-card-list .guest-card .guest-actions{gap:6px!important;}
+  body.admin-body .guest-card-list .guest-card .ui-icon-btn{width:38px!important;height:38px!important;}
+
+  /* Presentes: controlos empilhados e tabela transformada em cartões */
+  body.admin-body .gifts-admin-view .gift-stats{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  body.admin-body .gifts-admin-view .gift-stat-card{min-height:78px!important;padding:11px!important;border-radius:14px!important;}
+  body.admin-body .gifts-admin-view .gift-tools{display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important;align-items:center!important;}
+  body.admin-body .gifts-admin-view .gift-search{grid-column:1/-1!important;min-height:44px!important;}
+  body.admin-body .gifts-admin-view .gift-tools select{min-height:42px!important;width:100%!important;font-size:.62rem!important;}
+  body.admin-body .gifts-admin-view .gift-view-toggle{display:flex!important;justify-content:flex-end!important;}
+  body.admin-body .gifts-admin-view .gift-list-meta{font-size:.58rem!important;padding:4px 2px!important;}
+  body.admin-body .gifts-admin-view .gift-list-scroll{flex:1 1 auto!important;min-height:260px!important;height:auto!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;border-radius:15px!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body .gifts-admin-view .gift-table{display:block!important;width:100%!important;}
+  body.admin-body .gifts-admin-view .gift-table thead{display:none!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody{display:block!important;width:100%!important;max-height:none!important;overflow:visible!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody tr{display:grid!important;grid-template-columns:58px 1fr auto!important;grid-template-areas:'photo name actions' 'photo state actions' 'photo reserved actions'!important;width:100%!important;padding:11px!important;margin:0!important;border-bottom:1px solid #eee7e2!important;background:#fffdfb!important;box-sizing:border-box!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody tr:last-child{border-bottom:0!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td{border:0!important;padding:3px 8px!important;text-align:left!important;min-width:0!important;}
+  body.admin-body .gifts-admin-view .gift-photo-cell{grid-area:photo!important;padding:0 8px 0 0!important;}
+  body.admin-body .gifts-admin-view .gift-photo,.body.admin-body .gifts-admin-view .gift-photo.placeholder{width:50px!important;height:50px!important;border-radius:11px!important;object-fit:cover!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label='Presente']{grid-area:name!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label='Estado']{grid-area:state!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label='Reservado por']{grid-area:reserved!important;font-size:.56rem!important;color:#8a8079!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody td[data-label='#']{display:none!important;}
+  body.admin-body .gifts-admin-view .gift-actions-cell{grid-area:actions!important;align-self:center!important;padding:0!important;}
+  body.admin-body .gifts-admin-view .gift-actions{display:flex!important;flex-direction:column!important;gap:5px!important;}
+  body.admin-body .gifts-admin-view .gift-actions .ui-icon-btn{width:36px!important;height:36px!important;}
+  body.admin-body .gifts-admin-view .gift-pagination{flex:0 0 auto!important;display:flex!important;justify-content:center!important;padding:8px 0 2px!important;}
+
+  /* Mesas */
+  body.admin-body .seating-summary{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  body.admin-body .seating-layout{display:flex!important;flex-direction:column!important;gap:12px!important;}
+  body.admin-body .table-list{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;order:1!important;}
+  body.admin-body .unassigned-panel{order:2!important;padding:14px!important;border-radius:16px!important;}
+  body.admin-body .table-card{min-width:0!important;border-radius:15px!important;}
+
+  /* Protocolos / tarefas / conteúdo */
+  body.admin-body .protocol-grid{grid-template-columns:1fr!important;gap:9px!important;}
+  body.admin-body .protocol-card{padding:13px!important;border-radius:15px!important;}
+  body.admin-body .planning-task-board{grid-template-columns:1fr!important;gap:12px!important;}
+  body.admin-body .planning-focus-card,.planning-guidance-card{border-radius:16px!important;padding:15px!important;}
+
+  /* Modais ocupam quase todo o ecrã, sem cortar conteúdo */
+  body.admin-body .modal{padding:10px!important;align-items:flex-end!important;}
+  body.admin-body .modal-box{width:100%!important;max-width:none!important;max-height:calc(100dvh - 20px)!important;border-radius:20px 20px 12px 12px!important;overflow:auto!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body .modal-hero{padding:18px 58px 15px 18px!important;}
+  body.admin-body .modal-hero h2{font-size:2.05rem!important;}
+  body.admin-body .modal-form-body{padding:17px!important;}
+  body.admin-body .modal-form-body input,body.admin-body .modal-form-body textarea,body.admin-body .modal-form-body select{min-height:46px!important;font-size:.78rem!important;}
+  body.admin-body .modal-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  body.admin-body .modal-actions .button{min-height:46px!important;}
+
+  /* Barra inferior mobile: acesso rápido sem substituir o menu completo */
+  body.admin-body .admin-mobile-bottom-nav{display:grid!important;position:fixed!important;left:0!important;right:0!important;bottom:0!important;height:64px!important;padding:6px 8px calc(6px + env(safe-area-inset-bottom))!important;grid-template-columns:repeat(5,1fr)!important;background:rgba(255,253,250,.98)!important;border-top:1px solid #e9e1db!important;box-shadow:0 -8px 28px rgba(40,31,26,.07)!important;z-index:1400!important;box-sizing:border-box!important;}
+  body.admin-body .admin-mobile-bottom-nav a,body.admin-body .admin-mobile-bottom-nav button{appearance:none!important;border:0!important;background:transparent!important;color:#766c65!important;text-decoration:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;font:500 .49rem/1 Montserrat,sans-serif!important;min-width:0!important;border-radius:11px!important;touch-action:manipulation!important;}
+  body.admin-body .admin-mobile-bottom-nav .mobile-nav-icon{font-size:1.05rem!important;line-height:1!important;}
+  body.admin-body .admin-mobile-bottom-nav a.active{color:#9b6857!important;background:#f1e8e2!important;}
+  body.admin-body .admin-mobile-bottom-nav button{cursor:pointer!important;}
+  body.admin-body.admin-modal-open .admin-mobile-bottom-nav{opacity:0!important;visibility:hidden!important;pointer-events:none!important;}
+}
+@media(min-width:761px){.admin-mobile-bottom-nav{display:none!important;}}
+</style>
 </head><body class="admin-body">
 <div id="login" class="login"><div class="login-box"><p class="eyebrow">Área privada</p><h1>Painel dos noivos</h1><p class="muted">Entre com a conta de administrador criada no Supabase.</p><form id="loginForm"><label>Email<input id="email" type="email" required></label><label>Palavra-passe<input id="password" type="password" required></label><button class="button">Entrar</button><div id="loginMsg" class="status hidden"></div></form></div></div>
 <div id="app" class="wedy-app hidden">
@@ -968,6 +1088,33 @@ body.admin-body .gifts-admin-view .gift-pagination{flex:0 0 auto!important;}
   body.admin-body .gifts-admin-view .gift-table tbody{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;}
 }
 </style>
+
+<nav class="admin-mobile-bottom-nav" aria-label="Navegação rápida no painel">
+  <a href="#visao-geral" data-mobile-nav="visao-geral" class="active"><span class="mobile-nav-icon">⌂</span><span>Painel</span></a>
+  <a href="#convidados" data-mobile-nav="convidados"><span class="mobile-nav-icon">♙</span><span>Convidados</span></a>
+  <a href="#mesas" data-mobile-nav="mesas"><span class="mobile-nav-icon">♧</span><span>Mesas</span></a>
+  <a href="#presentes" data-mobile-nav="presentes"><span class="mobile-nav-icon">◇</span><span>Presentes</span></a>
+  <button type="button" id="mobileMoreBtn" aria-label="Abrir mais áreas"><span class="mobile-nav-icon">•••</span><span>Mais</span></button>
+</nav>
+<script id="v665-mobile-nav">
+(function(){
+  const body=document.body, more=document.getElementById('mobileMoreBtn');
+  if(!more)return;
+  const navLinks=[...document.querySelectorAll('.admin-mobile-bottom-nav a[data-mobile-nav]')];
+  function sync(){
+    const hash=(location.hash||'#visao-geral').slice(1);
+    navLinks.forEach(a=>a.classList.toggle('active',a.dataset.mobileNav===hash || (hash==='visao-geral'&&a.dataset.mobileNav==='visao-geral')));
+  }
+  navLinks.forEach(a=>a.addEventListener('click',function(){setTimeout(sync,30);}));
+  more.addEventListener('click',function(){body.classList.add('admin-sidebar-open');});
+  window.addEventListener('hashchange',sync);
+  document.addEventListener('click',function(e){
+    const a=e.target.closest('.admin-dashboard-sidebar a[href^="#"]');
+    if(a)setTimeout(sync,30);
+  });
+  sync();
+})();
+</script>
 </body></html><style id="v634-admin-visual">
 /* V6.34 — refinamento visual do painel: mesma estrutura e funcionalidades, apresentação mais leve e editorial. */
 body.admin-body{background:#f5f2ef!important;color:#302a26!important;}
