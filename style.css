@@ -2866,3 +2866,44 @@ body:not(.admin-body):not(.reception-body):not(.intro-locked){
 }
 .site-shell{min-height:100vh;overflow:visible;}
 .intro-screen--hidden{pointer-events:none;visibility:hidden;}
+
+
+/* V7.2 — UX/UI: scroll ownership and modal behaviour.
+   Public page scroll belongs to the document. Internal scroll belongs only to
+   components that visibly need it (programme/gifts/dialog bodies). */
+body.public-modal-open,
+html.public-modal-open{overflow:hidden!important;height:100%!important;}
+.program-overlay,
+.reservation-overlay,
+.private-access-modal{overscroll-behavior:contain;}
+.program-modal,
+.reservation-modal,
+.private-access-dialog{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
+.modal-close,
+.private-access-close{touch-action:manipulation;}
+.open-button,
+.button,
+.program-open-button,
+.copy-account,
+.reserve-button,
+.gift-filter,
+.rsvp-choice button,
+.menu-toggle,
+.music-button{touch-action:manipulation;}
+
+@media (max-width:800px){
+  .topbar{position:absolute;}
+  .nav-links{z-index:30;max-height:calc(100svh - 90px);overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 45px rgba(0,0,0,.22);}
+  .nav-links a{min-height:44px;display:flex;align-items:center;}
+  .music-button,.menu-toggle{min-width:44px;min-height:44px;justify-content:center;}
+  .scroll-cue{min-height:44px;justify-content:center;}
+  .program-overlay,.reservation-overlay{padding:10px;}
+  .program-modal{max-height:calc(100svh - 20px);padding:2.2rem 1.1rem 1.4rem;}
+  .reservation-modal{max-height:calc(100svh - 20px);padding:2.5rem 1.1rem 1.3rem;}
+  .program-modal .modal-close,.reservation-modal .modal-close{width:44px;height:44px;display:grid;place-items:center;right:.25rem;top:.25rem;}
+  .gift-list{overscroll-behavior:contain;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .program-overlay,.reservation-overlay{backdrop-filter:none;}
+}

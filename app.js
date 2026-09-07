@@ -52,10 +52,15 @@ function setMusic(on){
   }
   musicButton?.setAttribute('aria-pressed',String(on));
 }
-function openInvitation(){
-  intro?.classList.add('intro-screen--hidden');
+function releaseIntroScroll(){
   document.body.classList.remove('intro-locked');
   document.documentElement.classList.remove('intro-locked');
+}
+function openInvitation(){
+  releaseIntroScroll();
+  intro?.classList.add('intro-screen--hidden');
+  // Garantir posição inicial consistente depois de desbloquear o documento.
+  if(window.scrollY < 2) window.scrollTo({top:0,left:0,behavior:'auto'});
   setTimeout(()=>setMusic(true),500);
 }
 openInvite?.addEventListener('click',openInvitation);
@@ -64,13 +69,39 @@ document.body.classList.add('intro-locked');
 document.documentElement.classList.add('intro-locked');
 
 const menuToggle=$('#menuToggle'), navLinks=$('#navLinks');
-menuToggle?.addEventListener('click',()=>navLinks.classList.toggle('nav-links--open'));
-$$('.nav-links a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('nav-links--open')));
+function toggleNav(){
+  const willOpen=!navLinks?.classList.contains('nav-links--open');
+  navLinks?.classList.toggle('nav-links--open',willOpen);
+  menuToggle?.setAttribute('aria-expanded',String(willOpen));
+  menuToggle?.setAttribute('aria-label',willOpen?'Fechar menu':'Abrir menu');
+}
+function closeNav(){
+  navLinks?.classList.remove('nav-links--open');
+  menuToggle?.setAttribute('aria-expanded','false');
+  menuToggle?.setAttribute('aria-label','Abrir menu');
+}
+menuToggle?.addEventListener('click',toggleNav);
+$$('.nav-links a').forEach(a=>a.addEventListener('click',closeNav));
 
 /* Program modal + programa editável */
-$('#programOpen')?.addEventListener('click',()=>$('#programOverlay').classList.remove('hidden'));
-$('#programClose')?.addEventListener('click',()=>$('#programOverlay').classList.add('hidden'));
-$('#programOverlay')?.addEventListener('click',e=>{if(e.target.id==='programOverlay')e.currentTarget.classList.add('hidden')});
+const programOverlay=$('#programOverlay');
+const reservationOverlay=$('#reservationOverlay');
+function setPublicModalLock(locked){
+  document.body.classList.toggle('public-modal-open',locked);
+  document.documentElement.classList.toggle('public-modal-open',locked);
+}
+function closeProgram(){
+  programOverlay?.classList.add('hidden');
+  setPublicModalLock(false);
+}
+function openProgram(){
+  programOverlay?.classList.remove('hidden');
+  setPublicModalLock(true);
+  setTimeout(()=>$('#programClose')?.focus(),50);
+}
+$('#programOpen')?.addEventListener('click',openProgram);
+$('#programClose')?.addEventListener('click',closeProgram);
+programOverlay?.addEventListener('click',e=>{if(e.target===programOverlay)closeProgram()});
 
 const fallbackProgram=[
  {date:'29 MAIO',time:'09:00',title:'Cerimónia religiosa',description:'Na Igreja Universal — Jardim, vamos celebrar a nossa união perante Deus, a família e os amigos.',location:'Igreja Universal — Jardim, Maputo',map_url:'https://www.google.com/maps/search/?api=1&query=Igreja%20Universal%20Jardim%20Maputo'},
@@ -235,20 +266,24 @@ function openReservation(id){
   $('#reservationTitle').innerHTML=`Reservar<br><i>${escapeHtml(g.name)}</i>`;
   $('#guestName').value=currentInvitation.full_name||'';
   $('#guestWhatsapp').value=currentInvitation.whatsapp||'';
-  $('#reservationOverlay').classList.remove('hidden');
+  reservationOverlay?.classList.remove('hidden');
+  setPublicModalLock(true);
+  setTimeout(()=>$('#reservationClose')?.focus(),50);
 }
 async function confirmReservation(e){
   e.preventDefault();
   if(!selectedGift||!currentInvitation)return;
   const {error}=await supabaseClient.rpc('reserve_gift',{gift_id:selectedGift.id,invitation_code:currentInvitation.code});
   if(error){toast(error.message.toLowerCase().includes('reserv')?'Este presente já foi reservado por outra pessoa.':'Não foi possível reservar o presente.');return;}
-  $('#reservationOverlay').classList.add('hidden');
+  reservationOverlay?.classList.add('hidden');
+  setPublicModalLock(false);
   await loadGifts();
   toast('Reserva confirmada com carinho. ❤️');
 }
 $('#reservationForm')?.addEventListener('submit',confirmReservation);
-$('#reservationClose')?.addEventListener('click',()=>$('#reservationOverlay').classList.add('hidden'));
-$('#reservationCancel')?.addEventListener('click',()=>$('#reservationOverlay').classList.add('hidden'));
+reservationOverlay?.addEventListener('click',e=>{if(e.target===reservationOverlay) closeReservation()});
+$('#reservationClose')?.addEventListener('click',closeReservation);
+$('#reservationCancel')?.addEventListener('click',closeReservation);
 $('#giftSearch')?.addEventListener('input',renderGifts);
 $$('.gift-filter').forEach(btn=>btn.addEventListener('click',()=>{
   giftFilter=btn.dataset.filter;
@@ -283,6 +318,9 @@ if(inviteParam)setTimeout(()=>findInvitation(inviteParam),250);
   close.addEventListener('click', shut);
   modal.querySelectorAll('[data-close-private]').forEach(el => el.addEventListener('click', shut));
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !modal.hidden) shut();
+    if(e.key !== 'Escape') return;
+    if(!modal.hidden){ shut(); return; }
+    if(!programOverlay?.classList.contains('hidden')){ closeProgram(); return; }
+    if(!reservationOverlay?.classList.contains('hidden')){ closeReservation(); return; }
   });
 })();
