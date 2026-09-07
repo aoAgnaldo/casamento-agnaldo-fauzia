@@ -270,6 +270,11 @@ function openReservation(id){
   setPublicModalLock(true);
   setTimeout(()=>$('#reservationClose')?.focus(),50);
 }
+function closeReservation(){
+  reservationOverlay?.classList.add('hidden');
+  setPublicModalLock(false);
+  selectedGift=null;
+}
 async function confirmReservation(e){
   e.preventDefault();
   if(!selectedGift||!currentInvitation)return;
