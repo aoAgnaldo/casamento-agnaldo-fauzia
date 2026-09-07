@@ -383,7 +383,7 @@ function renderGiftsPanel(){
   if(!pageItems.length){container.innerHTML='<div class="gift-empty">Não encontrámos presentes com estes critérios.</div>';} else if(giftView==='grid'){
     container.innerHTML=`<div class="gift-grid">${pageItems.map(g=>`<article class="gift-card-item"><div>${g.image_url?`<img class="gift-photo" src="${esc(g.image_url)}" alt="${esc(g.name)}">`:'<div class="gift-photo placeholder">♡</div>'}</div><div class="gift-card-main"><span class="gift-name">${esc(g.name)}</span><div class="gift-card-meta"><span>#${esc(g.item_no)}</span><span class="gift-status ${g.reserved?'reserved':'available'}">${g.reserved?'Reservado':'Disponível'}</span></div></div><div class="gift-card-footer"><span class="gift-reserved-by">${g.reserved?`Reservado por ${esc(g.reserved_by_name||'—')}`:'Ainda disponível'}</span><div class="gift-actions">${renderGiftActionButtons(g)}</div></div></article>`).join('')}</div>`;
   } else {
-    container.innerHTML=`<table class="gift-table"><thead><tr><th class="gift-col-photo">Foto</th><th class="gift-col-no">#</th><th>Presente</th><th class="gift-col-state">Estado</th><th class="gift-col-reserved">Reservado por</th><th class="gift-col-actions">Acções</th></tr></thead><tbody>${pageItems.map(g=>`<tr><td class="gift-photo-cell" data-label="Foto">${g.image_url?`<img class="gift-photo" src="${esc(g.image_url)}" alt="${esc(g.name)}">`:'<div class="gift-photo placeholder">♡</div>'}</td><td data-label="#"><span class="gift-number">${esc(g.item_no)}</span></td><td data-label="Presente"><span class="gift-name">${esc(g.name)}</span></td><td class="gift-state-cell" data-label="Estado"><span class="gift-status ${g.reserved?'reserved':'available'}">${g.reserved?'Reservado':'Disponível'}</span></td><td class="gift-reserved-cell" data-label="Reservado por"><span class="${g.reserved_by_name?'gift-reserved-by':'gift-reserved-empty'}">${esc(g.reserved_by_name||'—')}</span></td><td class="gift-actions-cell" data-label="Acções"><div class="gift-actions">${renderGiftActionButtons(g)}</div></td></tr>`).join('')}</tbody></table>`;
+    container.innerHTML=`<table class="gift-table gift-desktop-table"><thead><tr><th class="gift-col-photo">Foto</th><th class="gift-col-no">#</th><th>Presente</th><th class="gift-col-state">Estado</th><th class="gift-col-reserved">Reservado por</th><th class="gift-col-actions">Acções</th></tr></thead><tbody>${pageItems.map(g=>`<tr><td class="gift-photo-cell" data-label="Foto">${g.image_url?`<img class="gift-photo" src="${esc(g.image_url)}" alt="${esc(g.name)}">`:'<div class="gift-photo placeholder">♡</div>'}</td><td data-label="#"><span class="gift-number">${esc(g.item_no)}</span></td><td data-label="Presente"><span class="gift-name">${esc(g.name)}</span></td><td class="gift-state-cell" data-label="Estado"><span class="gift-status ${g.reserved?'reserved':'available'}">${g.reserved?'Reservado':'Disponível'}</span></td><td class="gift-reserved-cell" data-label="Reservado por"><span class="${g.reserved_by_name?'gift-reserved-by':'gift-reserved-empty'}">${esc(g.reserved_by_name||'—')}</span></td><td class="gift-actions-cell" data-label="Acções"><div class="gift-actions">${renderGiftActionButtons(g)}</div></td></tr>`).join('')}</tbody></table><div class="gift-mobile-list">${pageItems.map(g=>`<article class="gift-mobile-card" data-gift-open="${esc(g.id)}" tabindex="0" role="button" aria-label="Ver detalhes de ${esc(g.name)}"><div class="gift-mobile-photo">${g.image_url?`<img src="${esc(g.image_url)}" alt="">`:'<span>♡</span>'}</div><div class="gift-mobile-info"><div class="gift-mobile-title-row"><span class="gift-mobile-no">#${esc(g.item_no)}</span><span class="gift-mobile-name">${esc(g.name)}</span></div><span class="gift-status ${g.reserved?'reserved':'available'}">${g.reserved?'Reservado':'Disponível'}</span>${g.reserved?`<span class="gift-mobile-reserved">Por: ${esc(g.reserved_by_name||'—')}</span>`:''}</div><div class="gift-mobile-actions"><button type="button" class="ui-icon-btn" aria-label="Editar ${esc(g.name)}" title="Editar presente" data-gift-edit="${esc(g.id)}">✎</button><button type="button" class="ui-icon-btn danger" aria-label="Remover ${esc(g.name)}" title="Remover presente" data-gift-delete="${esc(g.id)}" ${g.reserved?'disabled':''}>×</button><span class="gift-mobile-chevron" aria-hidden="true">›</span></div></article>`).join('')}</div>`;
   }
   const pag=A('#giftPagination');if(!pag)return;
   const buttons=[];
@@ -412,6 +412,36 @@ A('#giftPagination')?.addEventListener('click',e=>{
   if(action==='prev')giftPage=Math.max(1,giftPage-1);else if(action==='next')giftPage=Math.min(totalPages,giftPage+1);else giftPage=Math.min(totalPages,Math.max(1,Number(action)||1));
   renderGiftsPanel();
 });
+
+A('#giftRows')?.addEventListener('click',e=>{
+  const edit=e.target.closest('[data-gift-edit]');
+  if(edit){e.stopPropagation();editGift(edit.dataset.giftEdit);return;}
+  const del=e.target.closest('[data-gift-delete]');
+  if(del){e.stopPropagation();if(!del.disabled)deleteGift(del.dataset.giftDelete);return;}
+  const card=e.target.closest('[data-gift-open]');
+  if(card)openGiftDetails(card.dataset.giftOpen);
+});
+A('#giftRows')?.addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ') && e.target.closest('[data-gift-open]')){e.preventDefault();openGiftDetails(e.target.closest('[data-gift-open]').dataset.giftOpen);}
+});
+
+function openGiftDetails(id){
+  const g=gifts.find(x=>String(x.id)===String(id)); if(!g)return;
+  const modal=A('#giftDetailModal'); if(!modal)return;
+  const image=g.image_url?`<img src="${esc(g.image_url)}" alt="${esc(g.name)}">`:'<div class="gift-detail-placeholder">♡</div>';
+  setText('#giftDetailNo','#'+(g.item_no??'—')); setText('#giftDetailName',g.name||'');
+  setText('#giftDetailCategory',g.category||'Lista de presentes'); setText('#giftDetailValue',g.estimated_value?String(g.estimated_value)+' MT':'—');
+  setText('#giftDetailStatus',g.reserved?'Reservado':'Disponível'); setText('#giftDetailReservedBy',g.reserved_by_name||'—'); setText('#giftDetailReservedDate',g.reserved_at?new Date(g.reserved_at).toLocaleDateString('pt-PT'):'—');
+  const desc=A('#giftDetailDescription'); if(desc)desc.textContent=g.description||'Presente da nossa lista de casamento.';
+  const img=A('#giftDetailImage'); if(img)img.innerHTML=image;
+  const reserve=A('#giftDetailReserve'); if(reserve){reserve.textContent=g.reserved?'Já reservado':'Ver no convite';reserve.disabled=!!g.reserved;reserve.onclick=()=>{if(g.reserved)return;toast('A reserva é feita pelos convidados através do convite. ❤️');};}
+  A('#giftDetailEdit').onclick=()=>{closeGiftDetails();editGift(id)};
+  A('#giftDetailDelete').onclick=()=>{closeGiftDetails();if(!g.reserved)deleteGift(id);};
+  modal.classList.remove('hidden'); document.body.classList.add('modal-scroll-lock');
+}
+function closeGiftDetails(){const modal=A('#giftDetailModal');if(modal)modal.classList.add('hidden');document.body.classList.remove('modal-scroll-lock');}
+A('#closeGiftDetailModal')?.addEventListener('click',closeGiftDetails);
+A('#giftDetailModal')?.addEventListener('click',e=>{if(e.target===e.currentTarget)closeGiftDetails()});
 
 // ---------------- ATALHOS DO DASHBOARD ----------------
 A('#shareInviteHome')?.addEventListener('click',async()=>{
