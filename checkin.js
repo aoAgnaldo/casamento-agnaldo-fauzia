@@ -9,9 +9,16 @@ function updateCounter(){
  let arrived=0,people=0,confirmed=0;
  guests.forEach(g=>{if(g.rsvp_status==='confirmed')confirmed++;if(g.checked_in){arrived++;people+=1+(g.companion_count||0)}});
  const pending=Math.max(0,confirmed-arrived);
- A('#countIn').textContent=arrived; A('#countPeople').textContent=people; A('#countPending').textContent=pending;
+ A('#countConfirmed').textContent=confirmed; A('#countIn').textContent=arrived; A('#countPeople').textContent=people; A('#countPending').textContent=pending; renderPublicRecent();
  A('#liveConfirmed').textContent=confirmed; A('#liveArrived').textContent=arrived; A('#liveRemaining').textContent=pending; A('#livePeople').textContent=people;
  renderReceptionLive();
+}
+
+function renderPublicRecent(){
+ const box=A('#recentPublicList');
+ if(!box)return;
+ const arr=guests.filter(g=>g.checked_in).sort((a,b)=>new Date(b.checked_in_at||0)-new Date(a.checked_in_at||0));
+ box.innerHTML=arr.slice(0,4).map(g=>{const people=1+(g.companion_count||0);return `<div class="recent-public-item"><span class="recent-public-avatar">${esc(operatorInitials(g.full_name))}</span><div><strong>${esc(g.full_name)}</strong><small>${people} pessoa(s)${g.table_name?` · ${esc(g.table_name)}`:''}</small></div><time>${g.checked_in_at?new Date(g.checked_in_at).toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'}):'—'}</time><b>✓</b></div>`}).join('')||'<div class="empty-state">Ainda não há entradas registadas.</div>';
 }
 
 function renderReceptionLive(){

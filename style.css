@@ -2682,3 +2682,78 @@ body.admin-body .planning-principles span{padding:7px 9px;border:1px solid #e8e0
 }
 /* Mantém a paginação fora da área rolável. */
 body.admin-body .gifts-admin-view .gift-pagination{position:relative!important;z-index:2!important;}
+
+/* V6.71 — Recepção mobile: fluxo rápido de check-in */
+@media (max-width:720px){
+  body.reception-body{background:#f7f4ee;padding-bottom:72px;overflow-x:hidden}
+  body.reception-body .wedy-app{min-height:100dvh}
+  body.reception-body .wedy-header{height:68px;padding:0 12px;background:rgba(255,253,250,.98);border-bottom:1px solid #ebe4dc;position:sticky;top:0;z-index:80}
+  body.reception-body .wedy-brand{gap:8px;min-width:0}
+  body.reception-body .wedy-brand img{width:28px;height:28px}
+  body.reception-body .wedy-brand span{font-family:'Cormorant Garamond',serif;font-size:1.18rem;white-space:nowrap}
+  body.reception-body .wedy-brand span i{font-style:normal;color:#a96e5b}
+  body.reception-body .wedy-event{display:none!important}
+  body.reception-body .reception-head-actions{margin-left:auto;gap:7px}
+  body.reception-body .reception-admin-link,body.reception-body .reception-logout{display:none!important}
+  body.reception-body .operator-profile{border:0;background:transparent;padding:4px}
+  body.reception-body .operator-profile-copy,.operator-chevron{display:none}
+  body.reception-body .operator-avatar{width:38px;height:38px}
+  body.reception-body .reception-menu-toggle{display:flex!important;width:44px;height:44px;border-radius:13px;background:#f5f0ea;border:1px solid #e4dcd3;color:#5f4a40;align-items:center;justify-content:center;font-size:1.25rem}
+  body.reception-body .reception-main{padding:14px 12px 20px!important;display:flex;flex-direction:column;gap:12px}
+  body.reception-body .reception-grid{display:contents}
+  body.reception-body .dashboard-left{order:1}
+  body.reception-body .dashboard-right{order:3}
+  body.reception-body #entrada{order:2}
+  body.reception-body #result{order:4}
+  body.reception-body #recentPublic{order:5}
+  body.reception-body #liveDashboard,body.reception-body #myTasks,body.reception-body #chiefTools{order:6}
+  body.reception-body .reception-hero-card{padding:20px 18px!important;min-height:0!important;border-radius:20px!important;background:#fffdfa!important}
+  body.reception-body .reception-hero-card h1{font-size:2.55rem!important;line-height:.9!important;margin:10px 0 7px!important;max-width:8ch}
+  body.reception-body .reception-hero-card .small{font-size:.8rem;line-height:1.45;margin-top:0}
+  body.reception-body .reception-hero-line{margin:16px 0;width:52px}
+  body.reception-body .wedy-reception-stats{grid-template-columns:repeat(4,1fr)!important;gap:7px;background:transparent!important;border:0!important;overflow:visible!important}
+  body.reception-body .wedy-reception-stats div{min-width:0!important;padding:12px 7px!important;background:#fffdfa;border:1px solid #e9e1d9!important;border-radius:14px!important;box-shadow:none}
+  body.reception-body .wedy-reception-stats div:last-child{grid-column:auto!important;border-right:1px solid #e9e1d9!important}
+  body.reception-body .wedy-reception-stats span{font-size:.43rem;letter-spacing:.1em;white-space:nowrap}
+  body.reception-body .wedy-reception-stats strong{font-size:1.75rem!important;line-height:1;margin:5px 0 3px!important}
+  body.reception-body .wedy-reception-stats small{font-size:.48rem!important;line-height:1.1;display:block}
+  body.reception-body .scanner-card{padding:18px!important;border-radius:20px!important;background:#fffdfa!important}
+  body.reception-body .scanner-card .card-head h2{font-size:2.05rem!important;margin:5px 0!important}
+  body.reception-body .scanner-card .card-head p.muted{font-size:.78rem;line-height:1.4}
+  body.reception-body .scanner-actions{margin:14px 0 10px;display:block}
+  body.reception-body #startScanner{width:100%;min-height:60px;border-radius:15px;font-size:.82rem;letter-spacing:.12em}
+  body.reception-body .manual-reception{display:block}
+  body.reception-body #code{width:100%;min-height:56px;font-size:16px;border-radius:14px;margin-top:8px}
+  body.reception-body #search{width:100%;min-height:54px;margin-top:8px;border-radius:14px}
+  body.reception-body .scan-hint{font-size:.58rem;line-height:1.45}
+  body.reception-body .guest-result-inner{padding:18px!important}
+  body.reception-body .guest-main h2{font-size:2rem!important}
+  body.reception-body .reception-confirm,.guest-action .button{width:100%;min-height:54px}
+  body.reception-body .reception-recent-mobile{display:block;background:#fffdfa;border:1px solid #e9e1d9;border-radius:20px;padding:17px}
+  body.reception-body .reception-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  body.reception-body .reception-section-head h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:500;margin:3px 0 0}
+  body.reception-body .text-link{border:0;background:none;color:#5e745f;text-decoration:underline;padding:8px;font-size:.7rem}
+  body.reception-body .recent-public-list{display:grid;gap:1px}
+  body.reception-body .recent-public-item{display:grid;grid-template-columns:38px minmax(0,1fr) auto 20px;align-items:center;gap:9px;padding:10px 2px;border-bottom:1px solid #eee8e2}
+  body.reception-body .recent-public-item:last-child{border-bottom:0}
+  body.reception-body .recent-public-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#f1e8df;color:#74564a;font-size:.65rem;font-weight:600}
+  body.reception-body .recent-public-item strong{display:block;font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  body.reception-body .recent-public-item small{display:block;color:#958c84;font-size:.58rem;margin-top:2px}
+  body.reception-body .recent-public-item time{font-size:.58rem;color:#8c847e}
+  body.reception-body .recent-public-item>b{color:#4d8061;font-size:.8rem}
+  body.reception-body .reception-mobile-nav{position:fixed;left:0;right:0;bottom:0;height:68px;z-index:120;background:rgba(255,253,250,.98);border-top:1px solid #e9e1d9;display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 18px rgba(60,45,35,.05)}
+  body.reception-body .reception-mobile-nav a,body.reception-body .reception-mobile-nav button{border:0;background:none;text-decoration:none;color:#7e7873;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:inherit;min-width:0}
+  body.reception-body .reception-mobile-nav span{font-size:1.15rem;line-height:1}
+  body.reception-body .reception-mobile-nav small{font-size:.52rem}
+  body.reception-body .reception-mobile-nav .active{color:#5e745f}
+  body.reception-body .operator-menu{position:fixed!important;right:12px!important;top:74px!important;left:12px!important;width:auto!important;z-index:150}
+}
+@media (max-width:390px){
+  body.reception-body .wedy-reception-stats{gap:5px!important}
+  body.reception-body .wedy-reception-stats div{padding:10px 4px!important}
+  body.reception-body .wedy-reception-stats strong{font-size:1.5rem!important}
+  body.reception-body .wedy-reception-stats span{font-size:.39rem}
+  body.reception-body .wedy-reception-stats small{font-size:.43rem!important}
+  body.reception-body .reception-hero-card h1{font-size:2.35rem!important}
+}
+@media (min-width:721px){.reception-recent-mobile,.reception-mobile-nav{display:none!important}}
