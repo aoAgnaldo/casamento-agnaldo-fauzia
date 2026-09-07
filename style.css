@@ -3181,3 +3181,60 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .intro-screen h1{font-size:clamp(2.65rem,12vw,3rem)!important;width:80vw!important;max-width:80vw!important}
   .intro-screen .intro-note{left:10vw!important;right:10vw!important;font-size:.92rem!important}
 }
+
+
+/* V7.8 — acesso reservado: acabamento premium inspirado na nova proposta visual. */
+.private-access-modal{padding:1.25rem;display:grid;place-items:center;}
+.private-access-backdrop{background:rgba(31,25,21,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+.private-access-dialog{width:min(1060px,100%);padding:2.2rem 4.2rem 2.1rem;background:linear-gradient(180deg,#fbf7f0 0%,#f7f1e8 100%);border:1px solid rgba(108,83,70,.16);border-radius:24px;box-shadow:0 30px 100px rgba(0,0,0,.28);text-align:center;max-height:min(90vh,860px);overflow:auto;scrollbar-width:thin;}
+.private-access-close{top:1rem;right:1rem;width:42px;height:42px;border-radius:50%;background:rgba(184,92,74,.08);color:#342c29;font-size:28px;line-height:1;transition:transform .16s ease,background .16s ease;}
+.private-access-close:hover,.private-access-close:focus-visible{background:rgba(184,92,74,.16);transform:rotate(3deg);}
+.private-access-brand{display:flex;align-items:center;justify-content:center;gap:.2rem;margin:.1rem auto .55rem;color:var(--terra);}
+.private-access-brand img{width:66px;height:66px;opacity:.9;}
+.private-access-brand span{font-family:var(--font-display);font-size:1.15rem;margin-left:-1.1rem;margin-top:.15rem;letter-spacing:-.03em;}
+.private-access-kicker{margin:0;color:var(--terra);font-size:10px;letter-spacing:.34em;font-weight:600;}
+.private-access-dialog h2{margin:.45rem 0 0;font-size:clamp(3.3rem,6vw,5.4rem);line-height:.86;letter-spacing:-.05em;}
+.private-access-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.15rem auto .9rem;max-width:230px;color:#c68171;}
+.private-access-divider span{height:1px;flex:1;background:rgba(184,92,74,.5);}
+.private-access-divider b{font-family:var(--font-body);font-size:13px;font-weight:400;}
+.private-access-subtitle{margin:.2rem 0 2rem;color:#6f655e;font-size:1rem;}
+.private-access-options{display:grid;grid-template-columns:1fr 1fr;gap:1.15rem;text-align:left;}
+.private-access-card{position:relative;min-height:245px;padding:2rem 2rem 1.8rem;border:1px solid rgba(52,44,41,.18);border-radius:12px;background:rgba(255,255,255,.28);overflow:hidden;display:flex;align-items:flex-end;gap:1rem;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background-color .18s ease;}
+.private-access-card--admin{border-color:rgba(184,92,74,.34);background:linear-gradient(135deg,rgba(184,92,74,.06),rgba(255,255,255,.12));}
+.private-access-card--reception{border-color:rgba(117,133,118,.42);background:linear-gradient(135deg,rgba(117,133,118,.08),rgba(255,255,255,.12));}
+.private-access-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(65,48,41,.09);}
+.private-access-card--admin:hover{border-color:rgba(184,92,74,.7);}
+.private-access-card--reception:hover{border-color:rgba(117,133,118,.8);}
+.private-access-icon{position:absolute;left:2rem;top:1.6rem;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:rgba(184,92,74,.12);color:#9a5947;}
+.private-access-card--reception .private-access-icon{background:rgba(117,133,118,.16);color:#586855;}
+.private-access-icon svg{width:38px;height:38px;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round;}
+.private-access-card-copy{position:relative;z-index:2;max-width:72%;display:grid;gap:.55rem;}
+.private-access-card strong{font-size:2.8rem;line-height:.95;letter-spacing:-.035em;}
+.private-access-card small{font-size:.9rem;line-height:1.4;color:#6f655e;max-width:280px;}
+.private-access-arrow{position:absolute;right:1.9rem;bottom:1.8rem;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:34px;font-family:Georgia,serif;font-weight:300;background:rgba(184,92,74,.13);color:#8e513f;transition:transform .18s ease;}
+.private-access-card--reception .private-access-arrow{background:rgba(117,133,118,.18);color:#526251;}
+.private-access-card:hover .private-access-arrow{transform:translateX(3px);}
+.private-access-leaf{position:absolute;right:-8px;top:5px;font-family:var(--font-display);font-size:9rem;line-height:1;color:#b85c4a;opacity:.055;transform:rotate(-15deg);pointer-events:none;}
+.private-access-card--reception .private-access-leaf{color:#758576;}
+.private-access-signoff{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.35rem auto .05rem;color:#b97767;}
+.private-access-signoff span{width:150px;height:1px;background:rgba(184,92,74,.35);}
+.private-access-signoff i{font-family:var(--font-script);font-size:1.55rem;font-weight:500;white-space:nowrap;}
+@media (max-width:760px){
+  .private-access-modal{padding:.7rem;align-items:center;}
+  .private-access-dialog{width:100%;padding:2.1rem 1rem 1.3rem;border-radius:20px;max-height:92svh;}
+  .private-access-brand img{width:58px;height:58px;}
+  .private-access-dialog h2{font-size:clamp(2.65rem,13vw,4rem);}
+  .private-access-subtitle{font-size:.9rem;margin-bottom:1.35rem;}
+  .private-access-options{grid-template-columns:1fr;gap:.75rem;}
+  .private-access-card{min-height:160px;padding:1.35rem 1.2rem 1.25rem;border-radius:11px;}
+  .private-access-icon{left:1.15rem;top:1.15rem;width:58px;height:58px;}
+  .private-access-icon svg{width:29px;height:29px;}
+  .private-access-card-copy{max-width:76%;}
+  .private-access-card strong{font-size:2.15rem;}
+  .private-access-card small{font-size:.78rem;}
+  .private-access-arrow{right:1.1rem;bottom:1.1rem;width:44px;height:44px;font-size:29px;}
+  .private-access-leaf{font-size:6.2rem;}
+  .private-access-signoff{gap:.65rem;margin-top:1rem;}
+  .private-access-signoff span{width:52px;}
+  .private-access-signoff i{font-size:1.25rem;}
+}

@@ -198,21 +198,33 @@
   <div class="private-access-backdrop" data-close-private></div>
   <div class="private-access-dialog" role="dialog" aria-modal="true" aria-labelledby="privateAccessTitle">
     <button class="private-access-close" id="privateAccessClose" type="button" aria-label="Fechar">×</button>
+    <div class="private-access-brand" aria-hidden="true">
+      <img src="monogram.svg" alt="">
+      <span>A &amp; F</span>
+    </div>
     <p class="private-access-kicker">ÁREA RESERVADA</p>
     <h2 id="privateAccessTitle">Escolha o acesso</h2>
+    <div class="private-access-divider" aria-hidden="true"><span></span><b>♥</b><span></span></div>
     <p class="private-access-subtitle">Seleccione o painel que pretende abrir.</p>
     <div class="private-access-options">
-      <a href="admin.html" class="private-access-card">
-        <span class="private-access-icon" aria-hidden="true">⌂</span>
-        <strong>Admin</strong>
-        <small>Gestão do convite, convidados e presentes</small>
+      <a href="admin.html" class="private-access-card private-access-card--admin">
+        <span class="private-access-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M6 14.2 16 6l10 8.2v11.3a1.5 1.5 0 0 1-1.5 1.5H7.5A1.5 1.5 0 0 1 6 25.5V14.2Z"/><path d="M12 27V18h8v9"/></svg>
+        </span>
+        <div class="private-access-card-copy"><strong>Admin</strong><small>Gestão do convite, convidados e presentes</small></div>
+        <span class="private-access-arrow" aria-hidden="true">›</span>
+        <span class="private-access-leaf" aria-hidden="true">⌁</span>
       </a>
-      <a href="checkin.html" class="private-access-card">
-        <span class="private-access-icon" aria-hidden="true">✓</span>
-        <strong>Recepção</strong>
-        <small>Confirmação da entrada dos convidados</small>
+      <a href="checkin.html" class="private-access-card private-access-card--reception">
+        <span class="private-access-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><circle cx="11" cy="11" r="4"/><circle cx="21" cy="12" r="3.5"/><path d="M4.5 23c.8-4.1 3.2-6 6.5-6s5.7 1.9 6.5 6M15.5 23c.8-3.3 2.9-5 5.5-5 2.8 0 4.8 1.8 5.5 5"/></svg>
+        </span>
+        <div class="private-access-card-copy"><strong>Recepção</strong><small>Confirmação da entrada dos convidados</small></div>
+        <span class="private-access-arrow" aria-hidden="true">›</span>
+        <span class="private-access-leaf" aria-hidden="true">⌁</span>
       </a>
     </div>
+    <div class="private-access-signoff"><span></span><i>Juntos para sempre</i><span></span></div>
   </div>
 </div>
 
