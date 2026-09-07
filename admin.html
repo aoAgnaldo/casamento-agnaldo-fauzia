@@ -1546,3 +1546,157 @@ body.admin-body .gifts-admin-view .gift-pagination{
   }
 }
 </style>
+
+<style id="v666-mobile-ux-final">
+/* V6.66 — revisão profunda mobile: navegação Mais funcional, drawer robusto e áreas optimizadas para toque. */
+@media(max-width:760px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
+  body.admin-body{overflow:hidden!important;background:#f7f4f1!important;}
+  body.admin-body .wedy-app{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;}
+  body.admin-body .wedy-header{height:64px!important;min-height:64px!important;left:0!important;right:0!important;z-index:1800!important;padding:0 10px!important;}
+  body.admin-body .admin-header-search{display:none!important;}
+  body.admin-body .admin-header-actions{height:64px!important;width:100%!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;gap:7px!important;}
+  body.admin-body .admin-notification{width:38px!important;height:38px!important;}
+  body.admin-body .wedy-event{position:static!important;margin-left:auto!important;right:auto!important;top:auto!important;max-width:calc(100% - 90px)!important;background:transparent!important;border:0!important;padding:0!important;}
+  body.admin-body .wedy-event .wedy-avatar{width:34px!important;height:34px!important;border-radius:11px!important;}
+  body.admin-body .wedy-event span:last-child{max-width:150px!important;overflow:hidden!important;}
+  body.admin-body .wedy-event b,body.admin-body .wedy-event small{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;display:block!important;}
+  body.admin-body .wedy-menu{position:static!important;width:40px!important;height:40px!important;margin-left:2px!important;border-radius:12px!important;z-index:1900!important;}
+
+  body.admin-body .admin-wrap{top:64px!important;bottom:0!important;height:calc(100dvh - 64px)!important;overflow:hidden!important;}
+  body.admin-body .admin-dashboard-main,body.admin-body .admin-view-section{left:0!important;right:0!important;top:0!important;bottom:0!important;height:100%!important;padding:17px 12px calc(86px + env(safe-area-inset-bottom))!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;}
+
+  /* Drawer mobile: largura confortável, X próprio e scroll independente. */
+  body.admin-body .admin-dashboard-sidebar{top:64px!important;bottom:0!important;left:0!important;width:min(328px,88vw)!important;height:calc(100dvh - 64px)!important;padding:18px 14px calc(30px + env(safe-area-inset-bottom))!important;border-radius:0 22px 22px 0!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;transform:translateX(-110%)!important;transition:transform .25s cubic-bezier(.22,.61,.36,1)!important;box-shadow:18px 0 50px rgba(40,31,26,.16)!important;z-index:2000!important;}
+  body.admin-body.admin-sidebar-open .admin-dashboard-sidebar{transform:translateX(0)!important;}
+  body.admin-body .admin-sidebar-backdrop{position:fixed!important;inset:64px 0 0 0!important;z-index:1950!important;background:rgba(39,31,27,.36)!important;backdrop-filter:blur(2px)!important;-webkit-backdrop-filter:blur(2px)!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,visibility .25s ease!important;}
+  body.admin-body.admin-sidebar-open .admin-sidebar-backdrop{opacity:1!important;visibility:visible!important;pointer-events:auto!important;}
+  body.admin-body.admin-sidebar-open{overflow:hidden!important;}
+
+  /* Marca do drawer */
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand{padding:8px 7px 18px!important;margin-bottom:15px!important;gap:10px!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand img{width:38px!important;height:38px!important;flex-basis:38px!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand strong{font-family:'Cormorant Garamond',Georgia,serif!important;font-size:1.35rem!important;line-height:1!important;white-space:nowrap!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand small{font-size:.52rem!important;}
+
+  /* Navegação com áreas claras e toque confortável. */
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-section-label{margin:16px 7px 7px!important;font-size:.55rem!important;letter-spacing:.14em!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav{gap:3px!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav a,
+  body.admin-body .admin-dashboard-sidebar .sidebar-group-toggle,
+  body.admin-body .admin-sidebar-subnav a{min-height:46px!important;padding:11px 12px!important;border-radius:12px!important;font-size:.69rem!important;gap:10px!important;}
+  body.admin-body .admin-sidebar-subnav{padding-left:9px!important;margin-left:8px!important;border-left:1px solid #e9e0d9!important;}
+  body.admin-body .admin-sidebar-subnav a{min-height:42px!important;}
+
+  /* Drawer pode ser fechado pelo botão adicionado via JS. */
+  body.admin-body .v666-drawer-close{position:sticky!important;top:-4px!important;float:right!important;margin:0 0 5px 5px!important;width:38px!important;height:38px!important;border:1px solid #e5ddd7!important;border-radius:11px!important;background:#f7f2ee!important;color:#6c5f57!important;font:400 21px/1 Montserrat,sans-serif!important;z-index:3!important;box-shadow:0 3px 12px rgba(45,35,29,.05)!important;}
+
+  /* Barra inferior: áreas mais usadas. */
+  body.admin-body .admin-mobile-bottom-nav{height:68px!important;padding:6px 8px calc(7px + env(safe-area-inset-bottom))!important;z-index:1700!important;}
+  body.admin-body .admin-mobile-bottom-nav a,body.admin-body .admin-mobile-bottom-nav button{min-height:50px!important;font-size:.5rem!important;gap:4px!important;}
+  body.admin-body .admin-mobile-bottom-nav .mobile-nav-icon{font-size:1.08rem!important;}
+  body.admin-body.admin-sidebar-open .admin-mobile-bottom-nav{opacity:0!important;visibility:hidden!important;pointer-events:none!important;}
+
+  /* "Mais" passa a ser uma acção real e visualmente distinta. */
+  body.admin-body .admin-mobile-bottom-nav button#mobileMoreBtn{color:#6f625a!important;}
+  body.admin-body .admin-mobile-bottom-nav button#mobileMoreBtn .mobile-nav-icon{letter-spacing:1px!important;font-size:.92rem!important;}
+
+  /* Títulos e acções de páginas. */
+  body.admin-body .admin-view-section .section-title-row{gap:10px!important;}
+  body.admin-body .admin-view-section .section-title-row h2{font-size:2.25rem!important;line-height:.96!important;}
+  body.admin-body .admin-view-section .section-title-row>.section-actions{grid-template-columns:1fr!important;}
+  body.admin-body .admin-view-section .section-title-row>.section-actions .button,
+  body.admin-body .admin-view-section .section-title-row>.button{min-height:46px!important;}
+
+  /* Dashboard: menos densidade, mais leitura. */
+  body.admin-body .admin-kpis{grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  body.admin-body .admin-kpi{min-height:92px!important;padding:12px!important;}
+  body.admin-body .admin-kpi strong{font-size:1.2rem!important;}
+
+  /* Convidados: nunca permitir tabela comprimida ou overflow horizontal. */
+  body.admin-body .guest-list-scroll,body.admin-body .guest-card-list{overflow-x:hidden!important;max-width:100%!important;}
+  body.admin-body .guest-card-list .guest-card{display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important;}
+  body.admin-body .guest-card-list .guest-actions{grid-column:2!important;grid-row:1/-1!important;align-self:center!important;}
+
+  /* Presentes: scroll apenas na lista, com cabeçalho/paginação fora dela. */
+  body.admin-body .gifts-admin-view{min-height:0!important;display:flex!important;flex-direction:column!important;}
+  body.admin-body .gifts-admin-view .gift-list-scroll{height:min(52dvh,520px)!important;min-height:230px!important;max-height:none!important;flex:0 1 auto!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body .gifts-admin-view .gift-table{width:100%!important;}
+
+  /* Mesas: leitura em cartões e acções fáceis. */
+  body.admin-body .seating-summary{grid-template-columns:1fr 1fr!important;}
+  body.admin-body .table-card{width:100%!important;}
+
+  /* Pop-ups: folhas móveis sem cortar botões nem conteúdo. */
+  body.admin-body .modal{padding:8px!important;align-items:flex-end!important;overflow:hidden!important;}
+  body.admin-body .modal-box{width:100%!important;max-width:none!important;max-height:calc(100dvh - 16px)!important;border-radius:20px 20px 12px 12px!important;overflow:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body .modal-hero{padding:18px 58px 15px 18px!important;position:sticky!important;top:0!important;z-index:2!important;background:linear-gradient(180deg,#fffdf9 0%,#fbfaf7 100%)!important;}
+  body.admin-body .modal-form-body{padding:17px 16px calc(20px + env(safe-area-inset-bottom))!important;}
+  body.admin-body .modal-form-body input,body.admin-body .modal-form-body textarea,body.admin-body .modal-form-body select{min-height:48px!important;font-size:.8rem!important;}
+  body.admin-body .modal-actions{position:sticky!important;bottom:0!important;background:#fbfaf7!important;padding:10px 0 calc(4px + env(safe-area-inset-bottom))!important;z-index:3!important;}
+
+  /* Evitar zoom acidental em inputs no iOS/Android. */
+  body.admin-body input,body.admin-body textarea,body.admin-body select{font-size:16px!important;}
+}
+</style>
+<script id="v666-mobile-ux-js">
+(function(){
+  'use strict';
+  const body=document.body;
+  const sidebar=document.querySelector('.admin-dashboard-sidebar');
+  const backdrop=document.getElementById('adminSidebarBackdrop');
+  const more=document.getElementById('mobileMoreBtn');
+  if(!sidebar||!more)return;
+
+  function isMobile(){return window.matchMedia('(max-width:760px)').matches;}
+  function setDrawer(open){
+    if(!isMobile())return;
+    body.classList.toggle('admin-sidebar-open',!!open);
+    more.setAttribute('aria-expanded',open?'true':'false');
+    if(open){
+      body.dataset.v666ScrollY=String(window.scrollY||0);
+      setTimeout(function(){
+        const close=sidebar.querySelector('.v666-drawer-close');
+        if(close)close.focus({preventScroll:true});
+      },40);
+    }
+  }
+  more.setAttribute('aria-expanded','false');
+  more.setAttribute('aria-controls','admin-mobile-sidebar');
+  sidebar.id='admin-mobile-sidebar';
+
+  if(!sidebar.querySelector('.v666-drawer-close')){
+    const close=document.createElement('button');
+    close.type='button';
+    close.className='v666-drawer-close';
+    close.setAttribute('aria-label','Fechar menu');
+    close.setAttribute('title','Fechar menu');
+    close.textContent='×';
+    sidebar.insertBefore(close,sidebar.firstElementChild);
+    close.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setDrawer(false);});
+  }
+
+  more.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setDrawer(true);});
+  backdrop?.addEventListener('click',function(){setDrawer(false);});
+  sidebar.addEventListener('click',function(e){
+    const link=e.target.closest('a');
+    if(!link)return;
+    if(isMobile())setTimeout(function(){setDrawer(false);},40);
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&body.classList.contains('admin-sidebar-open'))setDrawer(false);});
+  window.addEventListener('resize',function(){if(!isMobile())body.classList.remove('admin-sidebar-open');});
+
+  // Reabre o drawer quando o utilizador toca em Mais depois de mudar de área.
+  window.addEventListener('hashchange',function(){
+    if(isMobile())setTimeout(function(){body.classList.remove('admin-sidebar-open');more.setAttribute('aria-expanded','false');},0);
+  });
+
+  // Corrige o estado activo da barra inferior após qualquer navegação programática.
+  function syncBottom(){
+    const hash=(location.hash||'#visao-geral').slice(1);
+    document.querySelectorAll('.admin-mobile-bottom-nav [data-mobile-nav]').forEach(a=>a.classList.toggle('active',a.dataset.mobileNav===hash));
+  }
+  window.addEventListener('hashchange',syncBottom);
+  syncBottom();
+})();
+</script>
