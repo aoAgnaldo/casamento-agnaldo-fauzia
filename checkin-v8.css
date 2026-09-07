@@ -1,0 +1,235 @@
+/* V7.9 — Recepção: reconstrução UX/UI operacional.
+   Mantém a lógica existente e concentra-se em clareza, hierarquia e uso rápido durante o evento. */
+:root{
+  --rx-bg:#f5f1eb;
+  --rx-surface:#fffdfa;
+  --rx-surface-2:#f9f6f1;
+  --rx-border:#e5ddd4;
+  --rx-text:#2f2925;
+  --rx-muted:#827871;
+  --rx-terra:#9a604e;
+  --rx-terra-dark:#7f493b;
+  --rx-sage:#607565;
+  --rx-sage-soft:#e9f0e8;
+  --rx-danger:#9f5147;
+  --rx-shadow:0 12px 35px rgba(54,43,35,.07);
+}
+
+/* Global reception shell */
+body.reception-body{background:var(--rx-bg);color:var(--rx-text)}
+body.reception-body .wedy-main{max-width:1440px;padding:28px 28px 72px}
+body.reception-body .reception-main{gap:22px}
+body.reception-body .wedy-card,
+body.reception-body .chief-tools-card,
+body.reception-body .guest-result,
+body.reception-body .reception-recent-mobile{border-color:var(--rx-border)!important;background:var(--rx-surface)!important;box-shadow:var(--rx-shadow)!important}
+
+/* Header: identity + operator are the only high-priority controls */
+body.reception-body .wedy-header{background:rgba(255,253,250,.96);border-bottom:1px solid var(--rx-border);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:200}
+body.reception-body .reception-head-actions{gap:8px}
+body.reception-body .operator-profile{border:1px solid var(--rx-border);background:var(--rx-surface);border-radius:13px;padding:7px 10px;min-height:42px}
+body.reception-body .operator-profile:hover{background:#f7f2ed}
+body.reception-body .reception-admin-link{background:transparent!important;color:#68584f!important;border-color:#ddd2c9!important}
+body.reception-body .reception-logout{min-height:42px}
+body.reception-body .wedy-nav{gap:4px}
+body.reception-body .wedy-nav a{border-radius:10px;padding:8px 10px}
+body.reception-body .wedy-nav a.active{background:#f2ebe5;color:var(--rx-terra-dark)}
+
+/* Desktop operational layout: scanner is the primary task */
+@media(min-width:721px){
+  body.reception-body .reception-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);gap:22px;align-items:stretch}
+  body.reception-body .dashboard-left{order:2}
+  body.reception-body .dashboard-right{order:1}
+  body.reception-body .scanner-card{height:100%;display:flex;flex-direction:column;justify-content:center;min-height:360px}
+  body.reception-body .reception-hero-card{min-height:360px;display:flex;flex-direction:column;justify-content:center}
+  body.reception-body .reception-hero-card h1{font-size:clamp(3.1rem,5vw,5.3rem);max-width:10ch;line-height:.88}
+  body.reception-body .wedy-reception-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--rx-border);border-radius:18px;overflow:hidden;box-shadow:var(--rx-shadow)}
+  body.reception-body .wedy-reception-stats>div{background:var(--rx-surface);padding:20px 18px;min-width:0}
+  body.reception-body .wedy-reception-stats strong{font-size:3rem}
+}
+
+/* Scan area */
+body.reception-body .scanner-card{padding:28px!important}
+body.reception-body .scanner-card .section-kicker{margin-bottom:8px}
+body.reception-body .scanner-card h2{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.02em}
+body.reception-body .scanner-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin:20px 0 12px}
+body.reception-body #startScanner{min-height:56px;border-radius:14px;font-weight:600;letter-spacing:.04em}
+body.reception-body #stopScanner{min-height:56px;border-radius:14px}
+body.reception-body .reception-reader{width:100%;max-width:520px;margin:4px auto 16px;border-radius:18px;overflow:hidden;background:#171513;padding:8px}
+body.reception-body .reception-reader video{border-radius:12px}
+body.reception-body .manual-reception{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-top:8px}
+body.reception-body .manual-reception input{height:54px;border:1px solid var(--rx-border)!important;border-radius:14px!important;background:#fff!important;padding:0 16px!important;font-size:15px!important;box-shadow:none!important}
+body.reception-body .manual-reception input:focus{border-color:rgba(154,96,78,.55)!important;box-shadow:0 0 0 4px rgba(154,96,78,.10)!important}
+body.reception-body #search{min-height:54px;border-radius:14px;padding-inline:22px}
+body.reception-body .scan-hint{margin:10px 2px 0;color:#92877f;font-size:.62rem;line-height:1.55}
+
+/* Summary counters: numbers first, labels short and readable */
+body.reception-body .wedy-reception-stats>div{position:relative}
+body.reception-body .wedy-reception-stats span{display:block;color:#8a8079;font-size:.52rem;letter-spacing:.14em;font-weight:700}
+body.reception-body .wedy-reception-stats strong{display:block;color:#2f2925;font-family:'Cormorant Garamond',serif;font-weight:500;line-height:.95;margin:7px 0 4px}
+body.reception-body .wedy-reception-stats small{color:#958b84;font-size:.53rem;line-height:1.3}
+body.reception-body .wedy-reception-stats>div:nth-child(2) strong{color:var(--rx-sage)}
+body.reception-body .wedy-reception-stats>div:nth-child(3) strong{color:#9b7458}
+
+/* Search / result card */
+body.reception-body .guest-result{border-left:4px solid var(--rx-sage)!important}
+body.reception-body .guest-result-inner{gap:28px!important;padding:26px!important}
+body.reception-body .guest-main h2{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.02em}
+body.reception-body .guest-meta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+body.reception-body .guest-meta span{background:#f5f0ea;border:1px solid #e9e1da;border-radius:999px;padding:6px 9px;font-size:.61rem;color:#6f655e}
+body.reception-body .guest-meta span:first-child{background:#f2ebe5;color:var(--rx-terra-dark);font-weight:700}
+body.reception-body .assigned-table{margin-top:18px;padding:14px 16px;border-radius:14px;background:#f4f0eb;border:1px solid #e5ddd5;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px}
+body.reception-body .assigned-table small{grid-column:1/-1;color:#8b8078;font-size:.5rem;letter-spacing:.14em;font-weight:700}
+body.reception-body .assigned-table strong{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;line-height:1}
+body.reception-body .assigned-table span{align-self:end;color:#938880;font-size:.58rem}
+body.reception-body .result-valid,.body.reception-body .result-already,.body.reception-body .result-warning{border-radius:13px!important}
+body.reception-body .guest-action{align-self:end}
+body.reception-body .guest-action .button{min-height:58px;border-radius:15px;font-weight:700}
+body.reception-body .reception-confirm{background:var(--rx-sage)!important;border-color:var(--rx-sage)!important;color:#fff!important;box-shadow:0 9px 22px rgba(96,117,101,.18)}
+body.reception-body .reception-confirm:hover{background:#526857!important}
+
+/* Match list: readable as an operational picker */
+body.reception-body .search-matches{padding:24px!important}
+body.reception-body .search-match-list{display:grid;gap:7px;margin-top:14px}
+body.reception-body .search-match{border:1px solid #e8e0d9!important;background:#fff!important;border-radius:13px!important;padding:14px 15px!important;min-height:66px!important}
+body.reception-body .search-match:hover{border-color:#ccb9ad!important;background:#fcfaf7!important}
+body.reception-body .search-match:focus-visible{outline:3px solid rgba(154,96,78,.18);outline-offset:2px}
+body.reception-body .search-match-name b{font-size:.76rem}
+body.reception-body .search-match-name small{font-size:.58rem}
+body.reception-body .search-match-side strong{font-size:.62rem}
+body.reception-body .search-match-side small{font-size:.56rem}
+
+/* Recent movement */
+body.reception-body .reception-recent-mobile{padding:22px}
+body.reception-body .recent-public-item{min-height:58px!important}
+body.reception-body .recent-public-avatar{background:#f1e8df!important;color:#795c50!important}
+body.reception-body .recent-public-item time{font-variant-numeric:tabular-nums}
+
+/* Chief area: less noise, stronger grouping */
+body.reception-body .chief-tools{display:grid;gap:16px}
+body.reception-body .chief-tools-card{border-radius:18px!important}
+body.reception-body .chief-overview-head{gap:16px}
+body.reception-body .chief-command-note{align-self:flex-start}
+body.reception-body .chief-scroll-list{scrollbar-width:thin;scrollbar-color:#d1c6bd transparent}
+body.reception-body .chief-table-card{min-height:190px}
+
+/* Modal: controlled and accessible */
+body.reception-body .chief-table-modal.is-open{display:grid!important;place-items:center}
+body.reception-body .chief-table-modal-dialog{width:min(700px,calc(100vw - 28px));max-height:min(82dvh,760px)}
+body.reception-body .chief-table-modal-body{overscroll-behavior:contain}
+body.reception-body.modal-scroll-lock{overflow:hidden}
+
+/* Toasts: compact, high contrast, not covering the scan result */
+body.reception-body .reception-toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);z-index:10000;max-width:min(92vw,520px);padding:12px 16px;border-radius:12px;background:#2f2925;color:#fff;box-shadow:0 14px 34px rgba(0,0,0,.18);font-size:.72rem;text-align:center}
+
+/* Mobile = operation-first, not desktop squeezed */
+@media(max-width:720px){
+  body.reception-body{padding-bottom:76px}
+  body.reception-body .wedy-main{padding:12px 12px 86px!important}
+  body.reception-body .wedy-header{height:64px;padding:0 10px}
+  body.reception-body .wedy-brand img{width:26px;height:26px}
+  body.reception-body .wedy-brand span{font-size:1.1rem}
+  body.reception-body .reception-head-actions{gap:5px}
+  body.reception-body .operator-profile{width:42px;height:42px;min-height:42px;padding:4px;display:grid;place-items:center}
+  body.reception-body .operator-avatar{width:32px;height:32px}
+  body.reception-body .reception-menu-toggle{width:42px!important;height:42px!important}
+
+  body.reception-body .reception-grid{display:flex!important;flex-direction:column;gap:12px!important}
+  body.reception-body .dashboard-right{order:1!important}
+  body.reception-body .dashboard-left{order:2!important}
+  body.reception-body #entrada{order:3!important}
+  body.reception-body #result{order:4!important}
+  body.reception-body #recentPublic{order:5!important}
+  body.reception-body #myTasks{order:6!important}
+  body.reception-body #liveDashboard{order:7!important}
+  body.reception-body #chiefTools{order:8!important}
+
+  body.reception-body .scanner-card{padding:18px!important;border-radius:18px!important}
+  body.reception-body .scanner-card .card-head h2{font-size:2.25rem!important;margin:2px 0 5px!important}
+  body.reception-body .scanner-actions{grid-template-columns:1fr;gap:8px;margin:16px 0 10px}
+  body.reception-body #startScanner,body.reception-body #stopScanner{min-height:58px;width:100%}
+  body.reception-body .manual-reception{grid-template-columns:1fr;gap:8px}
+  body.reception-body .manual-reception input{height:56px}
+  body.reception-body #search{min-height:56px;width:100%}
+  body.reception-body .scan-hint{font-size:.61rem}
+
+  /* Hide decorative hero until the actual task is complete; keep event context compact. */
+  body.reception-body .reception-hero-card{padding:18px!important;border-radius:18px!important;min-height:0!important}
+  body.reception-body .reception-hero-card .section-kicker{margin-bottom:4px}
+  body.reception-body .reception-hero-card h1{font-size:2.55rem!important;max-width:11ch!important;line-height:.88!important;margin:7px 0 8px!important}
+  body.reception-body .reception-hero-line{margin:13px 0;width:46px}
+  body.reception-body .reception-hero-card .small{font-size:.73rem}
+
+  body.reception-body .wedy-reception-stats{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;border:0!important;background:transparent!important;overflow:visible!important}
+  body.reception-body .wedy-reception-stats>div{padding:14px 13px!important;border:1px solid var(--rx-border)!important;border-radius:15px!important;background:var(--rx-surface)!important}
+  body.reception-body .wedy-reception-stats span{font-size:.48rem!important}
+  body.reception-body .wedy-reception-stats strong{font-size:2.05rem!important}
+  body.reception-body .wedy-reception-stats small{font-size:.51rem!important}
+
+  body.reception-body .guest-result{border-left:0!important;border-top:4px solid var(--rx-sage)!important;border-radius:18px!important}
+  body.reception-body .guest-result-inner{padding:17px!important;gap:16px!important}
+  body.reception-body .guest-main h2{font-size:2.25rem!important;line-height:.92!important;margin:4px 0 8px!important}
+  body.reception-body .guest-meta{gap:6px}
+  body.reception-body .guest-meta span{font-size:.55rem;padding:6px 8px}
+  body.reception-body .assigned-table strong{font-size:1.5rem}
+  body.reception-body .guest-action .button{min-height:58px}
+
+  body.reception-body .reception-recent-mobile{padding:16px;border-radius:18px}
+  body.reception-body .reception-section-head h2{font-size:1.65rem!important}
+
+  body.reception-body .reception-mobile-nav{height:70px!important}
+  body.reception-body .reception-mobile-nav small{font-size:.5rem!important}
+  body.reception-body .reception-mobile-nav span{font-size:1.05rem!important}
+  body.reception-body .reception-mobile-nav a,.reception-mobile-nav button{min-height:58px!important}
+  body.reception-body .reception-mobile-nav .active{background:rgba(96,117,101,.08)}
+  body.reception-body .reception-more-sheet{position:fixed;inset:0;z-index:500;display:block}
+  body.reception-body .reception-more-sheet.hidden{display:none!important}
+  body.reception-body .reception-more-backdrop{position:absolute;inset:0;background:rgba(31,26,22,.38);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+  body.reception-body .reception-more-panel{position:absolute;left:10px;right:10px;bottom:80px;background:var(--rx-surface);border:1px solid var(--rx-border);border-radius:20px;box-shadow:0 24px 60px rgba(40,31,25,.22);padding:16px;max-height:calc(100dvh - 112px);overflow:auto}
+  body.reception-body .reception-more-head{display:flex;align-items:flex-start;justify-content:space-between;padding:3px 2px 12px;border-bottom:1px solid #eee7e1}
+  body.reception-body .reception-more-head h2{font:500 1.9rem/1 'Cormorant Garamond',serif;margin:4px 0 0}
+  body.reception-body .reception-more-close{width:40px;height:40px;border:1px solid var(--rx-border);border-radius:50%;background:#f6f1ec;font-size:23px;color:#665d57}
+  body.reception-body .reception-more-actions{display:grid;gap:8px;padding-top:10px}
+  body.reception-body .reception-more-actions>a,
+  body.reception-body .reception-more-actions>button{display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;text-align:left;gap:11px;border:1px solid #e8dfd8;background:#fff;border-radius:14px;padding:11px 12px;text-decoration:none;color:inherit;font:inherit;min-height:66px}
+  body.reception-body .reception-more-actions>a:active,
+  body.reception-body .reception-more-actions>button:active{transform:scale(.99)}
+  body.reception-body .more-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:#f2ebe5;color:var(--rx-terra-dark);font-weight:700}
+  body.reception-body .reception-more-actions b{display:block;font-size:.68rem}
+  body.reception-body .reception-more-actions small{display:block;margin-top:3px;color:#93877f;font-size:.55rem}
+  body.reception-body #mobileReceptionLogout .more-icon{background:#f8ece9;color:var(--rx-danger)}
+
+  body.reception-body .chief-tools-card{border-radius:16px!important}
+  body.reception-body .chief-overview-head{flex-direction:column!important;align-items:flex-start!important}
+  body.reception-body .chief-reception-kpis{grid-template-columns:1fr 1fr!important}
+  body.reception-body .chief-direct-search input{height:52px}
+  body.reception-body .chief-direct-search .button{min-height:52px}
+  body.reception-body .chief-tables-grid{grid-template-columns:1fr 1fr!important}
+  body.reception-body .chief-table-card{min-height:170px!important}
+
+  body.reception-body .reception-toast{bottom:82px;max-width:calc(100vw - 24px)}
+}
+
+@media(max-width:390px){
+  body.reception-body .wedy-reception-stats>div{padding:12px 10px!important}
+  body.reception-body .wedy-reception-stats strong{font-size:1.8rem!important}
+  body.reception-body .wedy-reception-stats small{font-size:.47rem!important}
+  body.reception-body .reception-hero-card h1{font-size:2.35rem!important}
+}
+
+@media(min-width:721px){
+  body.reception-body .reception-more-sheet{display:none!important}
+}
+
+/* Desktop also gets movement history: the section is operational, not mobile-only. */
+@media(min-width:721px){
+  body.reception-body .reception-recent-mobile{display:block!important;padding:22px!important}
+  body.reception-body .reception-recent-mobile .recent-public-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+  body.reception-body .reception-recent-mobile .recent-public-item{min-height:62px!important}
+}
+
+body.reception-body .search-empty-state{padding:26px!important}
+body.reception-body .search-empty-state h2{margin:4px 0 6px;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500}
+body.reception-body .search-empty-state p:not(.eyebrow){color:var(--rx-muted);margin:0;line-height:1.5;font-size:.75rem}
+body.reception-body .search-empty-actions{margin-top:16px}
+body.reception-body .search-empty-actions .button{min-height:46px;border-radius:12px}

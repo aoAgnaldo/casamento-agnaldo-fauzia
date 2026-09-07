@@ -1,9 +1,9 @@
-let guests=[], scanner=null, busy=false, protocolToken=null, protocolName='', protocolRole='protocol', operatorProfile={display_name:'',photo_url:'',role:'protocol'}, chiefTeam=[], chiefTasks=[], myTasks=[], chiefTables=[];
+let guests=[], scanner=null, busy=false, protocolToken=null, protocolName='', protocolRole='protocol', operatorProfile={display_name:'',photo_url:'',role:'protocol'}, chiefTeam=[], chiefTasks=[], myTasks=[], chiefTables=[], showAllRecent=false;
 const A=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 function msg(t){A('#loginMsg').textContent=t;A('#loginMsg').classList.remove('hidden')}
 function toast(t){const x=document.createElement('div');x.className='reception-toast';x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),2800)}
 async function init(){try{protocolToken=sessionStorage.getItem('protocolToken');protocolName=sessionStorage.getItem('protocolName')||'';protocolRole=sessionStorage.getItem('protocolRole')||'protocol'}catch(_){} if(protocolToken){const ok=await loadGuests(true);if(ok){await enter();return}try{sessionStorage.removeItem('protocolToken');sessionStorage.removeItem('protocolName');sessionStorage.removeItem('protocolRole')}catch(_){}} const {data}=await supabaseClient.auth.getSession();if(data.session){await enter()}else A('#login').classList.remove('hidden')}
-async function enter(){A('#login').classList.add('hidden');A('#reception').classList.remove('hidden');await loadOperatorProfile();A('#chiefTools')?.classList.toggle('hidden',protocolRole!=='chief');A('#myTasks')?.classList.remove('hidden');A('#liveDashboard')?.classList.toggle('hidden',protocolRole!=='chief');await loadGuests();await loadMyTasks();if(protocolRole==='chief')await loadChiefTools();startLiveRefresh();A('#code').focus()}
+async function enter(){A('#login').classList.add('hidden');A('#reception').classList.remove('hidden');await loadOperatorProfile();const isProtocol=!!protocolToken;A('#chiefTools')?.classList.toggle('hidden',protocolRole!=='chief');A('#myTasks')?.classList.toggle('hidden',!isProtocol);A('#mobileTasksNavItem')?.classList.toggle('hidden',!isProtocol);A('#liveDashboard')?.classList.toggle('hidden',protocolRole!=='chief');const loaded=await loadGuests();if(!loaded)toast('Não foi possível carregar os convidados. Tente actualizar a página.');if(isProtocol)await loadMyTasks();if(protocolRole==='chief')await loadChiefTools();startLiveRefresh();A('#code')?.focus()}
 async function loadGuests(protocol=!!protocolToken){const r=protocol?await supabaseClient.rpc('protocol_checkin_list',{p_token:protocolToken}):await supabaseClient.rpc('admin_list_invitations_checkin');if(r.error){if(protocol)return false;toast(r.error.message);return false}guests=r.data||[];updateCounter();return true}
 function updateCounter(){
  let arrived=0,people=0,confirmed=0;
@@ -18,7 +18,8 @@ function renderPublicRecent(){
  const box=A('#recentPublicList');
  if(!box)return;
  const arr=guests.filter(g=>g.checked_in).sort((a,b)=>new Date(b.checked_in_at||0)-new Date(a.checked_in_at||0));
- box.innerHTML=arr.slice(0,4).map(g=>{const people=1+(g.companion_count||0);return `<div class="recent-public-item"><span class="recent-public-avatar">${esc(operatorInitials(g.full_name))}</span><div><strong>${esc(g.full_name)}</strong><small>${people} pessoa(s)${g.table_name?` · ${esc(g.table_name)}`:''}</small></div><time>${g.checked_in_at?new Date(g.checked_in_at).toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'}):'—'}</time><b>✓</b></div>`}).join('')||'<div class="empty-state">Ainda não há entradas registadas.</div>';
+ const toggle=A('#recentPublicToggle'); if(toggle){if(arr.length>4){toggle.classList.remove('hidden');toggle.textContent=showAllRecent?'Ver menos':'Ver todos'}else{showAllRecent=false;toggle.classList.add('hidden')}}
+ box.innerHTML=arr.slice(showAllRecent?0:4).map(g=>{const people=1+(g.companion_count||0);return `<div class="recent-public-item"><span class="recent-public-avatar">${esc(operatorInitials(g.full_name))}</span><div><strong>${esc(g.full_name)}</strong><small>${people} pessoa(s)${g.table_name?` · ${esc(g.table_name)}`:''}</small></div><time>${g.checked_in_at?new Date(g.checked_in_at).toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'}):'—'}</time><b>✓</b></div>`}).join('')||'<div class="empty-state">Ainda não há entradas registadas.</div>';
 }
 
 function renderReceptionLive(){
@@ -34,19 +35,21 @@ function renderReceptionLive(){
  }
 }
 
-function render(g){const box=A('#result');if(!g){box.classList.add('hidden');return}const people=1+(g.companion_count||0);let state;if(g.checked_in){state=`<div class="result-already"><b>✓ Entrada já registada</b><span>${g.checked_in_at?new Date(g.checked_in_at).toLocaleString('pt-PT'):''}</span></div>`}else if(g.rsvp_status==='confirmed'){state='<div class="result-valid"><b>✓ Presença confirmada</b><span>Convite válido para a recepção.</span></div>'}else{state=`<div class="result-warning"><b>⚠ Estado: ${esc(g.rsvp_status)}</b><span>Este convidado ainda não confirmou a presença.</span></div>`}box.innerHTML=`<div class="guest-result-inner"><div class="guest-main"><p class="eyebrow">Convidado</p><h2>${esc(g.full_name)}</h2><div class="guest-meta"><span><b>${esc(g.code)}</b></span><span>${people} pessoa(s)</span><span>Permitido: ${g.allowed_guests}</span></div>${g.table_name?`<div class="assigned-table"><small>MESA</small><strong>${esc(g.table_name)}</strong><span>${g.table_capacity?`Capacidade ${g.table_capacity} lugares`:''}</span></div>`:'<div class="assigned-table no-table"><small>ASSENTO</small><strong>Mesa ainda não atribuída</strong></div>'}${state}</div><div class="guest-action">${g.checked_in?'<button class="button secondary" id="again">Próximo convidado</button>':`<button class="button reception-confirm" id="confirm">Confirmar entrada</button>`}</div></div>`;box.classList.remove('hidden');A('#again')?.addEventListener('click',next);A('#confirm')?.addEventListener('click',()=>confirmEntry(g.id));}
+function render(g){const box=A('#result');if(!g){box.classList.add('hidden');return}const people=1+(g.companion_count||0);let state;if(g.checked_in){state=`<div class="result-already"><b>✓ Entrada já registada</b><span>${g.checked_in_at?new Date(g.checked_in_at).toLocaleString('pt-PT'):''}</span></div>`}else if(g.rsvp_status==='confirmed'){state='<div class="result-valid"><b>✓ Presença confirmada</b><span>Convite válido para a recepção.</span></div>'}else{state=`<div class="result-warning"><b>⚠ Estado: ${esc(g.rsvp_status)}</b><span>Este convidado ainda não confirmou a presença.</span></div>`}box.innerHTML=`<div class="guest-result-inner"><div class="guest-main"><p class="eyebrow">Convidado</p><h2>${esc(g.full_name)}</h2><div class="guest-meta"><span><b>${esc(g.code)}</b></span><span>${people} pessoa(s)</span><span>Permitido: ${g.allowed_guests ?? people}</span></div>${g.table_name?`<div class="assigned-table"><small>MESA</small><strong>${esc(g.table_name)}</strong><span>${g.table_capacity?`Capacidade ${g.table_capacity} lugares`:''}</span></div>`:'<div class="assigned-table no-table"><small>ASSENTO</small><strong>Mesa ainda não atribuída</strong></div>'}${state}</div><div class="guest-action">${g.checked_in?'<button class="button secondary" id="again">Próximo convidado</button>':`<button class="button reception-confirm" id="confirm">Confirmar entrada · ${people} ${people===1?'pessoa':'pessoas'}</button>`}</div></div>`;box.classList.remove('hidden');A('#again')?.addEventListener('click',next);A('#confirm')?.addEventListener('click',()=>confirmEntry(g.id));}
+function normalizeSearchValue(value){return String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-PT').replace(/\s+/g,' ').trim()}
 async function search(raw){
  const key=String(raw||'').trim();
  if(!key){toast('Introduza o nome ou código do convite.');A('#code').focus();return}
- const q=key.toLocaleLowerCase('pt-PT');
- const exactCode=guests.find(x=>String(x.code||'').toLocaleLowerCase('pt-PT')===q);
- const exactName=guests.find(x=>String(x.full_name||'').toLocaleLowerCase('pt-PT')===q);
+ const q=normalizeSearchValue(key);
+ const exactCode=guests.find(x=>normalizeSearchValue(x.code)===q);
+ const exactName=guests.find(x=>normalizeSearchValue(x.full_name)===q);
  if(exactCode||exactName){render(exactCode||exactName);return}
- const matches=guests.filter(x=>String(x.full_name||'').toLocaleLowerCase('pt-PT').includes(q)||String(x.code||'').toLocaleLowerCase('pt-PT').includes(q));
- if(matches.length===0){render(null);toast('Nenhum convidado encontrado.');return}
+ const matches=guests.filter(x=>normalizeSearchValue(x.full_name).includes(q)||normalizeSearchValue(x.code).includes(q));
+ if(matches.length===0){renderSearchEmpty(key);return}
  if(matches.length===1){render(matches[0]);return}
  renderSearchMatches(matches);
 }
+function renderSearchEmpty(query){const box=A('#result');if(!box)return;box.innerHTML=`<div class=\"search-matches search-empty-state\"><p class=\"eyebrow\">SEM RESULTADOS</p><h2>Não encontrámos este convidado</h2><p>Não existe uma correspondência para <strong>${esc(query)}</strong>.</p><div class=\"search-empty-actions\"><button type=\"button\" class=\"button secondary\" id=\"retrySearch\">Tentar novamente</button></div></div>`;box.classList.remove('hidden');A('#retrySearch')?.addEventListener('click',()=>{A('#code').focus();A('#code').select()})}
 function renderSearchMatches(matches){
  const box=A('#result');
  if(!box)return;
@@ -126,21 +129,23 @@ A('#loginForm').onsubmit=async e=>{e.preventDefault();const {error}=await supaba
 let liveRefreshTimer=null;
 function startLiveRefresh(){clearInterval(liveRefreshTimer);liveRefreshTimer=setInterval(async()=>{if(document.visibilityState==='visible'){const ok=await loadGuests();if(!ok)clearInterval(liveRefreshTimer);else if(protocolRole==='chief')await loadChiefTools()}},15000)}
 A('#logout').onclick=async()=>{try{sessionStorage.removeItem('protocolToken');sessionStorage.removeItem('protocolName');sessionStorage.removeItem('protocolRole')}catch(_){}await supabaseClient.auth.signOut();location.reload()};A('#search').onclick=()=>search(A('#code').value);A('#code').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();search(e.target.value)}});
-A('#startScanner').onclick=async()=>{if(!window.Html5Qrcode){toast('Leitor QR indisponível.');return}if(scanner)return;A('#reader').classList.remove('hidden');A('#startScanner').classList.add('hidden');A('#stopScanner').classList.remove('hidden');scanner=new Html5Qrcode('reader');try{await scanner.start({facingMode:'environment'},{fps:12,qrbox:{width:260,height:260}},text=>{let code=text;try{const u=new URL(text);code=u.searchParams.get('convite')||text}catch(_){}A('#code').value=code;search(code);stopScanner()},()=>{})}catch(e){toast('Não foi possível abrir a câmara. Verifique a permissão.');stopScanner()}};
-async function stopScanner(){if(scanner){try{await scanner.stop()}catch(_){}try{scanner.clear()}catch(_){}scanner=null}A('#reader').classList.add('hidden');A('#startScanner').classList.remove('hidden');A('#stopScanner').classList.add('hidden')};A('#stopScanner').onclick=stopScanner;
+A('#recentPublicToggle')?.addEventListener('click',()=>{showAllRecent=!showAllRecent;const b=A('#recentPublicToggle');if(b)b.textContent=showAllRecent?'Ver menos':'Ver todos';renderPublicRecent();});
+let scanLocked=false;
+A('#startScanner').onclick=async()=>{if(!window.Html5Qrcode){toast('Leitor QR indisponível.');return}if(scanner)return;scanLocked=false;A('#reader').classList.remove('hidden');A('#startScanner').classList.add('hidden');A('#stopScanner').classList.remove('hidden');scanner=new Html5Qrcode('reader');try{await scanner.start({facingMode:'environment'},{fps:12,qrbox:(w,h)=>{const size=Math.max(180,Math.min(280,Math.floor(Math.min(w,h)*.72)));return {width:size,height:size}}},async text=>{if(scanLocked)return;scanLocked=true;let code=text;try{const u=new URL(text,location.href);code=u.searchParams.get('convite')||u.searchParams.get('code')||text}catch(_){}A('#code').value=code;await search(code);await stopScanner() },()=>{})}catch(e){toast('Não foi possível abrir a câmara. Verifique a permissão.');await stopScanner()}};
+async function stopScanner(){scanLocked=false;if(scanner){try{await scanner.stop()}catch(_){}try{scanner.clear()}catch(_){}scanner=null}A('#reader')?.classList.add('hidden');A('#startScanner')?.classList.remove('hidden');A('#stopScanner')?.classList.add('hidden')};A('#stopScanner').onclick=stopScanner;
 init();
 
 async function loadChiefTools(){
- const [team,tasks,status]=await Promise.all([
+ const [team,tasks,teamStatus,tablesStatus]=await Promise.all([
    supabaseClient.rpc('chief_list_protocols',{p_token:protocolToken}),
    supabaseClient.rpc('chief_list_tasks',{p_token:protocolToken}),
    supabaseClient.rpc('chief_reception_team',{p_token:protocolToken}),
    supabaseClient.rpc('chief_reception_tables',{p_token:protocolToken})
  ]);
- if(team.error||tasks.error){toast((team.error||tasks.error).message);return}
+ if(team.error||tasks.error||teamStatus.error||tablesStatus.error){toast((team.error||tasks.error||teamStatus.error||tablesStatus.error).message);return}
  chiefTeam=team.data||[];chiefTasks=tasks.data||[];
- chiefTables=status.data||[];
- if(!status.error) renderChiefReceptionStatus(status.data||[]);
+ chiefTables=tablesStatus.data||[];
+ renderChiefReceptionStatus(teamStatus.data||[]);
  renderChiefTools();
 }
 function renderChiefReceptionStatus(teamStatus){
@@ -200,6 +205,7 @@ window.openChiefTable=async tableId=>{
  meta.textContent=`${Number(table.arrived_people||0)} de ${Number(table.invited_people||0)} pessoa(s) já chegaram · capacidade ${table.capacity||'—'}`;
  body.innerHTML='<div class="loading-state">A carregar convidados…</div>';
  modal.classList.add('is-open');
+ modal.setAttribute('aria-hidden','false');
  document.body.classList.add('modal-open');
  const r=await supabaseClient.rpc('chief_table_guests',{p_token:protocolToken,p_table_id:tableId});
  if(r.error){body.innerHTML=`<div class="empty-state">Não foi possível carregar os convidados.<br><small>${esc(r.error.message)}</small></div>`;return}
@@ -210,7 +216,7 @@ window.openChiefTable=async tableId=>{
    return `<div class="table-guest-row"><div class="table-guest-main"><b>${esc(g.full_name)}</b><small>${esc(g.code)} · ${people} pessoa(s) · ${g.rsvp_status==='confirmed'?'Presença confirmada':esc(g.rsvp_status||'')}</small></div>${status}</div>`;
  }).join('')||'<div class="empty-state">Não existem convidados atribuídos a esta mesa.</div>';
 };
-window.closeChiefTable=()=>{A('#chiefTableModal')?.classList.remove('is-open');document.body.classList.remove('modal-open')};
+window.closeChiefTable=()=>{const m=A('#chiefTableModal');m?.classList.remove('is-open');m?.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open')};
 
 function renderChiefGuestSearch(g){
  const box=A('#chiefGuestSearchResult'); if(!box)return;
@@ -265,3 +271,27 @@ A('#chiefTaskForm')?.addEventListener('submit',async e=>{e.preventDefault();cons
 window.chiefToggleTask=async(id,done)=>{const r=await supabaseClient.rpc('chief_toggle_task',{p_token:protocolToken,p_task_id:id,p_completed:done});if(r.error){toast(r.error.message);return}await loadChiefTools()};
 window.chiefDeleteTask=async id=>{if(!confirm('Remover esta tarefa?'))return;const r=await supabaseClient.rpc('chief_delete_task',{p_token:protocolToken,p_task_id:id});if(r.error){toast(r.error.message);return}await loadChiefTools()};
 A('#chiefAddProtocol')?.addEventListener('click',async()=>{const name=prompt('Nome completo do novo protocolo:');if(!name)return;const phone=prompt('WhatsApp (opcional):')||'';const code=prompt('Código de acesso:');if(!code)return;const pin=prompt('PIN (mínimo 4 dígitos):');if(!pin)return;const r=await supabaseClient.rpc('chief_create_protocol',{p_token:protocolToken,p_full_name:name,p_whatsapp:phone,p_access_code:code,p_pin:pin});if(r.error){toast(r.error.message);return}await loadChiefTools();toast('Novo protocolo criado.')});
+
+
+(function initReceptionUX(){
+ const more=A('#mobileReceptionMore'), sheet=A('#receptionMoreSheet'), closeMore=A('#receptionMoreClose'), profile=A('#mobileOpenProfile'), admin=A('#mobileOpenAdmin'), logout=A('#mobileReceptionLogout');
+ const setMore=open=>{if(!sheet||!more)return;sheet.classList.toggle('hidden',!open);sheet.setAttribute('aria-hidden',open?'false':'true');more.setAttribute('aria-expanded',open?'true':'false');if(open)closeMore?.focus()};
+ more?.addEventListener('click',()=>setMore(sheet?.classList.contains('hidden')));
+ closeMore?.addEventListener('click',()=>setMore(false));
+ sheet?.addEventListener('click',e=>{if(e.target?.dataset?.closeMore)setMore(false)});
+ profile?.addEventListener('click',()=>{setMore(false);openOperatorProfile()});
+ logout?.addEventListener('click',()=>{setMore(false);A('#logout')?.click()});
+ admin?.addEventListener('click',()=>setMore(false));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')setMore(false)});
+ const nav=document.querySelector('.reception-mobile-nav');
+ nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.querySelectorAll('a').forEach(a=>a.classList.remove('active'));link.classList.add('active')}));
+})();
+
+(function improveModalA11y(){
+ const modal=A('#operatorProfileModal');if(!modal)return;
+ const sync=()=>{const open=!modal.classList.contains('hidden');modal.setAttribute('aria-hidden',open?'false':'true')};
+ sync();
+ new MutationObserver(sync).observe(modal,{attributes:true,attributeFilter:['class']});
+})();
+
+window.addEventListener('pagehide',()=>{if(scanner){stopScanner()}});
