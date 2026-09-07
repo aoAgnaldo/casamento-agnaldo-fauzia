@@ -2758,24 +2758,95 @@ body.admin-body .gifts-admin-view .gift-pagination{position:relative!important;z
 }
 @media (min-width:721px){.reception-recent-mobile,.reception-mobile-nav{display:none!important}}
 
-
-/* V6.72 — capa pública: composição do título mobile alinhada à referência aprovada */
-.hero h2 span { display: block; }
+/* V6.72 — abertura mobile alinhada à referência aprovada.
+   Apenas o ecrã inicial em mobile é alterado; desktop permanece intacto. */
 @media (max-width: 800px) {
-  .hero h2 {
-    width: min(76vw, 330px);
-    max-width: 76vw;
-    font-size: clamp(3.45rem, 16.5vw, 5.05rem);
-    line-height: .80;
-    letter-spacing: -.048em;
+  .intro-screen {
+    position: fixed;
+    inset: 0;
+    min-height: 100svh;
+    height: 100svh;
+    padding: 0;
+    display: block;
+    overflow: hidden;
   }
-  .hero h2 span { display: block; }
-  .hero h2 i { display: block; white-space: nowrap; }
+
+  .intro-mark {
+    position: absolute;
+    top: 1.4rem;
+    left: 50%;
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    transform: translateX(-50%);
+    opacity: .68;
+  }
+
+  .intro-screen .eyebrow {
+    position: absolute;
+    top: 21.5%;
+    left: 8vw;
+    right: 8vw;
+    margin: 0;
+    font-size: 8px;
+    line-height: 1.4;
+    letter-spacing: .27em;
+  }
+
+  .intro-screen h1 {
+    position: absolute;
+    top: 30.5%;
+    left: 5vw;
+    right: 5vw;
+    margin: 0;
+    max-width: none;
+    font-size: clamp(3.25rem, 16vw, 4.35rem);
+    line-height: .78;
+    letter-spacing: -.05em;
+    text-align: center;
+  }
+
+  .intro-screen .intro-note {
+    position: absolute;
+    top: 55%;
+    left: 12vw;
+    right: 12vw;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .intro-screen .open-button {
+    position: absolute;
+    left: 50%;
+    bottom: 10.5%;
+    margin: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    padding: .75rem 1rem;
+    font-size: 9px;
+    letter-spacing: .19em;
+  }
+
+  .intro-screen .intro-date {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 3.2%;
+    margin: 0;
+    font-size: 8px;
+    letter-spacing: .28em;
+  }
 }
-@media (max-width: 420px) {
-  .hero h2 {
-    width: 72vw;
-    max-width: 72vw;
-    font-size: clamp(3.25rem, 16.2vw, 4.7rem);
+
+@media (max-width: 360px) {
+  .intro-screen h1 {
+    font-size: clamp(3rem, 16vw, 3.7rem);
+  }
+  .intro-screen .intro-note {
+    left: 10vw;
+    right: 10vw;
+    font-size: .92rem;
   }
 }
