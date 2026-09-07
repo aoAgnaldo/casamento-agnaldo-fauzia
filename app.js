@@ -55,11 +55,13 @@ function setMusic(on){
 function openInvitation(){
   intro?.classList.add('intro-screen--hidden');
   document.body.classList.remove('intro-locked');
+  document.documentElement.classList.remove('intro-locked');
   setTimeout(()=>setMusic(true),500);
 }
 openInvite?.addEventListener('click',openInvitation);
 musicButton?.addEventListener('click',()=>setMusic(!musicPlaying));
 document.body.classList.add('intro-locked');
+document.documentElement.classList.add('intro-locked');
 
 const menuToggle=$('#menuToggle'), navLinks=$('#navLinks');
 menuToggle?.addEventListener('click',()=>navLinks.classList.toggle('nav-links--open'));

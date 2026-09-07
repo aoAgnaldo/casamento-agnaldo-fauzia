@@ -190,16 +190,6 @@ function highlightChiefTable(tableId, scroll=true){
 }
 
 
-function highlightChiefTable(tableId, scroll=true){
- const box=A('#chiefTablesGrid');
- if(!box)return;
- box.querySelectorAll('.chief-table-card.is-highlighted').forEach(el=>el.classList.remove('is-highlighted'));
- const card=box.querySelector(`.chief-table-card[data-table-id="${String(tableId)}"]`);
- if(!card)return;
- card.classList.add('is-highlighted');
- if(scroll) card.scrollIntoView({behavior:'smooth',block:'center'});
- window.setTimeout(()=>card.classList.remove('is-highlighted'),5000);
-}
 
 window.openChiefTable=async tableId=>{
  const modal=A('#chiefTableModal'), title=A('#chiefTableModalTitle'), meta=A('#chiefTableModalMeta'), body=A('#chiefTableModalBody');
