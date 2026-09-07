@@ -25,8 +25,8 @@
 </header>
 <main class="wedy-main reception-main" id="recepcao">
 <section class="dashboard-grid reception-grid">
-  <div class="dashboard-left"><article class="wedy-card reception-hero-card"><div class="reception-hero-top"><div><p class="section-kicker">RECEPÇÃO</p><h1>Check-in dos convidados</h1></div><div class="reception-date-badge"><span>SÁB</span><strong>29</strong><small>MAI 2027</small></div></div><p class="reception-hero-sub">Confirme a entrada de forma rápida e segura.</p><div class="reception-hero-line"></div><p class="small muted">Leia o QR Code ou pesquise pelo nome, telefone ou código do convite.</p></article></div>
-  <div class="dashboard-right"><article class="wedy-card scanner-card" id="scanner"><div class="card-head"><div><p class="section-kicker">ENTRADA</p><h2>Ler convite</h2><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="scanner-actions"><button class="button reception-primary" id="startScanner">▣ Ler QR Code</button><button class="button secondary hidden" id="stopScanner">Parar leitura</button></div><div id="reader" class="reception-reader hidden"></div><div class="manual-reception"><div class="manual-reception-field"><span aria-hidden="true">⌕</span><input id="code" placeholder="Nome, telefone ou código…" autocomplete="off" autofocus></div><button class="button" id="search">Pesquisar convidado</button></div><p class="scan-hint">Pode pesquisar pelo nome completo, telefone ou código. Um leitor QR externo também pode preencher este campo.</p></article></div>
+  <div class="dashboard-left"><article class="wedy-card reception-hero-card"><p class="section-kicker">RECEPÇÃO</p><h1>Check-in dos<br>convidados</h1><p class="muted">29 de Maio de 2027</p><div class="reception-hero-line"></div><p class="small muted">Use o QR Code do convite ou pesquise pelo código para confirmar a entrada.</p></article></div>
+  <div class="dashboard-right"><article class="wedy-card scanner-card" id="scanner"><div class="card-head"><div><p class="section-kicker">ENTRADA</p><h2>Ler convite</h2><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="scanner-actions"><button class="button reception-primary" id="startScanner">▣ Ler QR Code</button><button class="button secondary hidden" id="stopScanner">Parar leitura</button></div><div id="reader" class="reception-reader hidden"></div><div class="manual-reception"><input id="code" placeholder="Pesquisar por nome ou código do convite…" autocomplete="off" autofocus><button class="button" id="search">Pesquisar</button></div><p class="scan-hint">Pesquise pelo nome completo ou pelo código. Também pode usar um leitor de QR externo que preencha este campo.</p></article></div>
 </section>
 <section id="result" class="guest-result hidden"></section>
 <section class="reception-counter wedy-reception-stats" id="entrada" aria-label="Resumo da recepção"><div><span>CONVIDADOS</span><strong id="countConfirmed">0</strong><small>confirmados</small></div><div><span>ENTRARAM</span><strong id="countIn">0</strong><small>convites registados</small></div><div><span>POR CHEGAR</span><strong id="countPending">0</strong><small>confirmados</small></div><div><span>PESSOAS</span><strong id="countPeople">0</strong><small>pessoas presentes</small></div></section>
@@ -70,37 +70,7 @@
   <article class="chief-tools-card"><div class="chief-card-head"><div><p class="section-kicker">ACOMPANHAMENTO</p><h3>Tarefas atribuídas</h3><p class="muted">Acompanhe o progresso de toda a equipa.</p></div></div><div id="chiefTaskList" class="chief-scroll-list chief-task-list"></div></article>
 </section>
 
-</main><nav class="reception-mobile-nav" aria-label="Navegação da recepção"><a class="active" href="#recepcao"><span>⌂</span><small>Painel</small></a><a href="#scanner"><span>⌾</span><small>Check-in</small></a><a href="#entrada"><span>♙</span><small>Entradas</small></a><a href="#myTasks"><span>✓</span><small>Tarefas</small></a><button type="button" id="mobileReceptionMore"><span>•••</span><small>Mais</small></button></nav><div class="reception-more-backdrop" id="receptionMoreBackdrop"></div><div class="reception-more-sheet" id="receptionMoreSheet" aria-hidden="true"><button type="button" data-more-target="#liveDashboard" id="mobileMoreLive"><span>◉</span><div><strong>Estado da recepção</strong><small>Acompanhar entradas e mesas</small></div></button><button type="button" data-more-target="#chiefTools" id="mobileMoreChief"><span>♧</span><div><strong>Comando da equipa</strong><small>Protocolos, tarefas e mesas</small></div></button><button type="button" data-more-target="#operatorProfileToggle" id="mobileMoreProfile"><span>◯</span><div><strong>Meu perfil</strong><small>Nome e fotografia</small></div></button><button type="button" id="mobileMoreAdmin"><span>↗</span><div><strong>Painel administrativo</strong><small>Gestão completa do casamento</small></div></button></div><div id="toastArea"></div><script>
-(function(){
-  const more=document.getElementById('mobileReceptionMore');
-  const sheet=document.getElementById('receptionMoreSheet');
-  const backdrop=document.getElementById('receptionMoreBackdrop');
-  const nav=document.querySelector('.reception-mobile-nav');
-  if(!more||!sheet||!backdrop||!nav) return;
-  const close=()=>{sheet.classList.remove('is-open');backdrop.classList.remove('is-open');sheet.setAttribute('aria-hidden','true');more.classList.remove('active');};
-  const open=()=>{sheet.classList.add('is-open');backdrop.classList.add('is-open');sheet.setAttribute('aria-hidden','false');more.classList.add('active');};
-  more.addEventListener('click',()=>sheet.classList.contains('is-open')?close():open());
-  backdrop.addEventListener('click',close);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    close(); nav.querySelectorAll('a').forEach(x=>x.classList.remove('active')); a.classList.add('active');
-    const id=a.getAttribute('href'); const el=id&&document.querySelector(id); if(el){setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),0);}
-  }));
-  document.querySelectorAll('.reception-more-sheet [data-more-target]').forEach(btn=>btn.addEventListener('click',()=>{
-    const target=btn.getAttribute('data-more-target'); const el=target&&document.querySelector(target); close();
-    if(el){if(el.classList.contains('hidden')) el.classList.remove('hidden'); setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),0);}
-  }));
-  const profile=document.getElementById('mobileMoreProfile');
-  if(profile) profile.addEventListener('click',()=>{close();document.getElementById('operatorProfileToggle')?.click();});
-  const admin=document.getElementById('mobileMoreAdmin');
-  if(admin) admin.addEventListener('click',()=>{window.location.href='admin.html';});
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{if(!entry.isIntersecting) return; const id='#'+entry.target.id; nav.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id));});
-  },{rootMargin:'-25% 0px -60% 0px',threshold:0});
-  ['recepcao','scanner','recentPublic','myTasks'].forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el);});
-})();
-</script>
-<script>
+</main><nav class="reception-mobile-nav" aria-label="Navegação da recepção"><a class="active" href="#recepcao"><span>⌂</span><small>Painel</small></a><a href="#scanner"><span>⌾</span><small>Check-in</small></a><a href="#entrada"><span>♙</span><small>Entradas</small></a><a href="#myTasks"><span>✓</span><small>Tarefas</small></a><button type="button" id="mobileReceptionMore"><span>•••</span><small>Mais</small></button></nav><div id="toastArea"></div><script>
 (function(){const b=document.getElementById('receptionMenuToggle'),n=document.querySelector('.wedy-nav');if(b&&n){b.addEventListener('click',()=>{const open=n.classList.toggle('is-open');b.setAttribute('aria-expanded',open?'true':'false');});n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{n.classList.remove('is-open');b.setAttribute('aria-expanded','false');}));document.addEventListener('keydown',e=>{if(e.key==='Escape'){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');}})}})();
 </script><div id="operatorProfileModal" class="modal hidden">
   <div class="modal-box operator-profile-modal-box">
