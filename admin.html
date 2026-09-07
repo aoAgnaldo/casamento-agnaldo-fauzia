@@ -536,16 +536,15 @@ body.admin-body.admin-modal-open .admin-menu-panel {
 <div class="admin-sidebar-backdrop" id="adminSidebarBackdrop" aria-hidden="true"></div>
 <aside class="admin-dashboard-sidebar">
       <div class="admin-sidebar-brand"><img src="monogram.svg" alt="A & F"><div><strong>Agnaldo & Fáuzia</strong><small>29 de Maio de 2027</small></div></div>
-      <nav aria-label="Navegação do painel administrativo" class="admin-sidebar-nav">
+      <div class="admin-sidebar-section-label"><strong>Painel Principal</strong></div>
+      <nav aria-label="Painel principal" class="admin-sidebar-nav">
         <a class="active" href="#visao-geral"><span class="nav-icon">▦</span><span>Painel Principal</span></a>
         <a href="#convidados"><span class="nav-icon">♙</span><span>Convidados</span></a>
         <a href="#mesas"><span class="nav-icon">♧</span><span>Mesas</span></a>
         <a href="#presentes"><span class="nav-icon">◇</span><span>Presentes</span></a>
+        <a class="sidebar-parent-link" href="#protocolos" aria-expanded="true"><span class="nav-icon">♙</span><span>Protocolos</span><span class="sidebar-chevron">⌄</span></a>
       </nav>
-
-      <div class="admin-sidebar-group-title"><span>◉</span><strong>Protocolos</strong></div>
-      <nav class="admin-sidebar-subnav admin-sidebar-operations" aria-label="Operações de protocolo">
-        <a href="#protocolos"><span class="nav-icon">♙</span><span>Equipa / Protocolos</span></a>
+      <nav class="admin-sidebar-subnav admin-sidebar-operations" aria-label="Funções de protocolos">
         <a href="#checkin"><span class="nav-icon">✓</span><span>Recepção</span></a>
         <a href="checkin.html"><span class="nav-icon">▦</span><span>Check-in</span></a>
       </nav>
@@ -615,7 +614,30 @@ body.admin-body.admin-modal-open .admin-menu-panel {
 
 <section class="wedy-section admin-view-section" id="convidados"><div class="section-title-row"><div><p class="section-kicker">CONVIDADOS</p><h2>Lista de convidados</h2><p class="muted">Pesquise, filtre, edite e acompanhe cada convite.</p></div><div class="section-actions"><button class="icon-btn ui-icon-btn" type="button" id="adminExportTrigger" aria-label="Exportar convidados" title="Exportar convidados" data-tooltip="Exportar convidados">⇩</button><button class="icon-btn ui-icon-btn" type="button" id="adminImportTrigger" aria-label="Importar convidados por CSV" title="Importar convidados por CSV" data-tooltip="Importar convidados por CSV">⇧</button><button class="button" id="addBtn2" type="button">＋ Adicionar convite</button></div><div class="hidden" aria-hidden="true"><button type="button" id="addBtn"></button><button type="button" id="exportBtn"></button><button type="button" id="csvBtn"></button><input id="csvFile" type="file" accept=".csv"></div></div><div class="guest-tools"><div class="guest-search"><span>⌕</span><input id="guestSearch" type="search" placeholder="Pesquisar por nome, código ou WhatsApp…"></div><div class="guest-filters"><button class="guest-filter active" data-guest-filter="all">Todos</button><button class="guest-filter" data-guest-filter="confirmed">Confirmados</button><button class="guest-filter" data-guest-filter="pending">Pendentes</button><button class="guest-filter" data-guest-filter="declined">Recusados</button><button class="guest-filter" data-guest-filter="checked">Já entraram</button><button class="guest-filter" data-guest-filter="waiting">Por entrar</button></div></div><div id="guestCount" class="guest-count"></div><div class="guest-list-scroll guest-card-list" id="guestRows"></div></section>
 
-  <section class="wedy-section admin-view-section" id="presentes"><div class="section-title-row"><div><p class="section-kicker">PRESENTES</p><h2>Lista de presentes</h2><p class="muted">Adicione, edite ou remova presentes e respectivas fotografias.</p></div><button class="button" id="addGiftBtn">＋ Adicionar presente</button></div><div class="table-wrap gift-list-scroll"><table class="table"><thead><tr><th>Foto</th><th>#</th><th>Presente</th><th>Estado</th><th>Reservado por</th><th>Acções</th></tr></thead><tbody id="giftRows"></tbody></table></div></section>
+  <section class="wedy-section admin-view-section gifts-admin-view" id="presentes">
+  <div class="section-title-row gifts-title-row">
+    <div><p class="section-kicker">PRESENTES</p><h2>Lista de presentes</h2><p class="muted">Adicione, edite ou remova presentes e respectivas fotografias.</p></div>
+    <button class="button gifts-add-btn" id="addGiftBtn" type="button"><span aria-hidden="true">＋</span> Adicionar presente</button>
+  </div>
+  <div class="gift-stats" aria-label="Resumo da lista de presentes">
+    <article class="gift-stat-card"><span class="gift-stat-icon">♧</span><div><strong id="giftStatTotal">0</strong><small>Total de presentes</small></div></article>
+    <article class="gift-stat-card"><span class="gift-stat-icon success">✓</span><div><strong id="giftStatReserved">0</strong><small>Presentes reservados</small><div class="gift-stat-progress"><i id="giftStatReservedBar"></i><b id="giftStatReservedPct">0%</b></div></div></article>
+    <article class="gift-stat-card"><span class="gift-stat-icon available">◇</span><div><strong id="giftStatAvailable">0</strong><small>Presentes disponíveis</small><div class="gift-stat-progress available"><i id="giftStatAvailableBar"></i><b id="giftStatAvailablePct">0%</b></div></div></article>
+    <article class="gift-stat-card"><span class="gift-stat-icon heart">♡</span><div><strong id="giftStatRate">0%</strong><small>Taxa de reservas</small></div></article>
+  </div>
+  <div class="gift-tools" role="region" aria-label="Filtros de presentes">
+    <div class="gift-search"><span aria-hidden="true">⌕</span><input id="giftSearch" type="search" placeholder="Pesquisar presente…" aria-label="Pesquisar presente"></div>
+    <select id="giftStatusFilter" aria-label="Filtrar por estado"><option value="all">Todos os estados</option><option value="reserved">Reservados</option><option value="available">Disponíveis</option></select>
+    <select id="giftSort" aria-label="Ordenar presentes"><option value="number">Ordenar: Número</option><option value="name">Ordenar: Nome</option><option value="status">Ordenar: Estado</option></select>
+    <div class="gift-view-toggle" role="group" aria-label="Visualização">
+      <button type="button" id="giftViewGrid" class="ui-icon-btn" aria-label="Ver em grelha" title="Ver em grelha" data-tooltip="Ver em grelha">▦</button>
+      <button type="button" id="giftViewList" class="ui-icon-btn active" aria-label="Ver em lista" title="Ver em lista" data-tooltip="Ver em lista">☷</button>
+    </div>
+  </div>
+  <div class="gift-list-meta"><span id="giftCountText">A mostrar 0 presentes</span><span id="giftPageText">Página 1</span></div>
+  <div class="table-wrap gift-list-scroll" id="giftListContainer"><div id="giftRows"></div></div>
+  <div class="gift-pagination" id="giftPagination" aria-label="Paginação de presentes"></div>
+</section>
 <section class="wedy-section admin-extra admin-view-section" id="mesas"><div class="section-title-row"><div><p class="section-kicker">RECEPÇÃO</p><h2>Mesas e lugares</h2><p class="muted">Crie as mesas, defina a capacidade e organize os convidados de forma visual.</p></div><div class="section-actions"><button class="button secondary" id="organizeTablesBtn" type="button">Organizar mesas</button><button class="button" id="addTableBtn" type="button">＋ Adicionar mesa</button></div></div><div class="seating-summary" id="seatingSummary"></div><div class="seating-layout"><div class="table-list" id="tableList"></div><div class="unassigned-panel"><div class="section-admin-head"><div><h3>Convidados sem mesa</h3><p class="muted">Escolha uma mesa para cada convidado que ainda não tem lugar.</p></div></div><div id="unassignedGuests"></div></div></div></section><section class="wedy-section admin-extra admin-view-section" id="protocolos"><div class="section-title-row"><div><p class="section-kicker">EQUIPA</p><h2>Protocolos</h2><p class="muted">Adicione pessoas da equipa que terão acesso ao painel de recepção.</p></div><button class="button" id="addProtocolBtn">＋ Adicionar protocolo</button></div><div class="protocol-grid" id="protocolList"></div></section>
 <section class="wedy-section admin-extra admin-view-section" id="tarefas"><div class="section-title-row"><div><p class="section-kicker">PLANEAMENTO</p><h2>Tarefas</h2><p class="muted">Organize o que precisa de ser feito em cada dia até ao casamento.</p></div><div class="section-actions"><button class="button secondary" type="button" id="taskTodayBtn">Hoje</button><button class="button" type="button" id="addPlanningTaskBtn">＋ Adicionar tarefa</button></div></div><div class="planning-task-board"><article class="planning-focus-card"><div class="planning-focus-head"><div><span class="planning-date-label">HOJE</span><h3>Prioridades do dia</h3><p>Use esta área para acompanhar o que precisa de ser concluído.</p></div><span class="planning-focus-icon">✓</span></div><div id="planningTaskList" class="planning-task-list"><label class="planning-task-item"><input type="checkbox"><span><strong>Rever convidados sem mesa</strong><small>Confirmar distribuição e capacidade das mesas</small></span><time>Hoje</time></label><label class="planning-task-item"><input type="checkbox"><span><strong>Confirmar equipa de protocolo</strong><small>Verificar acessos e responsáveis da recepção</small></span><time>Hoje</time></label><label class="planning-task-item"><input type="checkbox"><span><strong>Rever lista de presentes</strong><small>Confirmar itens, fotografias e disponibilidade</small></span><time>Hoje</time></label><label class="planning-task-item"><input type="checkbox"><span><strong>Rever conteúdo do convite</strong><small>Confirmar capa, história, programa e detalhes</small></span><time>Hoje</time></label></div></article><aside class="planning-guidance-card"><span class="planning-guidance-kicker">COMO USAR</span><h3>Um passo de cada vez.</h3><p>As tarefas de planeamento devem ajudar-nos a saber o que fazer, quem é responsável e o que já foi concluído.</p><div class="planning-principles"><span>Prioridade</span><span>Responsável</span><span>Prazo</span><span>Estado</span></div></aside></div></section>
 </main></div>
@@ -786,6 +808,166 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
   document.addEventListener('keydown',()=>setTimeout(sync,0),true);
 })();
 </script>
+
+<style id="v655-navigation-final">
+body.admin-body .admin-sidebar-section-label{
+  margin:8px 8px 5px!important;padding:10px 2px 4px!important;
+  color:#8e5e4d!important;font-size:.58rem!important;letter-spacing:.08em!important;text-transform:uppercase!important;
+}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav{gap:2px!important;}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav .sidebar-parent-link{position:relative!important;}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav .sidebar-parent-link .sidebar-chevron{margin-left:auto!important;font-size:11px!important;color:#a79d96!important;}
+body.admin-body .admin-sidebar-operations{padding-left:12px!important;margin-top:-1px!important;}
+body.admin-body .admin-sidebar-operations a{padding-left:11px!important;border-left:1px solid #eee6e0!important;border-radius:0 8px 8px 0!important;}
+body.admin-body .admin-sidebar-operations a:hover{border-left-color:#d9c7bf!important;}
+body.admin-body .admin-sidebar-operations a.active{background:#f7f2ee!important;color:#956555!important;}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-content-title{margin-top:13px!important;}
+</style>
+
+
+<style id="v661-gifts-ux-ui">
+/* V6.61 — Presentes: visão geral, pesquisa, filtros, lista/grelha e paginação. */
+body.admin-body .gifts-admin-view .gifts-title-row{align-items:center!important;}
+body.admin-body .gifts-add-btn{min-height:44px!important;padding:11px 17px!important;gap:7px!important;}
+body.admin-body .gift-stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 18px;}
+body.admin-body .gift-stat-card{display:flex;align-items:center;gap:12px;min-width:0;padding:15px 16px;border:1px solid #e7dfd8;border-radius:15px;background:#fffdfb;box-shadow:0 7px 22px rgba(53,43,37,.035);}
+body.admin-body .gift-stat-icon{width:38px;height:38px;flex:0 0 38px;border-radius:11px;background:#f3ebe6;color:#9b6857;display:grid;place-items:center;font-size:1.05rem;}
+body.admin-body .gift-stat-icon.success{background:#e9f2ec;color:#397357}.gift-stat-icon.available{background:#fff1dc;color:#c18428}.gift-stat-icon.heart{background:#f8ece9;color:#b56355}
+body.admin-body .gift-stat-card strong{display:block;font:600 1.55rem/1 Montserrat,sans-serif;color:#2f2824;}
+body.admin-body .gift-stat-card small{display:block;margin-top:4px;font:.56rem/1.25 Montserrat,sans-serif;color:#8a817a;}
+body.admin-body .gift-stat-progress{display:flex;align-items:center;gap:7px;margin-top:7px;width:100%;min-width:90px;}
+body.admin-body .gift-stat-progress i{display:block;height:6px;flex:1;min-width:35px;background:#28946c;border-radius:999px;position:relative;overflow:hidden;}
+body.admin-body .gift-stat-progress i:after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.7);transform:translateX(var(--gift-progress-rest,0));}
+body.admin-body .gift-stat-progress.available i{background:#e7a52f;}
+body.admin-body .gift-stat-progress b{font:600 .5rem Montserrat,sans-serif;color:#27845f;white-space:nowrap;}
+body.admin-body .gift-stat-progress.available b{color:#b47725;}
+body.admin-body .gift-tools{display:grid;grid-template-columns:minmax(0,1fr) 165px 165px auto;gap:10px;align-items:center;margin:0 0 10px;}
+body.admin-body .gift-search{height:42px;display:flex;align-items:center;gap:8px;padding:0 13px;border:1px solid #e1d9d2;border-radius:11px;background:#fff;box-sizing:border-box;}
+body.admin-body .gift-search span{color:#8c8179}.gift-search input{width:100%;border:0;outline:0;background:transparent;font:400 .68rem Montserrat,sans-serif;color:#302a26;}
+body.admin-body .gift-tools select{height:42px;border:1px solid #e1d9d2;border-radius:11px;background:#fff;padding:0 12px;font:500 .62rem Montserrat,sans-serif;color:#5f564f;outline:none;}
+body.admin-body .gift-view-toggle{display:flex;gap:5px;justify-content:flex-end;}
+body.admin-body .gift-view-toggle .ui-icon-btn{width:42px!important;height:42px!important;border-radius:11px!important;}
+body.admin-body .gift-view-toggle .ui-icon-btn.active{background:#9b6857!important;color:#fff!important;border-color:#9b6857!important;}
+body.admin-body .gift-list-meta{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 9px;font:.56rem Montserrat,sans-serif;color:#8f857e;}
+body.admin-body .gifts-admin-view .gift-list-scroll{border:1px solid #e7dfd8!important;border-radius:15px!important;background:#fff!important;overflow:hidden!important;}
+body.admin-body .gift-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+body.admin-body .gift-table th{padding:12px 13px;background:#faf8f5;border-bottom:1px solid #ebe5df;text-align:left;font:600 .51rem Montserrat,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#857b74;}
+body.admin-body .gift-table td{padding:11px 13px;border-bottom:1px solid #eee8e3;font:.62rem Montserrat,sans-serif;color:#4f4640;vertical-align:middle;}
+body.admin-body .gift-table tr:last-child td{border-bottom:0}.gift-table tr:hover td{background:#fdfbf9;}
+body.admin-body .gift-col-photo{width:70px}.gift-col-no{width:48px}.gift-col-state{width:145px}.gift-col-reserved{width:175px}.gift-col-actions{width:112px}
+body.admin-body .gift-photo{width:48px;height:48px;object-fit:cover;border-radius:10px;display:block;border:1px solid #eee5de;}
+body.admin-body .gift-photo.placeholder{display:grid;place-items:center;background:#f5f1ed;color:#9b8e85;font-size:1rem;}
+body.admin-body .gift-name{font-weight:600;color:#312923;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+body.admin-body .gift-number{color:#8c8179}.gift-reserved-by{color:#716861}.gift-reserved-empty{color:#aaa098;}
+body.admin-body .gift-status{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;font:600 .51rem Montserrat,sans-serif;}
+body.admin-body .gift-status.reserved{background:#e7f3ec;color:#327354}.gift-status.available{background:#fff1de;color:#96621f}
+body.admin-body .gift-actions{display:flex!important;gap:6px!important;align-items:center!important;justify-content:flex-start!important;}
+body.admin-body .gift-actions .ui-icon-btn{width:38px!important;height:38px!important;}
+body.admin-body .gift-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px;}
+body.admin-body .gift-card-item{border:1px solid #e8e0da;border-radius:14px;background:#fff;padding:11px;display:grid;grid-template-columns:58px minmax(0,1fr);gap:10px;}
+body.admin-body .gift-card-item .gift-photo{width:58px;height:58px;}
+body.admin-body .gift-card-main{min-width:0}.gift-card-main .gift-name{margin-bottom:5px}.gift-card-meta{display:flex;flex-wrap:wrap;gap:5px;font:.53rem Montserrat,sans-serif;color:#857c75}.gift-card-meta span{padding:4px 6px;border-radius:7px;background:#f5f1ed;}
+body.admin-body .gift-card-footer{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:1px solid #eee8e3;}
+body.admin-body .gift-card-footer .gift-reserved-by{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:.54rem Montserrat,sans-serif;}
+body.admin-body .gift-pagination{display:flex;justify-content:flex-end;align-items:center;gap:5px;margin-top:10px;}
+body.admin-body .gift-pagination button{min-width:34px;height:34px;border:1px solid #e1d9d2;background:#fff;border-radius:9px;color:#665c55;font:600 .58rem Montserrat,sans-serif;cursor:pointer;}
+body.admin-body .gift-pagination button:hover{background:#f5f0eb}.gift-pagination button.active{background:#9b6857;color:#fff;border-color:#9b6857}.gift-pagination button:disabled{opacity:.45;cursor:default}
+body.admin-body .gift-empty{padding:40px 20px;text-align:center;color:#9b9189;font:.64rem Montserrat,sans-serif;}
+@media(max-width:760px){
+ body.admin-body .gift-stats{grid-template-columns:1fr 1fr;gap:9px;}
+ body.admin-body .gift-stat-card{padding:12px;gap:9px}.gift-stat-icon{width:34px;height:34px;flex-basis:34px}.gift-stat-card strong{font-size:1.3rem}
+ body.admin-body .gift-tools{grid-template-columns:1fr 1fr;gap:8px}.gift-tools .gift-search{grid-column:1/-1}.gift-view-toggle{grid-column:1/-1;justify-content:flex-start!important;}
+ body.admin-body .gift-list-meta{padding-bottom:7px;}
+ body.admin-body .gifts-admin-view .gift-list-scroll{overflow:visible!important;border:0!important;background:transparent!important;}
+ body.admin-body .gift-table{display:block}.gift-table thead{display:none}.gift-table tbody{display:block}.gift-table tr{display:grid;grid-template-columns:58px minmax(0,1fr);gap:8px;border:1px solid #e7dfd8;border-radius:14px;margin:0 0 9px;padding:10px;background:#fff;}
+ body.admin-body .gift-table td{display:block!important;border:0!important;padding:0!important;font-size:.59rem!important;min-width:0;}
+ body.admin-body .gift-table td.gift-photo-cell{grid-row:span 2}.gift-table td:before{display:none!important}
+ body.admin-body .gift-table .gift-state-cell,.gift-table .gift-reserved-cell{margin-top:1px;}
+ body.admin-body .gift-table .gift-actions-cell{grid-column:1/-1;padding-top:8px!important;margin-top:1px!important;border-top:1px solid #eee8e3!important;}
+ body.admin-body .gift-col-no,.gift-col-state,.gift-col-reserved,.gift-col-actions{width:auto}.gift-table .gift-reserved-cell{color:#827970}.gift-table .gift-actions{justify-content:flex-end!important;}
+ body.admin-body .gift-grid{grid-template-columns:1fr;padding:0;gap:9px}.gift-grid .gift-card-item{grid-template-columns:62px minmax(0,1fr);}
+ body.admin-body .gift-pagination{justify-content:center;margin-top:8px;}
+}
+</style>
+
+
+<style id="v664-gifts-real-scroll">
+/* V6.64 — presentes: apenas a vista activa aparece; o cabeçalho fica fixo e só a lista de itens faz scroll. */
+body.admin-body .admin-view-section.gifts-admin-view{display:none!important;}
+body.admin-body .admin-view-section.gifts-admin-view.admin-view-active{display:flex!important;flex-direction:column!important;min-height:0!important;height:100%!important;max-height:100%!important;overflow:hidden!important;}
+
+body.admin-body .gifts-admin-view .gift-list-scroll{
+  flex:1 1 auto!important;
+  min-height:220px!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+  box-sizing:border-box!important;
+  min-width:0!important;
+}
+body.admin-body .gifts-admin-view .gift-list-scroll > #giftRows{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  min-width:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:hidden!important;
+}
+body.admin-body .gifts-admin-view .gift-table{
+  width:100%!important;
+  margin:0!important;
+  table-layout:fixed!important;
+  border-collapse:separate!important;
+  border-spacing:0!important;
+}
+body.admin-body .gifts-admin-view .gift-table thead{
+  display:table!important;
+  width:100%!important;
+  table-layout:fixed!important;
+  position:relative!important;
+  z-index:3!important;
+}
+body.admin-body .gifts-admin-view .gift-table thead th{
+  position:sticky!important;
+  top:0!important;
+  z-index:4!important;
+  background:#faf8f5!important;
+}
+body.admin-body .gifts-admin-view .gift-table tbody{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-width:thin!important;
+  scrollbar-color:#d8cec7 transparent!important;
+}
+body.admin-body .gifts-admin-view .gift-table tbody tr{
+  display:table!important;
+  width:100%!important;
+  table-layout:fixed!important;
+}
+body.admin-body .gifts-admin-view .gift-table th,
+body.admin-body .gifts-admin-view .gift-table td{box-sizing:border-box!important;}
+body.admin-body .gifts-admin-view .gift-pagination{flex:0 0 auto!important;}
+
+/* O conteúdo da página fica sempre contido: não cria uma segunda barra de scroll exterior. */
+@media (min-width:761px){
+  body.admin-body .admin-view-section.gifts-admin-view.admin-view-active{overflow:hidden!important;}
+  body.admin-body .gifts-admin-view .gift-list-scroll{height:clamp(260px,calc(100vh - 360px),560px)!important;flex:0 0 auto!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody{height:100%!important;overflow-y:auto!important;}
+}
+@media (max-width:760px){
+  body.admin-body .admin-view-section.gifts-admin-view.admin-view-active{overflow:hidden!important;}
+  body.admin-body .gifts-admin-view .gift-list-scroll{height:clamp(220px,calc(100dvh - 390px),520px)!important;min-height:220px!important;flex:0 0 auto!important;}
+  body.admin-body .gifts-admin-view .gift-list-scroll > #giftRows{height:100%!important;overflow:hidden!important;}
+  body.admin-body .gifts-admin-view .gift-table{height:100%!important;display:table!important;}
+  body.admin-body .gifts-admin-view .gift-table tbody{height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;}
+}
+</style>
 </body></html><style id="v634-admin-visual">
 /* V6.34 — refinamento visual do painel: mesma estrutura e funcionalidades, apresentação mais leve e editorial. */
 body.admin-body{background:#f5f2ef!important;color:#302a26!important;}
@@ -998,5 +1180,222 @@ body.admin-body .admin-v624-main .carousel-card a{margin-top:auto!important;padd
 .modal-actions #closeModal,
 .toolbar #closeQrModal{
   display:none!important;
+}
+</style>
+<style id="v659-sidebar-restored">
+/* V6.59 — restaurar proporção visual da barra lateral da V6.55. */
+@media (min-width:761px){
+  body.admin-body .admin-dashboard-sidebar{
+    left:22.5vw!important;
+    width:180px!important;
+    top:76px!important;
+    bottom:0!important;
+    padding:25px 13px 20px!important;
+  }
+  body.admin-body .admin-dashboard-main,
+  body.admin-body .admin-view-section{
+    left:180px!important;
+  }
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand{
+    padding:8px 9px 22px!important;
+    margin-bottom:13px!important;
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    gap:9px!important;
+    border-bottom:1px solid #eee7e2!important;
+  }
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand img{
+    width:30px!important;
+    height:30px!important;
+    flex:0 0 30px!important;
+  }
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand > div{min-width:0!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand strong{
+    display:block!important;
+    font-family:'Cormorant Garamond', Georgia, serif!important;
+    font-size:1.02rem!important;
+    line-height:1.05!important;
+    font-weight:600!important;
+    letter-spacing:-.01em!important;
+    color:#352e2a!important;
+    white-space:nowrap!important;
+  }
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand small{
+    display:block!important;
+    margin-top:4px!important;
+    font:400 .5rem/1.25 Montserrat,sans-serif!important;
+    color:#978d86!important;
+    white-space:nowrap!important;
+  }
+  body.admin-body .admin-sidebar-section-label{display:block!important;}
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-nav a,
+  body.admin-body .admin-dashboard-sidebar .sidebar-group-toggle{
+    min-height:40px!important;
+    padding:9px 10px!important;
+    border-radius:11px!important;
+    font-size:.63rem!important;
+  }
+}
+@media (max-width:760px){
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand strong{
+    font-family:'Cormorant Garamond', Georgia, serif!important;
+    font-size:1.02rem!important;
+    font-weight:600!important;
+  }
+}
+</style>
+<style id="v660-sidebar-v655-identity">
+/* V6.60 — preservar exactamente a presença visual da barra V6.55; apenas melhorar a identidade do casal. */
+@media (min-width:761px){
+  body.admin-body .admin-dashboard-sidebar{
+    left:22.5vw!important;
+    width:238px!important;
+    top:76px!important;
+    bottom:0!important;
+    padding:24px 13px 20px!important;
+    box-sizing:border-box!important;
+  }
+  body.admin-body .admin-dashboard-main,
+  body.admin-body .admin-view-section{
+    left:238px!important;
+  }
+}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand{
+  display:flex!important;
+  align-items:center!important;
+  gap:11px!important;
+  padding:8px 9px 22px!important;
+  margin-bottom:13px!important;
+  border-bottom:1px solid #eee7e2!important;
+}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand img{
+  width:34px!important;
+  height:34px!important;
+  flex:0 0 34px!important;
+  opacity:.88!important;
+}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand > div{min-width:0!important;}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand strong{
+  display:block!important;
+  font-family:'Cormorant Garamond',Georgia,serif!important;
+  font-size:1.28rem!important;
+  line-height:1!important;
+  font-weight:500!important;
+  letter-spacing:-.018em!important;
+  color:#352e2a!important;
+  white-space:nowrap!important;
+}
+body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand small{
+  display:block!important;
+  margin-top:5px!important;
+  font:400 .52rem/1.2 Montserrat,sans-serif!important;
+  color:#978d86!important;
+  white-space:nowrap!important;
+}
+@media(max-width:760px){
+  body.admin-body .admin-dashboard-sidebar .admin-sidebar-brand strong{font-size:1.2rem!important;}
+}
+</style>
+
+<style id="v663-gifts-scroll-ux">
+/* V6.63 — Lista de presentes: cabeçalho fixo, apenas os itens fazem scroll.
+   O contentor da página permanece dentro da área visível para evitar corte por baixo. */
+body.admin-body .gifts-admin-view{
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  height:100%!important;
+  overflow:hidden!important;
+}
+body.admin-body .gifts-admin-view .gifts-title-row,
+body.admin-body .gifts-admin-view .gift-stats,
+body.admin-body .gifts-admin-view .gift-tools,
+body.admin-body .gifts-admin-view .gift-list-meta,
+body.admin-body .gifts-admin-view .gift-pagination{
+  flex:0 0 auto!important;
+}
+body.admin-body .gifts-admin-view .gift-list-scroll{
+  flex:1 1 auto!important;
+  min-height:180px!important;
+  max-height:none!important;
+  height:auto!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+  box-sizing:border-box!important;
+}
+body.admin-body .gifts-admin-view .gift-list-scroll > #giftRows{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow:hidden!important;
+}
+body.admin-body .gifts-admin-view .gift-table{
+  width:100%!important;
+  border-collapse:separate!important;
+  border-spacing:0!important;
+  table-layout:fixed!important;
+}
+body.admin-body .gifts-admin-view .gift-table thead{
+  display:table!important;
+  width:100%!important;
+  table-layout:fixed!important;
+  position:relative!important;
+  z-index:2!important;
+}
+body.admin-body .gifts-admin-view .gift-table tbody{
+  display:block!important;
+  width:100%!important;
+  max-height:calc(100% - 51px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-width:thin!important;
+  scrollbar-color:#d8cec7 transparent!important;
+}
+body.admin-body .gifts-admin-view .gift-table tbody tr{
+  display:table!important;
+  width:100%!important;
+  table-layout:fixed!important;
+}
+body.admin-body .gifts-admin-view .gift-table thead th,
+body.admin-body .gifts-admin-view .gift-table tbody td{
+  box-sizing:border-box!important;
+}
+body.admin-body .gifts-admin-view .gift-table thead th{
+  position:sticky!important;
+  top:0!important;
+  background:#faf8f5!important;
+}
+body.admin-body .gifts-admin-view .gift-pagination{
+  margin-top:10px!important;
+  padding-bottom:2px!important;
+  min-height:34px!important;
+}
+@media (max-width:760px){
+  body.admin-body .gifts-admin-view{
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body.admin-body .gifts-admin-view .gift-list-scroll{
+    min-height:180px!important;
+    overflow:hidden!important;
+    border:1px solid #e7dfd8!important;
+    border-radius:15px!important;
+    background:transparent!important;
+  }
+  body.admin-body .gifts-admin-view .gift-list-scroll > #giftRows{
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    padding:0!important;
+  }
+  body.admin-body .gifts-admin-view .gift-table{
+    display:block!important;
+  }
+  body.admin-body .gifts-admin-view .gift-table tbody{
+    display:block!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
 }
 </style>

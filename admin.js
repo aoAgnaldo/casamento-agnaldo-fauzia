@@ -1,5 +1,11 @@
 let session=null, guests=[], gifts=[], receptionTables=[], protocols=[];
 let guestFilter='all';
+let giftSearch='';
+let giftStatusFilter='all';
+let giftSort='number';
+let giftView='list';
+let giftPage=1;
+const GIFT_PAGE_SIZE=8;
 const A=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 
 const ACTION_ICONS={
@@ -332,8 +338,80 @@ function render(){
     <div class="guest-card-footer"><div class="guest-table-quick"><label for="guest-table-${g.id}">Mesa</label><select id="guest-table-${g.id}" aria-label="Escolher mesa para ${esc(g.full_name)}" onchange="quickAssignGuest('${g.id}',this)">${tableOptionsForGuest(g.id,g.table_id||'')}</select></div><div class="guest-card-actions">${iconBtn('edit','Editar convidado',`editGuest('${g.id}')`)}${iconBtn('qr','Abrir / editar QR Code',`openQR('${g.id}')`)}${iconBtn('whatsapp',g.invitation_sent_at?'Reenviar convite por WhatsApp':'Enviar convite por WhatsApp',`openWhats('${g.id}')`)}${iconBtn('remove','Remover convidado',`removeGuest('${g.id}')`)}</div></div>
   </article>`;
 }).join('');
- A('#giftRows').innerHTML=gifts.map(g=>`<tr><td data-label="Foto">${g.image_url?`<img class="gift-admin-thumb" src="${esc(g.image_url)}" alt="">`:'<div class="gift-admin-placeholder">♡</div>'}</td><td data-label="#">${g.item_no}</td><td data-label="Presente"><span class="mobile-row-title">${esc(g.name)}</span></td><td data-label="Estado">${g.reserved?'<span class="badge confirmed">Reservado</span>':'<span class="badge pending">Livre</span>'}</td><td data-label="Reservado por">${esc(g.reserved_by_name||'—')}</td><td data-label="Acções"><div class="gift-actions">${iconBtn('edit','Editar presente',`editGift(${g.id})`)}${iconBtn('remove','Remover presente',`deleteGift(${g.id})`,g.reserved?'disabled':'')}</div></td></tr>`).join('');
+ renderGiftsPanel();
 }
+
+
+function giftSortList(items){
+  return items.slice().sort((a,b)=>{
+    if(giftSort==='name') return String(a.name||'').localeCompare(String(b.name||''),'pt',{sensitivity:'base'});
+    if(giftSort==='status') return Number(!!b.reserved)-Number(!!a.reserved) || Number(a.item_no||0)-Number(b.item_no||0);
+    return Number(a.item_no||0)-Number(b.item_no||0);
+  });
+}
+function giftFilteredList(){
+  const q=giftSearch.trim().toLowerCase();
+  return giftSortList(gifts.filter(g=>{
+    const hay=[g.name,g.item_no,g.reserved_by_name].map(v=>String(v||'').toLowerCase()).join(' ');
+    const matchQ=!q||hay.includes(q);
+    const matchS=giftStatusFilter==='all'||(giftStatusFilter==='reserved'&&!!g.reserved)||(giftStatusFilter==='available'&&!g.reserved);
+    return matchQ&&matchS;
+  }));
+}
+function renderGiftActionButtons(g){
+  return `${iconBtn('edit','Editar presente',`editGift(${g.id})`)}${iconBtn('remove','Remover presente',`deleteGift(${g.id})`,g.reserved?'disabled':'')}`;
+}
+function renderGiftsPanel(){
+  const total=gifts.length;
+  const reserved=gifts.filter(g=>!!g.reserved).length;
+  const available=Math.max(0,total-reserved);
+  const reservedPct=total?Math.round(reserved/total*100):0;
+  const availablePct=total?Math.round(available/total*100):0;
+  const setText=(sel,val)=>{const el=A(sel);if(el)el.textContent=String(val)};
+  setText('#giftStatTotal',total);setText('#giftStatReserved',reserved);setText('#giftStatAvailable',available);setText('#giftStatRate',reservedPct+'%');
+  setText('#giftStatReservedPct',reservedPct+'%');setText('#giftStatAvailablePct',availablePct+'%');
+  const rb=A('#giftStatReservedBar');if(rb)rb.style.width=Math.max(0,reservedPct)+'%';
+  const ab=A('#giftStatAvailableBar');if(ab)ab.style.width=Math.max(0,availablePct)+'%';
+  const items=giftFilteredList();
+  const pages=Math.max(1,Math.ceil(items.length/GIFT_PAGE_SIZE));
+  giftPage=Math.min(Math.max(1,giftPage),pages);
+  const start=(giftPage-1)*GIFT_PAGE_SIZE;
+  const pageItems=items.slice(start,start+GIFT_PAGE_SIZE);
+  setText('#giftCountText',items.length===total?`A mostrar 1 a ${Math.min(GIFT_PAGE_SIZE,total)} de ${total} presentes`:`A mostrar ${items.length?start+1:0} a ${Math.min(start+GIFT_PAGE_SIZE,items.length)} de ${items.length} presentes`);
+  setText('#giftPageText',`Página ${giftPage} de ${pages}`);
+  const container=A('#giftRows');if(!container)return;
+  if(!pageItems.length){container.innerHTML='<div class="gift-empty">Não encontrámos presentes com estes critérios.</div>';} else if(giftView==='grid'){
+    container.innerHTML=`<div class="gift-grid">${pageItems.map(g=>`<article class="gift-card-item"><div>${g.image_url?`<img class="gift-photo" src="${esc(g.image_url)}" alt="${esc(g.name)}">`:'<div class="gift-photo placeholder">♡</div>'}</div><div class="gift-card-main"><span class="gift-name">${esc(g.name)}</span><div class="gift-card-meta"><span>#${esc(g.item_no)}</span><span class="gift-status ${g.reserved?'reserved':'available'}">${g.reserved?'Reservado':'Disponível'}</span></div></div><div class="gift-card-footer"><span class="gift-reserved-by">${g.reserved?`Reservado por ${esc(g.reserved_by_name||'—')}`:'Ainda disponível'}</span><div class="gift-actions">${renderGiftActionButtons(g)}</div></div></article>`).join('')}</div>`;
+  } else {
+    container.innerHTML=`<table class="gift-table"><thead><tr><th class="gift-col-photo">Foto</th><th class="gift-col-no">#</th><th>Presente</th><th class="gift-col-state">Estado</th><th class="gift-col-reserved">Reservado por</th><th class="gift-col-actions">Acções</th></tr></thead><tbody>${pageItems.map(g=>`<tr><td class="gift-photo-cell" data-label="Foto">${g.image_url?`<img class="gift-photo" src="${esc(g.image_url)}" alt="${esc(g.name)}">`:'<div class="gift-photo placeholder">♡</div>'}</td><td data-label="#"><span class="gift-number">${esc(g.item_no)}</span></td><td data-label="Presente"><span class="gift-name">${esc(g.name)}</span></td><td class="gift-state-cell" data-label="Estado"><span class="gift-status ${g.reserved?'reserved':'available'}">${g.reserved?'Reservado':'Disponível'}</span></td><td class="gift-reserved-cell" data-label="Reservado por"><span class="${g.reserved_by_name?'gift-reserved-by':'gift-reserved-empty'}">${esc(g.reserved_by_name||'—')}</span></td><td class="gift-actions-cell" data-label="Acções"><div class="gift-actions">${renderGiftActionButtons(g)}</div></td></tr>`).join('')}</tbody></table>`;
+  }
+  const pag=A('#giftPagination');if(!pag)return;
+  const buttons=[];
+  buttons.push(`<button type="button" data-gift-page="prev" ${giftPage<=1?'disabled':''} aria-label="Página anterior">‹</button>`);
+  for(let p=1;p<=pages;p++){
+    if(p>5 && p<pages-1 && Math.abs(p-giftPage)>1){if(p===6)buttons.push('<span style="padding:0 4px;color:#9b9189">…</span>');continue;}
+    buttons.push(`<button type="button" data-gift-page="${p}" class="${p===giftPage?'active':''}" aria-current="${p===giftPage?'page':'false'}">${p}</button>`);
+  }
+  buttons.push(`<button type="button" data-gift-page="next" ${giftPage>=pages?'disabled':''} aria-label="Página seguinte">›</button>`);
+  pag.innerHTML=buttons.join('');
+  updateGiftViewButtons();
+}
+function updateGiftViewButtons(){
+  A('#giftViewGrid')?.classList.toggle('active',giftView==='grid');
+  A('#giftViewList')?.classList.toggle('active',giftView==='list');
+}
+A('#giftSearch')?.addEventListener('input',e=>{giftSearch=e.target.value||'';giftPage=1;renderGiftsPanel()});
+A('#giftStatusFilter')?.addEventListener('change',e=>{giftStatusFilter=e.target.value;giftPage=1;renderGiftsPanel()});
+A('#giftSort')?.addEventListener('change',e=>{giftSort=e.target.value;giftPage=1;renderGiftsPanel()});
+A('#giftViewGrid')?.addEventListener('click',()=>{giftView='grid';renderGiftsPanel()});
+A('#giftViewList')?.addEventListener('click',()=>{giftView='list';renderGiftsPanel()});
+A('#giftPagination')?.addEventListener('click',e=>{
+  const btn=e.target.closest('button[data-gift-page]');if(!btn||btn.disabled)return;
+  const action=btn.dataset.giftPage;
+  const totalPages=Math.max(1,Math.ceil(giftFilteredList().length/GIFT_PAGE_SIZE));
+  if(action==='prev')giftPage=Math.max(1,giftPage-1);else if(action==='next')giftPage=Math.min(totalPages,giftPage+1);else giftPage=Math.min(totalPages,Math.max(1,Number(action)||1));
+  renderGiftsPanel();
+});
 
 // ---------------- ATALHOS DO DASHBOARD ----------------
 A('#shareInviteHome')?.addEventListener('click',async()=>{
