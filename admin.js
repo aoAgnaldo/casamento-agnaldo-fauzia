@@ -967,3 +967,16 @@ A('#programForm')?.addEventListener('submit',async e=>{
 });
 const _refreshOriginal=refresh;
 refresh=async function(){await _refreshOriginal();await loadProgramAdmin()};
+
+/* V6.70 — no mobile, a lista de presentes é a vista principal para evitar grelha apertada. */
+(function(){
+  const mq=window.matchMedia('(max-width:760px)');
+  function syncGiftMobile(){
+    if(mq.matches && typeof giftView!=='undefined' && giftView!=='list'){
+      giftView='list';
+      if(typeof renderGiftsPanel==='function') renderGiftsPanel();
+    }
+  }
+  syncGiftMobile();
+  mq.addEventListener?.('change',syncGiftMobile);
+})();
