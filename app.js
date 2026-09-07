@@ -105,7 +105,7 @@ async function loadWeddingImages(){
   try{
     const {data,error}=await supabaseClient.from('wedding_settings').select('cover_image_url,story_image_url,details_image_url,story_text').eq('id',1).maybeSingle();
     if(error || !data) return;
-    const cover=data.cover_image_url || 'foto-capa.png';
+    const cover=data.cover_image_url || 'monogram.svg';
     const story=data.story_image_url || cover;
     const details=data.details_image_url || cover;
     const coverImg=document.querySelector('.hero-image img');
