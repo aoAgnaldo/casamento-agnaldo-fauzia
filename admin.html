@@ -1700,3 +1700,114 @@ body.admin-body .gifts-admin-view .gift-pagination{
   syncBottom();
 })();
 </script>
+<style id="v667-mobile-ux-guests-gifts-checkin">
+/* V6.67 — Mobile-first UX/UI para Convidados, Presentes e Check-in. Apenas Admin. */
+@media (max-width:760px){
+  body.admin-body .admin-view-section#convidados,
+  body.admin-body .admin-view-section#gifts-admin-view,
+  body.admin-body .admin-view-section#checkin{scroll-margin-top:8px!important;}
+
+  /* Convidados: contexto imediato + pesquisa sempre acessível. */
+  body.admin-body #convidados .section-title-row{margin-bottom:12px!important;}
+  body.admin-body #convidados .section-title-row h2{font-size:2.15rem!important;margin-bottom:4px!important;}
+  body.admin-body #convidados .guest-tools{position:sticky!important;top:0!important;z-index:20!important;background:#fbfaf8!important;padding:7px 0 9px!important;margin:0!important;gap:8px!important;}
+  body.admin-body #convidados .guest-search{min-height:48px!important;border:1px solid #e5ded8!important;background:#fff!important;border-radius:13px!important;box-shadow:0 2px 10px rgba(48,38,32,.035)!important;}
+  body.admin-body #convidados .guest-search input{font-size:16px!important;padding:13px 0!important;}
+  body.admin-body #convidados .guest-filters{gap:6px!important;overflow-x:auto!important;scrollbar-width:none!important;padding:1px 1px 4px!important;}
+  body.admin-body #convidados .guest-filters::-webkit-scrollbar{display:none!important;}
+  body.admin-body #convidados .guest-filter{min-height:38px!important;padding:8px 12px!important;border-radius:999px!important;font-size:.57rem!important;box-shadow:none!important;}
+  body.admin-body #convidados .guest-count{font-size:.59rem!important;margin:7px 2px 9px!important;}
+  body.admin-body #convidados .guest-card-list{display:grid!important;gap:9px!important;overflow-y:auto!important;overflow-x:hidden!important;max-height:calc(100dvh - 245px)!important;padding:1px 1px 20px!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body #convidados .guest-card{display:block!important;margin:0!important;padding:13px!important;border:1px solid #e8e1db!important;border-radius:16px!important;background:#fff!important;box-shadow:0 2px 12px rgba(48,38,32,.035)!important;}
+  body.admin-body #convidados .guest-card-main{display:grid!important;grid-template-columns:42px minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important;}
+  body.admin-body #convidados .guest-avatar{width:42px!important;height:42px!important;border-radius:13px!important;font-size:.72rem!important;}
+  body.admin-body #convidados .guest-primary strong{font-size:.78rem!important;line-height:1.2!important;display:block!important;}
+  body.admin-body #convidados .guest-meta{gap:5px!important;margin-top:4px!important;flex-wrap:wrap!important;}
+  body.admin-body #convidados .guest-meta span{font-size:.52rem!important;}
+  body.admin-body #convidados .guest-card .badge{font-size:.5rem!important;padding:5px 7px!important;white-space:nowrap!important;}
+  body.admin-body #convidados .guest-card-details{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:1px!important;margin-top:12px!important;border-top:1px solid #eee8e3!important;border-bottom:1px solid #eee8e3!important;}
+  body.admin-body #convidados .guest-card-details>div{padding:9px 5px!important;min-width:0!important;}
+  body.admin-body #convidados .guest-card-details>div:nth-child(odd){border-right:1px solid #eee8e3!important;}
+  body.admin-body #convidados .guest-card-details small{font-size:.49rem!important;color:#958b83!important;display:block!important;margin-bottom:3px!important;}
+  body.admin-body #convidados .guest-card-details strong{font-size:.61rem!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  body.admin-body #convidados .guest-card-footer{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;align-items:end!important;padding-top:10px!important;}
+  body.admin-body #convidados .guest-table-quick label{font-size:.49rem!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:#958b83!important;display:block!important;margin-bottom:4px!important;}
+  body.admin-body #convidados .guest-table-quick select{width:100%!important;min-height:44px!important;border:1px solid #e3dcd6!important;border-radius:11px!important;background:#faf8f5!important;padding:8px 10px!important;font:500 16px Montserrat,sans-serif!important;color:#514943!important;}
+  body.admin-body #convidados .guest-card-actions{display:flex!important;gap:5px!important;align-items:center!important;}
+  body.admin-body #convidados .guest-card-actions .ui-icon-btn{width:42px!important;height:42px!important;border-radius:11px!important;}
+
+  /* Presentes: primeiro entender, depois agir. */
+  body.admin-body #presentes .gifts-title-row h2{font-size:2.15rem!important;}
+  body.admin-body #presentes .gifts-add-btn{width:100%!important;min-height:48px!important;margin-top:2px!important;}
+  body.admin-body #presentes .gift-stats{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin:10px 0!important;}
+  body.admin-body #presentes .gift-stat-card{min-height:76px!important;padding:11px!important;border-radius:14px!important;}
+  body.admin-body #presentes .gift-stat-card strong{font-size:1.35rem!important;}
+  body.admin-body #presentes .gift-stat-card small{font-size:.52rem!important;}
+  body.admin-body #presentes .gift-tools{display:grid!important;grid-template-columns:minmax(0,1fr) 46px!important;gap:7px!important;position:sticky!important;top:0!important;z-index:20!important;background:#fbfaf8!important;padding:7px 0!important;}
+  body.admin-body #presentes .gift-search{min-height:48px!important;background:#fff!important;border:1px solid #e5ded8!important;border-radius:13px!important;}
+  body.admin-body #presentes .gift-search input{font-size:16px!important;}
+  body.admin-body #presentes #giftStatusFilter,body.admin-body #presentes #giftSort{min-height:44px!important;font-size:16px!important;grid-column:1/-1!important;}
+  body.admin-body #presentes .gift-view-toggle{grid-column:2!important;grid-row:1!important;display:flex!important;}
+  body.admin-body #presentes .gift-view-toggle button{width:46px!important;height:46px!important;}
+  body.admin-body #presentes .gift-list-meta{display:flex!important;justify-content:space-between!important;gap:8px!important;font-size:.55rem!important;margin:4px 2px 7px!important;}
+  body.admin-body #presentes .gift-list-scroll{height:calc(100dvh - 405px)!important;min-height:300px!important;max-height:none!important;border-radius:15px!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;}
+  body.admin-body #presentes .gift-table{width:100%!important;min-width:0!important;table-layout:auto!important;}
+  body.admin-body #presentes .gift-table thead{position:sticky!important;top:0!important;z-index:5!important;}
+  body.admin-body #presentes .gift-table thead th{font-size:.5rem!important;padding:10px 7px!important;}
+  body.admin-body #presentes .gift-table tbody{display:table-row-group!important;width:auto!important;}
+  body.admin-body #presentes .gift-table tr{display:table-row!important;margin:0!important;padding:0!important;border:0!important;background:#fff!important;}
+  body.admin-body #presentes .gift-table td{display:table-cell!important;padding:10px 7px!important;border-bottom:1px solid #eee8e3!important;font-size:.57rem!important;vertical-align:middle!important;}
+  body.admin-body #presentes .gift-table td:before{display:none!important;}
+  body.admin-body #presentes .gift-col-photo{width:48px!important;}.gift-col-no{width:25px!important;}.gift-col-actions{width:86px!important;}
+  body.admin-body #presentes .gift-photo{width:40px!important;height:40px!important;border-radius:10px!important;object-fit:cover!important;}
+  body.admin-body #presentes .gift-name{font-size:.64rem!important;display:block!important;max-width:125px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  body.admin-body #presentes .gift-actions{justify-content:flex-end!important;flex-wrap:nowrap!important;}
+  body.admin-body #presentes .gift-actions .ui-icon-btn{width:37px!important;height:37px!important;min-width:37px!important;border-radius:10px!important;}
+  body.admin-body #presentes .gift-status{font-size:.48rem!important;padding:5px 7px!important;white-space:nowrap!important;}
+  body.admin-body #presentes .gift-pagination{position:sticky!important;bottom:0!important;background:#fbfaf8!important;padding:7px 0 calc(5px + env(safe-area-inset-bottom))!important;z-index:10!important;}
+  body.admin-body #presentes .gift-pagination button{width:38px!important;height:38px!important;}
+
+  /* Check-in: fluxo de 3 passos — procurar -> confirmar -> terminar. */
+  body.admin-body #checkin .section-title-row h2{font-size:2.15rem!important;}
+  body.admin-body #checkin .section-title-row .button{width:100%!important;min-height:48px!important;}
+  body.admin-body #checkin .checkin-main-card{padding:16px!important;border-radius:17px!important;background:#fff!important;box-shadow:0 3px 15px rgba(48,38,32,.04)!important;}
+  body.admin-body #checkin .scan-title{align-items:flex-start!important;}
+  body.admin-body #checkin .scan-title h3{font-size:1.55rem!important;}
+  body.admin-body #checkin .scan-title p{font-size:.62rem!important;line-height:1.45!important;}
+  body.admin-body #checkin .checkin-tools{margin-top:15px!important;}
+  body.admin-body #checkin .checkin-manual{gap:8px!important;}
+  body.admin-body #checkin .checkin-manual label{font-size:.55rem!important;}
+  body.admin-body #checkin .checkin-manual input{min-height:52px!important;background:#fff!important;border:1px solid #dfd8d2!important;border-radius:12px!important;font-size:16px!important;padding:13px!important;}
+  body.admin-body #checkin #checkinSearchBtn{min-height:50px!important;width:100%!important;margin-top:2px!important;}
+  body.admin-body #checkin #startScannerBtn,body.admin-body #checkin #stopScannerBtn{width:100%!important;min-height:50px!important;margin-top:8px!important;}
+  body.admin-body #checkin .qr-reader{margin-top:10px!important;border-radius:14px!important;overflow:hidden!important;background:#171412!important;}
+  body.admin-body #checkin .checkin-result{margin-top:12px!important;}
+  body.admin-body #checkin .checkin-person{display:flex!important;flex-direction:column!important;gap:12px!important;padding:14px!important;border-radius:14px!important;background:#faf7f3!important;border:1px solid #e7dfd8!important;}
+  body.admin-body #checkin .checkin-person .button{width:100%!important;min-height:50px!important;}
+  body.admin-body #checkin .checkin-ok,.admin-body #checkin .checkin-wait{padding:10px 11px!important;border-radius:11px!important;}
+  body.admin-body #checkin .checkin-summary{grid-template-columns:1fr 1fr!important;gap:0!important;margin-top:10px!important;}
+  body.admin-body #checkin .checkin-summary div{min-height:68px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;}
+  body.admin-body #checkin .checkin-summary div:last-child{grid-column:1/-1!important;border-top:1px solid #ebe6e1!important;}
+  body.admin-body #checkin .checkin-summary strong{font-size:1.8rem!important;}
+}
+</style>
+<script id="v667-checkin-search-ux">
+(function(){
+  const norm=v=>String(v||'').trim().toLowerCase().replace(/\s+/g,' ');
+  window.__v667SearchCheckin=function(raw){
+    const key=norm(raw); const box=document.getElementById('checkinResult');
+    if(!key){toast('Introduza o nome, código ou WhatsApp do convidado.');return;}
+    const all=Array.isArray(window.guests)?window.guests:[];
+    const exact=all.filter(g=>[g.code,g.full_name,g.whatsapp].some(v=>norm(v)===key));
+    const matches=exact.length?exact:all.filter(g=>[g.code,g.full_name,g.whatsapp].some(v=>norm(v).includes(key)));
+    if(matches.length===1){ renderCheckinResult(matches[0]); return; }
+    if(!matches.length){ renderCheckinResult(null); toast('Não encontrámos esse convidado.'); return; }
+    if(box){box.classList.remove('hidden');box.innerHTML='<div class="checkin-person"><div><p class="eyebrow">Mais de um resultado</p><h3>Seleccione o convidado</h3><p>Encontrámos '+matches.length+' pessoas. Pesquise pelo código ou nome completo para chegar rapidamente ao convite certo.</p></div><div style="display:grid;gap:7px">'+matches.slice(0,8).map(g=>'<button type="button" class="button secondary" onclick="renderCheckinResult(guests.find(x=>x.id=\''+String(g.id).replace(/'/g,"\\'")+'\'))">'+esc(g.full_name)+' · '+esc(g.code)+'</button>').join('')+'</div></div>';}
+  };
+  const input=document.getElementById('checkinCode');
+  const btn=document.getElementById('checkinSearchBtn');
+  if(input){input.placeholder='Nome, código ou WhatsApp…';input.setAttribute('aria-label','Pesquisar convidado por nome, código ou WhatsApp');}
+  if(btn){btn.textContent='Pesquisar convidado';btn.addEventListener('click',function(e){e.preventDefault();window.__v667SearchCheckin(input?.value||'');},true);}
+  if(input){input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();window.__v667SearchCheckin(input.value);}},true);}
+})();
+</script>
