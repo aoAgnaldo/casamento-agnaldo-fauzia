@@ -1,0 +1,117 @@
+/* V8.10 — Mobile controls definitive state.
+   Requirement: after the invitation is opened, show exactly three discreet controls:
+   Menu → Play/Pause → Admin lock. No circles/boxes around Music or Admin; Menu also has no border.
+   The three controls are hidden on Welcome and revealed via body.invitation-opened.
+*/
+@media (max-width:800px){
+  .topbar .topbar-actions{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:2px!important;
+    min-width:112px!important;
+    margin-left:auto!important;
+    flex:0 0 auto!important;
+    overflow:visible!important;
+  }
+
+  .topbar .topbar-actions #menuToggle,
+  .topbar .topbar-actions #musicButton,
+  .topbar .topbar-actions #privateAccessTrigger{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    visibility:visible!important;
+    opacity:.82!important;
+    pointer-events:auto!important;
+    appearance:none!important;
+    -webkit-appearance:none!important;
+    background:transparent!important;
+    border:0!important;
+    border-color:transparent!important;
+    box-shadow:none!important;
+    border-radius:0!important;
+    color:#fff!important;
+    outline:0!important;
+    margin:0!important;
+    padding:0!important;
+  }
+
+  /* MENU — apenas ícone, sem moldura */
+  .topbar .topbar-actions #menuToggle{
+    width:34px!important;
+    min-width:34px!important;
+    height:38px!important;
+    min-height:38px!important;
+  }
+  .topbar .topbar-actions #menuToggle span{
+    font-size:18px!important;
+    line-height:1!important;
+    color:#fff!important;
+  }
+  .topbar .topbar-actions #menuToggle span::before{
+    content:none!important;
+  }
+
+  /* MÚSICA — apenas o ícone */
+  .topbar .topbar-actions #musicButton{
+    width:32px!important;
+    min-width:32px!important;
+    height:38px!important;
+    min-height:38px!important;
+  }
+  .topbar .topbar-actions #musicButton #musicText{display:none!important}
+  .topbar .topbar-actions #musicButton #musicIcon{
+    display:block!important;
+    font-size:15px!important;
+    line-height:1!important;
+    color:#fff!important;
+    opacity:.82!important;
+  }
+
+  /* ADMIN — mesmo SVG usado no Web, sem emoji, sem caixa/círculo */
+  .topbar .topbar-actions #privateAccessTrigger{
+    width:32px!important;
+    min-width:32px!important;
+    height:38px!important;
+    min-height:38px!important;
+  }
+  .topbar .topbar-actions #privateAccessTrigger svg{
+    display:block!important;
+    width:15px!important;
+    height:15px!important;
+    stroke:#fff!important;
+    stroke-width:1.35!important;
+    fill:none!important;
+    opacity:.82!important;
+  }
+  .topbar .topbar-actions #privateAccessTrigger::before{
+    display:none!important;
+    content:none!important;
+  }
+
+  /* Welcome: nenhum dos três é apresentado */
+  body:not(.invitation-opened) .topbar .topbar-actions #menuToggle,
+  body:not(.invitation-opened) .topbar .topbar-actions #musicButton,
+  body:not(.invitation-opened) .topbar .topbar-actions #privateAccessTrigger,
+  html:not(.invitation-opened) .topbar .topbar-actions #menuToggle,
+  html:not(.invitation-opened) .topbar .topbar-actions #musicButton,
+  html:not(.invitation-opened) .topbar .topbar-actions #privateAccessTrigger{
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+
+  /* Depois de abrir: Menu → Música → Cadeado */
+  body.invitation-opened .topbar .topbar-actions #menuToggle,
+  body.invitation-opened .topbar .topbar-actions #musicButton,
+  body.invitation-opened .topbar .topbar-actions #privateAccessTrigger,
+  html.invitation-opened .topbar .topbar-actions #menuToggle,
+  html.invitation-opened .topbar .topbar-actions #musicButton,
+  html.invitation-opened .topbar .topbar-actions #privateAccessTrigger{
+    display:inline-flex!important;
+    visibility:visible!important;
+    opacity:.82!important;
+    pointer-events:auto!important;
+  }
+}

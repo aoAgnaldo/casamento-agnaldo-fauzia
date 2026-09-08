@@ -60,6 +60,8 @@ function releaseIntroScroll(){
 }
 function openInvitation(){
   releaseIntroScroll();
+  document.body.classList.add('invitation-opened');
+  document.documentElement.classList.add('invitation-opened');
   intro?.classList.add('intro-screen--hidden');
   // Garantir posição inicial consistente depois de desbloquear o documento.
   if(window.scrollY < 2) window.scrollTo({top:0,left:0,behavior:'auto'});
