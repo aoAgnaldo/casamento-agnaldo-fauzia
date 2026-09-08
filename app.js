@@ -44,11 +44,13 @@ function setMusic(on){
   if(on){
     youtubeCommand('playVideo');
     $('#musicIcon').textContent='Ⅱ';
-    $('#musicText').textContent='Pausa';
+    $('#musicText').textContent='Pausar';
+    musicButton?.setAttribute('aria-label','Pausar música');
   }else{
     youtubeCommand('pauseVideo');
     $('#musicIcon').textContent='▷';
     $('#musicText').textContent='Música';
+    musicButton?.setAttribute('aria-label','Reproduzir música');
   }
   musicButton?.setAttribute('aria-pressed',String(on));
 }
@@ -147,6 +149,11 @@ async function loadWeddingImages(){
     if(coverImg) coverImg.src=cover;
     if(storyImg) storyImg.src=story;
     if(detailsImg) detailsImg.src=details;
+    setMobileGalleryImages([
+      {url:cover,caption:'Um amor para toda a vida'},
+      {url:story,caption:'Onde tudo faz sentido'},
+      {url:details,caption:'Para sempre começa agora'}
+    ]);
     if(data.story_text){
       const box=document.querySelector('#storyTextContent');
       if(box) box.innerHTML=String(data.story_text).split(/\n\s*\n/).filter(Boolean).map(p=>`<p>${escapeHtml(p).replace(/\n/g,'<br>')}</p>`).join('');
@@ -188,10 +195,14 @@ async function findInvitation(presetKey=null){
   }
   $('#lookupStep').classList.add('hidden');
   $('#rsvpStep').classList.remove('hidden');
+  document.querySelector('.rsvp-mobile-steps span:nth-child(1)')?.classList.remove('is-active');
+  document.querySelector('.rsvp-mobile-steps span:nth-child(2)')?.classList.add('is-active');
 }
 $('#rsvpSearchForm')?.addEventListener('submit',e=>{e.preventDefault();findInvitation();});
 $('#changeGuest')?.addEventListener('click',()=>{
   $('#rsvpStep').classList.add('hidden'); $('#lookupStep').classList.remove('hidden');
+  document.querySelector('.rsvp-mobile-steps span:nth-child(2)')?.classList.remove('is-active');
+  document.querySelector('.rsvp-mobile-steps span:nth-child(1)')?.classList.add('is-active');
   currentInvitation=null;
 });
 let selectedAttendance=null;
@@ -237,11 +248,13 @@ function renderGifts(){
   if(!filtered.length){grid.innerHTML='<p class="gift-status">Nenhum presente encontrado.</p>';return;}
   grid.innerHTML=filtered.map(g=>{
     const reserved=!!g.reserved;
-    return `<div class="gift-list-row ${reserved?'gift-list-row--reserved':''}">
+    const photo=g.image_url?`<img class="gift-public-photo" src="${escapeHtml(g.image_url)}" alt="${escapeHtml(g.name)}" loading="lazy">`:'<span class="gift-public-photo gift-public-photo--placeholder" aria-hidden="true">♡</span>';
+    return `<article class="gift-list-row ${reserved?'gift-list-row--reserved':''}">
       <span class="gift-index">${String(g.item_no).padStart(2,'0')}</span>
+      <span class="gift-public-photo-wrap">${photo}</span>
       <span class="gift-name">${escapeHtml(g.name)}</span>
       ${reserved?'<span class="reserved-label">Reservado</span>':'<button class="reserve-button" type="button" data-gift-id="'+g.id+'">Reservar</button>'}
-    </div>`;
+    </article>`;
   }).join('');
   $$('.reserve-button').forEach(b=>b.addEventListener('click',()=>openReservation(b.dataset.giftId)));
 }
@@ -297,6 +310,49 @@ $$('.gift-filter').forEach(btn=>btn.addEventListener('click',()=>{
 }));
 loadGifts();
 
+/* Mobile story gallery — usa as três imagens já geridas pelo Admin. */
+const storyGallery=$('#storyGallery');
+const storyImageEl=$('#storyImage');
+const storyCaptionEl=$('#storyImageCaption');
+const storyDots=$('#storyGalleryDots');
+const storyPrev=$('#storyPrev');
+const storyNext=$('#storyNext');
+let mobileGalleryImages=[{url:'monogram.svg',caption:'Onde tudo faz sentido'}];
+let mobileGalleryIndex=0;
+function renderStoryGallery(){
+  if(!storyImageEl||!storyGallery)return;
+  const item=mobileGalleryImages[mobileGalleryIndex]||mobileGalleryImages[0];
+  storyImageEl.src=item.url;
+  storyImageEl.alt=item.caption||'Agnaldo e Fáuzia';
+  if(storyCaptionEl)storyCaptionEl.textContent=item.caption||'';
+  if(storyDots){
+    storyDots.innerHTML=mobileGalleryImages.map((_,i)=>`<button type="button" class="story-gallery-dot ${i===mobileGalleryIndex?'is-active':''}" aria-label="Imagem ${i+1}" data-story-index="${i}"></button>`).join('');
+    storyDots.querySelectorAll('[data-story-index]').forEach(b=>b.addEventListener('click',()=>{mobileGalleryIndex=Number(b.dataset.storyIndex);renderStoryGallery();}));
+  }
+}
+function changeStoryGallery(step){
+  if(mobileGalleryImages.length<2)return;
+  mobileGalleryIndex=(mobileGalleryIndex+step+mobileGalleryImages.length)%mobileGalleryImages.length;
+  renderStoryGallery();
+}
+storyPrev?.addEventListener('click',()=>changeStoryGallery(-1));
+storyNext?.addEventListener('click',()=>changeStoryGallery(1));
+let galleryTouchX=null;
+storyImageEl?.addEventListener('touchstart',e=>{galleryTouchX=e.touches[0].clientX},{passive:true});
+storyImageEl?.addEventListener('touchend',e=>{
+  if(galleryTouchX===null)return;
+  const dx=e.changedTouches[0].clientX-galleryTouchX;
+  galleryTouchX=null;
+  if(Math.abs(dx)>42)changeStoryGallery(dx<0?1:-1);
+},{passive:true});
+function setMobileGalleryImages(images){
+  const valid=Array.isArray(images)?images.filter(x=>x?.url):[];
+  if(!valid.length)return;
+  mobileGalleryImages=valid;
+  mobileGalleryIndex=Math.min(mobileGalleryIndex,mobileGalleryImages.length-1);
+  renderStoryGallery();
+}
+renderStoryGallery();
 /* Personalized invitation */
 const inviteParam=new URLSearchParams(location.search).get('convite');
 if(inviteParam)setTimeout(()=>findInvitation(inviteParam),250);

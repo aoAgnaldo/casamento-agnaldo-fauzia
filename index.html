@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="v7.5-polish.css">
+<link rel="stylesheet" href="v8.2-mobile.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 </head>
@@ -76,13 +77,19 @@
     <p>Entre fotografias, mensagens e boas conversas, os nossos caminhos começaram a aproximar-se. No dia 23 de Outubro de 2025, começámos a conversar e demos o primeiro passo para uma história que se tornaria cada vez mais bonita. Hoje, percebemos que aquele encontro não foi por acaso: Deus usou uma amiga como ponte para escrever a nossa história de amor.</p></div>
     <span class="signature">Com carinho, A &amp; F</span>
   </div>
-  <div class="story-image"><img src="monogram.svg" id="storyImage" alt="Agnaldo e Fáuzia"><span class="image-caption">Onde tudo faz sentido</span></div>
+  <div class="story-image mobile-story-gallery" id="storyGallery">
+    <button class="story-gallery-arrow story-gallery-arrow--prev" id="storyPrev" type="button" aria-label="Imagem anterior">‹</button>
+    <img src="monogram.svg" id="storyImage" alt="Agnaldo e Fáuzia">
+    <button class="story-gallery-arrow story-gallery-arrow--next" id="storyNext" type="button" aria-label="Próxima imagem">›</button>
+    <div class="story-gallery-dots" id="storyGalleryDots" aria-label="Navegação das imagens"></div>
+    <span class="image-caption" id="storyImageCaption">Onde tudo faz sentido</span>
+  </div>
 </section>
 
 <section class="program-section section-pad" id="programa">
   <div class="program-heading">
     <p class="section-label"><span></span>O grande dia</p>
-    <h2>Um dia cheio de<br><i>pequenos momentos</i></h2>
+    <h2>Um dia cheio de<br class="program-title-break"><i>pequenos momentos</i></h2>
     <p class="program-intro">Do primeiro momento ao último, cada detalhe foi pensado para celebrar este dia connosco.</p>
   </div>
   <div class="program-list-panel">
@@ -157,6 +164,7 @@
 
 <section class="rsvp-section section-pad" id="rsvp">
  <div class="rsvp-inner">
+  <div class="rsvp-mobile-steps" aria-hidden="true"><span class="is-active">01 Procurar</span><span>02 Confirmar</span></div>
   <img class="rsvp-mark" src="monogram.svg" alt="">
   <p class="section-label"><span></span>Uma resposta com carinho</p>
   <h2>Podemos contar<br><i>consigo?</i></h2>
