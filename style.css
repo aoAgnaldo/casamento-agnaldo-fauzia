@@ -3693,3 +3693,21 @@ html:not(.intro-locked) .topbar{
     text-align:left !important;
   }
 }
+
+/* V8.13 — Web: alinhar o cabeçalho de Presentes ao topo da lista */
+@media (min-width: 801px){
+  .gifts-section{
+    align-items:start !important;
+  }
+  .gifts-section .gifts-heading{
+    padding-top:0 !important;
+    margin-top:0 !important;
+  }
+  .gifts-section .gift-list-wrap{
+    padding-top:0 !important;
+    margin-top:0 !important;
+  }
+  .gifts-section .gift-list-head{
+    margin-top:0 !important;
+  }
+}
