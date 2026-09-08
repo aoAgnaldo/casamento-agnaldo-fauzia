@@ -3651,3 +3651,45 @@ html:not(.intro-locked) .topbar{
   .gift-photo-lightbox-image{max-width:92vw !important;max-height:76vh !important}
   .gift-photo-lightbox-close{width:40px !important;height:40px !important}
 }
+
+/* V8.12 — Presentes: recuperar scroll da lista + alinhamento mobile */
+.gifts-section .gift-list{
+  max-height:560px !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior:contain !important;
+  padding-right:.5rem !important;
+}
+.gifts-section .gift-item-copy{
+  text-align:left !important;
+  align-items:flex-start !important;
+  justify-items:start !important;
+}
+.gifts-section .gift-name,
+.gifts-section .gift-item-state{
+  text-align:left !important;
+  width:100% !important;
+}
+@media(max-width:800px){
+  .gifts-section .gift-list{
+    max-height:min(58dvh,520px) !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    padding-right:.35rem !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior:contain !important;
+  }
+  .gifts-section .gift-item-main{
+    grid-template-columns:52px minmax(0,1fr) auto !important;
+  }
+  .gifts-section .gift-item-copy{
+    text-align:left !important;
+    justify-items:start !important;
+    align-items:start !important;
+  }
+  .gifts-section .gift-name,
+  .gifts-section .gift-item-state{
+    text-align:left !important;
+  }
+}
