@@ -385,3 +385,35 @@ if(inviteParam)setTimeout(()=>findInvitation(inviteParam),250);
     if(!reservationOverlay?.classList.contains('hidden')){ closeReservation(); return; }
   });
 })();
+
+/* V8.5 — robustez dos controlos mobile */
+(() => {
+  const menu = document.getElementById('menuToggle');
+  const nav = document.getElementById('navLinks');
+  const privateTrigger = document.getElementById('privateAccessTrigger');
+  const body = document.body;
+
+  const syncTopControls = () => {
+    const opened = !body.classList.contains('intro-locked');
+    if (privateTrigger) {
+      privateTrigger.style.display = opened ? 'inline-flex' : 'none';
+      privateTrigger.style.visibility = opened ? 'visible' : 'hidden';
+      privateTrigger.style.pointerEvents = opened ? 'auto' : 'none';
+    }
+  };
+
+  syncTopControls();
+  const observer = new MutationObserver(syncTopControls);
+  observer.observe(body, { attributes:true, attributeFilter:['class'] });
+
+  menu?.addEventListener('click', () => {
+    if (!nav) return;
+    requestAnimationFrame(() => {
+      if (nav.classList.contains('nav-links--open')) {
+        nav.style.display = 'flex';
+      } else {
+        nav.style.display = '';
+      }
+    });
+  });
+})();

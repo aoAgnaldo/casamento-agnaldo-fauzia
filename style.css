@@ -3358,3 +3358,39 @@ html:not(.intro-locked) .topbar{
   visibility:visible !important;
   pointer-events:auto !important;
 }
+
+/* V8.5 — corrigir controlos mobile após abertura do convite.
+   Ordem: Menu (caixa) → Música (ícone) → Acesso reservado (cadeado).
+   No Welcome, os três continuam ocultos. */
+@media (max-width:800px){
+  .topbar{box-sizing:border-box!important;width:100%!important;max-width:100%!important;overflow:visible!important}
+  .topbar .brand{flex:0 1 auto!important;max-width:calc(100% - 150px)!important}
+  .topbar .topbar-actions{flex:0 0 auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:2px!important;min-width:126px!important;overflow:visible!important}
+  .topbar-actions .menu-toggle{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+  .topbar-actions .music-button{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+  .topbar-actions .private-access-trigger{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+  body.intro-locked .topbar-actions .menu-toggle,
+  body.intro-locked .topbar-actions .music-button,
+  body.intro-locked .topbar-actions .private-access-trigger{
+    visibility:hidden!important;
+    pointer-events:none!important;
+    opacity:0!important;
+  }
+  body:not(.intro-locked) .topbar-actions .private-access-trigger,
+  html:not(.intro-locked) .topbar-actions .private-access-trigger{
+    display:inline-flex!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    opacity:1!important;
+  }
+  /* O Menu precisa realmente abrir o menu; este override vence os display:none anteriores. */
+  .topbar .nav-links.nav-links--open{
+    display:flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  .topbar .nav-links:not(.nav-links--open){
+    display:none!important;
+  }
+}
