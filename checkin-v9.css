@@ -1,0 +1,87 @@
+/* V8.0 — Recepção: navegação simples, scroll natural e menu lateral. */
+body.reception-body{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  height:auto!important;
+  min-height:100%!important;
+  background:var(--rx-bg);
+}
+body.reception-body .wedy-app{
+  height:auto!important;
+  min-height:100dvh!important;
+  overflow:visible!important;
+}
+body.reception-body .reception-main{overflow:visible!important}
+body.reception-body .wedy-header{
+  position:relative!important;
+  top:auto!important;
+  left:auto!important;
+  right:auto!important;
+  z-index:120!important;
+  width:100%!important;
+}
+body.reception-body .dashboard-left{position:static!important;top:auto!important}
+body.reception-body .wedy-event{display:none!important}
+body.reception-body .wedy-nav{display:none!important}
+body.reception-body .reception-operator-identity{
+  display:flex;align-items:center;gap:10px;min-width:0;margin-left:auto;
+}
+body.reception-body .operator-identity-copy{display:flex;flex-direction:column;min-width:0}
+body.reception-body .operator-identity-copy b{font-size:.68rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
+body.reception-body .operator-identity-copy small{font-size:.52rem;color:var(--rx-muted);white-space:nowrap}
+body.reception-body .reception-operator-identity .operator-avatar{width:38px;height:38px;flex:0 0 38px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#e6d8cd;color:#795848;font-weight:700}
+body.reception-body .reception-operator-identity .operator-avatar img,
+body.reception-body .reception-drawer-user .operator-avatar img{width:100%;height:100%;object-fit:cover}
+body.reception-body .reception-head-actions{display:flex;align-items:center;gap:8px;margin-left:8px}
+body.reception-body .reception-menu-toggle{display:grid!important;place-items:center;width:44px!important;height:44px!important;min-height:44px!important;border:1px solid var(--rx-border);border-radius:12px;background:#f5f0ea;color:#594c44;cursor:pointer}
+body.reception-body .reception-admin-link{min-height:44px!important}
+
+/* Lateral drawer */
+body.reception-body .reception-side-drawer{position:fixed;inset:0;z-index:5000;pointer-events:none;visibility:hidden}
+body.reception-body .reception-side-drawer.is-open{pointer-events:auto;visibility:visible}
+body.reception-body .reception-drawer-backdrop{position:absolute;inset:0;background:rgba(42,34,29,.38);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity .2s ease}
+body.reception-body .reception-side-drawer.is-open .reception-drawer-backdrop{opacity:1}
+body.reception-body .reception-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(380px,92vw);background:var(--rx-surface);border-left:1px solid var(--rx-border);box-shadow:-20px 0 60px rgba(46,37,31,.18);transform:translateX(100%);transition:transform .24s ease;display:flex;flex-direction:column;overflow:auto}
+body.reception-body .reception-side-drawer.is-open .reception-drawer-panel{transform:translateX(0)}
+body.reception-body .reception-drawer-head{display:flex;align-items:flex-start;justify-content:space-between;padding:26px 22px 18px;border-bottom:1px solid #eee7e0}
+body.reception-body .reception-drawer-head h2{font:500 2.2rem/1 'Cormorant Garamond',serif;margin:4px 0 0}
+body.reception-body .reception-drawer-close{width:42px;height:42px;border-radius:50%;border:1px solid var(--rx-border);background:#f6f1ec;color:#5e534c;font-size:24px;display:grid;place-items:center;cursor:pointer}
+body.reception-body .reception-drawer-user{display:flex;align-items:center;gap:12px;margin:18px 22px;padding:13px 14px;border:1px solid #e8e0d8;border-radius:16px;background:#faf7f3}
+body.reception-body .reception-drawer-user .operator-avatar{width:46px;height:46px;flex:0 0 46px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#e6d8cd;color:#795848;font-weight:700}
+body.reception-body .reception-drawer-user b{display:block;font-size:.75rem}
+body.reception-body .reception-drawer-user small{display:block;margin-top:3px;font-size:.57rem;color:var(--rx-muted)}
+body.reception-body .reception-drawer-nav{display:grid;gap:7px;padding:6px 16px 18px}
+body.reception-body .reception-drawer-nav a,
+body.reception-body .reception-drawer-nav button,
+body.reception-body .reception-drawer-footer button{width:100%;display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;align-items:center;text-align:left;text-decoration:none;color:inherit;border:1px solid transparent;background:transparent;border-radius:14px;padding:12px 10px;min-height:64px;font:inherit;cursor:pointer}
+body.reception-body .reception-drawer-nav a:hover,
+body.reception-body .reception-drawer-nav button:hover,
+body.reception-body .reception-drawer-footer button:hover{background:#faf6f1;border-color:#eee5de}
+body.reception-body .reception-drawer-nav> a>span,
+body.reception-body .reception-drawer-nav>button>span,
+body.reception-body .reception-drawer-footer button>span{width:42px;height:42px;border-radius:13px;background:#f1ebe5;color:var(--rx-terra-dark);display:grid;place-items:center;font-size:1.05rem}
+body.reception-body .reception-drawer-nav b,.reception-drawer-footer b{display:block;font-size:.67rem}
+body.reception-body .reception-drawer-nav small,.reception-drawer-footer small{display:block;margin-top:3px;color:#968a82;font-size:.54rem;line-height:1.35}
+body.reception-body .reception-drawer-footer{margin-top:auto;padding:14px 16px 22px;border-top:1px solid #eee7e0}
+body.reception-body .reception-drawer-footer button{background:#faf6f2;border-color:#eee4dc}
+body.reception-body .reception-drawer-footer button>span{background:#f8ebe8;color:var(--rx-danger)}
+
+/* The old fixed bottom navigation is replaced by the single hamburger drawer. */
+body.reception-body .reception-mobile-nav,
+body.reception-body .reception-more-sheet{display:none!important}
+
+@media(max-width:720px){
+  body.reception-body .wedy-header{height:64px!important;padding:0 10px!important}
+  body.reception-body .wedy-brand{min-width:0!important;max-width:44vw}
+  body.reception-body .wedy-brand span{font-size:1.02rem!important}
+  body.reception-body .reception-operator-identity{gap:7px}
+  body.reception-body .operator-identity-copy{display:none}
+  body.reception-body .reception-admin-link{display:none!important}
+  body.reception-body .reception-head-actions{margin-left:0}
+  body.reception-body .reception-menu-toggle{width:44px!important;height:44px!important}
+  body.reception-body .reception-main{padding:14px 12px 34px!important}
+  body.reception-body .reception-side-drawer .reception-drawer-panel{width:min(360px,92vw)}
+}
+@media(min-width:721px){
+  body.reception-body .reception-drawer-panel{width:380px}
+}

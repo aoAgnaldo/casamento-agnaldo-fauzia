@@ -1913,3 +1913,50 @@ body.reception-body,body:has(.reception-main){background:#f4f1ee!important;}
  .reception-mobile-nav{height:68px!important;padding:7px 8px calc(7px + env(safe-area-inset-bottom))!important;border-top:1px solid #e4dbd5!important;background:rgba(255,253,250,.97)!important;backdrop-filter:blur(12px)!important;}
  .reception-mobile-nav a,.reception-mobile-nav button{min-height:52px!important;border-radius:12px!important;}
 }
+
+/* V8.1 — Mobile: a lista de convidados deve acompanhar o scroll da página,
+   e não ficar presa num segundo scroll interno. */
+@media (max-width:760px){
+  html, body.admin-body{
+    overflow:hidden!important;
+    height:100%!important;
+    overscroll-behavior:none!important;
+  }
+  body.admin-body .admin-wrap{
+    height:calc(100dvh - 64px)!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body.admin-body .admin-view-section.admin-view-active{
+    height:100%!important;
+    max-height:none!important;
+    min-height:0!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-y:auto!important;
+    touch-action:pan-y!important;
+    padding-bottom:calc(96px + env(safe-area-inset-bottom))!important;
+  }
+  /* O conteúdo de convidados cresce livremente; apenas o contentor principal rola. */
+  body.admin-body #convidados.admin-view-active .guest-list-scroll,
+  body.admin-body #convidados.admin-view-active .guest-card-list{
+    max-height:none!important;
+    height:auto!important;
+    overflow:visible!important;
+    -webkit-overflow-scrolling:auto!important;
+  }
+  body.admin-body #convidados.admin-view-active .guest-card-list .guest-card{
+    min-height:0!important;
+  }
+  /* Os filtros podem deslizar horizontalmente sem roubar o gesto vertical. */
+  body.admin-body #convidados.admin-view-active .guest-filters{
+    touch-action:pan-x!important;
+  }
+  /* Espaço real para que o último convidado nunca fique atrás da barra inferior. */
+  body.admin-body #convidados.admin-view-active .guest-card-list::after{
+    content:"";
+    display:block;
+    height:8px;
+  }
+}
