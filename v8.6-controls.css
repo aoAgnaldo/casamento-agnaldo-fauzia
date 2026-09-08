@@ -1,0 +1,96 @@
+/* V8.6 — Controlos mobile finais
+   Ordem após abertura: Menu (único com caixa) → Música → Acesso reservado.
+   No Welcome, os três permanecem ocultos.
+*/
+@media (max-width:800px){
+  .topbar .topbar-actions{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:2px!important;
+    min-width:130px!important;
+    margin-left:auto!important;
+    overflow:visible!important;
+  }
+
+  /* MENU — único controlo com moldura */
+  .topbar-actions .menu-toggle{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    padding:0!important;
+    border:1px solid rgba(255,255,255,.45)!important;
+    border-radius:11px!important;
+    background:rgba(255,255,255,.10)!important;
+    box-shadow:none!important;
+  }
+
+  /* MÚSICA — só o símbolo, sem caixa */
+  .topbar-actions .music-button{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:34px!important;
+    min-width:34px!important;
+    height:44px!important;
+    min-height:44px!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:inherit!important;
+  }
+  .topbar-actions .music-button #musicText{display:none!important}
+  .topbar-actions .music-button #musicIcon{display:block!important;font-size:15px!important;line-height:1!important}
+
+  /* ADMIN — cadeado, só ícone, sem caixa */
+  .topbar-actions .private-access-trigger{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    width:34px!important;
+    min-width:34px!important;
+    height:44px!important;
+    min-height:44px!important;
+    padding:0!important;
+    margin:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:inherit!important;
+  }
+  .topbar-actions .private-access-trigger svg{
+    display:block!important;
+    width:16px!important;
+    height:16px!important;
+    stroke:currentColor!important;
+    fill:none!important;
+  }
+
+  /* No Welcome não existe nenhum dos três controlos. */
+  body.intro-locked .topbar-actions .menu-toggle,
+  body.intro-locked .topbar-actions .music-button,
+  body.intro-locked .topbar-actions .private-access-trigger{
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+
+  /* Depois de abrir: Menu → Música → Cadeado. */
+  body:not(.intro-locked) .topbar-actions .menu-toggle,
+  body:not(.intro-locked) .topbar-actions .music-button,
+  body:not(.intro-locked) .topbar-actions .private-access-trigger{
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+}
