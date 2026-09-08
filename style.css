@@ -3829,3 +3829,54 @@ html:not(.intro-locked) .topbar{
   }
   .rsvp-copy{max-width:290px !important}
 }
+
+
+/* V8.17 — RSVP: linhas fixas + formulário Web com o mesmo acabamento do Mobile */
+.rsvp-inner .section-label > span:last-child{
+  white-space:nowrap !important;
+}
+.rsvp-inner h2{
+  max-width:none !important;
+  width:auto !important;
+  text-wrap:unset !important;
+  word-break:normal !important;
+  overflow-wrap:normal !important;
+}
+.rsvp-inner h2 .rsvp-title-line{
+  display:inline-block !important;
+  white-space:nowrap !important;
+}
+.rsvp-search input,
+.rsvp-search-row .button,
+.rsvp-guest-card,
+.rsvp-choice button,
+.companion-field input,
+.rsvp-confirm,
+.rsvp-change-guest{
+  border-radius:12px !important;
+}
+
+@media (min-width:801px){
+  .rsvp-search input{
+    border-radius:12px !important;
+  }
+  .rsvp-search-row .button{
+    border-radius:12px !important;
+  }
+  .rsvp-guest-card{
+    border-radius:16px !important;
+  }
+  .rsvp-choice button{
+    border-radius:12px !important;
+  }
+  .companion-field input{
+    border-radius:12px !important;
+  }
+}
+
+@media (max-width:800px){
+  .rsvp-inner h2{
+    max-width:none !important;
+    width:100% !important;
+  }
+}
