@@ -40,3 +40,13 @@
   .rsvp-copy{font-size:1rem!important;line-height:1.45!important}.rsvp-search{margin-top:1.35rem!important}.rsvp-search label{font-size:9px!important}.rsvp-search-row{gap:.55rem!important}.rsvp-search input{min-height:52px!important;font-size:16px!important;border-radius:12px!important}.rsvp-search-row .button{min-height:52px!important;border-radius:12px!important}.rsvp-guest-card{padding:1rem!important;border-radius:16px!important;background:rgba(255,255,255,.075)!important}.rsvp-choice{grid-template-columns:1fr!important;gap:.55rem!important}.rsvp-choice button{min-height:50px!important;border-radius:12px!important;text-align:left!important;padding:.8rem 1rem!important}.rsvp-choice button.is-selected{box-shadow:0 0 0 2px rgba(231,184,169,.35)}.companion-count-label select{width:100%;min-height:48px;margin-top:.45rem}.rsvp-confirm,.rsvp-change-guest{width:100%!important;justify-content:center!important;min-height:50px!important}
   .rsvp-section{padding-bottom:calc(5rem + env(safe-area-inset-bottom))!important}
 }
+
+/* V8.3 — mobile: apenas o Menu usa caixa; Música e Acesso reservado ficam só com ícone. */
+@media (max-width:800px){
+  .topbar-actions .menu-toggle{background:rgba(255,255,255,.10)!important;border:1px solid rgba(255,255,255,.45)!important;border-radius:11px!important;box-shadow:none!important}
+  .topbar-actions .music-button{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;color:inherit!important;backdrop-filter:none!important}
+  .topbar-actions .private-access-trigger{display:none!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;color:inherit!important}
+  body.intro-locked .topbar-actions .private-access-trigger{display:inline-flex!important}
+  body:not(.intro-locked) .topbar-actions .private-access-trigger{display:none!important}
+  body.intro-locked .topbar{padding:calc(env(safe-area-inset-top) + .65rem) 5vw .65rem!important}
+}

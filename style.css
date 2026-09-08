@@ -3238,3 +3238,52 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .private-access-signoff span{width:52px;}
   .private-access-signoff i{font-size:1.25rem;}
 }
+
+/* V8.3 — controlos globais do convite: Menu (único com caixa), Música e Acesso reservado. */
+.topbar-actions{display:flex;align-items:center;gap:.45rem;margin-left:auto}
+.topbar-actions .menu-toggle,
+.topbar-actions .music-button,
+.topbar-actions .private-access-trigger{margin:0;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;box-sizing:border-box}
+.topbar-actions .menu-toggle{width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:1px solid rgba(255,255,255,.34);border-radius:10px;background:rgba(255,255,255,.06);color:inherit}
+.topbar-actions .menu-toggle span{font-size:17px;line-height:1}
+.topbar-actions .music-button{width:38px;height:44px;min-width:38px;min-height:44px;padding:0;border:0;background:transparent;box-shadow:none;color:inherit}
+.topbar-actions .music-button #musicText{display:none}
+.topbar-actions .music-button #musicIcon{display:block;font-size:15px;line-height:1}
+.topbar-actions .private-access-trigger{width:38px;height:44px;min-width:38px;min-height:44px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:inherit;display:none}
+.topbar-actions .private-access-trigger svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.35;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+body:not(.intro-locked) .topbar-actions .private-access-trigger{display:none!important}
+body.intro-locked .topbar{z-index:60;pointer-events:none}
+body.intro-locked .topbar-actions{pointer-events:auto}
+body.intro-locked .topbar .brand,
+body.intro-locked .topbar .nav-links{visibility:hidden;pointer-events:none}
+@media (min-width:801px){
+  .topbar-actions .menu-toggle{display:inline-flex}
+}
+@media (max-width:800px){
+  .topbar-actions{gap:.15rem}
+  .topbar-actions .menu-toggle{width:44px;height:44px;min-width:44px}
+  .topbar-actions .music-button,.topbar-actions .private-access-trigger{width:40px;min-width:40px;height:44px}
+  .topbar{pointer-events:none}
+  .topbar .topbar-actions{pointer-events:auto}
+}
+
+/* V8.3 final override — only Menu has a square frame; Music/Admin are icon-only. */
+.topbar-actions .private-access-trigger,
+body:not(.intro-locked) .topbar-actions .private-access-trigger{display:none!important;border:0!important;border-color:transparent!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;outline:0!important}
+body.intro-locked .topbar-actions .private-access-trigger{display:inline-flex!important}
+.topbar-actions .private-access-trigger:hover,
+.topbar-actions .private-access-trigger:focus-visible{border:0!important;border-color:transparent!important;background:transparent!important;box-shadow:none!important}
+body.intro-locked .topbar{color:#342c29!important}
+body.intro-locked .topbar .brand img{filter:none!important}
+.topbar-actions .music-button{border:0!important;border-color:transparent!important;background:transparent!important;box-shadow:none!important;border-radius:0!important}
+.topbar-actions .music-button:hover,
+.topbar-actions .music-button:focus-visible{border:0!important;border-color:transparent!important;background:transparent!important;box-shadow:none!important}
+.topbar-actions .menu-toggle{border:1px solid rgba(255,255,255,.34)!important;background:rgba(255,255,255,.06)!important;box-shadow:none!important;border-radius:10px!important}
+body.intro-locked .topbar-actions .menu-toggle{border-color:rgba(52,44,41,.24)!important;background:rgba(52,44,41,.045)!important}
+body.intro-locked .topbar-actions .music-button,
+body.intro-locked .topbar-actions .private-access-trigger{color:#342c29!important}
+@media (min-width:801px){
+  .topbar-actions .menu-toggle{display:inline-flex!important}
+  .topbar-actions .music-button,.topbar-actions .private-access-trigger{display:inline-flex!important}
+  body:not(.intro-locked) .topbar-actions .private-access-trigger{display:none!important}
+}
