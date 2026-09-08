@@ -3829,3 +3829,30 @@ html:not(.intro-locked) .topbar{
   }
   .rsvp-copy{max-width:290px !important}
 }
+
+
+/* V8.15 — RSVP: composição exacta em duas linhas */
+.rsvp-inner > .section-label .rsvp-label-text{
+  display:inline-block;
+  line-height:1.35;
+}
+.rsvp-inner h2 > span{
+  white-space:nowrap;
+}
+@media (max-width:800px){
+  .rsvp-inner > .section-label .rsvp-label-text{
+    line-height:1.2;
+  }
+  .rsvp-inner h2{
+    max-width:none !important;
+    width:100% !important;
+  }
+  .rsvp-inner h2 > span{
+    white-space:nowrap;
+  }
+}
+@media (max-width:360px){
+  .rsvp-inner h2{
+    font-size:clamp(2.7rem,13.7vw,3.7rem) !important;
+  }
+}
