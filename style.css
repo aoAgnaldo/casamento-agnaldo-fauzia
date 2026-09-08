@@ -3711,3 +3711,121 @@ html:not(.intro-locked) .topbar{
     margin-top:0 !important;
   }
 }
+
+/* V8.14 — RSVP: composição mais clara, compacta e orientada à acção */
+.rsvp-inner{
+  max-width:720px !important;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.rsvp-inner h2{
+  font-size:clamp(4rem,6.4vw,6.4rem) !important;
+  line-height:.82 !important;
+  margin:1.15rem 0 1.1rem !important;
+  max-width:8.5ch !important;
+}
+.rsvp-copy{
+  max-width:560px !important;
+  margin:0 auto 1.35rem !important;
+}
+.rsvp-search{
+  width:min(100%,520px) !important;
+  max-width:none !important;
+  margin:1rem auto 0 !important;
+  text-align:left;
+}
+.rsvp-search-row{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:.65rem !important;
+  align-items:stretch;
+}
+.rsvp-search-row .button{
+  justify-content:center;
+  white-space:nowrap;
+  min-width:154px;
+}
+.rsvp-privacy-note{
+  margin:.75rem 0 0 !important;
+  font-size:10px !important;
+  letter-spacing:.02em !important;
+  color:rgba(248,244,237,.68) !important;
+}
+.rsvp-actions{
+  margin-top:.8rem !important;
+}
+.rsvp-help{
+  margin:0 !important;
+  font-family:var(--font-body) !important;
+  font-size:10px !important;
+  letter-spacing:.06em !important;
+  color:rgba(248,244,237,.72) !important;
+}
+.rsvp-help a{
+  color:var(--cream);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.38);
+  padding-bottom:.15rem;
+}
+.rsvp-mobile-steps{margin-bottom:.2rem !important}
+
+@media (max-width:800px){
+  .rsvp-section.section-pad{
+    padding-top:4.3rem !important;
+    padding-bottom:4.3rem !important;
+  }
+  .rsvp-inner{max-width:100% !important}
+  .rsvp-mark{
+    width:38px !important;
+    height:38px !important;
+    margin-bottom:1.15rem !important;
+  }
+  .rsvp-inner h2{
+    font-size:clamp(3.25rem,15vw,4.65rem) !important;
+    line-height:.8 !important;
+    margin:.85rem 0 1rem !important;
+    max-width:7.2ch !important;
+  }
+  .rsvp-copy{
+    font-size:1.05rem !important;
+    line-height:1.28 !important;
+    max-width:310px !important;
+    margin-bottom:1rem !important;
+  }
+  .rsvp-search{
+    width:100% !important;
+    margin-top:.65rem !important;
+  }
+  .rsvp-search-row{
+    grid-template-columns:1fr !important;
+    gap:.55rem !important;
+  }
+  .rsvp-search-row .button{
+    width:100% !important;
+    min-width:0 !important;
+  }
+  .rsvp-search input{
+    width:100% !important;
+    min-height:50px !important;
+    padding:.9rem .9rem !important;
+  }
+  .rsvp-search-row .button{
+    min-height:50px !important;
+  }
+  .rsvp-privacy-note{
+    max-width:280px !important;
+    text-align:center;
+    line-height:1.35 !important;
+    margin-top:.6rem !important;
+  }
+  .rsvp-actions{margin-top:.65rem !important}
+  .rsvp-help{font-size:9px !important}
+}
+
+@media (max-width:420px){
+  .rsvp-inner h2{
+    font-size:clamp(3rem,14.5vw,4rem) !important;
+  }
+  .rsvp-copy{max-width:290px !important}
+}
