@@ -236,6 +236,31 @@ $('#rsvpConfirm')?.addEventListener('click',async()=>{
 
 /* Gifts */
 let allGifts=[], giftFilter='all', selectedGift=null;
+const giftPhotoLightbox=document.createElement('div');
+giftPhotoLightbox.id='giftPhotoLightbox';
+giftPhotoLightbox.className='gift-photo-lightbox hidden';
+giftPhotoLightbox.innerHTML='<div class="gift-photo-lightbox-inner"><button class="gift-photo-lightbox-close" type="button" aria-label="Fechar fotografia">×</button><img class="gift-photo-lightbox-image" alt="Fotografia do presente"><p class="gift-photo-lightbox-caption"></p></div>';
+document.body.appendChild(giftPhotoLightbox);
+const giftPhotoLightboxImage=giftPhotoLightbox.querySelector('.gift-photo-lightbox-image');
+const giftPhotoLightboxCaption=giftPhotoLightbox.querySelector('.gift-photo-lightbox-caption');
+function openGiftPhoto(url,name){
+  if(!url)return;
+  giftPhotoLightboxImage.src=url;
+  giftPhotoLightboxImage.alt=name?`Fotografia de ${name}`:'Fotografia do presente';
+  giftPhotoLightboxCaption.textContent=name||'';
+  giftPhotoLightbox.classList.remove('hidden');
+  setPublicModalLock(true);
+  setTimeout(()=>giftPhotoLightbox.querySelector('.gift-photo-lightbox-close')?.focus(),30);
+}
+function closeGiftPhoto(){
+  giftPhotoLightbox.classList.add('hidden');
+  giftPhotoLightboxImage.src='';
+  giftPhotoLightboxCaption.textContent='';
+  setPublicModalLock(false);
+}
+giftPhotoLightbox.querySelector('.gift-photo-lightbox-close')?.addEventListener('click',closeGiftPhoto);
+giftPhotoLightbox.addEventListener('click',e=>{if(e.target===giftPhotoLightbox)closeGiftPhoto()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!giftPhotoLightbox.classList.contains('hidden'))closeGiftPhoto()});
 function renderGifts(){
   const grid=$('#giftGrid'); if(!grid)return;
   const q=String($('#giftSearch')?.value||'').trim().toLowerCase();
@@ -248,7 +273,7 @@ function renderGifts(){
   if(!filtered.length){grid.innerHTML='<p class="gift-status">Nenhum presente encontrado.</p>';return;}
   grid.innerHTML=filtered.map(g=>{
     const reserved=!!g.reserved;
-    const photo=g.image_url?`<img class="gift-public-photo" src="${escapeHtml(g.image_url)}" alt="${escapeHtml(g.name)}" loading="lazy">`:'<span class="gift-public-photo gift-public-photo--placeholder" aria-hidden="true">♡</span>';
+    const photo=g.image_url?`<button class="gift-public-photo-button" type="button" data-gift-photo="${escapeHtml(g.image_url)}" data-gift-name="${escapeHtml(g.name)}" aria-label="Ver fotografia de ${escapeHtml(g.name)}"><img class="gift-public-photo" src="${escapeHtml(g.image_url)}" alt="${escapeHtml(g.name)}" loading="lazy"></button>`:'<span class="gift-public-photo gift-public-photo--placeholder" aria-hidden="true">♡</span>';
     return `<article class="gift-list-row ${reserved?'gift-list-row--reserved':''}">
       <span class="gift-index">${String(g.item_no).padStart(2,'0')}</span>
       <span class="gift-public-photo-wrap">${photo}</span>
@@ -257,6 +282,7 @@ function renderGifts(){
     </article>`;
   }).join('');
   $$('.reserve-button').forEach(b=>b.addEventListener('click',()=>openReservation(b.dataset.giftId)));
+  $$('.gift-public-photo-button').forEach(b=>b.addEventListener('click',()=>openGiftPhoto(b.dataset.giftPhoto,b.dataset.giftName)));
 }
 async function loadGifts(){
   const code=currentInvitation?.code||null;

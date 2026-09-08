@@ -3465,3 +3465,31 @@ html:not(.intro-locked) .topbar{
     pointer-events:none !important;
   }
 }
+
+/* V8.9 — Presentes: miniatura na lista + fotografia ampliada ao clicar */
+.gift-public-photo-button{display:block;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:pointer;color:inherit}
+.gift-public-photo-button:focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:12px}
+.gift-photo-lightbox{position:fixed;inset:0;z-index:220;background:rgba(35,30,28,.76);backdrop-filter:blur(8px);display:grid;place-items:center;padding:1.25rem}
+.gift-photo-lightbox.hidden{display:none!important}
+.gift-photo-lightbox-inner{position:relative;max-width:min(92vw,780px);max-height:90vh;display:grid;place-items:center}
+.gift-photo-lightbox-image{display:block;max-width:92vw;max-height:82vh;width:auto;height:auto;object-fit:contain;background:var(--cream);box-shadow:0 22px 80px rgba(0,0,0,.35)}
+.gift-photo-lightbox-close{position:absolute;right:-.4rem;top:-.4rem;width:42px;height:42px;border:1px solid rgba(255,255,255,.45);border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font-size:1.5rem;line-height:1;cursor:pointer}
+.gift-photo-lightbox-caption{margin-top:.65rem;color:#fff;text-align:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+@media (max-width:800px){
+  /* V8.9 — os três controlos do topo partilham a mesma linguagem discreta */
+  .topbar .topbar-actions{gap:1px!important;min-width:112px!important}
+  .topbar .topbar-actions #menuToggle,
+  .topbar .topbar-actions #musicButton,
+  .topbar .topbar-actions #privateAccessTrigger{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#fff!important}
+  .topbar .topbar-actions #menuToggle{width:34px!important;min-width:34px!important;height:38px!important;min-height:38px!important}
+  .topbar .topbar-actions #menuToggle span{font-size:18px!important}
+  .topbar .topbar-actions #menuToggle span::before{font-size:18px!important;color:#fff!important}
+  .topbar .topbar-actions #musicButton{width:32px!important;min-width:32px!important;height:38px!important;min-height:38px!important}
+  .topbar .topbar-actions #musicButton #musicIcon{font-size:15px!important;color:#fff!important;opacity:.82!important}
+  .topbar .topbar-actions #privateAccessTrigger{width:30px!important;min-width:30px!important;height:38px!important;min-height:38px!important}
+  .topbar .topbar-actions #privateAccessTrigger svg{display:block!important;width:15px!important;height:15px!important;stroke:#fff!important;fill:none!important;opacity:.82!important}
+  .topbar .topbar-actions #privateAccessTrigger::before{display:none!important;content:none!important}
+  .gift-list-row{grid-template-columns:24px 54px minmax(0,1fr)!important;gap:.6rem!important}
+  .gift-public-photo-wrap{width:54px!important;height:54px!important;border-radius:10px!important}
+}
