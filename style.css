@@ -3287,3 +3287,74 @@ body.intro-locked .topbar-actions .private-access-trigger{color:#342c29!importan
   .topbar-actions .music-button,.topbar-actions .private-access-trigger{display:inline-flex!important}
   body:not(.intro-locked) .topbar-actions .private-access-trigger{display:none!important}
 }
+
+/* V8.4 — navegação aprovada: controlos só depois de abrir o convite.
+   Desktop: A&F à esquerda / navegação centrada / Música + Admin à direita.
+   Mobile: A&F à esquerda / Menu + Música + Admin à direita.
+   No Welcome (intro): nenhum dos controlos aparece. */
+
+/* O Welcome é visualmente limpo: o topbar só entra quando o convite foi aberto. */
+body.intro-locked .topbar,
+html.intro-locked .topbar{
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+/* Desktop — menu não aparece; apenas música e acesso Admin. */
+@media (min-width:801px){
+  .topbar{
+    display:grid !important;
+    grid-template-columns:minmax(180px,1fr) auto minmax(180px,1fr) !important;
+    align-items:center !important;
+    gap:1.5rem !important;
+  }
+  .topbar .brand{grid-column:1;justify-self:start}
+  .topbar .nav-links{grid-column:2;justify-self:center}
+  .topbar .topbar-actions{grid-column:3;justify-self:end;margin-left:0}
+  .topbar-actions .menu-toggle{display:none !important}
+  .topbar-actions .music-button,
+  .topbar-actions .private-access-trigger{display:inline-flex !important}
+  .topbar-actions .private-access-trigger{width:38px;height:44px;min-width:38px;min-height:44px}
+  body:not(.intro-locked) .topbar-actions .private-access-trigger{display:inline-flex !important}
+}
+
+/* Mobile — Menu é o único com caixa; Música e Admin são só ícones. */
+@media (max-width:800px){
+  .topbar{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+  }
+  .topbar .brand{flex:1 1 auto;min-width:0}
+  .topbar .nav-links{display:none !important}
+  .topbar .topbar-actions{display:flex !important;align-items:center !important;gap:.05rem !important;margin-left:auto !important;flex:0 0 auto}
+  .topbar-actions .menu-toggle{display:inline-flex !important}
+  .topbar-actions .music-button,
+  .topbar-actions .private-access-trigger{display:inline-flex !important}
+}
+
+/* O acesso Admin pertence ao convite aberto, não à Welcome. */
+body.intro-locked .topbar-actions .private-access-trigger,
+html.intro-locked .topbar-actions .private-access-trigger{
+  display:none !important;
+}
+body:not(.intro-locked) .topbar-actions .private-access-trigger,
+html:not(.intro-locked) .topbar-actions .private-access-trigger{
+  display:inline-flex !important;
+}
+
+/* No Welcome, nenhum controlo fica visível por cima da composição inicial. */
+body.intro-locked .topbar-actions .menu-toggle,
+body.intro-locked .topbar-actions .music-button,
+body.intro-locked .topbar-actions .private-access-trigger{
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+/* Após a abertura, o header recupera a interacção normalmente. */
+body:not(.intro-locked) .topbar,
+html:not(.intro-locked) .topbar{
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
