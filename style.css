@@ -3880,3 +3880,56 @@ html:not(.intro-locked) .topbar{
     width:100% !important;
   }
 }
+
+/* V8.18 — RSVP: Web alinhado ao conceito Mobile e título exactamente em 2 linhas */
+.rsvp-inner h2{
+  width:max-content !important;
+  max-width:none !important;
+  text-wrap:nowrap !important;
+  overflow:visible !important;
+  text-align:center !important;
+}
+.rsvp-inner h2 .rsvp-title-line{
+  display:block !important;
+  width:max-content !important;
+  max-width:none !important;
+  white-space:nowrap !important;
+}
+@media (min-width:801px){
+  .rsvp-inner h2{
+    font-size:clamp(4.6rem,6.2vw,7rem) !important;
+    line-height:.84 !important;
+    margin:1.35rem 0 1.35rem !important;
+  }
+  .rsvp-search{
+    width:min(100%,620px) !important;
+  }
+  .rsvp-search-row{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 170px !important;
+    gap:.7rem !important;
+    align-items:stretch !important;
+  }
+  .rsvp-search input,
+  .rsvp-search-row .button{
+    min-height:54px !important;
+    border-radius:14px !important;
+  }
+  .rsvp-search input{
+    padding:1rem 1.05rem !important;
+  }
+  .rsvp-search-row .button{
+    width:100% !important;
+    justify-content:center !important;
+  }
+}
+@media (max-width:800px){
+  .rsvp-inner h2{
+    width:100% !important;
+    max-width:100% !important;
+    font-size:clamp(3rem,14.5vw,4rem) !important;
+  }
+  .rsvp-inner h2 .rsvp-title-line{
+    width:100% !important;
+  }
+}
