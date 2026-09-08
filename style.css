@@ -3394,3 +3394,74 @@ html:not(.intro-locked) .topbar{
     display:none!important;
   }
 }
+
+/* V8.7 — correcção definitiva dos controlos mobile.
+   Após abrir o convite: Menu → Música → Acesso reservado.
+   O Admin nunca depende de display inline do JavaScript. */
+@media (max-width:800px){
+  .topbar .topbar-actions{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    flex:0 0 auto !important;
+    width:auto !important;
+    min-width:132px !important;
+    gap:0 !important;
+    overflow:visible !important;
+  }
+  .topbar-actions .menu-toggle{
+    display:inline-flex !important;
+    width:44px !important;
+    min-width:44px !important;
+    height:44px !important;
+    min-height:44px !important;
+    flex:0 0 44px !important;
+  }
+  .topbar-actions .music-button{
+    display:inline-flex !important;
+    width:40px !important;
+    min-width:40px !important;
+    height:44px !important;
+    min-height:44px !important;
+    flex:0 0 40px !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+  }
+  .topbar-actions .private-access-trigger,
+  body:not(.intro-locked) .topbar-actions .private-access-trigger,
+  html:not(.intro-locked) .topbar-actions .private-access-trigger{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+    width:40px !important;
+    min-width:40px !important;
+    height:44px !important;
+    min-height:44px !important;
+    flex:0 0 40px !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    border-radius:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    color:inherit !important;
+  }
+  .topbar-actions .private-access-trigger svg{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    width:17px !important;
+    height:17px !important;
+    stroke:currentColor !important;
+    fill:none !important;
+    stroke-width:1.45 !important;
+  }
+  body.intro-locked .topbar-actions .private-access-trigger,
+  html.intro-locked .topbar-actions .private-access-trigger{
+    display:none !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+  }
+}
