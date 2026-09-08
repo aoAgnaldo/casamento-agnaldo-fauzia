@@ -266,25 +266,52 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!giftPhotoLightbox.
 function renderGifts(){
   const grid=$('#giftGrid'); if(!grid)return;
   const q=String($('#giftSearch')?.value||'').trim().toLowerCase();
+  const normalizeText = (value='') => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const nq=normalizeText(q);
   const filtered=allGifts.filter(g=>{
-    const mq=!q||String(g.name).toLowerCase().includes(q)||String(g.item_no).includes(q);
+    const name=normalizeText(g.name||'');
+    const itemNo=String(g.item_no||'').toLowerCase();
+    const mq=!nq||name.includes(nq)||itemNo.includes(nq);
     const mf=giftFilter==='all'||(giftFilter==='available'&&!g.reserved)||(giftFilter==='reserved'&&g.reserved);
     return mq&&mf;
   });
-  $('#giftCount').textContent=filtered.length?`${filtered.length} ${filtered.length===1?'presente':'presentes'}`:'Nenhum presente encontrado.';
-  if(!filtered.length){grid.innerHTML='<p class="gift-status">Nenhum presente encontrado.</p>';return;}
+  $('#giftCount').textContent=filtered.length
+    ? `${filtered.length} ${filtered.length===1?'presente':'presentes'}`
+    : 'Nenhum presente encontrado.';
+  if(!filtered.length){
+    grid.innerHTML='<p class="gift-status gift-empty">Nenhum presente encontrado.</p>';
+    return;
+  }
+
   grid.innerHTML=filtered.map(g=>{
     const reserved=!!g.reserved;
-    const photo=g.image_url?`<button class="gift-public-photo-button" type="button" data-gift-photo="${escapeHtml(g.image_url)}" data-gift-name="${escapeHtml(g.name)}" aria-label="Ver fotografia de ${escapeHtml(g.name)}"><img class="gift-public-photo" src="${escapeHtml(g.image_url)}" alt="${escapeHtml(g.name)}" loading="lazy"></button>`:'<span class="gift-public-photo gift-public-photo--placeholder" aria-hidden="true">♡</span>';
+    const no=String(g.item_no).padStart(2,'0');
+    const thumb=g.image_url
+      ? `<button class="gift-photo-trigger" type="button" data-gift-photo="${escapeHtml(g.image_url)}" data-gift-name="${escapeHtml(g.name)}" aria-label="Ampliar fotografia de ${escapeHtml(g.name)}">
+           <img src="${escapeHtml(g.image_url)}" alt="" class="gift-photo-thumb" loading="lazy">
+           <span class="gift-photo-icon" aria-hidden="true">⌕</span>
+         </button>`
+      : `<span class="gift-photo-trigger gift-photo-trigger--empty" aria-hidden="true"><span class="gift-photo-icon">♡</span></span>`;
+
+    const action=reserved
+      ? '<span class="reserved-label">Reservado</span>'
+      : `<button class="reserve-button" type="button" data-gift-id="${escapeHtml(g.id)}">Reservar</button>`;
+
     return `<article class="gift-list-row ${reserved?'gift-list-row--reserved':''}">
-      <span class="gift-index">${String(g.item_no).padStart(2,'0')}</span>
-      <span class="gift-public-photo-wrap">${photo}</span>
-      <span class="gift-name">${escapeHtml(g.name)}</span>
-      ${reserved?'<span class="reserved-label">Reservado</span>':'<button class="reserve-button" type="button" data-gift-id="'+g.id+'">Reservar</button>'}
+      <span class="gift-index" aria-hidden="true">${no}</span>
+      <div class="gift-item-main">
+        ${thumb}
+        <div class="gift-item-copy">
+          <span class="gift-name">${escapeHtml(g.name)}</span>
+          ${reserved?'<span class="gift-item-state">Este presente já foi reservado.</span>':''}
+        </div>
+        <div class="gift-item-action">${action}</div>
+      </div>
     </article>`;
   }).join('');
+
   $$('.reserve-button').forEach(b=>b.addEventListener('click',()=>openReservation(b.dataset.giftId)));
-  $$('.gift-public-photo-button').forEach(b=>b.addEventListener('click',()=>openGiftPhoto(b.dataset.giftPhoto,b.dataset.giftName)));
+  $$('.gift-photo-trigger[data-gift-photo]').forEach(b=>b.addEventListener('click',()=>openGiftPhoto(b.dataset.giftPhoto,b.dataset.giftName)));
 }
 async function loadGifts(){
   const code=currentInvitation?.code||null;

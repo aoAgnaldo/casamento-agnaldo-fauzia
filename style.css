@@ -3493,3 +3493,161 @@ html:not(.intro-locked) .topbar{
   .gift-list-row{grid-template-columns:24px 54px minmax(0,1fr)!important;gap:.6rem!important}
   .gift-public-photo-wrap{width:54px!important;height:54px!important;border-radius:10px!important}
 }
+
+
+/* V8.11 — Presentes: lista limpa e compacta (Web + Mobile)
+   A fotografia é uma miniatura. O tamanho grande só aparece no lightbox ao clicar. */
+.gifts-section .gift-list{
+  max-height:none !important;
+  overflow:visible !important;
+  padding-right:0 !important;
+  border-top:1px solid var(--line);
+  overscroll-behavior:auto !important;
+}
+.gifts-section .gift-list-row{
+  display:grid !important;
+  grid-template-columns:32px minmax(0,1fr) !important;
+  gap:12px !important;
+  align-items:center !important;
+  min-height:76px !important;
+  padding:12px 0 !important;
+}
+.gifts-section .gift-item-main{
+  display:grid !important;
+  grid-template-columns:64px minmax(0,1fr) auto !important;
+  gap:12px !important;
+  align-items:center !important;
+  min-width:0 !important;
+}
+.gifts-section .gift-photo-trigger{
+  position:relative !important;
+  width:64px !important;
+  height:64px !important;
+  min-width:64px !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border:1px solid rgba(52,44,41,.16) !important;
+  border-radius:10px !important;
+  background:#f1ebe4 !important;
+  display:grid !important;
+  place-items:center !important;
+  color:var(--terra) !important;
+  cursor:pointer !important;
+}
+.gifts-section .gift-photo-trigger--empty{
+  cursor:default !important;
+}
+.gifts-section .gift-photo-thumb{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+}
+.gifts-section .gift-photo-icon{
+  position:absolute !important;
+  right:4px !important;
+  bottom:4px !important;
+  width:20px !important;
+  height:20px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:50% !important;
+  background:rgba(251,248,243,.92) !important;
+  color:var(--terra) !important;
+  font:600 11px/1 var(--font-body) !important;
+  box-shadow:0 2px 8px rgba(40,32,28,.10) !important;
+}
+.gifts-section .gift-item-copy{
+  min-width:0 !important;
+  display:grid !important;
+  gap:3px !important;
+}
+.gifts-section .gift-name{
+  display:block !important;
+  min-width:0 !important;
+  font-family:var(--font-display) !important;
+  font-size:1.28rem !important;
+  line-height:1.05 !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+.gifts-section .gift-item-state{
+  display:block !important;
+  font-size:9px !important;
+  letter-spacing:.08em !important;
+  text-transform:uppercase !important;
+  color:#988c84 !important;
+}
+.gifts-section .gift-item-action{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+}
+.gifts-section .reserve-button{
+  white-space:nowrap !important;
+  min-width:86px !important;
+  min-height:36px !important;
+  padding:.42rem .65rem !important;
+}
+.gifts-section .reserved-label{
+  white-space:nowrap !important;
+  font-size:9px !important;
+  letter-spacing:.10em !important;
+  text-transform:uppercase !important;
+  color:var(--sage) !important;
+}
+.gifts-section .gift-empty{padding:1.25rem 0 !important;text-align:left}
+.gift-photo-lightbox-inner{max-width:min(92vw,820px) !important}
+.gift-photo-lightbox-image{max-width:min(90vw,760px) !important;max-height:84vh !important}
+
+@media (max-width:800px){
+  .gifts-section{display:block !important}
+  .gifts-section .gifts-heading{margin-bottom:3rem !important}
+  .gifts-section .gift-list-head{
+    align-items:flex-start !important;
+    gap:12px !important;
+  }
+  .gifts-section .gift-list-head h3{font-size:2rem !important}
+  .gifts-section .gift-list{
+    max-height:none !important;
+    overflow:visible !important;
+  }
+  .gifts-section .gift-list-row{
+    grid-template-columns:24px minmax(0,1fr) !important;
+    gap:8px !important;
+    min-height:68px !important;
+    padding:10px 0 !important;
+  }
+  .gifts-section .gift-item-main{
+    grid-template-columns:52px minmax(0,1fr) auto !important;
+    gap:9px !important;
+  }
+  .gifts-section .gift-photo-trigger{
+    width:52px !important;
+    height:52px !important;
+    min-width:52px !important;
+    border-radius:9px !important;
+  }
+  .gifts-section .gift-photo-icon{
+    width:18px !important;
+    height:18px !important;
+    font-size:10px !important;
+    right:3px !important;
+    bottom:3px !important;
+  }
+  .gifts-section .gift-name{
+    font-size:1.08rem !important;
+    line-height:1.02 !important;
+  }
+  .gifts-section .gift-item-state{font-size:8px !important}
+  .gifts-section .reserve-button{
+    min-width:72px !important;
+    min-height:34px !important;
+    padding:.36rem .52rem !important;
+    font-size:8px !important;
+  }
+  .gifts-section .reserved-label{font-size:8px !important}
+  .gift-photo-lightbox{padding:1rem !important}
+  .gift-photo-lightbox-image{max-width:92vw !important;max-height:76vh !important}
+  .gift-photo-lightbox-close{width:40px !important;height:40px !important}
+}
