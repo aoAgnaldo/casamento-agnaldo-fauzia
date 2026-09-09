@@ -4598,3 +4598,57 @@ html:not(.intro-locked) .topbar{
   .private-access-signoff span{width:45px}
   .private-access-signoff i{font-size:1.1rem}
 }
+
+/* V8.34 — Área Reservada mais mimoso: compactação refinada mantendo a animação existente */
+@media (min-width: 801px) {
+  .private-access-dialog{
+    width:min(900px,94vw);
+    padding:1.55rem 2.6rem 1.35rem;
+    max-height:min(86vh,760px);
+    border-radius:20px;
+  }
+  .private-access-brand{margin:.05rem auto .3rem}
+  .private-access-brand img{width:48px;height:48px}
+  .private-access-brand span{font-size:.95rem;margin-left:-.72rem}
+  .private-access-kicker{font-size:8.5px;letter-spacing:.29em}
+  .private-access-dialog h2{font-size:clamp(2.55rem,4.2vw,4.15rem);line-height:.9;margin:.28rem 0 0}
+  .private-access-divider{gap:.7rem;margin:.72rem auto .62rem;max-width:170px}
+  .private-access-subtitle{margin:.1rem 0 1.05rem;font-size:.88rem}
+  .private-access-options{gap:.75rem}
+  .private-access-card{min-height:172px;padding:1.15rem 1.2rem 1rem;border-radius:10px}
+  .private-access-icon{left:1.15rem;top:1rem;width:50px;height:50px}
+  .private-access-icon svg{width:25px;height:25px}
+  .private-access-card-copy{max-width:77%;gap:.34rem}
+  .private-access-card strong{font-size:2.05rem}
+  .private-access-card small{font-size:.78rem;line-height:1.3}
+  .private-access-arrow{right:1.05rem;bottom:1rem;width:43px;height:43px;font-size:26px}
+  .private-access-signoff{gap:.55rem;margin: .78rem auto 0}
+  .private-access-signoff span{width:85px}
+  .private-access-signoff i{font-size:1.15rem}
+}
+
+@media (max-width: 800px) {
+  .private-access-dialog{
+    width:min(100%, 430px);
+    padding:1.3rem .8rem .95rem;
+    max-height:88svh;
+    border-radius:18px;
+  }
+  .private-access-brand img{width:42px;height:42px}
+  .private-access-brand span{font-size:.9rem;margin-left:-.68rem}
+  .private-access-kicker{font-size:8px;letter-spacing:.24em}
+  .private-access-dialog h2{font-size:clamp(2.2rem,10vw,3rem);line-height:.92;margin:.25rem 0 0}
+  .private-access-divider{gap:.55rem;margin:.58rem auto .55rem;max-width:155px}
+  .private-access-subtitle{font-size:.82rem;margin-bottom:.82rem}
+  .private-access-options{gap:.52rem}
+  .private-access-card{min-height:112px;padding:.95rem .85rem .85rem;border-radius:9px}
+  .private-access-icon{left:.85rem;top:.8rem;width:40px;height:40px}
+  .private-access-icon svg{width:20px;height:20px}
+  .private-access-card-copy{max-width:78%;gap:.25rem;padding-top:1.3rem}
+  .private-access-card strong{font-size:1.55rem}
+  .private-access-card small{font-size:.68rem;line-height:1.25}
+  .private-access-arrow{right:.78rem;bottom:.8rem;width:36px;height:36px;font-size:22px}
+  .private-access-signoff{gap:.42rem;margin-top:.62rem}
+  .private-access-signoff span{width:34px}
+  .private-access-signoff i{font-size:.98rem}
+}
