@@ -4043,3 +4043,137 @@ html:not(.intro-locked) .topbar{
   .rsvp-search{width:min(100%,680px) !important;}
   .rsvp-search-row{grid-template-columns:minmax(0,1fr) 180px !important;}
 }
+
+/* V8.20 — RSVP: composição final centrada e duas linhas responsivas */
+.rsvp-inner .section-label{
+  width:100% !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+.rsvp-inner .section-label > span:last-child{
+  display:block !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+}
+.rsvp-mobile-break{display:none !important;}
+
+.rsvp-inner h2{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+  overflow:visible !important;
+}
+.rsvp-inner h2 .rsvp-title-line{
+  display:block !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+}
+
+@media (min-width:801px){
+  .rsvp-inner h2{
+    font-size:clamp(4.6rem,6.2vw,7rem) !important;
+    line-height:.78 !important;
+  }
+  .rsvp-search{width:min(100%,760px) !important;}
+  .rsvp-search-row{grid-template-columns:minmax(0,1fr) 180px !important;}
+}
+
+@media (max-width:800px){
+  .rsvp-inner .section-label > span:last-child{
+    font-size:clamp(.78rem,3.6vw,1rem) !important;
+    letter-spacing:.16em !important;
+  }
+  .rsvp-inner h2{
+    font-size:clamp(2.35rem,11.4vw,4.2rem) !important;
+    line-height:.78 !important;
+  }
+  .rsvp-inner h2 .rsvp-title-line{
+    width:max-content !important;
+    max-width:100% !important;
+  }
+}
+
+@media (max-width:340px){
+  .rsvp-inner h2{
+    font-size:clamp(2.15rem,10.9vw,3rem) !important;
+    line-height:.8 !important;
+  }
+}
+
+
+/* V8.21 — RSVP: composição tipográfica definitiva
+   - eyebrow em uma linha no Web
+   - título em duas linhas controladas no HTML
+   - mobile adapta o tamanho sem quebrar "Podemos contar"
+   - formulário Web ligeiramente mais largo
+*/
+.rsvp-inner .section-label{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  width:100% !important;
+  text-align:center !important;
+}
+.rsvp-inner .section-label > span:last-child{
+  display:inline-block !important;
+  width:auto !important;
+  max-width:none !important;
+  margin:0 !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+}
+.rsvp-heading-fixed{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+  overflow:visible !important;
+  line-height:.82 !important;
+  white-space:normal !important;
+}
+.rsvp-heading-fixed > span{
+  display:block !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+  white-space:nowrap !important;
+}
+@media (min-width:801px){
+  .rsvp-heading-fixed{
+    font-size:clamp(4.6rem,6.1vw,7rem) !important;
+    line-height:.80 !important;
+    margin-top:1.35rem !important;
+    margin-bottom:1.35rem !important;
+  }
+  .rsvp-search{
+    width:min(100%,820px) !important;
+  }
+}
+@media (max-width:800px){
+  .rsvp-heading-fixed{
+    font-size:clamp(2.35rem,10.8vw,4rem) !important;
+    line-height:.84 !important;
+  }
+  .rsvp-heading-fixed > span{
+    max-width:none !important;
+  }
+  .rsvp-inner .section-label > span:last-child{
+    font-size:clamp(.76rem,3.3vw,.95rem) !important;
+    letter-spacing:.14em !important;
+  }
+}
+@media (max-width:360px){
+  .rsvp-heading-fixed{
+    font-size:clamp(2.1rem,10vw,2.8rem) !important;
+    line-height:.86 !important;
+  }
+}
