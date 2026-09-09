@@ -980,3 +980,61 @@ refresh=async function(){await _refreshOriginal();await loadProgramAdmin()};
   syncGiftMobile();
   mq.addEventListener?.('change',syncGiftMobile);
 })();
+
+
+/* =========================================================
+   V8.35 — Conteúdo completo editável para convidados
+   ========================================================= */
+const CONTENT_DEFAULTS={
+  hero_kicker:'Estamos a celebrar', hero_title_line1:'Um amor para', hero_title_line2:'toda a vida',
+  hero_copy:'Há encontros que parecem acaso, mas chegam com a delicadeza de uma promessa.',
+  date_label:'29 de maio de 2027', story_signature:'Com carinho, A & F',
+  gifts_intro:'A vossa presença é o nosso maior presente. Se quiserem oferecer algo, podem escolher uma opção abaixo ou contribuir directamente.',
+  contribution_name:'Agnaldo & Fáuzia', gifts_note:'Reserve um presente para não haver repetidos.',
+  rsvp_copy:'Procure o seu convite pelo nome ou código pessoal e confirme a sua presença directamente aqui no site.',
+  rsvp_help:'Falar connosco →', footer_names:'Agnaldo & Fáuzia', footer_date:'29 · 05 · 2027',
+  details_title_1:'Alguns detalhes', details_title_2:'importantes'
+};
+let siteContent={...CONTENT_DEFAULTS}, bankAccounts=[], detailsItems=[], storyImages=[];
+const DEFAULT_BANKS=[['BCI','17039233510001'],['BIM','1005281229'],['Moza','04520806110001'],['M-Pesa','845510992'],['E-Mola','87 588 4353']];
+const DEFAULT_DETAILS=[['Kaya Kwanga','Avenida da Marginal · Maputo · Plus Code: 2JW6+WGC','⌖'],['Traje','Elegância descontraída. Cores alegres são bem-vindas.','◷'],['Confirmação','Pedimos resposta até 30 de Abril de 2027.','□']];
+async function loadSiteContentEditor(){
+  const {data,error}=await supabaseClient.from('wedding_settings').select('site_content,bank_accounts,details_items,story_images').eq('id',1).maybeSingle();
+  if(error){toast('O editor de conteúdo precisa da actualização da base de dados V8.35.');}
+  siteContent={...CONTENT_DEFAULTS,...(data?.site_content||{})};
+  bankAccounts=Array.isArray(data?.bank_accounts)&&data.bank_accounts.length?data.bank_accounts.map(x=>[String(x?.bank||''),String(x?.account||'')]):DEFAULT_BANKS.map(x=>[...x]);
+  detailsItems=Array.isArray(data?.details_items)&&data.details_items.length?data.details_items.map(x=>({title:String(x?.title||''),text:String(x?.text||''),icon:String(x?.icon||'⌁')})):DEFAULT_DETAILS.map(x=>({title:x[0],text:x[1],icon:x[2]}));
+  storyImages=Array.isArray(data?.story_images)?data.story_images.map((x,i)=>({url:String(x?.url||''),caption:String(x?.caption||'')||`Imagem ${i+1}`,path:String(x?.path||'')})).filter(x=>x.url):[];
+  renderContentEditors();
+}
+function setVal(id,v){const el=A('#'+id);if(el)el.value=v??''}
+function renderContentEditors(){
+  Object.entries({siteContentHeroKicker:siteContent.hero_kicker,siteContentHeroTitle1:siteContent.hero_title_line1,siteContentHeroTitle2:siteContent.hero_title_line2,siteContentHeroCopy:siteContent.hero_copy,siteContentDateLabel:siteContent.date_label,siteContentStorySignature:siteContent.story_signature,siteContentGiftsIntro:siteContent.gifts_intro,siteContentContributionName:siteContent.contribution_name,siteContentGiftsNote:siteContent.gifts_note,siteContentRsvpCopy:siteContent.rsvp_copy,siteContentRsvpHelp:siteContent.rsvp_help,siteContentFooterNames:siteContent.footer_names,siteContentFooterDate:siteContent.footer_date,siteContentDetailsTitle1:siteContent.details_title_1,siteContentDetailsTitle2:siteContent.details_title_2,siteContentStoryText:weddingImages.story_text||''}).forEach(([id,v])=>setVal(id,v));
+  const b=A('#bankAccountsEditor');if(b)b.innerHTML=bankAccounts.map((x,i)=>`<div class="bank-row"><input value="${esc(x[0])}" aria-label="Banco ou método" data-bank-name="${i}" placeholder="BCI"><input value="${esc(x[1])}" aria-label="Número da conta" data-bank-account="${i}" placeholder="Número"><input value="${esc(x[2]||x[1])}" aria-label="Número de cópia" data-bank-copy="${i}" placeholder="Copiar conta" title="Número usado para copiar"></div>`).join('');
+  const d=A('#detailsItemsEditor');if(d)d.innerHTML=detailsItems.map((x,i)=>`<div class="detail-item-row"><div class="detail-item-icon">${esc(x.icon)}</div><div class="detail-item-fields"><input value="${esc(x.title)}" data-detail-title="${i}" placeholder="Título"><textarea data-detail-text="${i}" rows="2" placeholder="Descrição">${esc(x.text)}</textarea>${iconBtn('remove','Remover detalhe',`removeDetailItem(${i})`)}</div></div>`).join('');
+  const s=A('#storyImagesEditor');if(s)s.innerHTML=storyImages.length?storyImages.map((x,i)=>`<article class="story-image-item"><img src="${esc(x.url)}" alt="${esc(x.caption||`Imagem ${i+1}`)}"><div class="story-image-meta"><span class="story-image-first">${i===0?'Principal':'Imagem '+(i+1)}</span>${iconBtn('remove','Remover fotografia',`removeStoryImage(${i})`)}</div></article>`).join(''):'<div class="empty-state">Ainda não existem fotografias da história.</div>';
+}
+A('#addBankAccountBtn')?.addEventListener('click',()=>{bankAccounts.push(['','']);renderContentEditors();});
+A('#addDetailItemBtn')?.addEventListener('click',()=>{detailsItems.push({title:'',text:'',icon:'⌁'});renderContentEditors();});
+A('#addStoryImagesBtn')?.addEventListener('click',()=>A('#storyImagesFile')?.click());
+A('#storyImagesFile')?.addEventListener('change',async e=>{
+  const files=[...(e.target.files||[])];if(!files.length)return;
+  const btn=A('#addStoryImagesBtn');if(btn){btn.disabled=true;btn.textContent='A carregar…'}
+  try{for(const file of files){if(!/^image\/(jpeg|png|webp)$/.test(file.type))continue;const compressed=await compressWeddingImage(file),path=`story/${crypto.randomUUID()}.webp`;const up=await supabaseClient.storage.from('wedding-images').upload(path,compressed,{cacheControl:'31536000',upsert:false,contentType:'image/webp'});if(up.error)throw up.error;const url=supabaseClient.storage.from('wedding-images').getPublicUrl(path).data.publicUrl;storyImages.push({url,path,caption:''});}renderContentEditors();toast(files.length===1?'Fotografia adicionada.':'Fotografias adicionadas.');}catch(err){toast(err?.message||'Não foi possível carregar as fotografias.')}finally{if(btn){btn.disabled=false;btn.textContent='＋ Adicionar fotografias'}e.target.value=''}});
+window.removeStoryImage=async i=>{const item=storyImages[i];if(!item)return;if(!confirm('Remover esta fotografia da história?'))return;storyImages.splice(i,1);renderContentEditors();if(item.path)await supabaseClient.storage.from('wedding-images').remove([item.path]);};
+window.removeDetailItem=i=>{detailsItems.splice(i,1);renderContentEditors()};
+A('#saveSiteContentBtn')?.addEventListener('click',async()=>{
+ const btn=A('#saveSiteContentBtn');btn.disabled=true;btn.textContent='A guardar…';
+ try{
+   const val=id=>A('#'+id)?.value.trim()||'';
+   siteContent={hero_kicker:val('siteContentHeroKicker'),hero_title_line1:val('siteContentHeroTitle1'),hero_title_line2:val('siteContentHeroTitle2'),hero_copy:val('siteContentHeroCopy'),date_label:val('siteContentDateLabel'),story_signature:val('siteContentStorySignature'),gifts_intro:val('siteContentGiftsIntro'),contribution_name:val('siteContentContributionName'),gifts_note:val('siteContentGiftsNote'),rsvp_copy:val('siteContentRsvpCopy'),rsvp_help:val('siteContentRsvpHelp'),footer_names:val('siteContentFooterNames'),footer_date:val('siteContentFooterDate'),details_title_1:val('siteContentDetailsTitle1'),details_title_2:val('siteContentDetailsTitle2')};
+   bankAccounts=[...document.querySelectorAll('[data-bank-name]')].map((el,i)=>[el.value.trim(),A(`[data-bank-account="${i}"]`)?.value.trim()||'',A(`[data-bank-copy="${i}"]`)?.value.trim()||'']).filter(x=>x[0]&&x[1]);
+   detailsItems=[...document.querySelectorAll('[data-detail-title]')].map((el,i)=>({title:el.value.trim(),text:A(`[data-detail-text="${i}"]`)?.value.trim()||'',icon:detailsItems[i]?.icon||'⌁'})).filter(x=>x.title&&x.text);
+   const storyText=val('siteContentStoryText');
+   const {error}=await supabaseClient.rpc('admin_update_wedding_content',{p_site_content:siteContent,p_bank_accounts:bankAccounts.map(x=>({bank:x[0],account:x[1],copy:x[2]||x[1]})),p_details_items:detailsItems,p_story_images:storyImages,p_story_text:storyText});
+   if(error)throw error;
+   weddingImages.story_text=storyText;toast('Conteúdo do convite actualizado com sucesso. ❤️');
+ }catch(err){toast(err?.message||'Não foi possível guardar o conteúdo.')}finally{btn.disabled=false;btn.textContent='Guardar alterações'}
+});
+const _enterContent=_enterOriginal=>_enterOriginal;
+const _refreshWithContent=refresh;refresh=async function(){await _refreshWithContent();await loadSiteContentEditor()};

@@ -140,26 +140,40 @@ $$('.copy-account').forEach(btn=>btn.addEventListener('click',async()=>{
 /* Imagens do convite — geridas pelo painel Admin */
 async function loadWeddingImages(){
   try{
-    const {data,error}=await supabaseClient.from('wedding_settings').select('cover_image_url,story_image_url,details_image_url,story_text').eq('id',1).maybeSingle();
+    const {data,error}=await supabaseClient.from('wedding_settings').select('cover_image_url,story_image_url,details_image_url,story_text,site_content,bank_accounts,details_items,story_images').eq('id',1).maybeSingle();
     if(error || !data) return;
+    const content=data.site_content||{};
     const cover=data.cover_image_url || 'monogram.svg';
     const story=data.story_image_url || cover;
     const details=data.details_image_url || cover;
     const coverImg=document.querySelector('.hero-image img');
+    const q=(sel)=>document.querySelector(sel);
+    const heroKicker=q('.hero-kicker'), heroTitle=q('.hero h2'), heroCopy=q('.hero-copy');
+    if(heroKicker&&content.hero_kicker)heroKicker.textContent=content.hero_kicker;
+    if(heroTitle&&(content.hero_title_line1||content.hero_title_line2))heroTitle.innerHTML=`${escapeHtml(content.hero_title_line1||'Um amor')}<br><i>${escapeHtml(content.hero_title_line2||'toda a vida')}</i>`;
+    if(heroCopy&&content.hero_copy)heroCopy.textContent=content.hero_copy;
+    const dateMain=q('.date-main h2'); if(dateMain&&content.date_label)dateMain.textContent=content.date_label;
+    const sig=q('.signature'); if(sig&&content.story_signature)sig.textContent=content.story_signature;
+    const giftsIntro=q('#presentes .gifts-heading > p:not(.section-label)'); if(giftsIntro&&content.gifts_intro)giftsIntro.textContent=content.gifts_intro;
+    const contribName=q('.contribution-box p:nth-of-type(2) strong'); if(contribName&&content.contribution_name)contribName.textContent=content.contribution_name;
+    const giftsNote=q('.gift-list-note'); if(giftsNote&&content.gifts_note)giftsNote.textContent=content.gifts_note;
+    const rsvpCopy=q('.rsvp-copy'); if(rsvpCopy&&content.rsvp_copy)rsvpCopy.textContent=content.rsvp_copy;
+    const rsvpHelp=q('.rsvp-help a'); if(rsvpHelp&&content.rsvp_help)rsvpHelp.textContent=content.rsvp_help;
+    const footerNames=q('.footer-names'); if(footerNames&&content.footer_names)footerNames.innerHTML=escapeHtml(content.footer_names).replace('&amp;','<i>&amp;</i>');
+    const footerDate=q('.footer > div:first-child p:nth-child(2)'); if(footerDate&&content.footer_date)footerDate.textContent=content.footer_date;
+    const detailsH=q('.details-copy h2'); if(detailsH&&(content.details_title_1||content.details_title_2))detailsH.innerHTML=`${escapeHtml(content.details_title_1||'Alguns detalhes')}<br><i>${escapeHtml(content.details_title_2||'importantes')}</i>`;
     const storyImg=document.querySelector('.story-image img');
     const detailsImg=document.querySelector('.details-image img');
     if(coverImg) coverImg.src=cover;
     if(storyImg) storyImg.src=story;
     if(detailsImg) detailsImg.src=details;
-    setMobileGalleryImages([
-      {url:cover,caption:'Um amor para toda a vida'},
-      {url:story,caption:'Onde tudo faz sentido'},
-      {url:details,caption:'Para sempre começa agora'}
-    ]);
+    const gallery=Array.isArray(data.story_images)&&data.story_images.length?data.story_images.filter(x=>x?.url).map((x,i)=>({url:x.url,caption:x.caption||`Momento ${i+1}`})):[{url:story,caption:'Onde tudo faz sentido'},{url:details,caption:'Para sempre começa agora'}];
+    setMobileGalleryImages(gallery);
     if(data.story_text){
       const box=document.querySelector('#storyTextContent');
       if(box) box.innerHTML=String(data.story_text).split(/\n\s*\n/).filter(Boolean).map(p=>`<p>${escapeHtml(p).replace(/\n/g,'<br>')}</p>`).join('');
     }
+    renderEditableGuestContent(data);
   }catch(_){/* mantém as imagens de fallback */}
 }
 loadWeddingImages();
@@ -365,6 +379,16 @@ $$('.gift-filter').forEach(btn=>btn.addEventListener('click',()=>{
 }));
 loadGifts();
 
+/* Dados bancários e detalhes importantes — conteúdo editável no Admin */
+function renderEditableGuestContent(data){
+  const accounts=Array.isArray(data?.bank_accounts)?data.bank_accounts:[];
+  const bankBox=document.querySelector('.account-list');
+  if(bankBox&&accounts.length){bankBox.innerHTML=accounts.map(x=>{const account=String(x?.account||''),copy=String(x?.copy||account);return `<div class="account-row"><span><b>${escapeHtml(x?.bank||'')}</b> ${escapeHtml(account)}</span><button class="copy-account" data-account="${escapeHtml(copy)}">Copiar</button></div>`}).join('');
+    $$('.copy-account').forEach(btn=>btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(btn.dataset.account||'');btn.textContent='Copiado';setTimeout(()=>btn.textContent='Copiar',1400)}catch{toast('Não foi possível copiar.')}}));
+  }
+  const details=Array.isArray(data?.details_items)?data.details_items:[];const box=document.querySelector('.details-copy');
+  if(box&&details.length){box.querySelectorAll('.detail-row').forEach(x=>x.remove());details.forEach(x=>{const row=document.createElement('div');row.className='detail-row';row.innerHTML=`<span class="detail-icon" aria-hidden="true">${escapeHtml(x?.icon||'⌁')}</span><div><strong>${escapeHtml(x?.title||'')}</strong><p>${escapeHtml(x?.text||'')}</p></div>`;box.appendChild(row)});}
+}
 /* Mobile story gallery — usa as três imagens já geridas pelo Admin. */
 const storyGallery=$('#storyGallery');
 const storyImageEl=$('#storyImage');

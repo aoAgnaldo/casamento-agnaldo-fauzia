@@ -1,0 +1,27 @@
+
+/* V8.35 — editor de conteúdo do convite */
+.content-editor-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.85fr);gap:18px;margin-top:18px}
+.content-editor-card{background:#fffdf9;border:1px solid rgba(91,66,54,.14);border-radius:22px;padding:22px;box-shadow:0 10px 30px rgba(47,31,24,.05)}
+.content-editor-card--wide{grid-column:1/-1}
+.content-editor-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.content-editor-card-head h3{margin:.15rem 0 .35rem;font-family:"Cormorant Garamond",serif;font-size:1.9rem;font-weight:500}
+.content-editor-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.content-editor-fields label,.content-detail-heading-fields label,.story-text-editor-inline{display:flex;flex-direction:column;gap:7px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#756a63}
+.content-editor-fields .field-span-2{grid-column:1/-1}
+.content-editor-fields input,.content-editor-fields textarea,.content-detail-heading-fields input,.story-text-editor-inline textarea,.bank-row input,.detail-item-row input,.detail-item-row textarea{width:100%;border:1px solid rgba(91,66,54,.16);border-radius:12px;background:#fff;padding:12px 13px;color:#332a26;font:500 .92rem/1.35 "DM Sans",sans-serif;text-transform:none;letter-spacing:normal;outline:none}
+.content-editor-fields textarea,.story-text-editor-inline textarea,.detail-item-row textarea{resize:vertical;min-height:84px}
+.content-editor-fields input:focus,.content-editor-fields textarea:focus,.content-detail-heading-fields input:focus,.story-text-editor-inline textarea:focus,.bank-row input:focus,.detail-item-row input:focus,.detail-item-row textarea:focus{border-color:#b77c68;box-shadow:0 0 0 3px rgba(183,124,104,.10)}
+.bank-accounts-editor,.details-items-editor{display:flex;flex-direction:column;gap:10px}
+.bank-row{display:grid;grid-template-columns:88px 1fr 1fr auto;gap:8px;align-items:center;padding:10px;border:1px solid rgba(91,66,54,.12);border-radius:14px;background:#fff}
+.bank-row .icon-btn,.detail-item-row .icon-btn{flex:0 0 38px}
+.content-detail-heading-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.detail-item-row{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:start;padding:12px;border:1px solid rgba(91,66,54,.12);border-radius:14px;background:#fff}
+.detail-item-row .detail-item-fields{display:grid;grid-template-columns:1fr 1.7fr auto;gap:8px;align-items:start}
+.story-images-editor{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.story-image-item{position:relative;border:1px solid rgba(91,66,54,.13);border-radius:16px;overflow:hidden;background:#f7f1eb}
+.story-image-item img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.story-image-item .story-image-meta{padding:8px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.74rem;color:#71655d}
+.story-image-item .story-image-first{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#a76450}
+.content-editor-note{margin:16px 2px 4px;color:#7a706a;font-size:.78rem}
+@media(max-width:900px){.content-editor-grid{grid-template-columns:1fr}.content-editor-card--wide{grid-column:auto}.bank-row{grid-template-columns:1fr 1.3fr 1.3fr auto}.detail-item-row .detail-item-fields{grid-template-columns:1fr}.content-editor-fields{grid-template-columns:1fr}.content-editor-fields .field-span-2{grid-column:auto}.content-detail-heading-fields{grid-template-columns:1fr}}
+@media(max-width:600px){.content-editor-card{padding:16px;border-radius:17px}.bank-row{grid-template-columns:1fr auto}.bank-row input:nth-child(2),.bank-row input:nth-child(3){grid-column:1/-1}.story-images-editor{grid-template-columns:repeat(2,minmax(0,1fr))}}
