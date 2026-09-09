@@ -558,3 +558,64 @@
 
   #lookupStep{max-width:19rem !important;}
 }
+
+/* V8.30 — RSVP Mobile: label alinhada entre dois traços laterais.
+   Remove qualquer traço superior e posiciona o texto no eixo central. */
+@media (max-width:800px){
+  .rsvp-inner .section-label{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 auto 1.2rem !important;
+    padding:0 4.25rem !important;
+    box-sizing:border-box !important;
+    border:0 !important;
+    background:none !important;
+    transform:translateY(-0.85rem) !important;
+  }
+
+  .rsvp-inner .section-label::before,
+  .rsvp-inner .section-label::after{
+    content:"" !important;
+    position:absolute !important;
+    top:50% !important;
+    width:3.1rem !important;
+    max-width:3.1rem !important;
+    height:1px !important;
+    margin:0 !important;
+    transform:translateY(-50%) !important;
+    background:rgba(243,214,205,.62) !important;
+    flex:none !important;
+  }
+
+  .rsvp-inner .section-label::before{ left:0 !important; }
+  .rsvp-inner .section-label::after{ right:0 !important; }
+
+  .rsvp-inner .section-label > span{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:none !important;
+    white-space:nowrap !important;
+    text-align:center !important;
+    line-height:1.2 !important;
+  }
+}
+
+@media (max-width:380px){
+  .rsvp-inner .section-label{
+    padding-left:3.7rem !important;
+    padding-right:3.7rem !important;
+    transform:translateY(-0.72rem) !important;
+  }
+
+  .rsvp-inner .section-label::before,
+  .rsvp-inner .section-label::after{
+    width:2.7rem !important;
+    max-width:2.7rem !important;
+  }
+}
