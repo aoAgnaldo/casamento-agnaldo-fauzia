@@ -4175,3 +4175,107 @@ html:not(.intro-locked) .topbar{
     white-space:nowrap !important;
   }
 }
+
+
+/* V8.24 — RSVP Web: composição alinhada à referência aprovada */
+@media (min-width: 801px){
+  .rsvp-section.section-pad{
+    padding-top:4.5rem !important;
+    padding-bottom:5.25rem !important;
+  }
+
+  .rsvp-inner{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    max-width:720px !important;
+  }
+
+  .rsvp-mark{
+    width:46px !important;
+    height:46px !important;
+    margin:0 auto 1.15rem !important;
+  }
+
+  .rsvp-mobile-steps{
+    margin:0 auto 1.75rem !important;
+  }
+
+  .rsvp-inner .section-label{
+    width:auto !important;
+    justify-content:center !important;
+    margin:0 auto !important;
+    text-align:center !important;
+  }
+
+  .rsvp-inner h2.rsvp-heading-fixed{
+    width:100% !important;
+    margin:1.15rem auto 1.15rem !important;
+    text-align:center !important;
+    line-height:.68 !important;
+    letter-spacing:-.055em !important;
+  }
+
+  .rsvp-heading-fixed > span{
+    display:block !important;
+    width:max-content !important;
+    max-width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    white-space:nowrap !important;
+  }
+}
+
+@media (max-width:800px){
+  .rsvp-section.section-pad{
+    padding-top:4.3rem !important;
+  }
+
+  .rsvp-inner{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+  }
+
+  .rsvp-mark{
+    order:1 !important;
+    margin-bottom:1.05rem !important;
+  }
+
+  .rsvp-mobile-steps{
+    order:2 !important;
+    margin:0 auto 1.35rem !important;
+  }
+
+  .rsvp-inner .section-label{
+    order:3 !important;
+    justify-content:center !important;
+    text-align:center !important;
+  }
+
+  .rsvp-heading-fixed{
+    order:4 !important;
+    line-height:.78 !important;
+  }
+
+  #lookupStep,
+  #rsvpStep,
+  .rsvp-copy,
+  .rsvp-actions{
+    order:5 !important;
+  }
+}
+
+/* Título RSVP: exactamente duas linhas em todos os ecrãs normais */
+.rsvp-heading-fixed > span:first-child,
+.rsvp-heading-fixed > span:last-child{
+  white-space:nowrap !important;
+  word-break:normal !important;
+  overflow-wrap:normal !important;
+}
+
+@media (max-width:340px){
+  .rsvp-heading-fixed{
+    font-size:clamp(2.05rem,10.2vw,2.8rem) !important;
+  }
+}
