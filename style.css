@@ -4109,71 +4109,69 @@ html:not(.intro-locked) .topbar{
 }
 
 
-/* V8.21 — RSVP: composição tipográfica definitiva
-   - eyebrow em uma linha no Web
-   - título em duas linhas controladas no HTML
-   - mobile adapta o tamanho sem quebrar "Podemos contar"
-   - formulário Web ligeiramente mais largo
-*/
-.rsvp-inner .section-label{
-  display:flex !important;
-  justify-content:center !important;
-  align-items:center !important;
+/* V8.23 — RSVP: correcção final da composição do cabeçalho */
+.rsvp-heading-fixed{
+  display:block !important;
   width:100% !important;
+  max-width:none !important;
+  margin:0 auto !important;
+  padding:0 !important;
   text-align:center !important;
+  line-height:.86 !important;
+  white-space:normal !important;
+  overflow:visible !important;
+}
+.rsvp-heading-fixed > span{
+  display:block !important;
+  width:fit-content !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+}
+.rsvp-heading-fixed > span + span{
+  margin-top:.04em !important;
 }
 .rsvp-inner .section-label > span:last-child{
   display:inline-block !important;
   width:auto !important;
-  max-width:none !important;
-  margin:0 !important;
-  white-space:nowrap !important;
-  text-align:center !important;
-}
-.rsvp-heading-fixed{
-  width:100% !important;
-  max-width:none !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  text-align:center !important;
-  overflow:visible !important;
-  line-height:.82 !important;
-  white-space:normal !important;
-}
-.rsvp-heading-fixed > span{
-  display:block !important;
-  width:max-content !important;
   max-width:100% !important;
   margin:0 auto !important;
   white-space:nowrap !important;
+  text-align:center !important;
 }
+
 @media (min-width:801px){
   .rsvp-heading-fixed{
-    font-size:clamp(4.6rem,6.1vw,7rem) !important;
+    font-size:clamp(4.6rem,6.2vw,7rem) !important;
     line-height:.80 !important;
-    margin-top:1.35rem !important;
-    margin-bottom:1.35rem !important;
   }
   .rsvp-search{
-    width:min(100%,820px) !important;
+    width:min(100%,760px) !important;
   }
 }
+
 @media (max-width:800px){
   .rsvp-heading-fixed{
-    font-size:clamp(2.35rem,10.8vw,4rem) !important;
-    line-height:.84 !important;
+    font-size:clamp(2.5rem,11.5vw,4.3rem) !important;
+    line-height:.86 !important;
   }
   .rsvp-heading-fixed > span{
-    max-width:none !important;
+    white-space:nowrap !important;
   }
   .rsvp-inner .section-label > span:last-child{
-    font-size:clamp(.76rem,3.3vw,.95rem) !important;
-    letter-spacing:.14em !important;
+    font-size:clamp(.78rem,3.6vw,1rem) !important;
+    white-space:nowrap !important;
   }
 }
+
 @media (max-width:360px){
   .rsvp-heading-fixed{
-    font-size:clamp(2.1rem,10vw,2.8rem) !important;
-    line-height:.86 !important;
+    font-size:clamp(2.15rem,10.6vw,3rem) !important;
+    line-height:.88 !important;
+  }
+  .rsvp-heading-fixed > span{
+    white-space:nowrap !important;
   }
 }
