@@ -275,3 +275,139 @@
   .rsvp-inner h2.rsvp-heading-fixed{font-size:clamp(2.55rem,10.2vw,3.15rem) !important;line-height:.86 !important}
   .rsvp-inner .rsvp-copy{font-size:.94rem !important;max-width:18.5rem !important}
 }
+
+/* V8.28 — MOBILE RSVP: composição fiel à referência aprovada.
+   Corrige a ordem visual e evita que o signoff apareça no topo. */
+@media (max-width:800px){
+  .rsvp-section{
+    min-height:100svh !important;
+    padding:3rem 1.1rem calc(2.7rem + env(safe-area-inset-bottom)) !important;
+    overflow:hidden !important;
+  }
+
+  .rsvp-inner{
+    width:min(100%,25rem) !important;
+    max-width:25rem !important;
+    min-height:calc(100svh - 5.7rem) !important;
+    margin:0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    text-align:center !important;
+  }
+
+  /* Ordem exacta da referência: monograma → etapas → label → título → divider → copy → formulário → ajuda → assinatura */
+  .rsvp-mark{ order:1 !important; width:3.1rem !important; height:3.1rem !important; margin:0 auto 1.25rem !important; }
+  .rsvp-mobile-steps{ order:2 !important; margin:0 auto 1.7rem !important; }
+  .rsvp-inner .section-label{ order:3 !important; margin:0 auto 1.35rem !important; }
+  .rsvp-heading-fixed{ order:4 !important; margin:0 auto !important; }
+  .rsvp-divider{ order:5 !important; margin:1.45rem auto 1.25rem !important; }
+  .rsvp-copy{ order:6 !important; margin:0 auto 2rem !important; }
+  #lookupStep{ order:7 !important; }
+  #rsvpStep{ order:8 !important; }
+  .rsvp-actions{ order:9 !important; margin-top:1.1rem !important; }
+  .rsvp-signoff{ order:10 !important; margin:3.1rem auto 0 !important; }
+
+  /* Label com linhas laterais, igual à referência */
+  .rsvp-inner .section-label{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    gap:.7rem !important;
+  }
+  .rsvp-inner .section-label::before,
+  .rsvp-inner .section-label::after{
+    content:"" !important;
+    display:block !important;
+    flex:1 1 0 !important;
+    max-width:4.2rem !important;
+    height:1px !important;
+    background:rgba(243,214,205,.62) !important;
+  }
+  .rsvp-inner .section-label > span{
+    flex:0 0 auto !important;
+    width:auto !important;
+    margin:0 !important;
+    white-space:nowrap !important;
+    font-size:clamp(.72rem,3.25vw,.9rem) !important;
+    letter-spacing:.22em !important;
+    line-height:1.25 !important;
+  }
+
+  /* Título: exactamente duas linhas */
+  .rsvp-inner h2.rsvp-heading-fixed{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 auto !important;
+    font-size:clamp(2.7rem,10.5vw,4.2rem) !important;
+    line-height:.9 !important;
+    letter-spacing:-.055em !important;
+    text-align:center !important;
+  }
+  .rsvp-heading-fixed > span{
+    display:block !important;
+    width:max-content !important;
+    max-width:100% !important;
+    margin:0 auto !important;
+    white-space:nowrap !important;
+  }
+
+  /* Divider com coração */
+  .rsvp-divider{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:min(78%,16rem) !important;
+    gap:.6rem !important;
+  }
+  .rsvp-divider span{
+    flex:1 1 auto !important;
+    height:1px !important;
+    background:rgba(240,200,186,.72) !important;
+  }
+  .rsvp-divider b{
+    font-size:1rem !important;
+    font-weight:400 !important;
+  }
+
+  /* Texto */
+  .rsvp-inner .rsvp-copy{
+    width:100% !important;
+    max-width:19rem !important;
+    font-size:1rem !important;
+    line-height:1.48 !important;
+    text-align:center !important;
+    color:#fff0e9 !important;
+  }
+
+  /* Formulário igual à referência */
+  #lookupStep{
+    width:100% !important;
+    max-width:23rem !important;
+  }
+  .rsvp-search{ width:100% !important; max-width:none !important; }
+  .rsvp-search label{ display:block !important; text-align:left !important; font-size:9px !important; letter-spacing:.18em !important; }
+  .rsvp-search-row{ display:flex !important; flex-direction:column !important; gap:.7rem !important; margin-top:.6rem !important; }
+  .rsvp-search input,
+  .rsvp-search-row .button{ width:100% !important; min-height:3.65rem !important; border-radius:16px !important; box-sizing:border-box !important; }
+  .rsvp-search input{ padding:0 1rem !important; font-size:15px !important; }
+  .rsvp-search-row .button{ justify-content:center !important; font-size:10px !important; letter-spacing:.17em !important; }
+
+  .rsvp-inner .rsvp-actions{ width:100% !important; display:flex !important; justify-content:center !important; }
+  .rsvp-help{ margin:0 !important; font-size:10px !important; }
+
+  /* Assinatura só no fim */
+  .rsvp-signoff{ display:flex !important; flex-direction:column !important; align-items:center !important; }
+  .rsvp-signoff span{ width:2.7rem !important; height:1px !important; margin-bottom:.7rem !important; }
+  .rsvp-signoff strong{ font-size:1rem !important; letter-spacing:.17em !important; }
+  .rsvp-signoff small{ margin-top:.45rem !important; font-size:8px !important; letter-spacing:.35em !important; }
+}
+
+@media (max-width:380px){
+  .rsvp-section{padding-left:.9rem !important; padding-right:.9rem !important;}
+  .rsvp-inner h2.rsvp-heading-fixed{font-size:clamp(2.5rem,10.2vw,3.4rem) !important;}
+  .rsvp-inner .section-label > span{font-size:.7rem !important; letter-spacing:.17em !important;}
+  .rsvp-inner .rsvp-copy{max-width:18rem !important; font-size:.94rem !important;}
+}
