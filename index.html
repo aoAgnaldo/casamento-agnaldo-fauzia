@@ -17,6 +17,69 @@
 <link rel="stylesheet" href="v8.10-mobile-controls.css?v=8.12">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
+
+<style id="rsvp-final-manual-fix">
+/* RSVP — correcção manual final */
+.rsvp-inner .section-label {
+  text-align: center !important;
+}
+.rsvp-inner .section-label > span:last-child {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+}
+
+.rsvp-heading-fixed {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  text-align: center !important;
+  line-height: .88 !important;
+}
+
+.rsvp-heading-fixed > span {
+  display: block !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+}
+
+@media (min-width: 801px) {
+  .rsvp-heading-fixed { font-size: clamp(4.5rem, 6vw, 7rem) !important; }
+  .rsvp-search {
+    width: min(760px, 90vw) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .rsvp-search-row { width: 100% !important; }
+  .rsvp-search-row input { flex: 1 1 auto !important; min-width: 0 !important; }
+}
+
+@media (max-width: 800px) {
+  .rsvp-heading-fixed {
+    font-size: clamp(2.7rem, 11vw, 4.5rem) !important;
+    line-height: .90 !important;
+  }
+  .rsvp-heading-fixed > span { white-space: nowrap !important; }
+  .rsvp-inner .section-label > span:last-child {
+    font-size: .8rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .rsvp-heading-fixed { font-size: 2.55rem !important; }
+}
+</style>
+
 </head>
 <body>
 <main class="site-shell">
