@@ -1,0 +1,277 @@
+/* V8.27 — RSVP MOBILE refinado de acordo com a referência aprovada.
+   Web permanece inalterada. */
+@media (max-width:800px){
+  .rsvp-section{
+    min-height:100svh !important;
+    display:flex !important;
+    align-items:stretch !important;
+    justify-content:center !important;
+    padding:2.7rem 1.15rem calc(2.2rem + env(safe-area-inset-bottom)) !important;
+    position:relative !important;
+    overflow:hidden !important;
+  }
+
+  .rsvp-section::after{
+    content:"" !important;
+    position:absolute !important;
+    left:-3rem !important;
+    bottom:-2.2rem !important;
+    width:12rem !important;
+    height:12rem !important;
+    background:url("rsvp-floral-left.svg") no-repeat left bottom / contain !important;
+    opacity:.24 !important;
+    pointer-events:none !important;
+  }
+
+  .rsvp-inner{
+    width:min(100%,24rem) !important;
+    max-width:24rem !important;
+    min-height:100% !important;
+    margin:0 auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    position:relative !important;
+    z-index:1 !important;
+    text-align:center !important;
+  }
+
+  .rsvp-mark{
+    width:3.25rem !important;
+    height:3.25rem !important;
+    margin:0 auto .95rem !important;
+    opacity:.78 !important;
+    flex:0 0 auto !important;
+  }
+
+  .rsvp-mobile-steps{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:.5rem !important;
+    margin:0 auto 1.55rem !important;
+  }
+
+  .rsvp-mobile-steps span{
+    padding:.42rem .72rem !important;
+    border:1px solid rgba(255,255,255,.23) !important;
+    border-radius:999px !important;
+    background:transparent !important;
+    color:rgba(255,255,255,.56) !important;
+    font-size:8px !important;
+    letter-spacing:.13em !important;
+    line-height:1 !important;
+    text-transform:uppercase !important;
+  }
+
+  .rsvp-mobile-steps span.is-active{
+    color:#fff8f3 !important;
+    border-color:rgba(245,216,205,.72) !important;
+    background:rgba(255,255,255,.035) !important;
+  }
+
+  .rsvp-inner .section-label{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    margin:0 auto 1.25rem !important;
+    gap:.7rem !important;
+    color:#e7b8a9 !important;
+    text-align:center !important;
+  }
+
+  .rsvp-inner .section-label::before,
+  .rsvp-inner .section-label::after{
+    content:"" !important;
+    flex:1 1 auto !important;
+    width:auto !important;
+    max-width:none !important;
+    height:1px !important;
+    background:rgba(243,214,205,.62) !important;
+  }
+
+  .rsvp-inner .section-label > span{
+    display:block !important;
+    width:auto !important;
+    margin:0 !important;
+    white-space:nowrap !important;
+    font-size:clamp(.75rem,3vw,.92rem) !important;
+    letter-spacing:.27em !important;
+    line-height:1.25 !important;
+  }
+
+  .rsvp-inner h2.rsvp-heading-fixed{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 auto !important;
+    color:#fff8f3 !important;
+    font-family:var(--font-display) !important;
+    font-size:clamp(2.75rem,10.5vw,4rem) !important;
+    font-weight:400 !important;
+    line-height:.84 !important;
+    letter-spacing:-.055em !important;
+    text-align:center !important;
+  }
+
+  .rsvp-heading-fixed > span{
+    display:block !important;
+    width:max-content !important;
+    max-width:100% !important;
+    margin:0 auto !important;
+    white-space:nowrap !important;
+  }
+
+  .rsvp-heading-fixed > span + span{
+    margin-top:.02em !important;
+  }
+
+  .rsvp-divider{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:.55rem !important;
+    width:min(78%,15rem) !important;
+    margin:1.2rem auto 1.15rem !important;
+    color:#f0c8ba !important;
+  }
+
+  .rsvp-divider span{
+    flex:1 1 auto !important;
+    height:1px !important;
+    background:rgba(240,200,186,.65) !important;
+  }
+
+  .rsvp-divider b{
+    font-family:var(--font-display) !important;
+    font-size:1rem !important;
+    font-weight:400 !important;
+    line-height:1 !important;
+  }
+
+  .rsvp-inner .rsvp-copy{
+    width:100% !important;
+    max-width:19.5rem !important;
+    margin:0 auto 1.65rem !important;
+    color:#fff0e9 !important;
+    font-family:var(--font-display) !important;
+    font-size:1rem !important;
+    line-height:1.42 !important;
+    text-align:center !important;
+  }
+
+  #lookupStep{
+    width:100% !important;
+  }
+
+  .rsvp-search{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 auto !important;
+    text-align:left !important;
+  }
+
+  .rsvp-search label{
+    display:block !important;
+    color:#f6ddd5 !important;
+    font-size:9px !important;
+    letter-spacing:.18em !important;
+    text-transform:uppercase !important;
+  }
+
+  .rsvp-search-row{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:.65rem !important;
+    margin-top:.55rem !important;
+  }
+
+  .rsvp-search input,
+  .rsvp-search-row .button{
+    width:100% !important;
+    min-height:3.25rem !important;
+    box-sizing:border-box !important;
+    border-radius:14px !important;
+  }
+
+  .rsvp-search input{
+    padding:0 1rem !important;
+    border:1px solid rgba(255,255,255,.48) !important;
+    background:rgba(255,255,255,.07) !important;
+    color:#fff8f3 !important;
+    font-size:15px !important;
+  }
+
+  .rsvp-search-row .button{
+    justify-content:center !important;
+    border-radius:14px !important;
+    background:#758576 !important;
+    color:#fff !important;
+    font-size:10px !important;
+    letter-spacing:.16em !important;
+  }
+
+  .rsvp-inner .rsvp-actions{
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
+    margin-top:1rem !important;
+  }
+
+  .rsvp-help{
+    margin:0 !important;
+    color:#f6ded6 !important;
+    font-family:var(--font-body) !important;
+    font-size:10px !important;
+    line-height:1.35 !important;
+  }
+
+  .rsvp-help a{
+    color:#fff8f3 !important;
+    border-bottom:1px solid rgba(255,255,255,.6) !important;
+    padding-bottom:.12rem !important;
+  }
+
+  .rsvp-signoff{
+    margin:2.25rem auto 0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    color:#f2c5b7 !important;
+  }
+
+  .rsvp-signoff span{
+    width:2.8rem !important;
+    height:1px !important;
+    margin-bottom:.65rem !important;
+    background:rgba(242,197,183,.72) !important;
+  }
+
+  .rsvp-signoff strong{
+    font-family:var(--font-display) !important;
+    font-size:1rem !important;
+    line-height:1.2 !important;
+    letter-spacing:.16em !important;
+    text-transform:uppercase !important;
+  }
+
+  .rsvp-signoff strong i{
+    color:#dfa190 !important;
+    font-weight:400 !important;
+  }
+
+  .rsvp-signoff small{
+    margin-top:.38rem !important;
+    font-size:8px !important;
+    letter-spacing:.31em !important;
+  }
+}
+
+@media (max-width:360px){
+  .rsvp-section{padding-left:.9rem !important;padding-right:.9rem !important}
+  .rsvp-inner{width:min(100%,22.5rem) !important;max-width:22.5rem !important}
+  .rsvp-mobile-steps{margin-bottom:1.35rem !important}
+  .rsvp-inner h2.rsvp-heading-fixed{font-size:clamp(2.55rem,10.2vw,3.15rem) !important;line-height:.86 !important}
+  .rsvp-inner .rsvp-copy{font-size:.94rem !important;max-width:18.5rem !important}
+}
