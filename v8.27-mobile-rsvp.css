@@ -619,3 +619,55 @@
     max-width:2.7rem !important;
   }
 }
+
+/* V8.31 — RSVP Mobile: traços laterais curtos e centrados */
+@media (max-width:800px){
+  .rsvp-inner .section-label{
+    width:min(100%,32rem) !important;
+    max-width:32rem !important;
+    padding:0 !important;
+    gap:.6rem !important;
+    transform:translateY(-0.85rem) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  .rsvp-inner .section-label::before,
+  .rsvp-inner .section-label::after{
+    position:static !important;
+    flex:0 0 2.2rem !important;
+    width:2.2rem !important;
+    max-width:2.2rem !important;
+    margin:0 !important;
+    transform:none !important;
+  }
+
+  .rsvp-inner .section-label > span{
+    flex:0 1 auto !important;
+    width:auto !important;
+    max-width:calc(100% - 5rem) !important;
+    font-size:15px !important;
+    letter-spacing:.30em !important;
+    text-align:center !important;
+    white-space:nowrap !important;
+  }
+}
+
+@media (max-width:380px){
+  .rsvp-inner .section-label{
+    gap:.48rem !important;
+  }
+
+  .rsvp-inner .section-label::before,
+  .rsvp-inner .section-label::after{
+    flex-basis:1.75rem !important;
+    width:1.75rem !important;
+    max-width:1.75rem !important;
+  }
+
+  .rsvp-inner .section-label > span{
+    max-width:calc(100% - 4rem) !important;
+    font-size:13px !important;
+    letter-spacing:.24em !important;
+  }
+}
