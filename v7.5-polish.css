@@ -124,3 +124,4 @@ body.reception-body .reception-mobile-nav a,body.reception-body .reception-mobil
   *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
 .detail-icon{color:var(--terra);display:inline-block;flex:0 0 auto}.qr-title{font-size:2.5rem}.gift-photo-label{margin-bottom:0}
+

@@ -1,0 +1,90 @@
+/* V11 — a recepção usa a mesma linguagem nocturna do painel administrativo. */
+body.reception-body.reception-v10.reception-v11 {
+  --r11-bg: #201c19;
+  --r11-panel: #29231f;
+  --r11-field: #251f1c;
+  --r11-line: #4a4039;
+  --r11-text: #fff7f0;
+  --r11-muted: #cdb9aa;
+  --r11-peach: #e5a087;
+  --r11-peach-soft: #58392f;
+  --r11-green: #85d6ad;
+  --r11-green-soft: #244633;
+  background: var(--r11-bg) !important;
+  color: var(--r11-text) !important;
+}
+body.reception-body.reception-v10.reception-v11 :is(.reception-wedy, .reception-main) { background: var(--r11-bg) !important; color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .wedy-header {
+  min-height: 69px !important;
+  border-bottom-color: var(--r11-line) !important;
+  background: #27211d !important;
+  box-shadow: none !important;
+}
+body.reception-body.reception-v10.reception-v11 .wedy-brand { color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .wedy-brand img { filter: sepia(.25) saturate(.75) brightness(1.55); }
+body.reception-body.reception-v10.reception-v11 .wedy-nav a { color: var(--r11-muted) !important; }
+body.reception-body.reception-v10.reception-v11 .wedy-nav a.active { color: var(--r11-peach) !important; }
+body.reception-body.reception-v10.reception-v11 .operator-avatar { background: var(--r11-peach-soft) !important; color: var(--r11-peach) !important; }
+body.reception-body.reception-v10.reception-v11 .operator-identity-copy :is(b, small) { color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .operator-identity-copy small { color: var(--r11-muted) !important; }
+body.reception-body.reception-v10.reception-v11 .reception-main { max-width: 1080px !important; padding: 33px 28px 62px !important; }
+body.reception-body.reception-v10.reception-v11 .button {
+  border-color: var(--r11-peach) !important;
+  background: var(--r11-peach) !important;
+  box-shadow: none !important;
+  color: #301f19 !important;
+  text-transform: none !important;
+}
+body.reception-body.reception-v10.reception-v11 .button.secondary,
+body.reception-body.reception-v10.reception-v11 .reception-admin-link {
+  border-color: var(--r11-line) !important;
+  background: var(--r11-panel) !important;
+  color: var(--r11-text) !important;
+}
+body.reception-body.reception-v10.reception-v11 .reception-menu-toggle,
+body.reception-body.reception-v10.reception-v11 .reception-logout { border-color: var(--r11-line) !important; background: var(--r11-panel) !important; color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .wedy-card,
+body.reception-body.reception-v10.reception-v11 .chief-tools-card,
+body.reception-body.reception-v10.reception-v11 .reception-recent-mobile,
+body.reception-body.reception-v10.reception-v11 .guest-result {
+  border-color: var(--r11-line) !important;
+  background: var(--r11-panel) !important;
+  box-shadow: none !important;
+}
+body.reception-body.reception-v10.reception-v11 .reception-hero-card { min-height: 292px !important; background: #25201d !important; }
+body.reception-body.reception-v10.reception-v11 .section-kicker { color: var(--r11-peach) !important; }
+body.reception-body.reception-v10.reception-v11 :is(.reception-hero-card h1, .scanner-card h2, .reception-section-head h2, .chief-card-head h3, .chief-overview-head h3) { color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .muted,
+body.reception-body.reception-v10.reception-v11 .scan-hint,
+body.reception-body.reception-v10.reception-v11 .reception-hero-card .muted { color: var(--r11-muted) !important; }
+body.reception-body.reception-v10.reception-v11 .reception-hero-line { background: var(--r11-line) !important; }
+body.reception-body.reception-v10.reception-v11 .scanner-card { padding: 27px !important; }
+body.reception-body.reception-v10.reception-v11 :is(.manual-reception input, .chief-direct-search input) {
+  border-color: var(--r11-line) !important;
+  background: var(--r11-field) !important;
+  color: var(--r11-text) !important;
+}
+body.reception-body.reception-v10.reception-v11 :is(.manual-reception input, .chief-direct-search input)::placeholder { color: #a48f81 !important; }
+body.reception-body.reception-v10.reception-v11 .wedy-reception-stats > div {
+  border-color: var(--r11-line) !important;
+  background: var(--r11-panel) !important;
+  box-shadow: none !important;
+}
+body.reception-body.reception-v10.reception-v11 .wedy-reception-stats span,
+body.reception-body.reception-v10.reception-v11 .wedy-reception-stats small { color: var(--r11-muted) !important; }
+body.reception-body.reception-v10.reception-v11 .wedy-reception-stats strong { color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .recent-public-item,
+body.reception-body.reception-v10.reception-v11 .recent-arrival,
+body.reception-body.reception-v10.reception-v11 .chief-scroll-list > * { border-color: var(--r11-line) !important; color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .live-indicator { background: var(--r11-green-soft) !important; color: var(--r11-green) !important; }
+body.reception-body.reception-v10.reception-v11 .reception-side-drawer .reception-drawer-panel,
+body.reception-body.reception-v10.reception-v11 .modal-box { border-color: var(--r11-line) !important; background: var(--r11-panel) !important; color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .reception-drawer-nav :is(a, button),
+body.reception-body.reception-v10.reception-v11 .reception-drawer-user { border-color: var(--r11-line) !important; color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .login { background: var(--r11-bg) !important; }
+body.reception-body.reception-v10.reception-v11 .login-box { border-color: var(--r11-line) !important; background: var(--r11-panel) !important; color: var(--r11-text) !important; box-shadow: none !important; }
+body.reception-body.reception-v10.reception-v11 .login-box :is(h1, label) { color: var(--r11-text) !important; }
+body.reception-body.reception-v10.reception-v11 .login-box :is(input, select, textarea) { border-color: var(--r11-line) !important; background: var(--r11-field) !important; color: var(--r11-text) !important; }
+@media (max-width: 800px) {
+  body.reception-body.reception-v10.reception-v11 .reception-main { padding: 24px 16px 46px !important; }
+}

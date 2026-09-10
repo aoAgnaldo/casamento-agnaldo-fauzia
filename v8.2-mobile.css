@@ -50,3 +50,4 @@
   body:not(.intro-locked) .topbar-actions .private-access-trigger{display:none!important}
   body.intro-locked .topbar{padding:calc(env(safe-area-inset-top) + .65rem) 5vw .65rem!important}
 }
+

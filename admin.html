@@ -1,5 +1,5 @@
 <!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Painel | Agnaldo & Fáuzia</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="admin-v7.css">
-<link rel="stylesheet" href="v7.5-polish.css"><link rel="stylesheet" href="v8.35-content-admin.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script><script src="supabase-config.js"></script>
+<link rel="stylesheet" href="v7.5-polish.css"><link rel="stylesheet" href="admin-v8.35.css"><link rel="stylesheet" href="admin-v8.36.css"><link rel="stylesheet" href="admin-v8.37.css"><link rel="stylesheet" href="admin-v8.38.css"><link rel="stylesheet" href="admin-v8.39.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script><script src="supabase-config.js"></script>
 
 
 
@@ -47,7 +47,6 @@
         <a href="#site-capa"><span class="nav-icon">▧</span><span>Capa e Imagens</span></a>
         <a href="#site-historia"><span class="nav-icon">♡</span><span>Nossa História</span></a>
         <a href="#programa-admin"><span class="nav-icon">◷</span><span>Programa (Site)</span></a>
-        <a href="#site-definicoes"><span class="nav-icon">⚙</span><span>Informações do convite</span></a>
       </nav>
 
       <div class="admin-sidebar-content-title admin-sidebar-planning-title"><span>✓</span><strong>Planeamento</strong></div>
@@ -100,49 +99,6 @@
     <div class="section-title-row"><div><p class="section-kicker">CONTEÚDO DO SITE</p><h2>Nossa História</h2><p class="muted">Edite o texto e a fotografia que contam a história de Agnaldo & Fáuzia.</p></div><button class="icon-btn ui-icon-btn" type="button" id="siteStoryEditFullBtn" aria-label="Editar nossa história" title="Editar nossa história" data-tooltip="Editar nossa história">✎</button></div>
     <div class="site-story-preview"><img id="siteStoryLargePreview" src="monogram.svg" alt="Nossa história"><div><p class="site-story-label">A NOSSA HISTÓRIA</p><p id="siteStoryTextPreview" class="site-story-text">A nossa história aparecerá aqui.</p></div></div>
   </section>
-  <section class="wedy-section admin-view-section site-content-view" id="site-definicoes">
-    <div class="section-title-row"><div><p class="section-kicker">CONTEÚDO DO SITE</p><h2>Informações do convite</h2><p class="muted">Edite os textos e dados que os convidados vêem, os dados bancários e os detalhes importantes.</p></div><button class="button" id="saveSiteContentBtn" type="button">Guardar alterações</button></div>
-    <div class="content-editor-grid">
-      <article class="content-editor-card content-editor-card--wide">
-        <div class="content-editor-card-head"><div><p class="section-kicker">TEXTOS PRINCIPAIS</p><h3>Convite público</h3><p class="muted">Estes campos controlam os textos mais visíveis da página do convidado.</p></div></div>
-        <div class="content-editor-fields">
-          <label>Frase da capa<input id="siteContentHeroKicker" maxlength="120"></label>
-          <label>Primeira linha do título<input id="siteContentHeroTitle1" maxlength="120"></label>
-          <label>Segunda linha do título<input id="siteContentHeroTitle2" maxlength="120"></label>
-          <label class="field-span-2">Texto da capa<textarea id="siteContentHeroCopy" rows="3" maxlength="500"></textarea></label>
-          <label>Data apresentada<input id="siteContentDateLabel" maxlength="80"></label>
-          <label>Assinatura da história<input id="siteContentStorySignature" maxlength="120"></label>
-          <label class="field-span-2">Texto introdutório dos presentes<textarea id="siteContentGiftsIntro" rows="3" maxlength="500"></textarea></label>
-          <label>Nome para contribuição<input id="siteContentContributionName" maxlength="120"></label>
-          <label>Nota da lista de presentes<input id="siteContentGiftsNote" maxlength="180"></label>
-          <label class="field-span-2">Texto do RSVP<textarea id="siteContentRsvpCopy" rows="3" maxlength="500"></textarea></label>
-          <label>Texto de ajuda<input id="siteContentRsvpHelp" maxlength="120"></label>
-          <label>Nome no rodapé<input id="siteContentFooterNames" maxlength="120"></label>
-          <label>Data no rodapé<input id="siteContentFooterDate" maxlength="80"></label>
-        </div>
-      </article>
-
-      <article class="content-editor-card">
-        <div class="content-editor-card-head"><div><p class="section-kicker">DADOS BANCÁRIOS</p><h3>Contribuições</h3><p class="muted">Edite bancos, números e meios de pagamento mostrados aos convidados.</p></div><button type="button" class="button secondary" id="addBankAccountBtn">＋ Adicionar</button></div>
-        <div id="bankAccountsEditor" class="bank-accounts-editor"></div>
-      </article>
-
-      <article class="content-editor-card">
-        <div class="content-editor-card-head"><div><p class="section-kicker">DETALHES</p><h3>Informações importantes</h3><p class="muted">Edite local, traje, confirmação e outras instruções.</p></div><button type="button" class="button secondary" id="addDetailItemBtn">＋ Adicionar</button></div>
-        <div class="content-detail-heading-fields"><label>Título principal<input id="siteContentDetailsTitle1" maxlength="120"></label><label>Título em destaque<input id="siteContentDetailsTitle2" maxlength="120"></label></div>
-        <div id="detailsItemsEditor" class="details-items-editor"></div>
-      </article>
-
-      <article class="content-editor-card content-editor-card--wide">
-        <div class="content-editor-card-head"><div><p class="section-kicker">NOSSA HISTÓRIA</p><h3>Galeria da história</h3><p class="muted">Adicione várias fotografias. A primeira será a imagem principal; todas entram na galeria do convite.</p></div><button type="button" class="button secondary" id="addStoryImagesBtn">＋ Adicionar fotografias</button></div>
-        <input id="storyImagesFile" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
-        <div id="storyImagesEditor" class="story-images-editor"></div>
-        <label class="field-span-2 story-text-editor-inline">Texto da nossa história<textarea id="siteContentStoryText" rows="10" maxlength="5000"></textarea><small class="muted">Separe os parágrafos com uma linha em branco.</small></label>
-      </article>
-    </div>
-    <p class="content-editor-note">As alterações são guardadas no Supabase e passam a aparecer no convite público para todos os convidados.</p>
-  </section>
-
   <section class="wedy-section admin-view-section" id="checkin"><div class="section-title-row"><div><p class="section-kicker">ENTRADAS</p><h2>Check-in dos convidados</h2><p class="muted">No dia do casamento, leia o QR Code ou procure pelo código do convite.</p></div><a class="button secondary" href="checkin.html">Abrir recepção ↗</a></div>
     <div class="checkin-layout"><div class="checkin-main-card"><div class="scan-title"><span class="scan-icon">⌁</span><div><h3>Ler convite</h3><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="checkin-tools"><div class="checkin-manual"><label>Código do convite<input id="checkinCode" placeholder="Ex.: AF-TESTE01" autocomplete="off"></label><button class="button" id="checkinSearchBtn">Pesquisar convite</button></div><div id="checkinResult" class="checkin-result hidden"></div><button class="button secondary" id="startScannerBtn">▣ Ler QR Code</button><button class="button secondary hidden" id="stopScannerBtn">Parar leitura</button><div id="qrReader" class="qr-reader hidden"></div></div></div><div class="checkin-summary"><div><strong id="stCheckedIn2">0</strong><span>Entraram</span></div><div><strong id="stNotCheckedIn2">0</strong><span>Por entrar</span></div><div><strong id="stPresentPeople">0</strong><span>Pessoas presentes</span></div></div></div>
   </section>
@@ -224,9 +180,6 @@
 </script>
 <script>
 (function(){
-  const pairs=
-<script>
-(function(){
   const pairs=[['modal','closeModal'],['giftModal','closeGiftModal'],['qrModal','closeQrModal']];
   pairs.forEach(([mid,cid])=>{const m=document.getElementById(mid),c=document.getElementById(cid);if(m&&c){m.addEventListener('mousedown',e=>{if(e.target===m)c.click()});}});
   document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;document.querySelectorAll('.modal:not(.hidden)').forEach(m=>{const c=m.querySelector('[id^="close"]');if(c)c.click();});});
@@ -246,7 +199,7 @@ document.getElementById('siteEditCoverBtn')?.addEventListener('click',()=>window
 document.getElementById('siteEditStoryBtn')?.addEventListener('click',()=>window.openImageSettings?.('story'));
 document.getElementById('siteEditDetailsBtn')?.addEventListener('click',()=>window.openImageSettings?.('details'));
 document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>window.openImageSettings?.('story'));
-</script><script>document.getElementById('adminExportTrigger')?.addEventListener('click',()=>document.getElementById('exportBtn')?.click());document.getElementById('adminImportTrigger')?.addEventListener('click',()=>document.getElementById('csvFile')?.click());</script><script src="admin.js"></script>
+</script><script>document.getElementById('adminExportTrigger')?.addEventListener('click',()=>document.getElementById('exportBtn')?.click());document.getElementById('adminImportTrigger')?.addEventListener('click',()=>document.getElementById('csvFile')?.click());</script><script src="admin.js"></script><script src="admin-v8.35.js"></script><script src="admin-v8.36.js"></script>
 <script>
 // V6.45 — ligação de segurança do menu superior. Não depende de estilos nem do listener anterior.
 (function(){
@@ -275,7 +228,7 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
 (function(){
   const body=document.body;
   const dashboard=document.getElementById('visao-geral');
-  const sections=[...document.querySelectorAll('.admin-view-section')];
+  const sections=()=>[...document.querySelectorAll('.admin-view-section')];
   const links=[...document.querySelectorAll('.admin-dashboard-sidebar a[href^="#"]')];
   const mobileMenu=null;
   const backdrop=document.getElementById('adminSidebarBackdrop');
@@ -283,7 +236,7 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
     const target=id && document.getElementById(id);
     const isDash=!target || id==='visao-geral';
     dashboard.classList.toggle('is-view-hidden',!isDash);
-    sections.forEach(s=>s.classList.toggle('admin-view-active',!isDash && s.id===id));
+    sections().forEach(s=>s.classList.toggle('admin-view-active',!isDash && s.id===id));
     links.forEach(a=>{
       const href=a.getAttribute('href');
       a.classList.toggle('active',(isDash&&href==='#visao-geral')||(!isDash&&href==='#'+id));
@@ -372,6 +325,7 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
   sync();
 })();
 </script>
+<script src="admin-v8.37.js"></script>
 </body></html>
 
 
@@ -462,8 +416,5 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
   if(input){input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();window.__v667SearchCheckin(input.value);}},true);}
 })();
 </script>
-
-
-
-
-
+<script src="admin-v8.38.js"></script>
+<script src="admin-v8.39.js"></script>

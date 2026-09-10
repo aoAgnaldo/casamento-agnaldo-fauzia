@@ -296,3 +296,4 @@ function closeOperatorDrawer(){
 })();
 
 window.addEventListener('pagehide',()=>{if(scanner){stopScanner()}});
+

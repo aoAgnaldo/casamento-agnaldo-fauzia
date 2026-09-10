@@ -1,0 +1,34 @@
+PAINEL DOS NOIVOS — V8.38
+
+Esta é uma cópia completa do site, pronta para substituir os ficheiros do site actual.
+O ficheiro original não foi alterado.
+
+O que foi melhorado no painel administrativo:
+
+- Painel Principal redesenhado: mostra primeiro confirmações, mesas e presentes que pedem atenção.
+- Uma acção principal por página e menus contextuais para editar, enviar, activar ou remover, sem botões repetidos.
+- Navegação lateral renovada e editor do convite organizado por todas as secções do site.
+- Pesquisa global de convidados, códigos, WhatsApp e áreas do painel (Ctrl + K).
+- Área “Editar todo o convite” reorganizada por secções: Geral/Capa, Nossa História,
+  Galeria de Fotos, Programa, Informações, Dados Bancários, RSVP e Rodapé.
+- Pré-visualização do convite junto ao formulário de edição.
+- Tabela da lista de presentes corrigida: número, nome, estado e acções ficam alinhados.
+- O programa e as fotografias continuam com os editores próprios já existentes.
+- Pré-visualização directa da página que os convidados vêem.
+- Recepção / Check-in também recebeu a mesma identidade visual e está ajustada para telemóvel.
+
+Para publicar:
+
+1. No Supabase, abra SQL Editor, crie uma nova consulta, copie todo o conteúdo
+   de supabase-v8.36-editor-conteudo.sql e execute UMA vez.
+2. Envie TODOS os ficheiros desta pasta para o mesmo local onde o site actual está publicado.
+3. Mantenha os nomes dos ficheiros exactamente como estão.
+4. Abra admin.html, entre normalmente e escolha “Editar todo o convite”.
+5. Guarde as alterações e use “Pré-visualizar” para confirmar a página dos convidados.
+
+Na primeira utilização, o editor grava apenas os campos que alterar. Assim, os
+textos que já estão no convite público não são substituídos por engano.
+
+O SQL apenas acrescenta uma coluna de conteúdo ao wedding_settings e uma função
+protegida para administradores autenticados. Não altera convidados, presentes,
+mesas, confirmações nem imagens já existentes.
