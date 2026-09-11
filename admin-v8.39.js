@@ -116,3 +116,79 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => window.setTimeout(enableDarkPanel, 0), { once: true });
   else window.setTimeout(enableDarkPanel, 0);
 })();
+
+/* V8.40 — preferência de tema guardada neste dispositivo, sem alterar a estrutura do painel. */
+(function () {
+  'use strict';
+
+  const storageKey = 'af-admin-theme';
+
+  function savedTheme() {
+    try {
+      return window.localStorage.getItem(storageKey) === 'light' ? 'light' : 'dark';
+    } catch (_) {
+      return 'dark';
+    }
+  }
+
+  function updateThemeButton(control, theme) {
+    if (!control) return;
+    control.querySelectorAll('[data-admin-theme-choice]').forEach(choice => {
+      const isActive = choice.dataset.adminThemeChoice === theme;
+      choice.classList.toggle('is-active', isActive);
+      choice.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
+  function applyTheme(theme, persist) {
+    const resolvedTheme = theme === 'light' ? 'light' : 'dark';
+    document.documentElement.dataset.adminTheme = resolvedTheme;
+    document.body.dataset.adminTheme = resolvedTheme;
+    document.body.classList.toggle('admin-theme-light', resolvedTheme === 'light');
+    document.body.classList.toggle('admin-theme-dark', resolvedTheme === 'dark');
+    document.documentElement.style.colorScheme = resolvedTheme;
+
+    if (persist) {
+      try { window.localStorage.setItem(storageKey, resolvedTheme); } catch (_) { /* preferência apenas desta sessão */ }
+    }
+
+    updateThemeButton(document.getElementById('adminThemeToggle'), resolvedTheme);
+  }
+
+  function mountThemeToggle() {
+    const actions = document.querySelector('.admin-header-actions');
+    if (!actions) return null;
+    const existing = document.getElementById('adminThemeToggle');
+    if (existing) return existing;
+
+    const control = document.createElement('div');
+    control.id = 'adminThemeToggle';
+    control.className = 'admin-theme-toggle';
+    control.setAttribute('role', 'group');
+    control.setAttribute('aria-label', 'Tema do painel');
+    control.innerHTML = `
+      <button type="button" data-admin-theme-choice="light" aria-pressed="false">
+        <span class="admin-theme-choice-icon" aria-hidden="true">☀</span><span class="admin-theme-choice-label">Claro</span>
+      </button>
+      <button type="button" data-admin-theme-choice="dark" aria-pressed="true">
+        <span class="admin-theme-choice-icon" aria-hidden="true">☾</span><span class="admin-theme-choice-label">Escuro</span>
+      </button>`;
+    control.addEventListener('click', event => {
+      const choice = event.target.closest('[data-admin-theme-choice]');
+      if (!choice) return;
+      applyTheme(choice.dataset.adminThemeChoice, true);
+    });
+
+    const identity = document.getElementById('adminIdentity');
+    actions.insertBefore(control, identity || actions.lastElementChild);
+    return control;
+  }
+
+  function initializeTheme() {
+    mountThemeToggle();
+    applyTheme(savedTheme(), false);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeTheme, { once: true });
+  else initializeTheme();
+})();
