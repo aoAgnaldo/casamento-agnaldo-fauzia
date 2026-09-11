@@ -1444,3 +1444,175 @@ body.admin-body.admin-v838.admin-v839 .v839-step small {
     padding: 18px !important;
   }
 }
+
+/* V8.43 — uma grelha única, navegação situacional e controlo real da pré-visualização. */
+body.admin-body.admin-v838.admin-v839 {
+  --v843-content-max: 1320px;
+}
+
+/* "Convite" e "Gerir o casamento" passam a ser títulos de secção irmãos. */
+body.admin-body.admin-v838.admin-v839 :is(.admin-sidebar-section-label, .admin-sidebar-content-title.v843-sidebar-heading) {
+  display: block !important;
+  min-height: 0 !important;
+  margin: 22px 8px 8px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--v839-muted) !important;
+  font: 700 .7rem/1 Montserrat, Arial, sans-serif !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+}
+body.admin-body.admin-v838.admin-v839 .admin-sidebar-content-title.v843-sidebar-heading :is(span, .site-content-chevron) {
+  display: none !important;
+}
+body.admin-body.admin-v838.admin-v839 .admin-sidebar-content-title.v843-sidebar-heading strong,
+body.admin-body.admin-v838.admin-v839 .admin-sidebar-section-label strong {
+  color: inherit !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+}
+body.admin-body.admin-v838.admin-v839 .admin-sidebar-subnav[aria-label="Convite"],
+body.admin-body.admin-v838.admin-v839 .admin-sidebar-subnav[aria-label="Planeamento"] {
+  display: grid !important;
+  gap: 3px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* A largura da página de Mesas torna-se a linha-guia para todo o painel. */
+@media (min-width: 761px) {
+  body.admin-body.admin-v838.admin-v839 .admin-view-section > :not(.modal):not(.guest-picker-modal) {
+    width: min(100%, var(--v843-content-max)) !important;
+    max-width: var(--v843-content-max) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #v838Dashboard,
+  body.admin-body.admin-v838.admin-v839 #tarefas > .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #tarefas > .planning-task-board {
+    width: min(100%, var(--v843-content-max)) !important;
+    max-width: var(--v843-content-max) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #tarefas .planning-task-board {
+    max-width: none !important;
+  }
+}
+
+/* Filtros de Presentes usam as superfícies do tema, inclusive no menu aberto. */
+body.admin-body.admin-v838.admin-v839 #presentes .gift-tools :is(#giftStatusFilter, #giftSort) {
+  min-height: 44px !important;
+  border-color: var(--v839-line) !important;
+  background-color: var(--v839-field) !important;
+  color: var(--v839-text) !important;
+  font: 600 .8rem/1.2 Montserrat, Arial, sans-serif !important;
+  color-scheme: dark;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-tools :is(#giftStatusFilter, #giftSort) option {
+  background: var(--v839-panel) !important;
+  color: var(--v839-text) !important;
+}
+html[data-admin-theme="light"] body.admin-body.admin-v838.admin-v839 #presentes .gift-tools :is(#giftStatusFilter, #giftSort) {
+  background-color: #fffdfa !important;
+  color: #2b201b !important;
+  color-scheme: light;
+}
+html[data-admin-theme="light"] body.admin-body.admin-v838.admin-v839 #presentes .gift-tools :is(#giftStatusFilter, #giftSort) option {
+  background: #fffdfa !important;
+  color: #2b201b !important;
+}
+
+/* A mesma capa pode agora ser lida como ecrã mobile ou como página web. */
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-preview > header {
+  align-items: center !important;
+  flex-wrap: wrap !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-mode-switch {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: auto;
+  padding: 3px;
+  border: 1px solid var(--v839-line);
+  border-radius: 10px;
+  background: var(--v839-field);
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-mode-switch button {
+  min-height: 30px !important;
+  padding: 0 9px !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: var(--v839-muted) !important;
+  font: 700 .68rem/1 Montserrat, Arial, sans-serif !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-mode-switch button.is-active {
+  background: var(--v839-peach-soft) !important;
+  color: var(--v839-peach-deep) !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-frame[data-v843-preview-mode="web"] {
+  min-height: 0 !important;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-frame[data-v843-preview-mode="web"] .v837-phone-notch {
+  display: none !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-frame[data-v843-preview-mode="web"] .v837-phone-copy {
+  right: clamp(18px, 7%, 42px) !important;
+  bottom: clamp(18px, 9%, 42px) !important;
+  left: clamp(18px, 7%, 42px) !important;
+  max-width: 68%;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-frame[data-v843-preview-mode="web"] .v837-phone-copy strong {
+  font-size: clamp(1.75rem, 3.2vw, 3.45rem) !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-frame[data-v843-preview-mode="web"] .v837-phone-copy p {
+  max-width: 31ch;
+  font-size: .86rem !important;
+}
+
+@media (max-width: 760px) {
+  body.admin-body.admin-v838.admin-v839 .admin-dashboard-main,
+  body.admin-body.admin-v838.admin-v839 .admin-view-section {
+    padding: 22px 18px 96px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 .section-actions .button {
+    flex: 1 1 150px;
+    justify-content: center !important;
+    min-height: 46px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-tools {
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-tools .gift-search,
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-tools .gift-view-toggle {
+    grid-column: auto !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-tools :is(#giftStatusFilter, #giftSort) {
+    width: 100% !important;
+    min-height: 46px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-view-toggle {
+    justify-content: flex-start !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-preview {
+    width: 100% !important;
+    margin-top: 16px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-mode-switch {
+    width: 100%;
+    margin-left: 0;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-mode-switch button {
+    flex: 1;
+    min-height: 38px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v843-preview-frame[data-v843-preview-mode="mobile"] {
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

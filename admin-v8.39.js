@@ -192,3 +192,110 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeTheme, { once: true });
   else initializeTheme();
 })();
+
+/* V8.43 — estrutura comum, localização clara e pré-visualização por dispositivo. */
+(function () {
+  'use strict';
+
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+  function isContentRoute(hash) {
+    return hash === '#site-editor' || hash === '#site-capa' || hash === '#site-historia' || hash.startsWith('#content-');
+  }
+
+  function setCurrent(link, active) {
+    if (!link) return;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+
+  function syncSidebarLocation() {
+    const hash = window.location.hash || '#visao-geral';
+    const contentLink = $('.admin-sidebar-subnav[aria-label="Convite"] a[href="#site-editor"]');
+    const planningLink = $('.admin-sidebar-subnav[aria-label="Planeamento"] a[href="#tarefas"]');
+    setCurrent(contentLink, isContentRoute(hash));
+    setCurrent(planningLink, hash === '#tarefas');
+  }
+
+  function organiseSidebar() {
+    const contentTitle = $('.admin-sidebar-content-title:not(.admin-sidebar-planning-title)');
+    const contentNav = $('.admin-sidebar-subnav[aria-label="Conteúdo do convite"]');
+    const planningTitle = $('.admin-sidebar-planning-title');
+    const planningNav = $('.admin-sidebar-planning');
+    if (!contentTitle || !contentNav || !planningTitle || !planningNav) return false;
+
+    contentTitle.classList.add('v843-sidebar-heading');
+    planningTitle.classList.add('v843-sidebar-heading');
+    contentTitle.innerHTML = '<strong>Convite</strong>';
+    planningTitle.innerHTML = '<strong>Planeamento</strong>';
+    contentNav.setAttribute('aria-label', 'Convite');
+    planningNav.setAttribute('aria-label', 'Planeamento');
+
+    if (contentNav.dataset.v843Structure !== 'true') {
+      contentNav.dataset.v843Structure = 'true';
+      contentNav.innerHTML = '<a href="#site-editor"><span class="nav-icon" aria-hidden="true">✎</span><span>Conteúdo do site</span></a>';
+    }
+    if (planningNav.dataset.v843Structure !== 'true') {
+      planningNav.dataset.v843Structure = 'true';
+      planningNav.innerHTML = '<a href="#tarefas"><span class="nav-icon" aria-hidden="true">☷</span><span>Planeamento</span></a>';
+    }
+    syncSidebarLocation();
+    return true;
+  }
+
+  function setPreviewMode(preview, mode) {
+    const selected = mode === 'web' ? 'web' : 'mobile';
+    preview.dataset.v843PreviewMode = selected;
+    const frame = $('.v837-phone-preview', preview);
+    if (frame) frame.dataset.v843PreviewMode = selected;
+    $$('[data-v843-preview-mode]', preview).forEach(button => {
+      const active = button.dataset.v843PreviewMode === selected;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+  }
+
+  function mountPreviewModes() {
+    const preview = $('.v837-editor-preview');
+    if (!preview) return false;
+    if (preview.dataset.v843PreviewMounted === 'true') return true;
+
+    const header = $('header', preview);
+    const frame = $('.v837-phone-preview', preview);
+    if (!header || !frame) return false;
+
+    const modes = document.createElement('div');
+    modes.className = 'v843-preview-mode-switch';
+    modes.setAttribute('role', 'group');
+    modes.setAttribute('aria-label', 'Formato da pré-visualização');
+    modes.innerHTML = '<button type="button" data-v843-preview-mode="mobile" aria-pressed="true">Mobile</button><button type="button" data-v843-preview-mode="web" aria-pressed="false">Web</button>';
+    modes.addEventListener('click', event => {
+      const button = event.target.closest('[data-v843-preview-mode]');
+      if (button) setPreviewMode(preview, button.dataset.v843PreviewMode);
+    });
+
+    header.appendChild(modes);
+    frame.classList.add('v843-preview-frame');
+    preview.dataset.v843PreviewMounted = 'true';
+    setPreviewMode(preview, 'mobile');
+    return true;
+  }
+
+  function initialise(attempt) {
+    organiseSidebar();
+    if (!mountPreviewModes() && attempt < 40) window.setTimeout(() => initialise(attempt + 1), 60);
+  }
+
+  window.addEventListener('hashchange', syncSidebarLocation);
+  document.addEventListener('click', event => {
+    if (event.target.closest('.admin-dashboard-sidebar a[href^="#"]')) window.setTimeout(syncSidebarLocation, 0);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.setTimeout(() => initialise(0), 80), { once: true });
+  } else {
+    window.setTimeout(() => initialise(0), 80);
+  }
+})();

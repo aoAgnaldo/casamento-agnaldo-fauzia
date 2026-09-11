@@ -1,0 +1,34 @@
+PAINEL DOS NOIVOS — REVISÃO UX/UI V8.43
+
+Esta pasta é a versão pronta para publicar do site e do painel administrativo.
+
+Principais melhorias desta revisão:
+
+- Todas as páginas do painel usam a mesma linha de alinhamento da área
+  “Mesas e lugares”.
+- “Convite” e “Gerir o casamento” têm agora a mesma estrutura na barra lateral.
+- “Planeamento” voltou a ter o destaque activo na barra lateral quando esta área
+  está aberta.
+- A pré-visualização do convite permite alternar entre Mobile e Web antes de
+  abrir a página pública completa.
+- Os filtros de Presentes acompanham correctamente o modo Claro e o modo Escuro.
+- Os controlos e espaçamentos foram ajustados para ecrãs de telemóvel.
+
+PARA PUBLICAR:
+
+1. Faça uma cópia de segurança da pasta que está actualmente na hospedagem.
+2. Envie TODOS os ficheiros desta pasta para a raiz do seu site, mantendo os
+   mesmos nomes de ficheiro.
+3. Não altere os nomes de admin.html, index.html, style.css, admin.js,
+   admin-v8.39.css, admin-v8.39.js ou supabase-config.js.
+4. Se ainda não tiver activado o editor completo do convite no Supabase, execute
+   UMA vez o ficheiro supabase-v8.36-editor-conteudo.sql no SQL Editor.
+5. Depois de publicar, abra admin.html e recarregue a página uma vez.
+
+IMPORTANTE:
+
+- Esta revisão não apaga convidados, presentes, mesas, fotografias nem respostas.
+- O ficheiro supabase-config.js deve continuar com a configuração do seu próprio
+  projecto Supabase.
+- O painel administrativo abre em admin.html; a página pública dos convidados
+  abre em index.html.
