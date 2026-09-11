@@ -1,0 +1,424 @@
+/* V8.44 — uma régua de conteúdo, acções sempre visíveis e temas coerentes. */
+body.admin-body.admin-v838.admin-v839 {
+  --v844-rail: 1320px;
+}
+
+/* A largura de Mesas e lugares é agora a única régua do painel. */
+@media (min-width: 761px) {
+  body.admin-body.admin-v838.admin-v839 #convidados .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-tools,
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-count,
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-list-scroll,
+  body.admin-body.admin-v838.admin-v839 #presentes .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-stats,
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-tools,
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-list-meta,
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-list-scroll,
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-pagination,
+  body.admin-body.admin-v838.admin-v839 #mesas .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #mesas .seating-summary,
+  body.admin-body.admin-v838.admin-v839 #mesas .seating-layout,
+  body.admin-body.admin-v838.admin-v839 #protocolos .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #protocolos .protocol-grid,
+  body.admin-body.admin-v838.admin-v839 #tarefas .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #tarefas .planning-task-board,
+  body.admin-body.admin-v838.admin-v839 #programa-admin .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #programa-admin .program-admin-list,
+  body.admin-body.admin-v838.admin-v839 #checkin .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #checkin .checkin-layout,
+  body.admin-body.admin-v838.admin-v839 #site-capa .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #site-capa .site-editor-grid,
+  body.admin-body.admin-v838.admin-v839 #site-historia .section-title-row,
+  body.admin-body.admin-v838.admin-v839 #site-historia .site-story-preview,
+  body.admin-body.admin-v838.admin-v839 #site-editor.v837-editor {
+    width: min(100%, var(--v844-rail)) !important;
+    max-width: var(--v844-rail) !important;
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-tools {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 13px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-count {
+    margin-top: 0 !important;
+    margin-bottom: 9px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-list-scroll {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-pagination {
+    justify-content: flex-end !important;
+  }
+}
+
+/* O QR fica sempre à vista; o menu abre para cima e não é cortado pelo cartão. */
+body.admin-body.admin-v838.admin-v839 #convidados .guest-card {
+  position: relative !important;
+  z-index: 0;
+  overflow: visible !important;
+}
+body.admin-body.admin-v838.admin-v839 #convidados .guest-card:has(.v838-action-menu[open]) {
+  z-index: 120 !important;
+}
+body.admin-body.admin-v838.admin-v839 #convidados .guest-card-footer,
+body.admin-body.admin-v838.admin-v839 #convidados .guest-card-actions,
+body.admin-body.admin-v838.admin-v839 #convidados .guest-list-scroll {
+  overflow: visible !important;
+}
+body.admin-body.admin-v838.admin-v839 #convidados .guest-card-actions {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+body.admin-body.admin-v838.admin-v839 #convidados .v844-guest-qr {
+  display: inline-flex !important;
+  min-height: 36px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 0 10px !important;
+  border: 1px solid var(--v839-line) !important;
+  border-radius: 10px !important;
+  background: var(--v839-field) !important;
+  color: var(--v839-text) !important;
+  cursor: pointer;
+  font: 700 .61rem/1 Montserrat, Arial, sans-serif !important;
+  white-space: nowrap;
+}
+body.admin-body.admin-v838.admin-v839 #convidados .v844-guest-qr:hover,
+body.admin-body.admin-v838.admin-v839 #convidados .v844-guest-qr:focus-visible {
+  border-color: var(--v839-peach) !important;
+  background: var(--v839-peach-soft) !important;
+  color: var(--v839-peach) !important;
+}
+body.admin-body.admin-v838.admin-v839 #convidados .v844-guest-qr svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+}
+body.admin-body.admin-v838.admin-v839 #convidados .v844-guest-menu .v838-action-menu-panel {
+  top: auto !important;
+  right: 0 !important;
+  bottom: calc(100% + 8px) !important;
+  z-index: 300 !important;
+}
+body.admin-body.admin-v838.admin-v839 .v838-action-menu-panel {
+  border-color: var(--v839-line) !important;
+  background: var(--v839-panel-raised) !important;
+}
+body.admin-body.admin-v838.admin-v839 .v838-menu-action {
+  color: var(--v839-text) !important;
+}
+body.admin-body.admin-v838.admin-v839 .v838-menu-action:hover,
+body.admin-body.admin-v838.admin-v839 .v838-menu-action:focus-visible {
+  background: var(--v839-peach-soft) !important;
+  color: var(--v839-peach) !important;
+}
+
+/* Presentes usa as mesmas superfícies no modo claro e no modo escuro. */
+body.admin-body.admin-v838.admin-v839 #presentes .gift-grid {
+  background: transparent !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-card-item,
+body.admin-body.admin-v838.admin-v839 #presentes .gift-mobile-card,
+body.admin-body.admin-v838.admin-v839 #presentes .gift-table tbody tr {
+  border-color: var(--v839-line) !important;
+  background: var(--v839-panel) !important;
+  color: var(--v839-text) !important;
+  box-shadow: none !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-list-scroll,
+body.admin-body.admin-v838.admin-v839 #presentes .gift-table {
+  border-color: var(--v839-line) !important;
+  background: var(--v839-panel) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-table th {
+  border-color: var(--v839-line) !important;
+  background: var(--v839-panel-raised) !important;
+  color: var(--v839-muted) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-table td,
+body.admin-body.admin-v838.admin-v839 #presentes .gift-card-footer {
+  border-color: var(--v839-line) !important;
+  background: transparent !important;
+  color: var(--v839-text) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes :is(.gift-name, .gift-number, .gift-reserved-by, .gift-reserved-empty, .gift-mobile-name) {
+  color: var(--v839-text) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes :is(.gift-card-meta, .gift-mobile-reserved, .gift-card-footer .gift-reserved-by) {
+  color: var(--v839-muted) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-card-meta span {
+  background: var(--v839-field) !important;
+  color: var(--v839-muted) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-photo.placeholder,
+body.admin-body.admin-v838.admin-v839 #presentes .gift-mobile-photo {
+  border-color: var(--v839-line) !important;
+  background: var(--v839-field) !important;
+  color: var(--v839-peach) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-pagination button {
+  border-color: var(--v839-line) !important;
+  background: var(--v839-panel) !important;
+  color: var(--v839-text) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-pagination button:hover,
+body.admin-body.admin-v838.admin-v839 #presentes .gift-pagination button:focus-visible {
+  border-color: var(--v839-peach) !important;
+  background: var(--v839-peach-soft) !important;
+  color: var(--v839-peach) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-tools :is(input, select),
+body.admin-body.admin-v838.admin-v839 #presentes .gift-search {
+  border-color: var(--v839-line) !important;
+  background: var(--v839-field) !important;
+  color: var(--v839-text) !important;
+}
+body.admin-body.admin-v838.admin-v839 #presentes .gift-tools option {
+  background: var(--v839-panel) !important;
+  color: var(--v839-text) !important;
+}
+html[data-admin-theme="dark"] body.admin-body.admin-v838.admin-v839 #presentes .gift-tools select {
+  color-scheme: dark !important;
+}
+html[data-admin-theme="light"] body.admin-body.admin-v838.admin-v839 #presentes .gift-tools select {
+  color-scheme: light !important;
+}
+
+/* Conteúdo do site: as secções regressam a uma barra horizontal, como na referência. */
+body.admin-body.admin-v838.admin-v839 #site-editor.v837-editor {
+  max-width: var(--v844-rail) !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, .72fr) !important;
+  grid-template-areas:
+    "tabs tabs"
+    "form preview" !important;
+  align-items: start !important;
+  gap: 16px !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs {
+  position: static !important;
+  grid-area: tabs !important;
+  display: flex !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  gap: 4px !important;
+  overflow-x: auto !important;
+  overscroll-behavior-inline: contain;
+  padding: 5px !important;
+  border-color: var(--v839-line) !important;
+  background: var(--v839-panel) !important;
+  scrollbar-color: var(--v839-line) transparent;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs button {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  gap: 6px !important;
+  min-height: 40px !important;
+  padding: 0 11px !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: transparent !important;
+  color: var(--v839-muted) !important;
+  font-size: .7rem !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs button:hover,
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs button:focus-visible {
+  background: var(--v839-field) !important;
+  color: var(--v839-text) !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs button.is-active {
+  background: var(--v839-peach-soft) !important;
+  box-shadow: inset 0 -2px 0 var(--v839-peach) !important;
+  color: var(--v839-peach) !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-tab-icon {
+  width: auto !important;
+  height: auto !important;
+  color: currentColor !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-form-card {
+  grid-area: form !important;
+  min-width: 0 !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-preview {
+  position: sticky !important;
+  top: 18px !important;
+  grid-area: preview !important;
+  min-width: 0 !important;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v844-image-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v844-image-actions .button {
+  min-height: 40px !important;
+}
+
+/* Escolha explícita de música: aceita ID ou link do YouTube e grava o ID no convite. */
+body.admin-body.admin-v838.admin-v839 #site-editor .v844-music-picker {
+  display: grid;
+  gap: 8px;
+  margin-top: 9px;
+  padding: 10px;
+  border: 1px solid var(--v839-line);
+  border-radius: 12px;
+  background: var(--v839-field);
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v844-music-picker strong {
+  color: var(--v839-text);
+  font: 700 .68rem/1.25 Montserrat, Arial, sans-serif;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v844-music-picker small {
+  color: var(--v839-muted);
+  font: 500 .61rem/1.4 Montserrat, Arial, sans-serif;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v844-music-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+body.admin-body.admin-v838.admin-v839 #site-editor .v844-music-actions .button {
+  min-height: 36px !important;
+  padding-inline: 10px !important;
+  font-size: .65rem !important;
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog {
+  position: fixed;
+  z-index: 10020;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(20, 16, 14, .66);
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog.hidden {
+  display: none !important;
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog-card {
+  width: min(100%, 510px);
+  padding: 22px;
+  border: 1px solid var(--v839-line);
+  border-radius: 16px;
+  background: var(--v839-panel);
+  color: var(--v839-text);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, .28);
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog-card h2 {
+  margin: 0;
+  color: var(--v839-text);
+  font: 500 2rem/1 "Cormorant Garamond", Georgia, serif;
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog-card p {
+  margin: 8px 0 15px;
+  color: var(--v839-muted);
+  font: 500 .72rem/1.55 Montserrat, Arial, sans-serif;
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog-card label {
+  display: grid;
+  gap: 7px;
+  color: var(--v839-text);
+  font: 700 .66rem/1.2 Montserrat, Arial, sans-serif;
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog-card input {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--v839-line);
+  border-radius: 10px;
+  background: var(--v839-field);
+  color: var(--v839-text);
+  font: 500 .78rem/1.2 Montserrat, Arial, sans-serif;
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-error {
+  min-height: 1.2em;
+  margin: 8px 0 0 !important;
+  color: #ffb3a0 !important;
+}
+body.admin-body.admin-v838.admin-v839 .v844-music-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas:
+      "tabs"
+      "form"
+      "preview" !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-preview {
+    position: static !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-card-footer {
+    align-items: stretch !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #convidados .guest-card-actions {
+    align-self: flex-end !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #convidados .v844-guest-qr {
+    min-height: 38px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #presentes .gift-card-item {
+    grid-template-columns: 54px minmax(0, 1fr) !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas:
+      "tabs"
+      "form"
+      "preview" !important;
+    gap: 14px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs {
+    margin: 0 -2px !important;
+    width: calc(100% + 4px) !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs button {
+    min-height: 42px !important;
+    padding-inline: 10px !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-preview {
+    position: static !important;
+  }
+  body.admin-body.admin-v838.admin-v839 #site-editor .v844-image-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+  body.admin-body.admin-v838.admin-v839 .v844-music-dialog {
+    align-items: end;
+    padding: 10px;
+  }
+  body.admin-body.admin-v838.admin-v839 .v844-music-dialog-card {
+    padding: 18px;
+    border-radius: 16px 16px 12px 12px;
+  }
+  body.admin-body.admin-v838.admin-v839 .v844-music-dialog-actions .button {
+    flex: 1 1 130px;
+    justify-content: center;
+  }
+}

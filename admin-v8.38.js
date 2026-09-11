@@ -131,14 +131,29 @@
     if (!group || group.dataset.v838Menu === 'true') return;
     const actions = $$('button, a', group).filter(node => !node.closest('.v838-action-menu'));
     if (actions.length < 2) return;
+    const isGuestGroup = group.matches('#convidados .guest-card-actions');
+    const qrAction = isGuestGroup
+      ? actions.find(action => /qr\s*code/i.test(actionLabel(action)))
+      : null;
+    const menuActions = qrAction ? actions.filter(action => action !== qrAction) : actions;
     const preserved = Array.from(group.children)
       .filter(child => !child.matches('button, a'))
       .map(child => child.cloneNode(true));
+    if (qrAction) {
+      const qrButton = qrAction.cloneNode(true);
+      qrButton.classList.remove('icon-btn', 'ui-icon-btn');
+      qrButton.classList.add('v844-guest-qr');
+      qrButton.removeAttribute('data-tooltip');
+      qrButton.removeAttribute('title');
+      qrButton.setAttribute('aria-label', actionLabel(qrAction));
+      qrButton.insertAdjacentHTML('beforeend', '<span>QR Code</span>');
+      preserved.push(qrButton);
+    }
     const details = document.createElement('details');
-    details.className = 'v838-action-menu';
+    details.className = 'v838-action-menu' + (isGuestGroup ? ' v844-guest-menu' : '');
     details.innerHTML = '<summary aria-label="Mais opções">•••</summary><div class="v838-action-menu-panel"></div>';
     const panel = $('.v838-action-menu-panel', details);
-    actions.forEach(action => {
+    menuActions.forEach(action => {
       const item = action.cloneNode(true);
       const label = actionLabel(action);
       item.classList.remove('icon-btn', 'ui-icon-btn');

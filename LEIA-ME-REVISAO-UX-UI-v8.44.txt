@@ -1,0 +1,21 @@
+PAINEL DO CASAMENTO — REVISÃO UX/UI V8.44
+
+Esta pasta está pronta para alojamento estático.
+
+1. Envie TODO o conteúdo desta pasta para a raiz do seu alojamento.
+2. Mantenha os ficheiros e pastas com estes mesmos nomes.
+3. Abra admin.html para o painel privado e index.html para o convite público.
+4. Mantenha supabase-config.js com as credenciais correctas do seu projecto Supabase.
+5. Antes de usar a edição do conteúdo do convite, execute no Supabase o ficheiro
+   supabase-v8.36-editor-conteudo.sql, se ainda não o executou.
+
+Inclui nesta revisão:
+- Uma linha de alinhamento comum para títulos, filtros, listas e cartões.
+- QR Code sempre visível nos cartões dos convidados e menu de três pontos sem cortes.
+- Contraste consistente dos Presentes nos modos Claro e Escuro.
+- Botões directos para trocar capa, imagem da história e imagem dos detalhes.
+- Escolha de música do YouTube para tocar quando o convidado abre o convite.
+- Secções do conteúdo do site numa barra horizontal, com pré-visualização Mobile e Web.
+- Melhor comportamento em ecrãs pequenos.
+
+Não é necessário compilar nem instalar dependências: basta enviar os ficheiros.

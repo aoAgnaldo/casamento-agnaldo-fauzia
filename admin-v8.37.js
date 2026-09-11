@@ -78,7 +78,7 @@
 
   function paneMarkup(pane) {
     const gallery = pane.id === 'galeria'
-      ? `<div class="v837-editor-gallery"><strong>Imagens do convite</strong><p>Altere a imagem de capa, a fotografia da história e a imagem dos detalhes sem perder os respectivos recortes.</p><button class="button secondary" type="button" data-v837-route="site-capa">Abrir capa e imagens</button><button class="button secondary" type="button" data-v837-route="site-historia">Abrir nossa história</button></div>`
+      ? `<div class="v837-editor-gallery"><strong>Imagens do convite</strong><p>Escolha aqui as imagens que aparecem para os convidados: capa, história e detalhes.</p><div class="v844-image-actions"><button class="button secondary" type="button" data-v837-image-target="cover">Trocar capa</button><button class="button secondary" type="button" data-v837-image-target="story">Trocar imagem da história</button><button class="button secondary" type="button" data-v837-image-target="details">Trocar imagem dos detalhes</button></div></div>`
       : `<div class="v837-pane-fields" data-v837-pane-fields="${pane.id}"></div>${pane.id === 'programa' ? `<div class="v837-editor-note"><strong>Momentos do dia</strong><p>Adicione ou altere horários, descrições e localizações de cada momento na área específica.</p><button class="button secondary" type="button" data-v837-route="programa-admin">Gerir momentos do programa</button></div>` : ''}`;
     return `<section class="v837-form-pane" data-v837-pane="${pane.id}" aria-labelledby="v837-${pane.id}-title"><header class="v837-pane-heading"><div><p>${escapeHtml(pane.kicker)}</p><h3 id="v837-${pane.id}-title">${escapeHtml(pane.title)}</h3><small>${escapeHtml(pane.description)}</small></div></header>${gallery}</section>`;
   }
@@ -306,6 +306,12 @@
       const tab = event.target.closest('[data-v837-tab]')?.dataset.v837Tab;
       if (tab) {
         activateTab(tab, true);
+        return;
+      }
+      const imageTarget = event.target.closest('[data-v837-image-target]')?.dataset.v837ImageTarget;
+      if (imageTarget) {
+        event.preventDefault();
+        if (typeof window.openImageSettings === 'function') window.openImageSettings(imageTarget);
         return;
       }
       const route = event.target.closest('[data-v837-route]')?.dataset.v837Route;
