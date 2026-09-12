@@ -246,8 +246,16 @@
 
   function syncEditorRoute() {
     if (!editor) return;
-    if (location.hash === '#site-editor') {
-      window.setTimeout(showEditor, 0);
+    const routeTabs = {
+      '#site-capa': 'galeria',
+      '#site-historia': 'historia'
+    };
+    const requestedTab = routeTabs[location.hash] || (location.hash.startsWith('#content-') ? location.hash.slice('#content-'.length) : '');
+    if (location.hash === '#site-editor' || requestedTab) {
+      window.setTimeout(() => {
+        showEditor();
+        if (requestedTab) activateTab(requestedTab, false);
+      }, 0);
     } else {
       editor.classList.remove('admin-view-active');
     }

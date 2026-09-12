@@ -1,0 +1,179 @@
+/* V8.45 — correcções de usabilidade: entrada, menus, QR e rotas antigas. */
+
+/* A página de entrada é independente do tema do painel e mantém contraste alto. */
+body.admin-body #login {
+  min-height: 100dvh !important;
+  padding: clamp(18px, 4vw, 52px) !important;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 16% 15%, rgba(225, 157, 130, .2), transparent 30%),
+    linear-gradient(135deg, #1c1613 0%, #30231d 100%) !important;
+  color: #2b201b !important;
+}
+body.admin-body #login .login-box {
+  width: min(100%, 470px) !important;
+  padding: clamp(28px, 5vw, 52px) !important;
+  border: 1px solid #ddcabe !important;
+  border-radius: 24px !important;
+  background: #fffdfa !important;
+  color: #2b201b !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .3) !important;
+}
+body.admin-body #login .login-box::before,
+body.admin-body #login .login-box .eyebrow {
+  color: #914f3e !important;
+}
+body.admin-body #login .login-box :is(h1, h2, h3, label) {
+  color: #2b201b !important;
+}
+body.admin-body #login .login-box .muted {
+  color: #67534a !important;
+}
+body.admin-body #login .login-box input {
+  border: 1px solid #bfa99b !important;
+  border-radius: 11px !important;
+  background: #ffffff !important;
+  color: #2b201b !important;
+  caret-color: #914f3e !important;
+}
+body.admin-body #login .login-box input::placeholder { color: #876f62 !important; }
+body.admin-body #login .login-box input:focus {
+  border-color: #914f3e !important;
+  box-shadow: 0 0 0 3px rgba(145, 79, 62, .16) !important;
+}
+body.admin-body #login .login-box .button {
+  border: 1px solid #914f3e !important;
+  background: #914f3e !important;
+  color: #fffdfa !important;
+}
+body.admin-body #login .login-box .button:hover,
+body.admin-body #login .login-box .button:focus-visible { background: #733b2e !important; }
+body.admin-body #login .login-box .status { color: #9d352a !important; }
+
+/* A acção essencial fica exposta; o menu aberto passa a ocupar espaço no cartão, sem ser cortado. */
+body.admin-body.admin-v838.admin-v839 :is(
+  #convidados .guest-card,
+  #presentes .gift-card-item,
+  #presentes .gift-table tbody tr,
+  #mesas .table-card,
+  #protocolos .protocol-card,
+  #programa-admin .program-admin-card
+) {
+  position: relative !important;
+  overflow: visible !important;
+  z-index: 0;
+}
+body.admin-body.admin-v838.admin-v839 :is(
+  #convidados .guest-card,
+  #presentes .gift-card-item,
+  #presentes .gift-table tbody tr,
+  #mesas .table-card,
+  #protocolos .protocol-card,
+  #programa-admin .program-admin-card
+):has(.v838-action-menu[open]) { z-index: 120 !important; }
+body.admin-body.admin-v838.admin-v839 :is(
+  #convidados .guest-card-actions,
+  #presentes .gift-actions,
+  #mesas .table-card-actions,
+  #protocolos .protocol-actions,
+  #programa-admin .program-admin-actions
+) {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  overflow: visible !important;
+}
+body.admin-body.admin-v838.admin-v839 .v845-primary-action {
+  display: inline-flex !important;
+  min-height: 36px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 11px !important;
+  border: 1px solid var(--v839-line) !important;
+  border-radius: 9px !important;
+  background: var(--v839-field) !important;
+  color: var(--v839-text) !important;
+  cursor: pointer;
+  font: 700 .62rem/1 Montserrat, Arial, sans-serif !important;
+  white-space: nowrap;
+}
+body.admin-body.admin-v838.admin-v839 .v845-primary-action:hover,
+body.admin-body.admin-v838.admin-v839 .v845-primary-action:focus-visible {
+  border-color: var(--v839-peach) !important;
+  background: var(--v839-peach-soft) !important;
+  color: var(--v839-peach) !important;
+}
+body.admin-body.admin-v838.admin-v839 .v838-action-menu[open] {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  vertical-align: top;
+}
+body.admin-body.admin-v838.admin-v839 .v838-action-menu[open] > .v838-action-menu-panel {
+  position: static !important;
+  z-index: auto !important;
+  width: max-content;
+  max-width: min(260px, calc(100vw - 48px));
+  margin-top: 8px !important;
+  padding: 6px !important;
+  border-color: var(--v839-line) !important;
+  background: var(--v839-panel-raised) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .2) !important;
+}
+body.admin-body.admin-v838.admin-v839 .v838-action-menu[open] .v838-menu-action {
+  min-height: 38px !important;
+  white-space: normal;
+}
+
+/* Um QR pequeno, limpo e próprio para ser lido por telemóvel. */
+body.admin-body.admin-v838.admin-v839 #qrModal .qr-box {
+  width: min(calc(100% - 28px), 500px) !important;
+  max-width: 500px !important;
+}
+body.admin-body.admin-v838.admin-v839 #qrModal .qr-code {
+  display: grid !important;
+  width: min(100%, 206px) !important;
+  min-height: 206px;
+  place-items: center;
+  margin: 18px auto 14px !important;
+  padding: 15px !important;
+  box-sizing: border-box;
+  border: 1px solid #e5ddd7;
+  border-radius: 14px;
+  background: #ffffff !important;
+}
+body.admin-body.admin-v838.admin-v839 #qrModal .qr-code :is(img, canvas) {
+  display: block;
+  width: 176px !important;
+  height: 176px !important;
+  max-width: 100%;
+  image-rendering: pixelated;
+}
+body.admin-body.admin-v838.admin-v839 #qrModal #qrUrl {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto 14px !important;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border: 1px solid var(--v839-line);
+  border-radius: 10px;
+  background: var(--v839-field);
+  color: var(--v839-muted) !important;
+  font: 500 .64rem/1.45 Montserrat, Arial, sans-serif;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  body.admin-body #login { padding: 16px !important; }
+  body.admin-body #login .login-box { border-radius: 20px !important; }
+  body.admin-body.admin-v838.admin-v839 :is(
+    #convidados .guest-card-actions,
+    #presentes .gift-actions,
+    #mesas .table-card-actions,
+    #protocolos .protocol-actions,
+    #programa-admin .program-admin-actions
+  ) { align-items: flex-start !important; flex-wrap: wrap !important; }
+  body.admin-body.admin-v838.admin-v839 .v838-action-menu[open] > .v838-action-menu-panel { max-width: calc(100vw - 56px); }
+}

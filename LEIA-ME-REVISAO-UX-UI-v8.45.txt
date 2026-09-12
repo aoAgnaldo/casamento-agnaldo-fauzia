@@ -1,0 +1,57 @@
+REVISÃO UX/UI v8.45 — PAINEL AGNALDO & FÁUZIA
+===============================================
+
+Esta entrega corrige os problemas assinalados na revisão mais recente:
+
+1. QR Code do convite
+   - Usa o endereço público do convite em vez do caminho grande do computador.
+   - Fica menor, nítido e apenas uma imagem do QR é mantida no painel.
+   - O endereço actual está configurado para:
+     https://aoagnaldo.github.io/casamento-agnaldo-fauzia/index.html
+   - Caso mude de hospedagem, altere apenas a linha WEDDING_PUBLIC_INVITE_URL
+     dentro de supabase-config.js.
+
+2. Botões de três pontos e edição
+   - A acção Editar fica sempre visível nos cartões de convidados, mesas,
+     equipa, programa e presentes.
+   - Ao abrir os três pontos, as opções passam a expandir dentro do cartão;
+     deixam de ficar escondidas ou cortadas.
+
+3. Entrada no painel
+   - O ecrã de login passou a ter fundo escuro, cartão claro e texto escuro,
+     com contraste legível nos dois modos do painel.
+
+4. Conteúdo do site e imagens
+   - O editor passou a receber a ligação do Supabase necessária para guardar.
+   - A Galeria de Fotos mostra directamente: Trocar capa, Trocar imagem da
+     história e Trocar imagem dos detalhes.
+   - Os endereços antigos #site-capa e #site-historia passam a abrir o editor,
+     em vez de apresentar um ecrã vazio.
+
+5. Actualização segura no navegador
+   - O admin.html referencia a revisão 8.45 com versão no endereço dos
+     ficheiros, reduzindo o risco de o Chrome usar cópias antigas em cache.
+
+COMO COLOCAR NA HOSPEDAGEM
+--------------------------
+
+1. Extraia o ficheiro ZIP da revisão v8.45.
+2. Envie todos os ficheiros extraídos para a raiz do mesmo projecto onde já
+   existem admin.html e index.html, substituindo os ficheiros antigos.
+3. Mantenha a estrutura de pastas e todos os ficheiros juntos.
+4. Se ainda não o tiver feito, execute uma única vez no Supabase o ficheiro
+   supabase-v8.36-editor-conteudo.sql que acompanha o projecto. Ele cria a
+   função usada para guardar o conteúdo do convite.
+5. Depois da publicação, abra admin.html e faça Ctrl + F5 no Chrome.
+
+FICHEIROS NOVOS OU ALTERADOS NESTA REVISÃO
+------------------------------------------
+
+- admin.html
+- admin.js
+- admin-v8.37.js
+- admin-v8.38.js
+- admin-v8.45.css (novo)
+- supabase-config.js
+- este ficheiro LEIA-ME-REVISAO-UX-UI-v8.45.txt
+

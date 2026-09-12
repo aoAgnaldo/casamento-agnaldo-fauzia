@@ -32,8 +32,14 @@ function iconBtn(icon,label,onclick='',extra=''){
 
 function showMsg(el,t){el.textContent=t;el.classList.remove('hidden')}
 function genCode(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let out='AF-';for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];return out}
-function inviteUrl(){return location.origin+location.pathname.replace(/admin\.html$/,'index.html')}
-function makeMessage(g){return `Olá, ${g.full_name}! ❤️\n\nÉ com muita alegria que nós, Agnaldo & Fáuzia, queremos convidar-te para o nosso casamento.\n\n📅 29 de Maio de 2027\n📍 Igreja Universal do Jardim — 09:00\n🎉 Recepção: Sala de Eventos do Kaya Kwanga Residence, às 15h\n\nPreparamos um convite especial para ti:\n👉 ${inviteUrl()}?convite=${encodeURIComponent(g.code)}\n\n🔐 Código do teu convite: ${g.code}\n\nAgradecemos que confirmes a tua presença até 30 de Abril de 2027. ❤️\n\nSerá uma alegria celebrar este momento contigo!`;}
+function inviteUrl(){
+ const configured=String(window.WEDDING_PUBLIC_INVITE_URL||'').trim();
+ if(configured)return configured;
+ if(location.protocol==='file:')return 'https://aoagnaldo.github.io/casamento-agnaldo-fauzia/index.html';
+ return new URL('index.html',location.href).href;
+}
+function guestInviteUrl(g){const base=inviteUrl();return `${base}${base.includes('?')?'&':'?'}convite=${encodeURIComponent(g.code)}`}
+function makeMessage(g){return `Olá, ${g.full_name}! ❤️\n\nÉ com muita alegria que nós, Agnaldo & Fáuzia, queremos convidar-te para o nosso casamento.\n\n📅 29 de Maio de 2027\n📍 Igreja Universal do Jardim — 09:00\n🎉 Recepção: Sala de Eventos do Kaya Kwanga Residence, às 15h\n\nPreparamos um convite especial para ti:\n👉 ${guestInviteUrl(g)}\n\n🔐 Código do teu convite: ${g.code}\n\nAgradecemos que confirmes a tua presença até 30 de Abril de 2027. ❤️\n\nSerá uma alegria celebrar este momento contigo!`;}
 async function init(){const {data}=await supabaseClient.auth.getSession();if(data.session){session=data.session;await enter()}else A('#login').classList.remove('hidden')}
 
 const ADMIN_CREATE_FUNCTION_URL = SUPABASE_URL + '/functions/v1/create-admin';
@@ -458,15 +464,17 @@ A('#carouselNext')?.addEventListener('click',()=>carouselTrack?.scrollBy({left:2
 let currentQrGuest=null;
 window.openQR=id=>{
  const g=guests.find(x=>x.id===id); if(!g)return; currentQrGuest=g;
- const url=inviteUrl()+`?convite=${encodeURIComponent(g.code)}`;
+ const url=guestInviteUrl(g);
  A('#qrGuestName').textContent=`${g.full_name} — ${g.code}`;
  A('#qrUrl').textContent=url;
  const box=A('#qrCode'); box.innerHTML='';
- new QRCode(box,{text:url,width:240,height:240});
+ if(typeof QRCode!=='function'){box.textContent='Não foi possível gerar o QR Code neste momento.';return;}
+ new QRCode(box,{text:url,width:176,height:176,correctLevel:QRCode.CorrectLevel?.M});
+ window.setTimeout(()=>{if(box.querySelector('img'))box.querySelectorAll('canvas').forEach(canvas=>canvas.remove());},0);
  A('#qrModal').classList.remove('hidden');
 };
 A('#closeQrModal')?.addEventListener('click',()=>closeAnyModal(A('#qrModal')));
-A('#copyInviteLink')?.addEventListener('click',async()=>{if(!currentQrGuest)return;const url=inviteUrl()+`?convite=${encodeURIComponent(currentQrGuest.code)}`;await navigator.clipboard.writeText(url);toast('Link do convite copiado.');});
+A('#copyInviteLink')?.addEventListener('click',async()=>{if(!currentQrGuest)return;const url=guestInviteUrl(currentQrGuest);await navigator.clipboard.writeText(url);toast('Link do convite copiado.');});
 A('#downloadQr')?.addEventListener('click',()=>{const img=A('#qrCode img')||A('#qrCode canvas');if(!img){toast('QR Code ainda não está pronto.');return;}const a=document.createElement('a');a.href=img.tagName.toLowerCase()==='canvas'?img.toDataURL('image/png'):img.src;a.download=`convite-${currentQrGuest.code}.png`;a.click();});
 function openModal(g={id:'',full_name:'',whatsapp:'',allowed_guests:1,code:genCode()}){A('#modalTitle').textContent=g.id?'Editar convidado':'Novo convidado';A('#guestId').value=g.id;A('#gName').value=g.full_name;A('#gPhone').value=g.whatsapp||'';A('#gAllowed').value=g.allowed_guests;A('#gCode').value=g.code;A('#gMessage').value=makeMessage(g);A('#waLink').href=g.whatsapp?`https://wa.me/${String(g.whatsapp).replace(/\D/g,'')}?text=${encodeURIComponent(makeMessage(g))}`:'#';A('#modal').classList.remove('hidden');document.body.classList.add('modal-scroll-lock');setTimeout(()=>A('#gName').focus(),80)}
 window.editGuest=id=>openModal(guests.find(x=>x.id===id));

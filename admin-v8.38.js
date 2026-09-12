@@ -135,7 +135,8 @@
     const qrAction = isGuestGroup
       ? actions.find(action => /qr\s*code/i.test(actionLabel(action)))
       : null;
-    const menuActions = qrAction ? actions.filter(action => action !== qrAction) : actions;
+    const editAction = actions.find(action => /editar|edit/i.test(actionLabel(action)));
+    const menuActions = actions.filter(action => action !== qrAction && action !== editAction);
     const preserved = Array.from(group.children)
       .filter(child => !child.matches('button, a'))
       .map(child => child.cloneNode(true));
@@ -148,6 +149,17 @@
       qrButton.setAttribute('aria-label', actionLabel(qrAction));
       qrButton.insertAdjacentHTML('beforeend', '<span>QR Code</span>');
       preserved.push(qrButton);
+    }
+    if (editAction) {
+      const editButton = editAction.cloneNode(true);
+      const label = actionLabel(editAction);
+      editButton.classList.remove('icon-btn', 'ui-icon-btn');
+      editButton.classList.add('v845-primary-action');
+      editButton.removeAttribute('data-tooltip');
+      editButton.removeAttribute('title');
+      editButton.setAttribute('aria-label', label);
+      editButton.textContent = 'Editar';
+      preserved.push(editButton);
     }
     const details = document.createElement('details');
     details.className = 'v838-action-menu' + (isGuestGroup ? ' v844-guest-menu' : '');
