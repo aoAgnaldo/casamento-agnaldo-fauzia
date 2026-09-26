@@ -1,0 +1,67 @@
+REVISÃO UX/UI v8.46 — MOBILE E ROLAGEM DO PAINEL
+=================================================
+
+Esta revisão resolve o bloqueio de rolagem no painel de administração em
+telemóveis e melhora a leitura nas áreas usadas no dia a dia.
+
+O QUE FOI CORRIGIDO
+-------------------
+
+1. Rolagem no telemóvel
+   - A área do painel que está aberta volta a receber o gesto de deslizar
+     para cima e para baixo.
+   - O conteúdo deixa de crescer dentro de uma moldura bloqueada.
+   - A página de Presentes, que tinha uma regra própria a impedir a rolagem,
+     passou a rolar normalmente.
+
+2. Barra inferior
+   - A navegação inferior continua fixa para acesso rápido.
+   - O painel reserva espaço acima dela, por isso os últimos botões,
+     campos e cartões deixam de ficar escondidos.
+
+3. Convidados
+   - Os filtros deslizam apenas na horizontal e não comprimem os nomes.
+   - Os cartões passam a usar uma sequência vertical mais legível.
+   - Os dados de presença, lotação, mesa, entrada e confirmação podem
+     quebrar linha quando necessário, em vez de aparecer cortados.
+
+4. Presentes
+   - Os quatro indicadores usam duas colunas no telemóvel, com texto maior.
+   - Pesquisa, estado e ordenação cabem numa grelha simples e utilizável.
+   - A lista deixa de criar uma segunda área fixa que prendia a rolagem.
+
+5. Mesas, equipa, planeamento e conteúdo do site
+   - Cartões com menos espaço vazio, mantendo botões fáceis de tocar.
+   - Tarefas mais compactas e fáceis de percorrer.
+   - Abas do editor de conteúdo podem ser deslizadas na horizontal sem
+     aumentar a largura da página.
+
+FICHEIRO NOVO
+-------------
+
+- admin-v8.46-mobile.css
+
+O admin.html já carrega este ficheiro depois de todas as revisões anteriores.
+Não é necessário alterar Supabase, a base de dados ou as imagens para usar
+esta atualização.
+
+COMO COLOCAR NA HOSPEDAGEM
+--------------------------
+
+1. Extraia o ficheiro ZIP da revisão v8.46.
+2. Envie todos os ficheiros extraídos para a raiz do projecto já hospedado,
+   substituindo os ficheiros com o mesmo nome.
+3. Confirme que admin-v8.46-mobile.css fica na mesma pasta de admin.html.
+4. Depois da publicação, abra admin.html no telemóvel e faça uma atualização
+   completa da página. No Chrome Android, feche e volte a abrir a página se
+   ainda aparecer uma cópia guardada.
+
+VERIFICAÇÃO REALIZADA
+---------------------
+
+- Foi confirmado que a camada v8.46 é carregada depois da revisão v8.45.
+- Foi validado o contrato de comportamento mobile: superfície activa com
+  rolagem vertical, reserva da barra inferior, filtros com deslize horizontal,
+  lista de presentes sem altura fixa e abas do editor navegáveis.
+- Foi verificado o equilíbrio estrutural dos blocos CSS.
+
