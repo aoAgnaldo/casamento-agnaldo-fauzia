@@ -1,0 +1,26 @@
+REVISÃO ADMIN v8.48
+
+Mesas e lugares: pesquisa por mesa, convidado ou descrição; filtro por
+ocupação; contagem de resultados; cartões sem altura vazia forçada;
+convidados sem mesa com selectores de largura completa.
+
+Presentes: filtros legíveis no telemóvel; nomes completos; acções sem
+compressão; paginação e navegação inferior respeitam ambos os temas.
+
+Conteúdo do site: aviso de alterações por guardar; confirmação ao sair
+por navegação do painel; aviso ao fechar a página; estado de gravação
+anunciado para leitores de ecrã; rodapé de gravação acompanha o formulário.
+
+Geral: foco visível; contraste dos botões principais no modo claro;
+alvos de toque maiores; gestos horizontal e vertical compatíveis.
+
+INSTALAÇÃO
+Envie todos os ficheiros para a pasta do site, substituindo os existentes.
+admin-v8.48.css e admin-v8.48.js devem ficar junto de admin.html.
+Actualize a página após publicar. Esta revisão não altera a base de dados.
+Para o Planeamento, mantém-se a configuração supabase-planner-v8.47.sql.
+
+VERIFICAÇÃO
+Sintaxe JavaScript e integridade do pacote verificadas localmente.
+Os fluxos com conta e dados reais precisam de validação no site publicado.
+O pacote não foi publicado automaticamente.
