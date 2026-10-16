@@ -58,7 +58,19 @@ function renderSearchMatches(matches){
  window.__searchMatches=matches;
 }
 window.selectSearchMatch=i=>{const g=window.__searchMatches?.[i];if(g)render(g)};
-async function confirmEntry(id){if(busy)return;const g=guests.find(x=>x.id===id);if(!g||g.checked_in)return;busy=true;const b=A('#confirm');if(b){b.disabled=true;b.textContent='A confirmar…'}const {error}=protocolToken?await supabaseClient.rpc('protocol_check_in',{p_token:protocolToken,p_invitation_id:id}):await supabaseClient.rpc('admin_check_in_invitation',{invitation_id:id});if(error){toast(error.message);busy=false;if(b){b.disabled=false;b.textContent='Confirmar entrada'}return}await loadGuests();toast(`✓ Entrada confirmada — ${g.full_name}`);render(guests.find(x=>x.id===id));setTimeout(next,1800);busy=false}
+async function confirmEntry(id){
+ if(busy)return;const g=guests.find(x=>x.id===id);if(!g||g.checked_in)return;
+ busy=true;const b=A('#confirm');if(b){b.disabled=true;b.textContent='A confirmar…';}
+ let confirmed=false;
+ try{
+ const {error}=protocolToken?await supabaseClient.rpc('protocol_check_in',{p_token:protocolToken,p_invitation_id:id}):await supabaseClient.rpc('admin_check_in_invitation',{invitation_id:id});
+ if(error)throw error;
+ confirmed=true;g.checked_in=true;g.checked_in_at=new Date().toISOString();
+ render(g);toast(`✓ Entrada confirmada — ${g.full_name}`);
+ const loaded=await loadGuests();if(!loaded)toast('Entrada registada. A lista será actualizada quando a ligação voltar.');
+ }catch(error){toast(confirmed?'Entrada registada. Actualize a lista quando a ligação voltar.':(error?.message||'Não foi possível confirmar. Verifique a ligação e tente novamente.'));}
+ finally{busy=false;if(!confirmed&&b){b.disabled=false;b.textContent='Tentar confirmar novamente';}}
+}
 function next(){A('#result').classList.add('hidden');A('#code').value='';A('#code').focus()}
 
 async function loadMyTasks(){

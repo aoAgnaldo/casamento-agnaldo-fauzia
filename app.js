@@ -167,14 +167,29 @@ async function loadWeddingImages(){
 loadWeddingImages();
 
 /* RSVP */
+let lookupBusy=false, rsvpBusy=false;
+function resetRsvp(){
+  selectedAttendance=null;
+  $$('[data-rsvp]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-pressed','false');});
+  $('#rsvpConfirm').disabled=false;
+  $('#rsvpConfirm').textContent='Confirmar resposta';
+  $('#rsvpConfirm').classList.add('hidden');
+  $('#companionArea').classList.add('hidden');
+  $('#companionInputs').innerHTML='';
+  $('#rsvpMsg').textContent='';
+  $('#rsvpMsg').classList.add('hidden');
+}
 async function findInvitation(presetKey=null){
   const key=String(presetKey ?? $('#lookupKey').value).trim();
-  if(!key)return;
+  if(!key||lookupBusy)return;
+  lookupBusy=true;
   $('#lookupKey').value=key;
   $('#findBtn').disabled=true;
   $('#lookupMsg').classList.add('hidden');
-  const {data,error}=await supabaseClient.rpc('find_invitation',{search_key:key});
-  $('#findBtn').disabled=false;
+  let data,error;
+  try{({data,error}=await supabaseClient.rpc('find_invitation',{search_key:key}));}
+  catch(e){error=e;}
+  finally{lookupBusy=false;$('#findBtn').disabled=false;}
   if(error){
     $('#lookupMsg').textContent='Não foi possível procurar o convite. Tente novamente.';
     $('#lookupMsg').classList.remove('hidden'); return;
@@ -187,6 +202,7 @@ async function findInvitation(presetKey=null){
     $('#lookupMsg').textContent='Encontrámos mais de um convidado com esse nome. Utilize o código do convite.';
     $('#lookupMsg').classList.remove('hidden'); return;
   }
+  resetRsvp();
   currentInvitation=data[0];
   const allowed=Math.max(0,Number(currentInvitation.allowed_guests||1)-1);
   $('#guestGreeting').innerHTML=`<strong>Olá, ${escapeHtml(currentInvitation.full_name)}! ❤️</strong><p>O seu convite permite ${Number(currentInvitation.allowed_guests||1)} pessoa(s) no total.</p>`;
@@ -204,6 +220,8 @@ async function findInvitation(presetKey=null){
 }
 $('#rsvpSearchForm')?.addEventListener('submit',e=>{e.preventDefault();findInvitation();});
 $('#changeGuest')?.addEventListener('click',()=>{
+  if(rsvpBusy)return;
+  resetRsvp();
   $('#rsvpStep').classList.add('hidden'); $('#lookupStep').classList.remove('hidden');
   document.querySelector('.rsvp-mobile-steps span:nth-child(2)')?.classList.remove('is-active');
   document.querySelector('.rsvp-mobile-steps span:nth-child(1)')?.classList.add('is-active');
@@ -211,31 +229,42 @@ $('#changeGuest')?.addEventListener('click',()=>{
 });
 let selectedAttendance=null;
 $$('[data-rsvp]').forEach(btn=>btn.addEventListener('click',()=>{
+  if(rsvpBusy||!currentInvitation)return;
   selectedAttendance=btn.dataset.rsvp==='true';
-  $$('[data-rsvp]').forEach(b=>b.classList.remove('is-selected'));
+  $$('[data-rsvp]').forEach(b=>{b.classList.remove('is-selected');b.setAttribute('aria-pressed',String(b===btn));});
   btn.classList.add('is-selected');
   $('#rsvpConfirm').classList.remove('hidden');
   $('#companionArea').classList.toggle('hidden',!selectedAttendance || Number(currentInvitation?.allowed_guests||1)<=1);
-  if(!selectedAttendance) $('#companionInputs').innerHTML='';
+  if(!selectedAttendance){$('#companionInputs').innerHTML='';$('#companionCount').value='0';}
 }));
 $('#companionCount')?.addEventListener('change',()=>{
   const n=Number($('#companionCount').value);
-  $('#companionInputs').innerHTML=Array.from({length:n},(_,i)=>`<div class="companion-field"><input class="comp-name" required placeholder="Nome do acompanhante ${i+1}"><input class="comp-whatsapp" required placeholder="WhatsApp"></div>`).join('');
+  $('#companionInputs').innerHTML=Array.from({length:n},(_,i)=>`<div class="companion-field"><input class="comp-name" placeholder="Nome do acompanhante ${i+1} (opcional)" aria-label="Nome do acompanhante ${i+1}"><input class="comp-whatsapp" type="tel" inputmode="tel" placeholder="WhatsApp (opcional)" aria-label="WhatsApp do acompanhante ${i+1}"></div>`).join('');
 });
 $('#rsvpConfirm')?.addEventListener('click',async()=>{
-  if(!currentInvitation||selectedAttendance===null)return;
+  if(!currentInvitation||selectedAttendance===null||rsvpBusy)return;
+  rsvpBusy=true;
+  const button=$('#rsvpConfirm'),change=$('#changeGuest');
+  button.disabled=true;button.textContent='A guardar…';if(change)change.disabled=true;
+  const invitation=currentInvitation,attending=selectedAttendance;
   const count=selectedAttendance?Number($('#companionCount').value):0;
   const note='';
+  const companionDetails=selectedAttendance?$$('#companionInputs .companion-field').map((field,i)=>{const name=field.querySelector('.comp-name')?.value.trim();const phone=field.querySelector('.comp-whatsapp')?.value.trim();return [name||`Acompanhante ${i+1}`,phone].filter(Boolean).join(' · ');}):[];
+  const responseNote=companionDetails.length?'Acompanhantes:\n'+companionDetails.join('\n'):note;
+  let success=false;
+  const msg=$('#rsvpMsg');msg.classList.remove('hidden');msg.setAttribute('role','status');
+  try{
   const {error}=await supabaseClient.rpc('save_rsvp',{
-    invitation_code:currentInvitation.code,
-    attending:selectedAttendance,
+    invitation_code:invitation.code,
+    attending,
     companion_count:count,
-    note
+    note:responseNote
   });
-  const msg=$('#rsvpMsg'); msg.classList.remove('hidden');
-  if(error){msg.textContent='Não foi possível guardar a resposta. Tente novamente.';return;}
-  msg.textContent=selectedAttendance?`Obrigado, ${currentInvitation.full_name}! A sua presença foi confirmada. ❤️`:`Obrigado por nos avisar, ${currentInvitation.full_name}. Ficaremos com a sua resposta registada.`;
-  $('#rsvpConfirm').disabled=true;
+  if(error)throw error;
+  success=true;
+  msg.textContent=attending?`Obrigado, ${invitation.full_name}! A sua presença foi confirmada. ❤️`:`Obrigado por nos avisar, ${invitation.full_name}. Ficaremos com a sua resposta registada.`;
+  }catch{msg.textContent='Não foi possível guardar a resposta. Verifique a ligação e tente novamente.';}
+  finally{rsvpBusy=false;button.disabled=success;button.textContent=success?'Resposta registada':'Tentar novamente';if(change)change.disabled=false;}
 });
 
 /* Gifts */
@@ -345,15 +374,24 @@ function closeReservation(){
   setPublicModalLock(false);
   selectedGift=null;
 }
+let reservationBusy=false;
 async function confirmReservation(e){
   e.preventDefault();
-  if(!selectedGift||!currentInvitation)return;
-  const {error}=await supabaseClient.rpc('reserve_gift',{gift_id:selectedGift.id,invitation_code:currentInvitation.code});
-  if(error){toast(error.message.toLowerCase().includes('reserv')?'Este presente já foi reservado por outra pessoa.':'Não foi possível reservar o presente.');return;}
+  if(!selectedGift||!currentInvitation||reservationBusy)return;
+  reservationBusy=true;
+  const button=$('#reservationForm')?.querySelector('[type="submit"]');
+  const label=button?.textContent;if(button){button.disabled=true;button.textContent='A reservar…';}
+  const gift=selectedGift,invitation=currentInvitation;
+  try{
+  const {error}=await supabaseClient.rpc('reserve_gift',{gift_id:gift.id,invitation_code:invitation.code});
+  if(error){toast(String(error.message||'').toLowerCase().includes('reserv')?'Este presente já foi reservado por outra pessoa.':'Não foi possível reservar o presente.');return;}
   reservationOverlay?.classList.add('hidden');
   setPublicModalLock(false);
-  await loadGifts();
+  selectedGift=null;
   toast('Reserva confirmada com carinho. ❤️');
+  await loadGifts();
+  }catch{toast('Verifique a ligação e actualize a lista antes de voltar a reservar.');}
+  finally{reservationBusy=false;if(button){button.disabled=false;button.textContent=label;}}
 }
 $('#reservationForm')?.addEventListener('submit',confirmReservation);
 reservationOverlay?.addEventListener('click',e=>{if(e.target===reservationOverlay) closeReservation()});
