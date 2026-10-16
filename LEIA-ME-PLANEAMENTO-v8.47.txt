@@ -1,0 +1,45 @@
+PLANEAMENTO DO CASAMENTO v8.47
+
+O módulo começa vazio. Nenhum conteúdo do Word foi copiado.
+
+FUNÇÕES
+Etapas personalizáveis; tarefas e subtarefas; responsáveis, prazos,
+prioridades e estados; compras e serviços; quantidade e unidade;
+fornecedor; valores previsto, limite, custo final e pago; orçamento;
+meta de poupança e contribuições; pesquisa e filtros; cópia JSON.
+
+INSTALAÇÃO
+1. Envie todos os ficheiros deste pacote para a pasta do site, mantendo
+   os restantes ficheiros e substituindo os que tenham o mesmo nome.
+2. Execute supabase-planner-v8.47.sql no SQL Editor do seu projecto.
+3. Abra admin.html#tarefas e actualize a página.
+
+GRAVAÇÃO
+As alterações são guardadas neste navegador, separadas por conta.
+Use Sincronizar para guardar na conta. Nos outros dispositivos, entre
+com a mesma conta do painel e abra novamente Planeamento.
+Contas diferentes têm planos diferentes nesta versão.
+Sem a configuração SQL, o módulo funciona apenas neste dispositivo.
+O estado de gravação aparece sempre no topo.
+Se dois dispositivos alterarem o plano ao mesmo tempo, a sincronização
+detecta a versão concorrente e não substitui silenciosamente o plano.
+Exporte a cópia local antes de recarregar para consultar a versão da conta.
+
+ORÇAMENTO
+Os valores são totais por item, já incluindo a quantidade.
+Deixe custo final vazio enquanto não existir um preço confirmado.
+O custo final, incluindo zero, substitui a previsão no resumo actualizado.
+Subtarefas não têm custos próprios para evitar dupla contagem.
+Poupança e pagamentos são registos separados; um pagamento não retira
+automaticamente dinheiro da poupança.
+
+SEGURANÇA E RECUPERAÇÃO
+Exportar cópia guarda um ficheiro JSON com todo o plano.
+Restaurar valida a estrutura e pede confirmação antes de substituir.
+Ao eliminar uma etapa, as tarefas ficam sem etapa e são preservadas.
+O módulo não altera dados de convidados nem conteúdo do convite público.
+
+VALIDAÇÃO
+Modelo e cálculos verificados com Node; sintaxe JS e referências locais
+verificadas. A migração SQL está incluída mas não foi executada no servidor.
+É necessário validar a gravação online depois de aplicar a migração.
