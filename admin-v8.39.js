@@ -16,10 +16,11 @@
     const gifts = Array.isArray(window.gifts) ? window.gifts : [];
     const confirmed = guests.filter(guest => guest.rsvp_status === 'confirmed');
     const pending = guests.filter(guest => guest.rsvp_status === 'pending');
-    const unseated = confirmed.filter(guest => !guest.table_id);
+    const unseated = guests.filter(guest => guest.rsvp_status !== 'declined' && !guest.table_id);
+    const unseatedPeople = unseated.reduce((sum, guest) => sum + 1 + Number(guest.companion_count || 0), 0);
     const arrived = confirmed.filter(guest => Boolean(guest.checked_in));
     const reserved = gifts.filter(gift => Boolean(gift.reserved));
-    return { guests, gifts, confirmed, pending, unseated, arrived, reserved };
+    return { guests, gifts, confirmed, pending, unseated, unseatedPeople, arrived, reserved };
   }
 
   function displayTime(value) {
@@ -39,18 +40,18 @@
     const name = ($('#adminHeaderName')?.textContent || 'Agnaldo').trim().split(/\s+/)[0] || 'Agnaldo';
     const arrivals = data.arrived.slice().sort((a, b) => new Date(b.checked_in_at || 0) - new Date(a.checked_in_at || 0)).slice(0, 3);
     const tasks = [
-      { complete: true, title: 'Programa do dia revisto', copy: 'Todos os momentos estão definidos', href: '#programa-admin' },
+      { complete: false, title: 'Rever o programa do dia', copy: 'Confirme horários, locais e momentos', href: '#programa-admin' },
       { complete: false, title: 'Confirmar convidados pendentes', copy: data.pending.length === 1 ? '1 convite ainda não respondeu' : `${data.pending.length} convites ainda não responderam`, href: '#convidados' },
-      { complete: false, title: 'Organizar pessoas sem mesa', copy: data.unseated.length === 1 ? '1 pessoa aguarda distribuição' : `${data.unseated.length} pessoas aguardam distribuição`, href: '#mesas' }
+      { complete: data.unseatedPeople === 0, title: 'Organizar pessoas sem mesa', copy: data.unseatedPeople === 1 ? '1 pessoa aguarda distribuição' : `${data.unseatedPeople} pessoas aguardam distribuição`, href: '#mesas' }
     ];
     root.innerHTML = `
       <header class="v839-dash-heading">
-        <div><h1>Bom dia, <em>${esc(name)}.</em></h1><span>Três coisas precisam da sua atenção antes do grande dia.</span></div>
+        <div><h1>Olá, <em>${esc(name)}.</em></h1><span>Acompanhe as confirmações, os lugares e os próximos passos.</span></div>
         <div class="v839-date-chip"><i aria-hidden="true">◷</i><span>Grande dia<strong>29 de Maio de 2027</strong></span></div>
       </header>
       <div class="v839-overview-stats" aria-label="Resumo do casamento">
         <a href="#convidados" class="v839-stat"><i>◌</i><span>Confirmações<small>${data.pending.length === 1 ? '1 convite aguarda resposta' : `${data.pending.length} convites aguardam resposta`}</small></span><b>${data.pending.length}</b></a>
-        <a href="#mesas" class="v839-stat"><i>▱</i><span>Mesas<small>${data.unseated.length === 1 ? '1 pessoa ainda sem lugar' : `${data.unseated.length} pessoas ainda sem lugar`}</small></span><b>${data.unseated.length}</b></a>
+        <a href="#mesas" class="v839-stat"><i>▱</i><span>Mesas<small>${data.unseatedPeople === 1 ? '1 pessoa ainda sem lugar' : `${data.unseatedPeople} pessoas ainda sem lugar`}</small></span><b>${data.unseatedPeople}</b></a>
         <a href="#presentes" class="v839-stat"><i>♡</i><span>Presentes<small>${data.reserved.length === 1 ? '1 presente reservado' : `${data.reserved.length} presentes reservados`}</small></span><b>${data.reserved.length}</b></a>
       </div>
       <div class="v839-dash-grid">

@@ -1,0 +1,22 @@
+/* Correcções confirmadas na inspecção visual de 17/10/2026. */
+body.admin-body.admin-v838.admin-v839 #tarefas .wp-heading h2{color:var(--v839-text)!important;opacity:1!important}
+body.admin-body.admin-v838.admin-v839 #site-editor.v837-editor{width:auto!important;max-width:none!important;margin:0!important;box-sizing:border-box!important}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-header,body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout{width:min(100%,1320px)!important;max-width:1320px!important;margin-left:auto!important;margin-right:auto!important;box-sizing:border-box!important}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout>*{min-width:0!important}
+@media(min-width:761px){
+ body.admin-body.admin-v838.admin-v839 #presentes.admin-view-section.admin-view-active{display:block!important;overflow-y:auto!important;overflow-x:hidden!important}
+ body.admin-body.admin-v838.admin-v839 #presentes :is(.gift-list-scroll,.gift-list-scroll>#giftRows,.gift-table,.gift-table tbody){height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;flex:none!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-list-scroll{display:block!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-table{display:table!important;table-layout:fixed!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-table thead{display:table-header-group!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-table tbody{display:table-row-group!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-table :is(thead,tbody) tr{display:table-row!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-table :is(th,td){display:table-cell!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-actions{flex-direction:row!important;flex-wrap:nowrap!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-table :is(th,td):last-child{width:130px!important}
+}
+@media(min-width:761px) and (max-width:1100px){
+ body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:'tabs' 'form' 'preview'!important}
+ body.admin-body.admin-v838.admin-v839 #site-editor .v837-form-pane{grid-template-columns:minmax(0,1fr)!important}
+ body.admin-body.admin-v838.admin-v839 #site-editor .v836-editor-field{grid-column:1!important}
+}

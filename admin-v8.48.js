@@ -1,5 +1,12 @@
 (function(){
  'use strict';
+ // Fechar a janela superior também quando um campo intercepta Escape.
+ document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  const open=[...document.querySelectorAll('.modal:not(.hidden)')].filter(m=>getComputedStyle(m).display!=='none');
+  const modal=open.at(-1);if(!modal)return;
+  const close=modal.querySelector('.modal-close-fixed');if(close){e.preventDefault();e.stopImmediatePropagation();close.click();}
+ },true);
  const tables=document.getElementById('mesas'),list=document.getElementById('tableList');
  const normal=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
  if(tables&&list){

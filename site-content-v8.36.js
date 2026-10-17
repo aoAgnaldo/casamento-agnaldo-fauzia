@@ -36,7 +36,7 @@
     const node = $('#storyTextContent');
     if (!node) return;
     const paragraphs = String(content.story_text || '').split(/\n\s*\n/).map(part => part.trim()).filter(Boolean);
-    node.innerHTML = paragraphs.map(part => `<p>${esc(part).replace(/\n/g, '<br>')}</p>`).join('');
+    node.innerHTML = paragraphs.map(part => `<p>${esc(part).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>')}</p>`).join('');
   }
 
   function setNames(content) {

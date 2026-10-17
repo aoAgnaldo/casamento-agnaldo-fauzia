@@ -1,4 +1,8 @@
 /* Revisão operacional de todo o Admin: temas, foco e superfícies móveis. */
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout>*,body.admin-body.admin-v838.admin-v839 #site-editor .v837-form-pane{min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-tabs{min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+body.admin-body.admin-v838.admin-v839 #site-editor .v836-editor-field :is(input,textarea,select){width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+@media(min-width:761px) and (max-width:1100px){body.admin-body.admin-v838.admin-v839 #site-editor .v837-editor-layout{width:100%!important;grid-template-columns:minmax(0,1fr)!important}body.admin-body.admin-v838.admin-v839 #site-editor .v837-form-pane{grid-template-columns:minmax(0,1fr)!important}body.admin-body.admin-v838.admin-v839 #site-editor .v836-editor-field{grid-column:1!important}}
 body.admin-body.admin-v838.admin-v839 :is(button,a,input,select,textarea):focus-visible{outline:2px solid var(--v839-peach)!important;outline-offset:3px!important}
 body.admin-body.admin-v838.admin-v839 :is(.section-title-row,.v837-editor-header){gap:16px!important}
 body.admin-body.admin-v838.admin-v839 .button:not(.secondary):not(.danger){background:var(--v839-peach)!important;color:var(--v839-bg-deep)!important}
