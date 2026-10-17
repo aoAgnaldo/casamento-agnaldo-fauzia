@@ -1,0 +1,7 @@
+/* Uma apresentação por ecrã: as regras antigas de tabela não podem
+   reactivar a versão desktop por cima dos cartões móveis. */
+@media(max-width:760px){
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-desktop-table{display:none!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-mobile-list{display:flex!important}
+ body.admin-body.admin-v838.admin-v839 #presentes .gift-list-scroll{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;overscroll-behavior:auto!important}
+}
