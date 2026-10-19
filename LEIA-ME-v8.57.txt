@@ -1,0 +1,34 @@
+PLANEAMENTO PARTILHADO — v8.57
+
+O servidor já está configurado para as duas contas autorizadas do casamento.
+A partilha foi verificada nos dois sentidos com transacções revertidas: não ficaram dados de teste.
+Uma conta não autorizada não consegue ler o plano. Os membros não podem adicionar outros membros pelo cliente.
+
+PUBLICAR
+Envie TODOS os ficheiros deste pacote para a mesma pasta do site, substituindo os anteriores. Não é necessário executar SQL deste pacote.
+O site público só passa a usar esta correcção depois de publicar os ficheiros. Reabra o painel ou faça uma actualização completa.
+Os principais ficheiros alterados são admin.html, planner-core.js, planner-sync.js e planner.js.
+
+COMO FUNCIONA
+Depois de Guardar um formulário, a gravação no servidor é automática (aproximadamente 650 ms).
+O outro perfil procura alterações a cada 8 segundos enquanto o painel está visível, e ao voltar à janela.
+Sem ligação, fica uma cópia no navegador e a gravação é repetida quando a ligação regressar.
+Verifique a mensagem de estado: uma cópia local não significa que a outra conta já a recebeu.
+Alterações simultâneas incompatíveis não são sobrepostas: pode exportar a cópia e carregar a versão partilhada. Esta operação mantém também uma cópia de segurança local.
+
+RECUPERAR O QUE JÁ ESCREVERAM
+Não limpe os dados do navegador nem feche a antiga pré-visualização antes de exportar o planeamento.
+Se os dados estão em localhost/127.0.0.1, abra essa mesma página e use Exportar. Depois, no site actualizado, use Restaurar para importar o JSON e aguarde a confirmação de gravação no servidor.
+Navegadores e endereços diferentes não partilham armazenamento local.
+Uma cópia antiga associada à mesma conta pode ser recuperada automaticamente apenas quando o plano do servidor está vazio. Uma cópia local genérica é oferecida para exportação, não publicada automaticamente.
+As cópias anteriores não são apagadas por esta actualização.
+
+VERIFICAÇÃO
+Testes locais: gravação automática, duas contas, falha de ligação e repetição, conflitos, recuperação de cópias, respostas atrasadas, acesso recusado e edição durante notificações de gravação.
+Todos os testes automatizados e verificações de sintaxe passaram. Não foi feito login interactivo com as vossas palavras-passe nem publicação no GitHub.
+
+NOTA DE SEGURANÇA
+A análise do servidor também sinalizou funções antigas com execução pública e protecção contra palavras-passe comprometidas desactivada. São avisos anteriores e fora desta alteração; não significam, por si só, uma falha explorável. Devem ser revistos separadamente sem remover permissões indiscriminadamente.
+Referências:
+https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable
+https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection

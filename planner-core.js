@@ -9,5 +9,6 @@
  for(const c of p.contributions)if(typeof c.name!=='string'||!Number.isFinite(c.amount)||c.amount<=0||typeof c.date!=='string')throw Error('Contribuição inválida.');
  for(const k of ['budget','target'])if(!Number.isFinite(p[k])||p[k]<0)throw Error('Meta inválida.');return p;
  }
- const api={blank,total,validate};if(typeof module!=='undefined')module.exports=api;else root.WeddingPlanner=api;
+ function updateRecord(list,record){const index=list.findIndex(x=>x.id===record.id);if(index<0)throw Error('Este registo já não existe no plano. Feche e volte a abrir.');list[index]=record;}
+ const api={blank,total,validate,updateRecord};if(typeof module!=='undefined')module.exports=api;else root.WeddingPlanner=api;
  })(typeof window!=='undefined'?window:globalThis);
