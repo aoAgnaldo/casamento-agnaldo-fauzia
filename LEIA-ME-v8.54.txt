@@ -1,0 +1,28 @@
+REVISÃO UX/UI DO ADMIN — 19/10/2026 — v8.54
+
+Mantém a base visual Stitch e todas as funções anteriores.
+
+MELHORIAS
+- Controlos ocultos deixam de reaparecer por conflito de estilos.
+- Recepção com pesquisa manual e leitura de QR separadas; distingue o painel da aplicação autónoma.
+- Guardar alterações acessível numa barra no editor, acima da navegação mobile.
+- A capa do editor acompanha os nomes introduzidos e alterações da imagem de origem.
+- Texto auxiliar maior, áreas de toque e foco de teclado mais visíveis.
+- Filtros, paginação, estados e navegação inferior coerentes com o tema.
+- Formulários com campos inválidos identificados e mensagens acessíveis.
+- Janelas de formulário recebem foco, mantêm a navegação Tab dentro da janela e devolvem foco ao fechar.
+- Mostrar/ocultar palavra-passe; rótulos acessíveis para os temas.
+- Ajustes de altura, margens, rolagem e formulários numa coluna no mobile.
+
+INSTALAÇÃO
+Faça uma cópia da hospedagem actual. Substitua os ficheiros deste pacote em conjunto, preservando a configuração do vosso projecto. Actualize o navegador depois da publicação.
+Não foram publicados ficheiros nem alterados registos da base de dados.
+
+VERIFICAÇÃO LOCAL
+Passaram os testes existentes de métricas, planeamento, RSVP e check-in simulado, e a validação de sintaxe dos scripts.
+No navegador: nomes editados reflectidos na capa; barra Guardar dentro do ecrã a 390x844; indicação de alterações por guardar; pesquisa e leitura QR com apresentação separada; modo escuro aplicado aos filtros; navegação entre áreas desktop.
+Formulário isolado: foco inicial, mostrar palavra-passe, campo inválido e recuperação de foco ao fechar confirmados.
+As páginas de teste não estão incluídas no ZIP de hospedagem.
+
+LIMITES
+Esta é uma revisão de interface, não uma certificação de todo o serviço. Gravação real, autenticação, permissões de acesso, upload completo, câmara e Android físico continuam a exigir teste no ambiente hospedado. Não foram criados contratos, fornecedores ou auditoria novos.

@@ -101,6 +101,8 @@ function content(){
  }
  const src=$('#siteCoverPreview')?.getAttribute('src')||$('#v837PreviewCover')?.getAttribute('src')||'monogram.svg';
  const image=$('img',hero);if(image.getAttribute('src')!==src)image.setAttribute('src',src);
+ const names=[$('#v836-couple_one')?.value,$('#v836-couple_two')?.value].filter(Boolean).join(' & ');
+ const coverName=$('.stitch-cover-photo strong',hero);if(coverName&&names&&coverName.textContent!==names)coverName.textContent=names;
  const heading=$('#site-editor .v837-editor-header h2');if(heading&&heading.textContent!=='Gestão de conteúdos do convite')heading.textContent='Gestão de conteúdos do convite';
 }
 function refresh(){
@@ -112,6 +114,8 @@ function start(){
  refresh();
  ['guestRows','tableList','v838Dashboard','site-editor'].forEach(id=>{const el=document.getElementById(id);if(el)new MutationObserver(schedule).observe(el,{childList:true,subtree:true});});
  window.addEventListener('hashchange',schedule);
+ document.addEventListener('input',e=>{if(e.target.closest('#site-editor'))schedule();});
+ const cover=$('#siteCoverPreview');if(cover)new MutationObserver(schedule).observe(cover,{attributes:true,attributeFilter:['src']});
  const name=$('#adminHeaderName');if(name)new MutationObserver(schedule).observe(name,{childList:true,subtree:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(start,250),{once:true});else setTimeout(start,250);
