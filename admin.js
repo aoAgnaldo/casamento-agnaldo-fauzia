@@ -323,6 +323,7 @@ function render(){
    const matchesF=guestFilter==='all'||(guestFilter==='confirmed'&&g.rsvp_status==='confirmed')||(guestFilter==='pending'&&g.rsvp_status==='pending')||(guestFilter==='declined'&&g.rsvp_status==='declined')||(guestFilter==='checked'&&!!g.checked_in)||(guestFilter==='waiting'&&g.rsvp_status==='confirmed'&&!g.checked_in);
    return matchesQ&&matchesF;
  });
+ window.renderAtelierGuestSummary?.(guests);
  A('#guestCount').textContent=`${filteredGuests.length} de ${guests.length} convite(s)`;
  A('#guestRows').innerHTML=filteredGuests.map(g=>{
   const people=g.rsvp_status==='confirmed'?peopleForGuest(g):0;

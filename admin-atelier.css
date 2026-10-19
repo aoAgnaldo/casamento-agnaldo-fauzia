@@ -1,0 +1,301 @@
+/* Atelier v8.52 — adaptação do desenho Stitch fornecido pelos noivos.
+   Camada isolada no Admin. Não altera o convite público ou os dados. */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+html body.admin-body.admin-v838.admin-v839.atelier {
+ --v839-bg:#faf8f5;--v839-bg-deep:#f4efea;--v839-panel:#fff;--v839-panel-raised:#f4efea;--v839-field:#fff;
+ --v839-line:#d5ccc1;--v839-line-soft:#e8e1d9;--v839-text:#28201b;--v839-muted:#6e655f;--v839-muted-dim:#766c64;
+ --v839-peach:#8b4538;--v839-peach-soft:#f9ece9;--v839-peach-deep:#6e2e23;--v839-green:#475343;--v839-green-soft:#ebefe8;--v839-gold:#7a6233;
+ --atelier-shadow:0 2px 8px -2px rgba(40,32,27,.04),0 1px 3px -1px rgba(40,32,27,.03);--atelier-on-primary:#fff;--v843-content-max:1320px;
+ margin:0!important;padding:0!important;height:100dvh!important;overflow:hidden!important;background:var(--v839-bg)!important;color:var(--v839-text)!important;font:14px/1.55 'Plus Jakarta Sans',Arial,sans-serif!important;
+}
+html[data-admin-theme="dark"] body.admin-body.admin-v838.admin-v839.atelier {
+ --v839-bg:#1c1916;--v839-bg-deep:#231f1b;--v839-panel:#29251f;--v839-panel-raised:#332d27;--v839-field:#24201c;
+ --v839-line:#6c5e53;--v839-line-soft:#443a32;--v839-text:#f9f2e9;--v839-muted:#c9bbad;--v839-muted-dim:#bbab9b;
+ --v839-peach:#f0b4a4;--v839-peach-soft:#483029;--v839-peach-deep:#ffd3c6;--v839-green:#c0d1b8;--v839-green-soft:#303e2d;--v839-gold:#e4c285;--atelier-on-primary:#321c16;
+ --atelier-shadow:0 3px 14px rgba(0,0,0,.08);
+}
+html body.admin-body.admin-v838.admin-v839.atelier::before,html body.admin-body.admin-v838.admin-v839.atelier::after{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier #app *{box-sizing:border-box;font-family:'Plus Jakarta Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(#app,#login,.modal,.wp-dialog) :is(h1,h2,h3){font-family:'Playfair Display',Georgia,serif!important;font-weight:500!important;letter-spacing:-.025em!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #app :is(h1,h2){font-size:36px!important;line-height:1.2!important}
+html body.admin-body.admin-v838.admin-v839.atelier #app h3{font-size:22px!important;line-height:1.3!important}
+html body.admin-body.admin-v838.admin-v839.atelier #app :is(p.muted,.v839-dash-heading>div>span){font-size:14px!important;line-height:1.65!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #app :is(.section-kicker,.eyebrow,.wp-kicker){font-size:10px!important;line-height:1.5!important;letter-spacing:.12em!important;font-weight:600!important;color:var(--v839-peach)!important;margin:0 0 8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier .wedy-app{position:relative!important;width:100%!important;height:100dvh!important;min-height:0!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--v839-bg)!important;overflow:hidden!important}
+html body.admin-body.admin-v838.admin-v839.atelier .wedy-header{position:absolute!important;inset:0 0 auto!important;height:76px!important;padding:0 32px!important;border:0!important;border-bottom:1px solid var(--v839-line-soft)!important;border-radius:0!important;background:var(--v839-panel)!important;box-shadow:none!important;gap:24px!important;z-index:100!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-wrap{position:absolute!important;inset:76px 0 0!important;width:auto!important;height:auto!important;min-height:0!important;padding:0!important;margin:0!important;overflow:hidden!important;background:var(--v839-bg)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-dashboard-sidebar{position:absolute!important;inset:0 auto 0 0!important;width:260px!important;padding:28px 20px!important;border:0!important;border-right:1px solid var(--v839-line-soft)!important;border-radius:0!important;background:var(--v839-bg-deep)!important;overflow-y:auto!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.admin-dashboard-main,.admin-view-section){position:absolute!important;inset:0 0 0 260px!important;width:auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:32px 40px 56px!important;overflow-x:hidden!important;overflow-y:auto!important;scrollbar-width:thin;scrollbar-color:var(--v839-line) transparent;touch-action:pan-y!important;background:var(--v839-bg)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #visao-geral .admin-modern-dashboard{padding:32px 40px 56px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard{width:100%!important;max-width:1320px!important;margin:0 auto!important;padding:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-sidebar-brand{gap:12px!important;padding:0 0 24px!important;margin:0 0 24px!important;border-color:var(--v839-line-soft)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-sidebar-brand img{width:38px!important;height:38px!important;filter:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-sidebar-brand strong{font-family:'Playfair Display',Georgia,serif!important;font-size:18px!important;line-height:1.25!important;color:var(--v839-text)!important;white-space:normal!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-sidebar-brand small{font-size:10px!important;letter-spacing:.07em!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.admin-sidebar-section-label,.admin-sidebar-content-title){font-size:10px!important;font-weight:500!important;letter-spacing:.12em!important;line-height:1.5!important;margin:26px 10px 10px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-dashboard-sidebar a{gap:12px!important;min-height:44px!important;padding:10px 12px!important;font-size:13px!important;font-weight:500!important;line-height:1.35!important;color:var(--v839-text)!important;border:1px solid transparent!important;border-radius:10px!important;background:transparent!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-dashboard-sidebar a:hover{background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-dashboard-sidebar a[aria-current="page"]{background:var(--v839-peach)!important;color:var(--atelier-on-primary)!important;border-color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-dashboard-sidebar a:not([aria-current="page"]){box-shadow:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-sidebar-operations{display:grid!important;padding:0!important;margin:4px 0 0!important}
+html body.admin-body.admin-v838.admin-v839.atelier .nav-icon{display:inline-flex!important;flex:0 0 18px!important;width:18px!important;height:18px!important;color:inherit!important}
+html body.admin-body.admin-v838.admin-v839.atelier .nav-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-sidebar-note{margin-top:32px!important;padding:22px 12px!important;border-color:var(--v839-line-soft)!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-sidebar-note p{font-family:'Playfair Display',Georgia,serif!important;font-size:16px!important;line-height:1.6!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-header-search{width:min(540px,48vw)!important;border:1px solid var(--v839-line-soft)!important;border-radius:12px!important;background:var(--v839-bg)!important;height:44px!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-header-search input{font-size:13px!important;color:var(--v839-text)!important;background:transparent!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-header-actions{gap:16px!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.wedy-event,.admin-notification,.wedy-menu){color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .wedy-event b{font-size:13px!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .wedy-event small{font-size:10px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .wedy-avatar{background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important;border-radius:50%!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-theme-toggle{border:1px solid var(--v839-line-soft)!important;background:var(--v839-bg-deep)!important;min-height:36px!important;border-radius:24px!important;padding:3px!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-theme-toggle button{min-height:30px!important;border-radius:20px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .admin-theme-toggle button.is-active{background:var(--v839-panel)!important;color:var(--v839-peach)!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .atelier-mobile-brand{display:none!important}
+/* Commandes, champs et retours visuels partagés. */
+html body.admin-body.admin-v838.admin-v839.atelier :is(#app,.modal,.wp-dialog) :is(button,input,select,textarea){font-family:'Plus Jakarta Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(#app,.modal,.wp-dialog) :is(.button,.wp-btn,.v845-primary-action){font-size:12px!important;font-weight:600!important;line-height:1.4!important;min-height:42px!important;padding:10px 16px!important;border-radius:9px!important;white-space:normal!important;box-shadow:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(#app,.modal,.wp-dialog) :is(.button:not(.secondary):not(.danger),.wp-primary){background:var(--v839-peach)!important;border:1px solid var(--v839-peach)!important;color:var(--atelier-on-primary)!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(#app,.modal,.wp-dialog) :is(.button.secondary,.wp-btn:not(.wp-primary),.v845-primary-action,.ui-icon-btn,.icon-btn){background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(button,a,input,select,textarea):focus-visible{outline:2px solid var(--v839-peach)!important;outline-offset:3px!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(#convidados,#mesas,#presentes,#protocolos,#site-editor,#tarefas,#checkin,#programa-admin,.modal,.wp-dialog) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){font-family:'Plus Jakarta Sans',Arial,sans-serif!important;font-size:14px!important;line-height:1.5!important;background:var(--v839-field)!important;color:var(--v839-text)!important;border:1px solid var(--v839-line)!important;border-radius:10px!important;min-height:44px!important;box-shadow:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(input,textarea)::placeholder{color:var(--v839-muted)!important;opacity:1!important}
+html body.admin-body.admin-v838.admin-v839.atelier #app :is(.section-title-row,.v837-editor-header){padding-bottom:24px!important;margin-bottom:24px!important;border-bottom:1px solid var(--v839-line-soft)!important;gap:24px!important;align-items:center!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.badge,.gift-status,.table-state){font:500 11px/1.4 'Plus Jakarta Sans',Arial,sans-serif!important;letter-spacing:0!important;padding:5px 10px!important;border:0!important;border-radius:20px!important;text-transform:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.badge.confirmed,.gift-status.available,.table-state.available){background:var(--v839-green-soft)!important;color:var(--v839-green)!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.badge.pending,.gift-status.reserved,.table-state.partial){background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .badge.declined{background:var(--v839-panel-raised)!important;color:var(--v839-muted)!important}
+/* Vue d'ensemble: cartes éditoriales et chiffres lisibles. */
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-heading{margin:0 0 28px!important;gap:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-heading h1{font-size:38px!important;margin-bottom:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-heading em{font-family:'Playfair Display',Georgia,serif!important;color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-date-chip{padding:12px 16px!important;min-width:190px!important;border:0!important;background:var(--v839-panel-raised)!important;border-radius:12px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-date-chip strong{color:var(--v839-text)!important;font-size:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-overview-stats{gap:20px!important;margin-bottom:24px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat{display:grid!important;grid-template-columns:1fr auto!important;min-height:164px!important;padding:24px!important;gap:12px!important;background:var(--v839-panel)!important;color:var(--v839-text)!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat>i{grid-column:2!important;grid-row:1!important;background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important;border-radius:50%!important;width:36px!important;height:36px!important;display:grid!important;place-items:center!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat>span{grid-column:1!important;grid-row:1!important;font-size:12px!important;font-weight:600!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat small{display:block!important;font-size:11px!important;font-weight:400!important;line-height:1.6!important;color:var(--v839-muted)!important;margin-top:6px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat>b{grid-column:1/-1!important;font:700 32px/1.2 'Plus Jakarta Sans',Arial,sans-serif!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-grid{gap:24px!important;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-panel{border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;background:var(--v839-panel)!important;box-shadow:var(--atelier-shadow)!important;overflow:hidden!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-panel>header{padding:24px 24px 16px!important;gap:16px!important;flex-wrap:wrap!important;border:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-panel>header a{font-size:11px!important;color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-panel h2{font-size:23px!important;line-height:1.3!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard :is(.v839-step-list,.v839-arrivals){padding:0 24px 20px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-step{padding:18px 0!important;border-color:var(--v839-line-soft)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-step strong{font-size:13px!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-step small{font-size:12px!important;line-height:1.6!important;color:var(--v839-muted)!important;margin-top:4px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-empty{padding:16px 24px!important;font-size:13px!important;color:var(--v839-muted)!important}
+/* Convidados: identidade, informação e acções numa mesma grelha. */
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-tools{background:transparent!important;border:0!important;padding:0!important;gap:12px!important;margin-bottom:16px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-search{background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:24px!important;min-height:46px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-search input{border:0!important;background:transparent!important;font-size:13px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-filters{gap:8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-filter{min-height:36px!important;padding:8px 14px!important;background:var(--v839-panel)!important;color:var(--v839-muted)!important;border:1px solid var(--v839-line-soft)!important;border-radius:24px!important;font-size:11px!important;font-weight:500!important;letter-spacing:0!important;text-transform:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-filter.active{background:var(--v839-peach)!important;color:var(--atelier-on-primary)!important;border-color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-count{font-size:12px!important;margin:14px 0!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados :is(.guest-card-list,.guest-list-scroll){display:grid!important;gap:16px!important;max-height:none!important;overflow:visible!important;border:0!important;background:transparent!important;padding:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card{display:block!important;margin:0!important;padding:24px!important;background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-main{display:flex!important;gap:14px!important;align-items:center!important;padding:0!important;min-height:48px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-avatar{width:44px!important;height:44px!important;flex:0 0 44px!important;border-radius:50%!important;background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important;font-size:13px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-primary{flex:1!important;min-width:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-primary strong{font-size:15px!important;line-height:1.5!important;white-space:normal!important;overflow:visible!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-meta{font-size:11px!important;line-height:1.7!important;gap:12px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-details{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;border:0!important;border-radius:10px!important;background:var(--v839-bg-deep)!important;margin:20px 0!important;overflow:hidden!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-details>div{padding:12px 14px!important;border:0!important;min-width:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-details small{font-size:9px!important;font-weight:500!important;color:var(--v839-muted)!important;letter-spacing:.06em!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-details strong{display:block!important;font-size:12px!important;line-height:1.5!important;color:var(--v839-text)!important;white-space:normal!important;overflow-wrap:anywhere!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-footer{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:16px!important;border:0!important;padding:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-table-quick{display:flex!important;align-items:center!important;gap:12px!important;flex:1!important;min-width:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-table-quick label{font-size:10px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-table-quick select{width:100%!important;max-width:320px!important;min-width:0!important;font-size:12px!important}
+/* Mesas et equipa. */
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-summary{gap:16px!important;margin-bottom:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-stat{display:flex!important;flex-direction:column-reverse!important;align-items:flex-start!important;gap:12px!important;padding:22px!important;background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-stat strong{font:700 30px/1.2 'Plus Jakarta Sans',Arial,sans-serif!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-stat span{font-size:10px!important;line-height:1.5!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-layout{grid-template-columns:minmax(0,1fr) 300px!important;gap:24px!important;align-items:start!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))!important;gap:20px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-card{padding:22px!important;gap:16px!important;background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-card-head{display:flex!important;flex-wrap:wrap!important;gap:14px!important;justify-content:space-between!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-card-head h3{margin:0 0 8px!important;font-size:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-card-head small{font-size:12px!important;color:var(--v839-muted)!important;line-height:1.6!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-capacity-summary{gap:8px!important;flex-wrap:wrap!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-capacity-summary strong{font:700 18px 'Plus Jakarta Sans',Arial,sans-serif!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-capacity-summary span:not(.table-state){font-size:11px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .capacity-track{height:5px!important;background:var(--v839-line-soft)!important;border-radius:6px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .capacity-track i{background:var(--v839-green)!important;border-radius:6px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-guests{min-height:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .empty-seat{font-size:12px!important;padding:18px 0!important;line-height:1.6!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-guest{padding:12px!important;background:var(--v839-bg-deep)!important;border:0!important;border-radius:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-guest strong{font-size:12px!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-guest small{display:block!important;font-size:11px!important;color:var(--v839-muted)!important;margin-top:5px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-add-guest-btn{background:var(--v839-peach)!important;color:var(--atelier-on-primary)!important;border:0!important;border-radius:9px!important;font-size:12px!important;padding:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .unassigned-panel{padding:22px!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;background:var(--v839-panel)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .unassigned-guest{padding:16px 0!important;border-color:var(--v839-line-soft)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .unassigned-guest b{font-size:12px!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .unassigned-guest small{font-size:10px!important;line-height:1.6!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #protocolos .protocol-card{padding:24px!important;background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #protocolos :is(.protocol-avatar,.protocol-code){background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #protocolos .protocol-info p{font-size:13px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #protocolos .protocol-actions{border-color:var(--v839-line-soft)!important;gap:10px!important}
+/* Presentes: fotografia editorial; ausência de imagem sem foto inventada. */
+html body.admin-body.admin-v838.admin-v839.atelier #presentes :is(.gift-summary-card,.gift-stat-card){border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;background:var(--v839-panel)!important;padding:20px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes :is(.gift-tools,.gift-list-scroll){background:transparent!important;border:0!important;box-shadow:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-tools{padding:0!important;gap:12px!important;margin:24px auto!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-search{border:1px solid var(--v839-line)!important;border-radius:24px!important;background:var(--v839-panel)!important;overflow:hidden!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-search input{border:0!important;background:transparent!important;font-size:13px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-grid{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))!important;gap:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-card-item{display:flex!important;flex-direction:column!important;gap:0!important;padding:0!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;background:var(--v839-panel)!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-card-item>div:first-child{width:100%!important;padding:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-card-item .gift-photo{width:100%!important;height:230px!important;object-fit:cover!important;border-radius:15px 15px 0 0!important;background:var(--v839-panel-raised)!important;color:var(--v839-muted)!important;display:grid!important;place-items:center!important;font-size:42px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-card-main{padding:20px!important;min-width:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-card-item .gift-name{font:500 22px/1.4 'Playfair Display',Georgia,serif!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-card-meta{margin-top:12px!important;gap:12px!important;color:var(--v839-muted)!important;font-size:11px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-card-footer{margin-top:auto!important;padding:16px 20px!important;border-color:var(--v839-line-soft)!important;gap:10px!important;flex-wrap:wrap!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes :is(.gift-reserved-by,.gift-reserved-empty){font-size:12px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-table{border:1px solid var(--v839-line-soft)!important;border-radius:14px!important;background:var(--v839-panel)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-table th{background:var(--v839-bg-deep)!important;color:var(--v839-muted)!important;font-size:10px!important;padding:14px!important;border:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-table td{padding:16px 12px!important;color:var(--v839-text)!important;border-color:var(--v839-line-soft)!important;font-size:13px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes :is(.gift-list-meta,.gift-pagination){font-size:12px!important;background:transparent!important;color:var(--v839-muted)!important}
+/* Conteúdo e planeamento usam as mesmas superfícies e dimensões. */
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-layout{gap:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-tabs{background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:12px!important;padding:6px!important;gap:4px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-tabs button{font-size:12px!important;padding:12px 14px!important;border:0!important;border-radius:8px!important;color:var(--v839-muted)!important;box-shadow:none!important;background:transparent!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-tabs button:is(.is-active,.active){background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor :is(.v837-form-shell,.v837-editor-preview,.v837-form-pane){background:var(--v839-panel)!important;border-color:var(--v839-line-soft)!important;border-radius:16px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-form-pane{padding:28px!important;gap:20px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-form-pane header{border-color:var(--v839-line-soft)!important;padding-bottom:20px!important;margin-bottom:8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-form-pane header p{font-size:13px!important;line-height:1.7!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v836-editor-field label{font-size:12px!important;font-weight:600!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v836-editor-field small{font-size:11px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-footer{background:var(--v839-panel)!important;border-color:var(--v839-line-soft)!important;padding:20px 24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-preview{padding:22px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.wp-root,.wp-dialog){font-family:'Plus Jakarta Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier #tarefas :is(.wp-panel,.wp-stat,.wp-stage){background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;padding:24px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #tarefas .wp-hero{background:var(--v839-peach-soft)!important;border:0!important;border-radius:20px!important;padding:32px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #tarefas .wp-hero h3{font-size:28px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #tarefas .wp-tabs{border-color:var(--v839-line-soft)!important;gap:8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #tarefas .wp-tabs button{font-size:13px!important;color:var(--v839-muted)!important;min-height:44px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #tarefas .wp-tabs button[aria-selected="true"]{color:var(--v839-peach)!important;border-color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #tarefas .wp-stat strong{font:700 26px/1.4 'Plus Jakarta Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier :is(.modal-box,.qr-box,.wp-dialog){background:var(--v839-panel)!important;color:var(--v839-text)!important;border:1px solid var(--v839-line-soft)!important;border-radius:24px!important;box-shadow:0 20px 40px -8px rgba(40,32,27,.16)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .modal{backdrop-filter:blur(6px)!important;background:rgba(40,32,27,.35)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .modal :is(.modal-hero,.modal-form-body){background:var(--v839-panel)!important;padding:28px!important;border-color:var(--v839-line-soft)!important}
+html body.admin-body.admin-v838.admin-v839.atelier .modal .modal-symbol{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier .modal :is(label,p,small){color:var(--v839-muted)!important;font-family:'Plus Jakarta Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier #login{background:var(--v839-bg)!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #login .login-box{background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;box-shadow:0 16px 48px rgba(40,32,27,.08)!important;max-width:460px!important;padding:44px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #login .login-box :is(h1,label){color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #login .login-box :is(p,.muted){color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #login .login-box input{background:var(--v839-field)!important;color:var(--v839-text)!important;border-color:var(--v839-line)!important;font:14px 'Plus Jakarta Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier #login .login-box .button{background:var(--v839-peach)!important;color:var(--atelier-on-primary)!important;border-color:var(--v839-peach)!important;width:100%!important;min-height:46px!important;border-radius:10px!important}
+@media(min-width:761px) and (max-width:1150px){
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-dashboard-sidebar{width:220px!important;padding:24px 14px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier :is(.admin-dashboard-main,.admin-view-section){left:220px!important;padding:28px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-layout{grid-template-columns:minmax(0,1fr)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(max-width:760px){
+ html body.admin-body.admin-v838.admin-v839.atelier .wedy-header{height:64px!important;padding:0 16px!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .atelier-mobile-brand{display:flex!important;align-items:center!important;gap:8px!important;color:var(--v839-peach)!important;text-decoration:none!important;min-width:0!important;font:500 14px 'Playfair Display',Georgia,serif!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .atelier-mobile-brand small{display:block!important;font:500 8px/1.5 'Plus Jakarta Sans',Arial,sans-serif!important;letter-spacing:.08em!important;color:var(--v839-muted)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .atelier-mobile-brand>span:first-child{border:1px solid var(--v839-line-soft)!important;border-radius:50%!important;width:30px!important;height:30px!important;display:grid!important;place-items:center!important;font-family:'Playfair Display',Georgia,serif!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-header-search,html body.admin-body.admin-v838.admin-v839.atelier .wedy-event,html body.admin-body.admin-v838.admin-v839.atelier .admin-notification{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-header-actions{margin-left:auto!important;gap:8px!important;flex-shrink:0!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-theme-choice-label{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-theme-toggle button{padding:0 9px!important;min-width:30px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-wrap{top:64px!important;height:calc(100dvh - 64px)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier :is(.admin-dashboard-main,.admin-view-section){inset:0!important;padding:22px 16px calc(94px + env(safe-area-inset-bottom))!important;height:100%!important;overflow-y:auto!important;touch-action:pan-y!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #visao-geral .admin-modern-dashboard{padding:22px 16px calc(94px + env(safe-area-inset-bottom))!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-dashboard-sidebar{position:fixed!important;top:64px!important;bottom:0!important;left:0!important;width:min(300px,86vw)!important;max-height:calc(100dvh - 64px)!important;border-radius:0 20px 20px 0!important;padding:24px 16px!important;z-index:220!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #app :is(h1,h2){font-size:28px!important;line-height:1.25!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #app h3{font-size:21px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #app :is(.section-title-row,.v837-editor-header){display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:18px!important;padding-bottom:20px!important;margin-bottom:20px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #app .section-actions{width:100%!important;gap:8px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #app .section-actions>.button{flex:1!important}
+ html body.admin-body.admin-v838.admin-v839.atelier :is(#app,.modal,.wp-dialog) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){font-size:16px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier :is(#app,.modal,.wp-dialog) :is(.button,.wp-btn,.v845-primary-action,.ui-icon-btn,.icon-btn){min-height:44px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-heading{display:block!important;margin-bottom:22px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-heading h1{font-size:30px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-date-chip{display:inline-flex!important;width:auto!important;min-width:0!important;margin-top:18px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-overview-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat{grid-template-columns:minmax(0,1fr)!important;min-height:148px!important;padding:18px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat>i{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-stat>b{grid-column:1!important;grid-row:2!important;font-size:28px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-dash-grid{grid-template-columns:minmax(0,1fr)!important;gap:18px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card{padding:18px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-main{flex-wrap:wrap!important;gap:10px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-main>.badge{margin-left:54px!important;margin-top:-3px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-details{grid-template-columns:repeat(2,minmax(0,1fr))!important;margin:16px 0!important;padding:4px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-details>div{padding:10px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-details>div:last-child{grid-column:1/-1!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-footer{flex-direction:column!important;align-items:stretch!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-table-quick select{max-width:none!important;font-size:14px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #convidados .guest-card-actions{justify-content:flex-start!important;gap:8px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-stat{padding:18px!important;gap:10px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .seat-stat strong{font-size:26px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-layout{grid-template-columns:minmax(0,1fr)!important;gap:20px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-list{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .table-card{padding:20px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #mesas .unassigned-panel{order:0!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-desktop-table{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-list{display:flex!important;gap:20px!important;background:transparent!important;padding:0!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-card{display:flex!important;flex-direction:column!important;gap:0!important;padding:0!important;background:var(--v839-panel)!important;border:1px solid var(--v839-line-soft)!important;border-radius:16px!important;min-height:0!important;box-shadow:var(--atelier-shadow)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-photo{width:100%!important;height:180px!important;border:0!important;border-radius:15px 15px 0 0!important;background:var(--v839-panel-raised)!important;display:grid!important;place-items:center!important;font-size:40px!important;color:var(--v839-muted)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-photo img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:15px 15px 0 0!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-info{padding:18px!important;display:grid!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-title-row{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:6px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-name{font:500 21px/1.4 'Playfair Display',Georgia,serif!important;white-space:normal!important;overflow:visible!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-no{font-size:10px!important;color:var(--v839-muted)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-info .gift-status{justify-self:start!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-actions{display:flex!important;justify-content:flex-end!important;gap:8px!important;padding:0 18px 18px!important;align-items:center!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-mobile-reserved{font-size:12px!important;color:var(--v839-green)!important;background:var(--v839-green-soft)!important;border-radius:8px!important;padding:10px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-tools{margin:20px 0!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-form-pane{padding:20px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-layout{gap:18px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-tabs{border-radius:24px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-tabs button{font-size:11px!important;white-space:nowrap!important;border-radius:20px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #tarefas :is(.wp-panel,.wp-stat,.wp-stage){padding:18px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #tarefas .wp-hero{padding:24px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .modal :is(.modal-hero,.modal-form-body){padding:22px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #login .login-box{padding:28px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-mobile-bottom-nav{position:fixed!important;inset:auto 0 0!important;height:calc(68px + env(safe-area-inset-bottom))!important;padding:6px 8px calc(6px + env(safe-area-inset-bottom))!important;border-top:1px solid var(--v839-line-soft)!important;background:var(--v839-panel)!important;box-shadow:0 -4px 20px rgba(40,32,27,.03)!important;z-index:150!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-mobile-bottom-nav :is(a,button){color:var(--v839-muted)!important;font-size:18px!important;border:0!important;border-radius:12px!important;padding:4px!important;background:transparent!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-mobile-bottom-nav :is(a,button) span{font-size:9px!important;line-height:1.5!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-mobile-bottom-nav a.active{background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important}
+}
+@media(prefers-reduced-motion:reduce){html body.admin-body.atelier *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-preview{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-preview>*{grid-column:1!important;width:100%!important;min-width:0!important;max-width:100%!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-preview>.v843-preview-frame{height:300px!important;margin:0!important;justify-self:center!important}
+html body.admin-body.admin-v838.admin-v839.atelier #site-editor .v837-editor-preview .v837-phone-copy strong{font:500 34px/1.1 'Playfair Display',Georgia,serif!important;color:#fff!important}
+html body.admin-body.admin-v838.admin-v839.atelier .wedy-header{display:flex!important;justify-content:space-between!important}
+html body.admin-body.admin-v838.admin-v839.atelier #login .login-box h1{font-size:38px!important;line-height:1.2!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-stats{gap:16px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-stat-card strong{font:700 28px/1.3 'Plus Jakarta Sans',Arial,sans-serif!important;color:var(--v839-text)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-stat-card small{font-size:11px!important;line-height:1.5!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-stat-progress{background:var(--v839-line-soft)!important}
+@media(max-width:760px){
+ html body.admin-body.admin-v838.admin-v839.atelier .atelier-mobile-brand{flex:1!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .atelier-mobile-brand>span:last-child{font:500 13px/1.4 'Playfair Display',Georgia,serif!important;white-space:nowrap!important}
+ html body.admin-body.admin-v838.admin-v839.atelier .admin-header-actions{flex:0 0 auto!important;width:auto!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-stat-card{padding:18px!important;min-width:0!important;display:block!important}
+ html body.admin-body.admin-v838.admin-v839.atelier #presentes .gift-stat-icon{display:none!important}
+}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-layout{display:grid!important}
+html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-layout>*{width:100%!important;min-width:0!important;order:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier #app #convidados .guest-search input,html body.admin-body.admin-v838.admin-v839.atelier #app #presentes .gift-search input{border:0!important;border-radius:0!important;min-width:0!important;box-shadow:none!important}
+@media(max-width:760px){html body.admin-body.admin-v838.admin-v839.atelier #mesas .seating-layout>.unassigned-panel{order:2!important}}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metrics{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metric{padding:22px;border:1px solid var(--v839-line-soft);border-radius:16px;background:var(--v839-panel);box-shadow:var(--atelier-shadow);display:grid;gap:8px}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metric span{font-size:10px;color:var(--v839-muted);letter-spacing:.06em;text-transform:uppercase}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metric strong{font:700 30px/1.2 'Plus Jakarta Sans',Arial,sans-serif;color:var(--v839-text)}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metric small{font-size:11px;color:var(--v839-muted)}
+html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metric.confirmed{border-bottom:3px solid var(--v839-green)}
+@media(min-width:1101px){html body.admin-body.admin-v838.admin-v839.atelier #v838Dashboard .v839-overview-stats{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:760px){html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metric{padding:18px}html body.admin-body.admin-v838.admin-v839.atelier #convidados .atelier-metric strong{font-size:26px}}

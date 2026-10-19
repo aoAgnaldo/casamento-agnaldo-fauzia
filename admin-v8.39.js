@@ -50,6 +50,7 @@
         <div class="v839-date-chip"><i aria-hidden="true">◷</i><span>Grande dia<strong>29 de Maio de 2027</strong></span></div>
       </header>
       <div class="v839-overview-stats" aria-label="Resumo do casamento">
+        <a href="#convidados" class="v839-stat"><i>♙</i><span>Lista de convidados<small>Convites registados</small></span><b>${data.guests.length}</b></a>
         <a href="#convidados" class="v839-stat"><i>◌</i><span>Confirmações<small>${data.pending.length === 1 ? '1 convite aguarda resposta' : `${data.pending.length} convites aguardam resposta`}</small></span><b>${data.pending.length}</b></a>
         <a href="#mesas" class="v839-stat"><i>▱</i><span>Mesas<small>${data.unseatedPeople === 1 ? '1 pessoa ainda sem lugar' : `${data.unseatedPeople} pessoas ainda sem lugar`}</small></span><b>${data.unseatedPeople}</b></a>
         <a href="#presentes" class="v839-stat"><i>♡</i><span>Presentes<small>${data.reserved.length === 1 ? '1 presente reservado' : `${data.reserved.length} presentes reservados`}</small></span><b>${data.reserved.length}</b></a>
@@ -126,9 +127,9 @@
 
   function savedTheme() {
     try {
-      return window.localStorage.getItem(storageKey) === 'light' ? 'light' : 'dark';
+      return window.localStorage.getItem(storageKey) === 'dark' ? 'dark' : 'light';
     } catch (_) {
-      return 'dark';
+      return 'light';
     }
   }
 
