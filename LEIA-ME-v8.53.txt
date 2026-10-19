@@ -1,0 +1,13 @@
+ADMIN ATELIER — v8.53
+
+Revisão baseada no ZIP Stitch (4): navegação lateral, resumo e lista desktop de convidados, cartões mobile, mesas, presentes em grelha e editor com imagem de capa.
+Planeamento inclui quadro com quatro estados e mantém lista, orçamento e poupança.
+
+INSTALAÇÃO
+Faça uma cópia da versão hospedada. Extraia este pacote na pasta do site, preservando a configuração existente do serviço de dados. Publique os ficheiros juntos e actualize o navegador.
+
+VERIFICAÇÃO
+Testes locais de métricas, planeamento, RSVP e check-in simulado passaram. JavaScript validado. Pré-visualizações desktop e mobile revistas sem ligação aos dados reais.
+Não foram publicados ficheiros nem alterados registos da conta. Autenticação, envio de fotografias e gravação no servidor precisam de validação no ambiente hospedado com uma sessão autorizada.
+
+Os ecrãs de demonstração e testes não fazem parte deste pacote. Módulos novos de fornecedores, contratos e auditoria não estão incluídos. As acções existentes foram preservadas; não foram inventados pagamentos ou estados de sincronização.

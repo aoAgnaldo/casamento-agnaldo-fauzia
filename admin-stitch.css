@@ -1,0 +1,226 @@
+/* Stitch ZIP (4): estrutura desktop e mobile. Apenas Admin. */
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53{
+ --v839-bg:#fff8f5;--v839-bg-deep:#f4efea;--v839-panel:#fff;--v839-panel-raised:#f4efea;--v839-peach:#8b4538;--v839-peach-soft:#f9ece9;
+}
+html[data-admin-theme="dark"] body.admin-body.admin-v838.admin-v839.atelier.stitch53{--v839-bg:#1c1916;--v839-bg-deep:#231f1b;--v839-panel:#29251f;--v839-panel-raised:#332d27;--v839-peach:#f0b4a4;--v839-peach-soft:#483029}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #app :is(h1,h2){font-size:32px!important;font-weight:600!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .wedy-header{height:64px!important;background:var(--v839-bg)!important;padding:0 40px!important;left:288px!important;box-shadow:0 1px 8px rgba(40,32,27,.025)!important;border:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-wrap{top:64px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-dashboard-sidebar{position:fixed!important;inset:0 auto 0 0!important;width:288px!important;padding:28px 22px 200px!important;z-index:140!important;border:0!important;background:var(--v839-bg-deep)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 :is(.admin-dashboard-main,.admin-view-section){left:288px!important;padding:32px 40px 56px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-sidebar-brand{margin:0 0 28px!important;padding:0!important;border:0!important;gap:10px!important;position:relative!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-sidebar-brand img{width:40px!important;height:40px!important;padding:5px!important;border-radius:12px!important;background:var(--v839-peach-soft)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-sidebar-brand strong{font-size:17px!important;max-width:145px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-sidebar-brand small{font-size:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-private{position:absolute;right:0;top:17px;background:#f7f2e7;color:#543e0d;padding:4px 7px;border-radius:20px;font-size:8px;letter-spacing:.05em}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-sidebar-section-label,html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-sidebar-content-title{font-size:10px!important;margin:32px 10px 12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-dashboard-sidebar a{min-height:42px!important;padding:10px 12px!important;font-size:13px!important;border-radius:11px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-sidebar-note{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account{position:fixed;left:8px;bottom:12px;width:272px;padding:16px;background:var(--v839-panel);border-radius:14px;box-shadow:var(--atelier-shadow);z-index:141}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account-open{display:flex;align-items:center;gap:10px;border:0;background:transparent;width:100%;text-align:left;color:var(--v839-text);padding:0}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account-avatar{width:34px;height:34px;border-radius:50%;background:var(--v839-peach);color:var(--atelier-on-primary);display:grid;place-items:center;font-size:11px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account-name{display:block;font-size:12px;font-weight:600}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account-open small{display:block;font-size:10px;color:var(--v839-muted);margin-top:3px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account a{display:block!important;margin-top:14px!important;text-align:center!important;background:var(--v839-bg-deep)!important;min-height:30px!important;padding:6px!important;font-size:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-header-search{border:0!important;background:var(--v839-panel)!important;max-width:540px!important;height:40px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-countdown{display:inline-flex;white-space:nowrap;align-items:center;border-radius:24px;background:#f7f2e7;color:#543e0d;font-size:11px;padding:8px 12px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-theme-toggle{min-height:32px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-theme-choice-label{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .wedy-event>span:last-child{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #app :is(.section-title-row,.v837-editor-header){border:0!important;margin-bottom:28px!important;padding-bottom:0!important;align-items:flex-end!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #app .section-title-row .muted{max-width:660px!important;font-size:13px!important;line-height:1.6!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #app .section-kicker{font-size:9px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .section-actions{max-width:420px!important;justify-content:flex-end!important;flex-wrap:wrap!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados #adminExportTrigger{width:auto!important;padding:10px 14px!important;gap:8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .stitch-button-label{font-size:11px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados #atelierGuestSummary{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:20px!important;margin-bottom:28px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric{padding:24px 22px;background:var(--v839-panel);border-radius:13px;min-height:184px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--atelier-shadow);border-bottom:1px solid var(--v839-line-soft);overflow:hidden}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric>span{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--v839-muted)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric>strong{font:700 30px/1.2 'Plus Jakarta Sans',Arial,sans-serif;color:var(--v839-text)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric strong small{font-size:12px;font-weight:400;color:var(--v839-muted)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric p{font-size:12px;color:var(--v839-muted);line-height:1.5;margin:0}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts{display:flex;gap:12px;justify-content:space-between;margin:auto 0}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts b{font-size:26px;font-weight:700;color:var(--v839-green)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts b:nth-child(2){color:var(--v839-gold)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts b:nth-child(3){color:var(--v839-peach)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts small{display:block;font-size:8px;color:var(--v839-muted);font-weight:400;margin-top:5px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-progress{height:5px;width:100%;background:var(--v839-bg-deep);border-radius:6px;overflow:hidden;margin-top:auto}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-progress i{display:block;height:100%;background:var(--v839-peach);border-radius:6px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-tools{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:14px!important;padding:18px!important;background:var(--v839-panel)!important;border-radius:14px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-search{flex:1 1 300px!important;background:var(--v839-bg-deep)!important;border:0!important;border-radius:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-search input{font-size:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-filters{flex:1 1 400px!important;min-width:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-filter{padding:5px 12px!important;min-height:30px!important;border:0!important;background:var(--v839-bg-deep)!important;font-size:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-filter.active{background:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-count{font-size:11px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-list{gap:0!important;background:var(--v839-panel)!important;border-radius:0 0 14px 14px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-guest-header{display:grid;grid-template-columns:minmax(190px,2fr) .65fr .85fr minmax(150px,1.2fr) 160px;gap:16px;padding:16px 20px;border-radius:12px 12px 0 0;background:var(--v839-bg-deep);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--v839-muted)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card{display:grid!important;grid-template-columns:minmax(190px,2fr) .65fr .85fr minmax(150px,1.2fr) 160px!important;gap:16px!important;align-items:center!important;min-height:90px!important;padding:18px 20px!important;border:0!important;border-bottom:1px solid var(--v839-line-soft)!important;border-radius:0!important;box-shadow:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-main{grid-column:1!important;grid-row:1!important;gap:12px!important;flex-wrap:nowrap!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-avatar{width:32px!important;height:32px!important;flex-basis:32px!important;font-size:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-primary strong{font-size:13px!important;font-weight:600!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-meta{font-size:10px!important;gap:4px!important;flex-direction:column!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-code{font-size:9px!important;color:var(--v839-muted)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-details{grid-column:2!important;grid-row:1!important;display:block!important;margin:0!important;padding:0!important;border-radius:0!important;background:transparent!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-details>div{padding:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-details>div:nth-child(n+3){display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-details small{font-size:8px!important;letter-spacing:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-details strong{font-size:11px!important;font-weight:500!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .stitch-rsvp{grid-column:3!important;grid-row:1!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .stitch-rsvp .badge{font-size:9px!important;padding:4px 8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-footer{display:contents!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-table-quick{grid-column:4!important;grid-row:1!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-table-quick label{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-table-quick select{min-height:36px!important;font-size:11px!important;padding:8px!important;background:var(--v839-bg-deep)!important;border:0!important;border-radius:8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-actions{grid-column:5!important;grid-row:1!important;gap:5px!important;flex-wrap:wrap!important;justify-content:flex-end!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-actions :is(.v845-primary-action,.v844-guest-qr){min-height:32px!important;padding:6px 8px!important;border:0!important;background:var(--v839-bg-deep)!important;font-size:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .v844-guest-qr span{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .v838-action-menu summary{width:30px!important;min-height:32px!important;border:0!important;background:transparent!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .v838-action-menu[open]{grid-column:1/-1!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #visao-geral .admin-modern-dashboard{padding:24px 40px 56px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #v838Dashboard .v839-dash-heading h1{font-size:32px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #v838Dashboard .v839-dash-heading{flex-wrap:wrap!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #v838Dashboard .v839-date-chip{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #v838Dashboard .v839-dash-grid{grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr)!important;align-items:start!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-panel{background:var(--v839-panel);padding:26px;border-radius:14px;box-shadow:var(--atelier-shadow)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-panel header{display:flex;gap:16px;justify-content:space-between;align-items:center;margin-bottom:22px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #app .stitch-panel h2{font-size:23px!important;font-weight:500!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-panel header a{font-size:11px;color:var(--v839-peach);white-space:nowrap}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-map{grid-column:1;grid-row:1/span 2}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-map-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;background:var(--v839-bg-deep);padding:18px;border-radius:12px;margin-bottom:22px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-map-table{display:grid;gap:14px;min-height:112px;background:var(--v839-panel);border:1px solid var(--v839-line-soft);border-radius:12px;padding:14px;color:var(--v839-text);text-decoration:none;font-size:12px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-map-table b{font-size:11px;color:var(--v839-green)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-empty{font-size:13px;line-height:1.7;color:var(--v839-muted);grid-column:1/-1}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .seating-layout{grid-template-columns:minmax(0,1fr) 290px!important;gap:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-list{background:var(--v839-bg-deep)!important;border:1px solid var(--v839-line-soft)!important;border-radius:14px!important;padding:18px!important;gap:12px!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card{padding:16px!important;border-radius:11px!important;gap:12px!important;min-height:240px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card-head h3{font-family:'Plus Jakarta Sans',Arial,sans-serif!important;font-size:14px!important;line-height:1.4!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card-head small{font-size:10px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card-actions{gap:4px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card-actions :is(button,summary){font-size:10px!important;min-height:30px!important;padding:5px 7px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-capacity-summary strong{font-size:14px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-capacity-summary span:not(.table-state){font-size:9px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-state{font-size:9px!important;padding:3px 7px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-guests{max-height:150px!important;overflow:auto!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-add-guest-btn{font-size:10px!important;min-height:36px!important;padding:8px!important;background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-table-number{display:inline-grid;place-items:center;width:26px;height:26px;border:1px solid var(--v839-line-soft);border-radius:50%;background:var(--v839-bg-deep);color:var(--v839-text);font-size:10px;float:left;margin:0 8px 6px 0}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card-head .section-kicker{display:none!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-salon-label{grid-column:1;grid-row:1;padding:14px 18px;border:1px dashed var(--v839-line);border-radius:10px;text-align:center;text-transform:uppercase;font-size:10px;letter-spacing:.08em;color:var(--v839-muted)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .seating-layout>.table-list{grid-column:1;grid-row:2}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .seating-layout>.unassigned-panel{grid-column:2;grid-row:1/span 2;background:var(--v839-panel)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-card-item{border:0!important;border-radius:13px!important;box-shadow:var(--atelier-shadow)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-card-item .gift-photo{height:210px!important;border-radius:13px 13px 0 0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-card-main{padding:18px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-card-item .gift-name{font:600 15px/1.5 'Plus Jakarta Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-card-footer{background:var(--v839-panel)!important;padding:12px 18px 18px!important;gap:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-card-footer>.gift-reserved-by{display:block!important;width:100%!important;background:var(--v839-bg-deep)!important;padding:12px!important;border-radius:9px!important;font-size:11px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-card-meta{justify-content:space-between!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-tools{padding:14px!important;border-radius:14px!important;background:var(--v839-panel)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-tools :is(input,select){background:var(--v839-bg-deep)!important;border:0!important;font-size:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .v837-form-pane{border:0!important;border-radius:14px!important;padding:26px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .v837-editor-preview{border:0!important;border-radius:14px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .v837-editor-tabs{background:var(--v839-bg-deep)!important;border:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .v837-editor-tabs button{font-size:11px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .v837-editor-tabs button.is-active{background:var(--v839-panel)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-editor{display:grid;gap:16px;margin:0 0 26px;padding-bottom:24px;border-bottom:1px solid var(--v839-line-soft)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-editor header{display:flex;justify-content:space-between;gap:16px;padding:0!important;border:0!important;margin:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-editor h3{font-size:21px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-editor p{font-size:12px!important;margin:5px 0 0!important;line-height:1.6!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-editor header>span{align-self:start;white-space:nowrap;font-size:9px;background:var(--v839-bg-deep);padding:5px 9px;border-radius:20px;color:var(--v839-muted)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-photo{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#543e33}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-photo img{width:100%;height:100%;object-fit:cover}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-photo>div{position:absolute;inset:0;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(transparent,rgba(0,0,0,.55));color:white}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-photo small{font-size:9px;text-transform:uppercase;letter-spacing:.1em}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-photo strong{font:500 30px/1.2 'Playfair Display',Georgia,serif!important;color:#fff!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-editor>.button{justify-self:start}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #protocolos .protocol-grid{gap:20px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #protocolos .protocol-card{border:0!important;border-radius:14px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #tarefas .wp-panel{border:0!important;border-radius:14px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #tarefas .wp-tabs{padding:6px!important;background:var(--v839-panel)!important;border:0!important;border-radius:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #tarefas .wp-tabs button{border-radius:9px!important;border:0!important;min-height:40px!important;font-size:12px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #tarefas .wp-tabs button.active{background:var(--v839-bg-deep)!important;color:var(--v839-peach)!important}
+@media(min-width:761px) and (max-width:1250px){
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-dashboard-sidebar{width:240px!important;padding-left:16px!important;padding-right:16px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .wedy-header{left:240px!important;padding:0 28px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 :is(.admin-dashboard-main,.admin-view-section){left:240px!important;padding:28px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account{width:224px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-countdown{display:none}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-guest-header{display:none}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card{grid-template-columns:minmax(160px,1.4fr) .65fr .75fr minmax(130px,1fr)!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-actions{grid-column:1/-1!important;grid-row:2!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados #atelierGuestSummary{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .seating-layout{grid-template-columns:minmax(0,1fr)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .seating-layout>.unassigned-panel{grid-column:1;grid-row:3}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #v838Dashboard .v839-dash-grid{grid-template-columns:minmax(0,1fr)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-map{grid-column:1;grid-row:auto}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:760px){
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .wedy-header{left:0!important;right:0!important;height:64px!important;padding:0 16px!important;background:var(--v839-panel)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 :is(.admin-dashboard-main,.admin-view-section){left:0!important;padding:20px 16px calc(94px + env(safe-area-inset-bottom))!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #visao-geral .admin-modern-dashboard{padding:20px 16px calc(94px + env(safe-area-inset-bottom))!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .admin-dashboard-sidebar{top:64px!important;width:min(300px,86vw)!important;padding:24px 16px 180px!important;z-index:220!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-account{position:static;width:100%;margin-top:28px;padding:14px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-countdown{display:none}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-private{right:0}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #app :is(h1,h2){font-size:27px!important;font-weight:600!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #app :is(.section-title-row,.v837-editor-header){gap:18px!important;margin-bottom:22px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .stitch-button-label{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .section-actions{max-width:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados #atelierGuestSummary{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric{min-height:140px;padding:18px;gap:12px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric>strong{font-size:27px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric>span{font-size:9px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-metric p{font-size:10px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts{gap:8px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts b{font-size:22px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-status-counts small{font-size:7px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-tools{padding:0!important;background:transparent!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-filters{flex:initial!important;overflow-x:auto!important;flex-wrap:nowrap!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-list{background:transparent!important;gap:14px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-guest-header{display:none}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;padding:18px!important;border:1px solid var(--v839-line-soft)!important;border-radius:14px!important;background:var(--v839-panel)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .stitch-rsvp{grid-column:1!important;grid-row:1!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-main{grid-column:1!important;grid-row:2!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-avatar{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-primary strong{font-size:15px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-meta{flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-details{grid-column:1!important;grid-row:3!important;display:flex!important;gap:20px!important;background:var(--v839-bg-deep)!important;padding:12px!important;border-radius:9px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-details>div:last-child{grid-column:auto!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-table-quick{grid-column:1!important;grid-row:4!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-table-quick select{font-size:14px!important;min-height:44px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-actions{grid-column:1!important;grid-row:5!important;justify-content:flex-end!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .guest-card-actions :is(.v845-primary-action,.v844-guest-qr,summary){min-height:44px!important;padding:9px 12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #convidados .v844-guest-qr span{display:inline!important;font-size:11px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .seating-layout{grid-template-columns:minmax(0,1fr)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-list{grid-template-columns:minmax(0,1fr)!important;background:transparent!important;border:0!important;padding:0!important;gap:16px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card{padding:20px!important;min-height:0!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card-head h3{font-family:'Playfair Display',Georgia,serif!important;font-size:22px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-card-actions :is(button,summary){min-height:44px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .seating-layout>.unassigned-panel{grid-column:1;grid-row:3}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #mesas .table-add-guest-btn{min-height:44px!important;font-size:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #v838Dashboard .v839-dash-grid{grid-template-columns:minmax(0,1fr)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-map{grid-column:1;grid-row:auto}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-panel{padding:20px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-panel header{display:block}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-panel header a{display:block;margin-top:12px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-map-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 .stitch-dashboard-actions{margin:18px 0 0;width:100%}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #presentes .gift-grid{grid-template-columns:minmax(0,1fr)!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53 #site-editor .stitch-cover-photo strong{font-size:24px!important}
+}
+ /* Quadro de tarefas: mesmas tarefas e edição, organizadas por estado. */
+.stitch53 .stitch-kanban{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
+.stitch53 .stitch-lane{background:var(--atelier-canvas,#f4efea);padding:12px;border-radius:14px;min-width:0;min-height:260px}
+.stitch53 .stitch-lane>header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:16px}
+.stitch53 .stitch-lane>header h3{font:600 13px/1.4 var(--font-body,sans-serif);margin:0}
+.stitch53 .stitch-lane>header small{padding:4px 8px;border-radius:20px;background:var(--atelier-card,#fff)}
+.stitch53 .stitch-lane .wp-item{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding:16px;background:var(--atelier-card,#fff);border-radius:12px}
+.stitch53 .stitch-lane .wp-item>div{flex:1;min-width:0}.stitch53 .stitch-lane .wp-item h3{font-size:14px;overflow-wrap:anywhere}
+.stitch53 .stitch-lane .wp-item-title{display:block}.stitch53 .stitch-lane .wp-pill{display:inline-block;margin-top:8px}
+.stitch53 .stitch-empty{font-size:13px;color:var(--atelier-muted,#73645c);padding:16px 4px}
+html[data-admin-theme="dark"] .stitch53 .stitch-lane{background:#231d19}html[data-admin-theme="dark"] .stitch53 .stitch-lane .wp-item{background:#302620}
+@media(max-width:1250px){.stitch53 .stitch-kanban{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.stitch53 .stitch-kanban{grid-template-columns:minmax(0,1fr)}.stitch53 .stitch-lane{min-height:0}}

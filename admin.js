@@ -3,7 +3,7 @@ let guestFilter='all';
 let giftSearch='';
 let giftStatusFilter='all';
 let giftSort='number';
-let giftView='list';
+let giftView='grid';
 let giftPage=1;
 const GIFT_PAGE_SIZE=8;
 const A=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
