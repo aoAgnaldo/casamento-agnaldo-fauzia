@@ -1,0 +1,24 @@
+ADMIN — INTEGRAÇÃO DOS QUATRO PAINÉIS APROVADOS — v8.56
+
+Este é o sistema completo existente com a nova apresentação integrada; não é o protótipo v8.55.
+
+MESAS: indicação visual proporcional de ocupação, lista de convites expansível, fila de convidados sem mesa, pesquisa e organização existentes.
+CONVIDADOS: linhas no desktop, cartões mobile, nomes legíveis e funções de edição, QR, envio e atribuição mantidas.
+PRESENTES: fotografias existentes em grelha responsiva, uma coluna no mobile, filtros, edição, reservas e vista de lista mantidos. A escolha da vista deixa de ser sobrescrita quando muda a largura.
+PLANEAMENTO: nova composição do quadro e das tarefas, mantendo etapas, lista, orçamento, pagamentos, poupança e exportação/restauro existentes.
+
+INSTALAR
+1. Faça uma cópia da hospedagem actual.
+2. Publique os ficheiros deste ZIP em conjunto na pasta existente.
+3. Preserve a configuração do vosso projecto caso tenha sido alterada na hospedagem desde a última versão.
+4. Actualize o navegador e confirme os fluxos com a vossa conta.
+
+O index.html continua a ser o convite público original. Os exemplos da prévia v8.55 NÃO foram copiados para o sistema. Não foram publicadas alterações nem modificados dados reais.
+
+VERIFICAÇÃO
+Testes locais existentes passaram e foram acrescentados testes do modelo visual de ocupação, incluindo capacidade excedida, proporções e dados inválidos. Sintaxe dos scripts validada.
+Revisão técnica adicional sem regressões críticas detectadas; corrigidos o rótulo da contagem de convites e a descrição acessível do desenho da mesa.
+No navegador, os renderizadores reais foram verificados com dados isolados: ocupação 4/8, lista expansível, filtro de presentes, grelha de uma coluna a 390 px, área vertical com scroll e quatro estados do planeamento. Orçamento continua acessível.
+
+LIMITES
+Os testes de interface não certificam gravação autenticada, upload, permissões de serviço, sincronização real ou câmara. Estes fluxos precisam de validação no ambiente hospedado. A pré-visualização não envia pedidos ao serviço de dados e não está incluída neste ZIP.
