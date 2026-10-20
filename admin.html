@@ -199,7 +199,7 @@ document.getElementById('siteEditCoverBtn')?.addEventListener('click',()=>window
 document.getElementById('siteEditStoryBtn')?.addEventListener('click',()=>window.openImageSettings?.('story'));
 document.getElementById('siteEditDetailsBtn')?.addEventListener('click',()=>window.openImageSettings?.('details'));
 document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>window.openImageSettings?.('story'));
-</script><script>document.getElementById('adminExportTrigger')?.addEventListener('click',()=>document.getElementById('exportBtn')?.click());document.getElementById('adminImportTrigger')?.addEventListener('click',()=>document.getElementById('csvFile')?.click());</script><script src="admin.js?v=8.56"></script><script src="admin-v8.35.js"></script><script src="admin-v8.36.js"></script>
+</script><script>document.getElementById('adminExportTrigger')?.addEventListener('click',()=>document.getElementById('exportBtn')?.click());document.getElementById('adminImportTrigger')?.addEventListener('click',()=>document.getElementById('csvFile')?.click());</script><script src="admin.js?v=8.59"></script><script src="admin-v8.35.js"></script><script src="admin-v8.36.js"></script>
 <script>
 // V6.45 — ligação de segurança do menu superior. Não depende de estilos nem do listener anterior.
 (function(){
@@ -299,12 +299,15 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
 
 
 
-<nav class="admin-mobile-bottom-nav" aria-label="Navegação rápida no painel">
+<nav class="admin-mobile-area-nav" aria-label="Áreas do painel">
   <a href="#visao-geral" data-mobile-nav="visao-geral" class="active"><span class="mobile-nav-icon">⌂</span><span>Painel</span></a>
   <a href="#convidados" data-mobile-nav="convidados"><span class="mobile-nav-icon">♙</span><span>Convidados</span></a>
   <a href="#mesas" data-mobile-nav="mesas"><span class="mobile-nav-icon">♧</span><span>Mesas</span></a>
   <a href="#presentes" data-mobile-nav="presentes"><span class="mobile-nav-icon">◇</span><span>Presentes</span></a>
-  <button type="button" id="mobileMoreBtn" aria-label="Abrir mais áreas"><span class="mobile-nav-icon">•••</span><span>Mais</span></button>
+  <a href="#protocolos" data-mobile-nav="protocolos"><span class="mobile-nav-icon">♙</span><span>Equipa</span></a>
+  <a href="#checkin" data-mobile-nav="checkin"><span class="mobile-nav-icon">✓</span><span>Recepção</span></a>
+  <a href="#site-editor" data-mobile-nav="site-editor"><span class="mobile-nav-icon">▧</span><span>Convite</span></a>
+  <a href="#tarefas" data-mobile-nav="tarefas"><span class="mobile-nav-icon">☷</span><span>Planeamento</span></a>
 </nav>
 <script id="v665-mobile-nav">
 (function(){
@@ -437,4 +440,6 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
 <link rel="stylesheet" href="admin-layout.css?v=8.56">
 <link rel="stylesheet" href="admin-interactions.css?v=8.58">
 <script src="admin-interactions.js?v=8.58"></script>
+<link rel="stylesheet" href="admin-responsive.css?v=8.59">
+<script src="admin-responsive.js?v=8.59"></script>
 <script src="admin-layout.js?v=8.56"></script>

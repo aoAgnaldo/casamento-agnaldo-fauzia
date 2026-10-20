@@ -1,0 +1,68 @@
+/* v8.59 — one content rhythm across every existing panel. */
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59{--admin-gutter:32px;--admin-content-width:1280px}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.admin-view-section,.admin-dashboard-main){padding:28px var(--admin-gutter) 48px!important;box-sizing:border-box!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app .admin-view-section{max-width:none!important;margin:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-view-section>:not(.modal):not(.guest-picker-modal),
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #v838Dashboard{width:100%!important;max-width:var(--admin-content-width)!important;margin-inline:auto!important;box-sizing:border-box!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.section-title-row,.v837-editor-header,.wp-heading,.v839-dash-heading){padding:0!important;margin-bottom:20px!important;gap:16px!important;align-items:center!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.section-title-row h2,.v837-editor-header h2,.wp-heading h2){font-size:30px!important;line-height:1.2!important;margin:4px 0 8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.section-title-row p,.v837-editor-header p,.wp-heading p){line-height:1.55!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #convidados .guest-tools{width:100%!important;padding:12px!important;margin-inline:auto!important;box-sizing:border-box!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-tools{margin-block:18px!important;padding:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.gift-stat-card,.seat-stat,.wp-stat,.stitch-metric){min-height:88px!important;padding:14px 16px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-mobile-area-nav{display:none}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59.admin-modal-open .admin-mobile-area-nav,
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59:has(.table-drawer-overlay:not(.hidden)) .admin-mobile-area-nav,
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59:has(#app.hidden) .admin-mobile-area-nav,
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59:has(.modal:not(.hidden)) .admin-mobile-area-nav,
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59:has(dialog[open]) .admin-mobile-area-nav{display:none!important}
+
+/* Compact default presentation; filtering, menus and item data remain unchanged. */
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-item{display:grid!important;grid-template-columns:52px minmax(0,1fr) minmax(220px,.75fr)!important;gap:16px!important;align-items:center!important;padding:12px 16px!important;border-radius:10px!important;min-height:80px!important;box-shadow:none!important;box-sizing:border-box!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-item>div:first-child{width:52px!important;height:52px!important;border-radius:8px!important;overflow:hidden!important;padding:0!important;background:var(--v839-bg-deep)!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-item .gift-photo{width:52px!important;height:52px!important;max-height:52px!important;object-fit:contain!important;border-radius:8px!important;font-size:24px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-thumbnail{display:block!important;width:52px!important;height:52px!important;border:0!important;padding:0!important;background:transparent!important;cursor:pointer!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-main{padding:0!important;min-width:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-item .gift-name{font:600 15px/1.4 'DM Sans',Arial,sans-serif!important;overflow-wrap:anywhere!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-meta{margin:6px 0 0!important;gap:8px!important;font-size:11px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-footer{padding:0!important;margin:0!important;border:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;flex-wrap:nowrap!important;min-width:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-footer>.gift-reserved-by{font-size:12px!important;overflow-wrap:anywhere!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-actions{flex-shrink:0!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-actions :is(button,summary){min-height:44px!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-table .gift-photo{width:44px!important;height:44px!important;object-fit:contain!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-table td{padding:10px 12px!important}
+
+@media(max-width:1100px){
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59{--admin-gutter:24px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-item{grid-template-columns:52px minmax(0,1fr)!important;gap:8px 12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-item>div:first-child{grid-row:1/span 2!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-footer{grid-column:2!important}
+}
+@media(max-width:760px){
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59{--admin-gutter:16px;--admin-area-nav-height:112px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-mobile-bottom-nav{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-mobile-area-nav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(2,46px)!important;gap:4px!important;position:fixed!important;inset:64px 0 auto!important;height:var(--admin-area-nav-height)!important;box-sizing:border-box!important;padding:8px!important;background:var(--v839-panel)!important;border-bottom:1px solid var(--v839-line-soft)!important;z-index:145!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-mobile-area-nav a{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;min-width:0!important;min-height:44px!important;padding:3px!important;color:var(--v839-muted)!important;font:500 11px/1.2 'DM Sans',Arial,sans-serif!important;text-decoration:none!important;border-radius:8px!important;border:1px solid transparent!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-mobile-area-nav a.active{background:var(--v839-peach-soft)!important;color:var(--v839-peach)!important;border-color:var(--v839-peach)!important;font-weight:700!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-mobile-area-nav a:focus-visible{outline:2px solid var(--v839-peach);outline-offset:-2px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .mobile-nav-icon{display:grid;place-items:center;font-size:18px;line-height:20px;height:20px}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .mobile-nav-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .admin-wrap{top:calc(64px + var(--admin-area-nav-height))!important;bottom:0!important;height:auto!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.admin-dashboard-main,.admin-view-section){padding:20px var(--admin-gutter) calc(28px + env(safe-area-inset-bottom))!important;height:100%!important;scroll-padding-block:16px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #site-editor{padding-bottom:100px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.section-title-row,.v837-editor-header,.wp-heading){flex-direction:column!important;align-items:stretch!important;margin-bottom:18px!important;gap:12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.section-title-row h2,.v837-editor-header h2,.wp-heading h2){font-size:27px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #app :is(.gift-stats,.seating-summary,.atelier-metrics){gap:8px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-stat-card{min-height:54px!important;padding:10px 12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-stat-card>div{display:flex!important;align-items:center!important;gap:8px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-stat-card small{font-size:11px!important;line-height:1.3!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-stat-icon{display:none!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-stat-card strong{font-size:23px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-item{padding:12px!important;gap:6px 12px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-card-footer>.gift-reserved-by{font-size:11px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-tools{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 #presentes .gift-search{width:100%!important;max-width:none!important;box-sizing:border-box!important}
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56.responsive59 .ux-save-dock{bottom:calc(8px + env(safe-area-inset-bottom))!important}
+}

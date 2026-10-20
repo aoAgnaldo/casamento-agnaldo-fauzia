@@ -1,0 +1,27 @@
+INTERFACE ADMIN — v8.59 — 20/10/2026
+
+ALTERAÇÕES DESTA ENTREGA
+- Navegação mobile em duas filas de quatro áreas: Painel, Convidados, Mesas, Presentes, Equipa, Recepção, Convite e Planeamento. Sem botão Mais.
+- A área actual é identificada visualmente e para leitores de ecrã.
+- Navegação lateral preservada na web. No mobile, a navegação de áreas fica oculta durante a edição em janelas e quando não há sessão aberta.
+- Presentes compactos na web e no mobile, com miniaturas de 52 px em vez de fotografias de 215/220 px. Nome, estado, reserva e acções mantidos.
+- A miniatura abre os detalhes. Foi corrigida também uma falha anterior que impedia abrir esses detalhes por falta de uma função auxiliar.
+- Margens, títulos e espaçamentos comuns entre painéis. Resumos numéricos e cartões mais compactos.
+- Inclui as correcções de scroll e menus da v8.58 e a sincronização do planeamento da v8.57.
+
+COMO PUBLICAR
+Substitua os ficheiros do site pelos deste pacote, na mesma pasta da hospedagem.
+Inclua obrigatoriamente admin-responsive.css e admin-responsive.js, além de admin.html e admin.js.
+Não é necessário executar SQL. Não foi alterado nenhum registo real nesta entrega.
+Os ficheiros ainda NÃO foram publicados no GitHub pelo assistente.
+
+VERIFICAÇÃO E LIMITE ACTUAL
+Passaram os 11 ficheiros de testes locais e as verificações de sintaxe de todos os JavaScripts.
+Os testes incluem rotas das oito áreas, agrupamento das secções do convite, detalhes dos presentes, cálculos, check-in e sincronização do planeamento.
+Na verificação intermédia do browser mobile: presentes compactos, oito áreas acessíveis e indicação da área actual passaram. Foi identificado um recuo de 12 px nos presentes contra 16 px dos outros painéis, corrigido posteriormente na folha de estilos.
+A última repetição visual, após esse ajuste e a activação da miniatura, NÃO terminou: a ferramenta de browser atingiu um limite de utilização. Não se deve interpretar esta versão como visualmente aprovada em todos os tamanhos ou como uma auditoria completa de todas as operações autenticadas.
+O teste de browser fica guardado na pasta de trabalho tests/responsive-regression.html; não faz parte do pacote de hospedagem.
+
+PRESERVAR PLANEAMENTO ANTIGO
+Exporte os planos que ainda estejam numa pré-visualização localhost/127.0.0.1 antes de limpar os dados do navegador. Depois importe no site actualizado e aguarde confirmação de gravação no servidor.
+Dados locais não passam automaticamente entre endereços ou navegadores diferentes.
