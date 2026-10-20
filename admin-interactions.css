@@ -1,0 +1,30 @@
+/* One bounded scrolling surface for the dashboard, matching other panels. */
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #visao-geral .admin-dashboard-main{
+ overflow-x:hidden!important;overflow-y:auto!important;min-height:0!important;
+ height:auto!important;max-height:none!important;overscroll-behavior-y:contain;
+ -webkit-overflow-scrolling:touch;touch-action:pan-y!important;
+}
+/* Menus never participate in card layout. Native popover puts them above clipping ancestors. */
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .v838-action-menu[open]{display:inline-block!important;vertical-align:middle!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app .v838-action-menu-panel{
+ display:none!important;position:fixed!important;inset:auto!important;
+ left:var(--action-left,8px)!important;top:var(--action-top,8px)!important;
+ width:min(280px,calc(100vw - 16px))!important;max-width:calc(100vw - 16px)!important;
+ max-height:calc(100dvh - 24px)!important;overflow-y:auto!important;
+ margin:0!important;padding:12px!important;box-sizing:border-box!important;
+ background:var(--v839-panel-raised)!important;color:var(--v839-text)!important;
+ border:1px solid var(--v839-line)!important;border-radius:14px!important;
+ box-shadow:0 12px 40px #0003!important;z-index:10000!important;
+}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app .v838-action-menu-panel[data-active=true]{display:block!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app .v838-action-menu-panel :is(button,a){min-height:44px!important;font:500 13px/1.4 'DM Sans',Arial,sans-serif!important}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .action-overlay-heading{display:inline-block;margin:6px 8px 14px;font-size:13px;color:var(--v839-muted)}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .action-overlay-close{float:right;border:0;background:transparent;color:var(--v839-text);padding:4px 8px;cursor:pointer}
+html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app .v838-action-menu-panel :focus-visible{outline:2px solid var(--v839-peach)!important;outline-offset:2px!important}
+@media(max-width:760px){
+ html body.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app .v838-action-menu-panel{
+  left:8px!important;right:8px!important;top:auto!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;
+  width:auto!important;max-height:calc(80dvh - env(safe-area-inset-bottom))!important;border-radius:20px!important;padding:16px!important;
+ }
+ .v838-action-menu-panel::backdrop{background:#0006}
+}

@@ -1,0 +1,29 @@
+PAINEL ADMIN — v8.58 — 20/10/2026
+
+ESTA ENTREGA
+- Scroll vertical restaurado no painel principal, no computador e no telemóvel.
+- Menus de três pontos sobrepostos aos cartões sem alterar a sua altura.
+- No telemóvel, as opções aparecem num painel inferior com botão Fechar.
+- Fecho por Escape, clique fora, scroll, mudança de painel e tamanho do ecrã.
+- Correcção específica da regra antiga que colocava o menu dos convidados fora do ecrã.
+- Preservados os controlos reais de edição, QR, envio e remoção; não foram alterados os dados do casamento.
+
+PUBLICAÇÃO
+Substitua os ficheiros do site pelos ficheiros deste pacote, na mesma pasta.
+Os novos ficheiros admin-interactions.js e admin-interactions.css têm de acompanhar admin.html.
+A correcção só aparece no site público depois desta publicação. Este trabalho não publicou ficheiros no GitHub.
+Não é necessário executar SQL: a partilha do planeamento e a libertação dos presentes ao eliminar convidados já foram activadas no servidor nas intervenções anteriores.
+
+PLANEAMENTO
+Este pacote inclui a gravação automática e a partilha da v8.57.
+Antes de limpar dados do navegador, exporte qualquer plano antigo que exista numa pré-visualização localhost/127.0.0.1. Depois importe no site actualizado e aguarde confirmação de gravação no servidor.
+Uma cópia local/offline ainda não significa que o outro perfil já recebeu os dados. Os dados locais não atravessam endereços/navegadores diferentes automaticamente.
+
+VERIFICAÇÃO REALIZADA
+37 verificações no browser a 1200x500 e 390x640: scroll, geometria dos menus, Escape, fecho ao rolar, foco, abertura do registo correcto e fecho de edição de convidados/mesas/presentes/equipa; dimensões e scroll de sete tipos de janela.
+Os testes usam os renderizadores e funções reais de abertura/fecho com exemplos isolados, sem cliente de dados. Não simulam uma gravação autenticada no servidor.
+Testes automatizados de cálculos, rotas, pesquisa, check-in e sincronização do planeamento também verificados. Revisão de código independente concluída sem falhas importantes restantes nestas alterações.
+
+LIMITES DESTA ENTREGA
+Esta entrega resolve as interacções referidas; não representa uma auditoria concluída de cada operação de todo o sistema.
+Não foram repetidos uploads reais de fotografias, envios WhatsApp, gravações de todos os formulários nem eliminações de pessoas reais.
