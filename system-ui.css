@@ -1,0 +1,98 @@
+/* v8.62: shared interaction rules; page-specific colours remain authoritative. */
+body.system62{--ui-touch:44px;--ui-radius:12px;--ui-gutter:clamp(16px,2.6vw,32px);min-width:0;min-height:100svh;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body.system62 *,body.system62 *::before,body.system62 *::after{box-sizing:border-box}
+body.system62 :is(button,input,select,textarea){max-width:100%}
+body.system62 :is(button,[role=button],summary){touch-action:manipulation}
+body.system62 :is(button,summary,a,input,select,textarea):focus-visible{outline:2px solid var(--v839-peach,var(--r11-peach,var(--terra,#874c38)));outline-offset:3px}
+body.system62 :is(img,video,canvas){max-width:100%}
+body.system62 :is(input,select,textarea){min-width:0}
+body.system62 :is(.status,[role=status],[role=alert]){overflow-wrap:anywhere}
+body.system62 :is(dialog,.modal-box,.program-modal,.reservation-modal,.private-access-card){max-width:calc(100vw - 24px);overscroll-behavior:contain;scrollbar-width:thin}
+body.system62 dialog:not([open]){display:none}
+body.system62 :is(.modal,.program-overlay,.reservation-overlay,.private-access-modal):not(.hidden){overscroll-behavior:contain}
+body.system62 :is(input,textarea){scroll-margin-block:90px}
+@media(pointer:coarse){body.system62 :is(button,summary,.button,.copy-account,.gift-filter,.text-link){min-height:44px}body.system62 :is(input,select){min-height:46px}}
+@media(max-width:760px){body.system62 :is(input,select,textarea){font-size:16px!important}body.system62 :is(button,.button){white-space:normal;line-height:1.35}body.system62 :is(dialog,.modal-box){max-width:calc(100vw - 16px)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}body.system62 *,body.system62 *::before,body.system62 *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Admin: common canvas, readable forms, compact content and a single scroll area. */
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app :is(.admin-view-section,.admin-dashboard-main){scrollbar-gutter:stable;scroll-padding-block:20px;min-width:0}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app :is(.section-title-row,.v837-editor-header,.pl61-heading){width:100%;gap:16px;box-sizing:border-box}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app :is(h2,h3,h4,.guest-name,.gift-name,.table-card-title){overflow-wrap:anywhere}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 :is(input,select,textarea){color:var(--v839-text)!important;background-color:var(--v839-field)!important;border-color:var(--v839-line)!important}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 input::placeholder,html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 textarea::placeholder{color:var(--v839-muted)!important;opacity:1}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .modal:not(.hidden){overflow-y:auto!important;overscroll-behavior:contain;align-items:flex-start!important;padding:24px 16px!important}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .modal:not(.hidden)>.modal-box{height:auto!important;max-height:none!important;overflow:visible!important;margin-block:auto!important}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 :is(.v838-action-menu-panel,.admin-menu-panel){max-width:calc(100vw - 24px);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .guest-card-name{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #mesas .table-card{min-width:0!important;align-self:start!important}
+html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .pl61-root{max-width:var(--admin-content-width,1280px)!important;width:100%!important;margin-inline:auto!important}
+@media(min-width:761px) and (max-width:1200px){html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #mesas .table-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #mesas .seating-layout{grid-template-columns:minmax(0,1fr) 250px!important;gap:16px!important}}
+@media(max-width:760px){
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app :is(.admin-view-section,.admin-dashboard-main){height:auto!important;min-height:100%!important;padding-inline:16px!important;padding-bottom:calc(110px + env(safe-area-inset-bottom))!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app :is(.section-title-row,.v837-editor-header,.pl61-heading){flex-direction:column!important;align-items:stretch!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app :is(.section-actions,.pl61-heading>.pl61-actions){width:100%;flex-wrap:wrap}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #app :is(.section-actions,.pl61-heading>.pl61-actions)>:not(input){min-height:44px;flex:1 1 auto}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #mesas .seating-layout{display:flex!important;flex-direction:column!important;gap:16px!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #mesas :is(.table-list,.unassigned-panel){width:100%!important;max-width:none!important;grid-column:auto!important;grid-row:auto!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #mesas .table-list{grid-template-columns:minmax(0,1fr)!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .guest-card{display:flex!important;flex-direction:column!important;gap:14px!important;align-items:stretch!important;padding:16px!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 :is(.guest-card-top,.guest-card-head,.guest-card-main){min-width:0!important;width:100%!important;flex-wrap:wrap!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .guest-card-stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;flex-basis:100%!important;width:100%!important;min-width:0!important;max-width:none!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .guest-card-stats>div{min-width:0!important}.system62 .guest-card-stats strong{white-space:normal!important;text-overflow:clip!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .guest-card-actions{display:flex!important;flex-wrap:wrap!important;width:100%!important;gap:8px!important;margin:0!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .guest-table-quick{width:100%!important;min-width:0!important}.system62 .guest-table-quick select{width:100%!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #presentes .gift-card-item{grid-template-columns:44px minmax(0,1fr)!important;min-height:0!important;padding:12px!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #presentes .gift-card-item>div:first-child,html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #presentes :is(.gift-thumbnail,.gift-card-item .gift-photo){width:44px!important;height:44px!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 #presentes .gift-card-footer{grid-column:2!important;flex-wrap:wrap!important;gap:6px!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 :is(.gift-pagination,.gift-list-pagination){background:transparent!important;display:flex!important;flex-wrap:wrap!important;gap:6px!important}
+ html body.system62.admin-body.admin-v838.admin-v839.atelier.stitch53.integrated56 .v837-editor-layout{grid-template-columns:minmax(0,1fr)!important}.system62 .v837-editor-layout>*{min-width:0!important}
+}
+
+/* Public invitation: comfortable reading and no nested gift scrolling on phones. */
+body.system62.wedding-public :is(.section-pad,.gifts-section,.rsvp-section){scroll-margin-top:84px}
+body.system62.wedding-public :is(.program-modal,.reservation-modal,.private-access-card){max-height:calc(100dvh - 32px)!important;overflow-y:auto!important;overscroll-behavior:contain}
+body.system62.wedding-public :is(.copy-account,.gift-filter,.rsvp-choice button){min-height:44px}
+body.system62.wedding-public :is(.account-row,.gift-item-copy,.rsvp-found-copy){min-width:0;overflow-wrap:anywhere}
+body.system62.wedding-public .program-section{align-items:start}
+body.system62.wedding-public :is(.section-pad,.gifts-section){padding-inline:clamp(20px,7vw,120px)}
+@media(max-width:760px){
+ body.system62.wedding-public .intro-screen{overflow-y:auto!important;min-height:100svh;padding:32px 20px calc(40px + env(safe-area-inset-bottom))!important}
+ body.system62.wedding-public .intro-mark{margin:0 auto 18px!important;width:48px;height:48px}.system62.wedding-public .intro-screen h1{font-size:clamp(52px,16vw,78px)!important;line-height:1!important}
+ body.system62.wedding-public .intro-date{position:static!important;margin:24px 0 0!important}.system62.wedding-public .intro-note{margin-bottom:20px!important}
+ body.system62.wedding-public :is(.section-pad,.gifts-section){padding:56px 20px!important}
+ body.system62.wedding-public :is(.date-section,.story-section,.program-section,.details-section){grid-template-columns:minmax(0,1fr)!important;gap:28px!important;min-height:0!important}
+ body.system62.wedding-public :is(.story-text,.date-main,.program-heading,.details-copy){width:100%;min-width:0;max-width:none!important}
+ body.system62.wedding-public :is(.story-text p,.detail-row p,.program-intro){font-size:18px!important;line-height:1.5!important;max-width:none!important}
+ body.system62.wedding-public :is(.story-text h2,.program-heading h2,.details-copy h2){font-size:clamp(42px,12vw,64px)!important;line-height:1!important;margin-block:18px!important}
+ body.system62.wedding-public .countdown{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}.system62.wedding-public .count-item{min-width:0;padding-left:9px!important}.system62.wedding-public .count-item strong{font-size:32px!important}
+ body.system62.wedding-public .topbar{padding-inline:16px!important;gap:8px!important}.system62.wedding-public .topbar-actions{gap:6px!important}
+ body.system62.wedding-public .gift-list{max-height:none!important;height:auto!important;overflow:visible!important;padding-right:0!important}
+ body.system62.wedding-public .gift-item{min-width:0!important}.system62.wedding-public .gift-item-main{min-width:0!important;gap:12px!important}.system62.wedding-public .gift-item-copy{overflow-wrap:anywhere}
+ body.system62.wedding-public :is(.gift-filter-row,.modal-actions){display:flex!important;flex-wrap:wrap!important;gap:8px!important}.system62.wedding-public .gift-filter{flex:1}
+ body.system62.wedding-public .rsvp-section{min-height:0!important;padding:48px 18px calc(48px + env(safe-area-inset-bottom))!important;overflow:visible!important}
+ body.system62.wedding-public :is(.rsvp-inner,.rsvp-card,.rsvp-form){min-width:0!important;max-width:100%!important}.system62.wedding-public .rsvp-search-row{display:flex!important;flex-wrap:wrap!important;gap:10px!important}.system62.wedding-public .rsvp-search-row input{flex:1 1 200px!important}.system62.wedding-public .rsvp-search-row button{min-height:46px!important;flex:1 1 120px!important}
+ body.system62.wedding-public .account-row{gap:10px!important;flex-wrap:wrap!important}.system62.wedding-public .account-row>span{overflow-wrap:anywhere;min-width:0}
+}
+
+/* Reception: scanner/search first, compact summaries and accessible login. */
+body.system62.reception-body{--ui-radius:12px}
+body.system62.reception-body :is(.reception-main,.chief-tools,.reception-live-dashboard){min-width:0;max-width:1440px;margin-inline:auto}
+body.system62.reception-body :is(.login,.reception-side-drawer){overflow-y:auto!important;overscroll-behavior:contain}
+body.system62.reception-body .login{padding:24px 16px!important;align-items:safe center!important;min-height:100svh}
+body.system62.reception-body .login-box{max-width:460px!important;width:100%!important;margin-block:auto!important}
+body.system62.reception-body :is(.manual-reception,.chief-direct-search){gap:10px!important;min-width:0}.system62.reception-body :is(.manual-reception input,.chief-direct-search input){min-width:0!important}
+body.system62.reception-body :is(.recent-public-item,.recent-arrival,.chief-scroll-list){overflow-wrap:anywhere}
+body.system62.reception-body #reader{max-width:100%!important;overflow:hidden;border-radius:12px}
+@media(max-width:900px){body.system62.reception-body .reception-grid{display:flex!important;flex-direction:column!important;gap:16px!important}body.system62.reception-body .reception-grid>.dashboard-left{display:none!important}body.system62.reception-body .reception-grid>.dashboard-right{width:100%!important}}
+@media(max-width:760px){
+ body.system62.reception-body .reception-main{padding:20px 16px calc(32px + env(safe-area-inset-bottom))!important}
+ body.system62.reception-body .scanner-card{padding:18px!important;min-width:0!important}
+ body.system62.reception-body :is(.manual-reception,.chief-direct-search){display:flex!important;flex-wrap:wrap!important}.system62.reception-body :is(.manual-reception input,.chief-direct-search input){flex:1 1 100%!important;width:100%!important}.system62.reception-body :is(.manual-reception button,.chief-direct-search button){width:100%!important;min-height:46px!important}
+ body.system62.reception-body :is(.wedy-reception-stats,.live-summary-grid,.chief-reception-kpis){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+ body.system62.reception-body :is(.live-columns,.chief-operations-columns){grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+ body.system62.reception-body :is(.chief-card-head,.chief-overview-head){flex-wrap:wrap!important;gap:12px!important}
+ body.system62.reception-body :is(.chief-scroll-list,.recent-arrivals-list){max-height:none!important;height:auto!important;overflow:visible!important}
+ body.system62.reception-body .reception-side-drawer .reception-drawer-panel{max-width:min(360px,calc(100vw - 20px))!important}
+ body.system62.reception-body .login-box{padding:24px 18px!important}.system62.reception-body .login-box h1{font-size:32px!important;line-height:1.15!important}
+}

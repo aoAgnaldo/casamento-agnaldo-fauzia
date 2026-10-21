@@ -1,0 +1,25 @@
+CASAMENTO — VERSÃO 8.62
+
+Optimização de interface para Admin, convite público e recepção.
+
+Inclui: formulários adaptados ao toque; painéis e convidados em coluna no
+telemóvel; presentes mais compactos; melhor aproveitamento do espaço;
+limites de janelas e menus; pesquisa acessível na recepção; imagens com
+carregamento diferido fora da capa; respeito pela redução de movimento.
+Mantém o botão Painéis flutuante no centro inferior e os dados existentes.
+
+INSTALAÇÃO
+Faça uma cópia da hospedagem actual. Extraia o ZIP e publique os ficheiros
+juntos na mesma pasta, substituindo os ficheiros correspondentes.
+Não apague a configuração existente nem os dados do Supabase.
+Não é necessária nenhuma migração de base de dados para esta versão.
+
+VERIFICAÇÃO
+29 ficheiros de testes automáticos passaram, além do contrato estático
+mobile, análise de sintaxe e verificação de referências locais nas páginas.
+Os 26 scripts anteriores de produção mantiveram-se inalterados.
+Não foi possível realizar nova inspecção visual interactiva nesta sessão.
+Validar no dispositivo: scroll até ao fim, teclado, menus, fotografias,
+pré-visualização, câmara e contraste nos dois temas antes de publicar.
+
+Esta entrega não foi publicada automaticamente.

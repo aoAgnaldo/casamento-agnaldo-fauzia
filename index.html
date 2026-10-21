@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="v8.27-mobile-rsvp.css?v=8.28">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
-</head>
-<body>
+<link rel="stylesheet" href="system-ui.css?v=8.62"><script defer src="system-ui.js?v=8.62"></script></head>
+<body class="wedding-public system62">
 <main class="site-shell">
 <div class="intro-screen" id="introScreen">
   <div class="intro-paper-noise"></div>
@@ -169,7 +169,7 @@
   <p>Preencha os seus dados para confirmarmos que este presente ficou consigo.</p>
   <form id="reservationForm">
    <label>O seu nome<input id="guestName" required minlength="2" placeholder="Escreva o seu nome"></label>
-   <label>O seu número do WhatsApp<input id="guestWhatsapp" required minlength="8" placeholder="Ex.: +258 84 000 0000"></label>
+   <label>O seu número do WhatsApp<input id="guestWhatsapp" inputmode="tel" autocomplete="tel" required minlength="8" placeholder="Ex.: +258 84 000 0000"></label>
    <div class="modal-actions"><button type="button" class="button button--quiet modal-cancel" id="reservationCancel">Cancelar</button><button type="submit" class="button button--primary">Confirmar reserva</button></div>
   </form>
  </div>
