@@ -43,6 +43,12 @@
    if(this.state.localFailure)this.state.message='Não foi possível criar a cópia local. Exporte o plano antes de sair.';
    this.emit();this.queue();
   }
+  async upgrade(){
+   if(!this.state.ready||this.state.busy||this.state.dirty||this.state.conflict)throw Error('Sincronize o plano e resolva alterações pendentes antes de activar as peças.');
+   if(!this.remote?.canUpgrade||!await this.remote.canUpgrade())throw Error('A preparação do servidor ainda não está disponível.');
+   if(this.stopped)throw Error('A conta mudou. Volte a abrir o plano.');
+   this.backup();this.save(core.upgradePlan(this.state.plan));await this.flush();
+  }
   async flush(){
    if(this.stopped||this.state.busy||this.state.conflict||!this.state.dirty)return;
    if(!this.state.shared||!this.id){this.state.message='Ainda não foi guardado no servidor. Cópia apenas neste navegador.';this.emit();return;}

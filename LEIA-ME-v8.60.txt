@@ -1,0 +1,43 @@
+ADMIN v8.60 — conjuntos, peças e navegação flutuante
+
+ESTADO
+Código preparado localmente. Não publicado pelo assistente.
+A preparação do servidor foi autorizada e aplicada: aceita versões 1/2,
+arquiva a versão anterior na conversão e recusa regressos à versão 1.
+O plano real NÃO foi convertido. Os membros autorizados não mudaram.
+
+UTILIZAÇÃO
+No mobile, o botão Painéis fica centrado em baixo e abre os oito destinos.
+No planeamento, aguarde a sincronização e escolha Activar peças.
+Esta acção cria cópias de segurança e exige confirmação.
+Depois de activar, use a nova versão nas duas contas.
+Crie etapas e tarefas/conjuntos normalmente. Em Peças e fornecedor,
+adicione as peças, quantidades e preços unitários. Guarde a peça e o conjunto.
+Os pagamentos continuam no conjunto; as peças não são somadas duas vezes.
+Sem peças, o modo de peças vale zero. Regressar aos preços manuais requer confirmação.
+Fornecedor vazio na peça significa usar o fornecedor do conjunto.
+O WhatsApp requer + e código de país; o sistema não adivinha o país.
+
+FOTOGRAFIAS
+JPEG/PNG/WebP até 15 MB; convertidas a WebP até 1600 px e 1 MB.
+Armazenamento privado, acessível apenas a membros do plano.
+URLs de visualização temporários de 10 minutos; não são URLs públicas.
+Se falhar a ligação ou fechar o editor, use Fotografias pendentes no mesmo
+dispositivo e conta para tentar enviar/associar novamente.
+Guardar a fotografia não substitui Guardar peça e Guardar conjunto.
+Envios antigos não são eliminados automaticamente do servidor.
+
+PUBLICAÇÃO
+Faça uma cópia do site actual e exporte o planeamento antes de publicar.
+Copie todos os ficheiros do ZIP para a mesma pasta da hospedagem.
+Actualize a página nas duas contas. Não execute novamente os SQL desta entrega.
+Os testes e scripts SQL ficam na pasta de trabalho, fora do ZIP público.
+Não limpe os dados locais se houver fotografias ou alterações pendentes.
+
+VERIFICAÇÃO
+Testes locais e transacção SQL isolada executados; dados de teste revertidos.
+Não se declara validação visual completa: a ferramenta de browser atingiu
+um limite. Testar em 360/390/768/1280 px, temas claro/escuro, teclado,
+abertura/fecho de janelas e fim do scroll antes da publicação definitiva.
+Existem avisos antigos de segurança relativos a outras funções e protecção
+de palavras-passe; não foram alterados indiscriminadamente nesta entrega.
