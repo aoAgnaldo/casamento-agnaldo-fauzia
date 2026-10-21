@@ -1,0 +1,14 @@
+V8.70 — PRESENTES EM GRELHA
+
+Corrige a interpretação da v8.69: a vista em grelha apresenta cartões
+com fotografia em destaque, nome e estado abaixo e acções no rodapé.
+Quatro colunas em ecrãs largos, três até 1500px, duas até 1100px e
+uma até 360px. A opção de lista continua separada.
+Mantidos os ajustes do modal e da pré-visualização limitada em altura.
+
+Faça cópia da hospedagem e publique todos os ficheiros do ZIP juntos,
+incluindo admin.js e gifts-ui.css da mesma versão. Sem migração.
+35 ficheiros de testes passaram, incluindo execução do renderer nas
+duas vistas. Isso não confirma geometria visual: o navegador continua
+indisponível nesta sessão, pelo limite já reportado.
+Não publicado automaticamente e sem alterações de dados.
