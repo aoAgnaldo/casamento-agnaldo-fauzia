@@ -28,6 +28,7 @@
  async uploadPhoto(id){const row=await this.store.get(id);if(!row)throw Error('Fotografia pendente não encontrada.');if(row.userId!==this.currentUser())throw Error('A conta mudou.');if(!row.uploaded){try{await this.transport.upload(row.path,row.blob);}catch(error){if(row.userId!==this.currentUser()||!this.transport.verify||!await this.transport.verify(row.path,row.blob))throw error;}if(row.userId!==this.currentUser())throw Error('A conta mudou.');row.uploaded=true;await this.store.put(row);}return {path:row.path};}
  async pending(userId,planId){return (await this.store.all()).filter(r=>r.userId===userId&&r.planId===planId);}
  acknowledge(id){return this.store.remove(id);}
+ async reconcile({userId,planId,referencedPaths}){if(userId!==this.currentUser())throw Error('A conta mudou.');const paths=new Set(referencedPaths);for(const row of await this.pending(userId,planId)){if(userId!==this.currentUser())throw Error('A conta mudou.');if(paths.has(row.path))await this.acknowledge(row.id);}}
  async photoUrl(path){const url=await this.transport.signedUrl(path);if(!/^https:\/\//.test(url))throw Error('Endereço de fotografia inválido.');return url;}
  }
  const api={MediaQueue,compressPhoto,indexedStore};if(typeof module!=='undefined')module.exports=api;else root.WeddingPlannerMedia=api;

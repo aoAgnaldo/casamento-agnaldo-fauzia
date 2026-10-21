@@ -1,0 +1,52 @@
+PLANEAMENTO DO CASAMENTO — v8.61 — 21/10/2026
+
+Esta entrega reconstrói o Planeamento. Não é uma publicação automática.
+Não altera permissões do servidor nem apaga o plano existente.
+
+COMEÇAR
+1. Abra Planeamento e escolha Criar primeira etapa.
+2. Dê um nome à etapa: Lobolo, Civil, Cerimónia, Recepção ou outro.
+3. Na etapa, escolha Adicionar item: Tarefa, Compra ou Serviço.
+4. Preencha apenas o necessário; responsáveis, prazos e fornecedores são opcionais.
+5. Guarde o item. A mensagem distingue gravação partilhada de cópia local.
+
+QUATRO ÁREAS
+Resumo: próximo prazo, atenção necessária e progresso.
+Preparativos: etapas, itens e peças opcionais.
+Agenda: os prazos dos mesmos itens; não precisa de os escrever novamente.
+Dinheiro: orçamento, custos, pagamentos e poupança dos mesmos preparativos.
+
+PEÇAS
+Numa Compra ou Serviço, escolha Adicionar peça. Indique quantidade e preço
+por unidade. Adicionar ao item guarda a peça no rascunho; no fim escolha
+Guardar alterações para guardar o item completo.
+O total das peças entra apenas uma vez no orçamento. Os pagamentos ficam
+no item. Remover a última peça deixa total zero; voltar ao preço manual
+exige confirmação. Confirmado zero é um preço válido.
+
+FORNECEDORES E FOTOS
+Abra Fornecedor e fotografia dentro do item ou peça. Na peça, fornecedor
+vazio usa o fornecedor do item. WhatsApp requer + e código de país.
+Fotos privadas: JPEG/PNG/WebP até 15 MB, convertidas para WebP até 1 MB.
+Se o envio ficar pendente, recupere em Ferramentas > Fotografias pendentes.
+Nenhuma fotografia remota antiga é eliminada automaticamente.
+
+GRAVAÇÃO E RECUPERAÇÃO
+Guardado e partilhado: servidor confirmou a gravação, acessível às duas contas.
+Guardado neste dispositivo; por partilhar: ainda falta a confirmação remota.
+Rascunhos recuperáveis e exportação ficam em Ferramentas.
+Não limpe dados do navegador enquanto houver alterações/fotografias pendentes.
+As cópias locais não passam automaticamente entre portas localhost, domínios,
+dispositivos ou contas. Exporte antes de mudar de endereço.
+
+PUBLICAR
+Faça cópia do site actual e exporte o plano. Copie todos os ficheiros do ZIP
+para a mesma pasta da hospedagem. Actualize a página nas duas contas.
+Não execute novamente os SQL das versões anteriores. Nenhum SQL novo é
+necessário nesta entrega; o servidor foi preparado para versão 2 na v8.60.
+
+VERIFICAÇÃO
+Consultar o relatório REVISAO-v8.61.md junto do pacote para os resultados e
+limites. Testes automáticos não substituem validação visual. Esta entrega
+é candidata a revisão visual: confirmar temas claro/escuro, scroll, teclado,
+foco e percursos completos em mobile e web antes da publicação definitiva.

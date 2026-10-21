@@ -18,6 +18,7 @@
  function supplierValid(s){if(s==null)return;for(const k of ['name','phone','whatsapp','address'])if(typeof s[k]!=='string'||s[k].length>(k==='address'?1000:180))throw Error('Fornecedor inválido.');}
  function photoValid(path){if(path==null||path==='')return;if(typeof path!=='string'||path.length>600||!/^[-a-zA-Z0-9_]+\/[-a-zA-Z0-9_]+\/[-a-zA-Z0-9_]+\/[-a-zA-Z0-9_]+\.(webp|jpg|png)$/.test(path))throw Error('Referência de fotografia inválida.');}
  function validate(p){
+ if(p&&p.budgetConfigured!==undefined&&typeof p.budgetConfigured!=='boolean')throw Error('Definição de orçamento inválida.');
  if(!p||![1,2].includes(p.version)||!Array.isArray(p.stages)||!Array.isArray(p.items)||!Array.isArray(p.contributions))throw Error('Cópia de planeamento inválida.');
  const ids=new Set();for(const x of [...p.stages,...p.items,...p.contributions]){if(!x||typeof x.id!=='string'||ids.has(x.id))throw Error('Registos inválidos ou duplicados.');ids.add(x.id);}
  for(const x of p.stages)if(typeof x.name!=='string'||!x.name.trim())throw Error('Etapa sem nome.');
