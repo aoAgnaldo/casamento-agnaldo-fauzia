@@ -1,0 +1,23 @@
+V8.65 — RECEPÇÃO
+
+A recepção integrada no Admin recebe uma base de coluna única em todas
+as larguras. Três indicadores compactos aparecem acima da pesquisa.
+O formulário e o QR usam a largura disponível, sem a coluna estreita
+mostrada nas imagens. Pesquisa em coluna até 1100 px; em ecrãs maiores,
+campo e botão podem partilhar uma linha. Equipa com cartões mais compactos.
+Mesas: redução de espaçamentos nas larguras intermédias.
+
+A causa identificada na versão anterior foi uma correcção limitada a
+760 px, deixando a composição antiga activa nas larguras intermédias.
+Não é possível confirmar apenas pelas imagens que a hospedagem está
+efectivamente a servir todos os ficheiros da última versão.
+
+Faça uma cópia da hospedagem e substitua todos os ficheiros pelo ZIP.
+Esta versão actualiza a referência de cache do estilo alterado.
+Não precisa de migração e não altera dados ou controladores de gravação.
+Não publicada automaticamente.
+
+32 ficheiros de testes passaram, incluindo contrato estático da recepção,
+além da sintaxe e referências locais. O teste novo verifica declarações,
+não geometria real. A validação visual de mobile/tablet/web continua
+pendente pelo limite da ferramenta de navegador desta sessão.
