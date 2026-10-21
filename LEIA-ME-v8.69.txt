@@ -1,0 +1,21 @@
+V8.69 — LISTA E EDITOR DOS PRESENTES
+
+Lista em linhas compactas com fotografia de 56px, nome e estado juntos,
+acções à direita no web e abaixo no mobile. Removida a repetição de
+disponibilidade; dados de reserva preservados.
+
+Editor com pré-visualização limitada a 180px (150px em ecrãs pequenos),
+imagem sem distorção e botão Remover fotografia com texto real. O botão
+anterior ficava vazio porque o texto estava num pseudo-elemento usado
+também como tooltip invisível; retiradas as classes de botão de ícone.
+
+Nenhuma alteração à lógica de gravação ou às permissões. A correcção
+de servidor da função admin_update_gift já foi aplicada separadamente.
+
+INSTALAR: faça uma cópia da hospedagem e publique todos os ficheiros do
+ZIP juntos, incluindo gifts-ui.css e admin.js actualizados.
+
+35 ficheiros de testes passaram, incluindo execução do renderer dos
+presentes, além de sintaxe e referências locais. Não foi possível
+validar visualmente o navegador pelo limite desta sessão. Esta versão
+continua a exigir revisão visual em mobile e web. Não foi publicada.
