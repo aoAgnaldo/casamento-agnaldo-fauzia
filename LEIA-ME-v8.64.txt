@@ -1,0 +1,27 @@
+CASAMENTO — V8.64 — PADRÃO PARTILHADO DE JANELAS
+
+Esta entrega uniformiza a apresentação dos formulários existentes do
+Admin e do selector de convidados: cabeçalho, fecho, margens, cantos,
+campos, scroll interno e acções. Os formulários recebem Cancelar quando
+existe um botão de fecho associado. O botão de remover fotografia passa
+a ter texto explícito, para não se confundir com fechar/cancelar.
+
+Menus de três pontos: opções em lista vertical e fecho no cabeçalho.
+Planeamento: cantos e rodapé alinhados com o padrão de edição.
+Mobile: altura disponível acompanha visualViewport; resumo da recepção
+em linha e pesquisa em coluna; presentes sem linhas de grelha esticadas;
+acções dos convidados sem botões de importação/exportação gigantes.
+Recepção separada: removido fundo claro residual da pesquisa.
+
+INSTALAR
+Faça uma cópia da hospedagem e publique todos os ficheiros do ZIP juntos.
+Não é necessária migração. Não foram modificados os registos, o servidor
+ou os controladores existentes de gravação. Não publicado automaticamente.
+
+VERIFICAÇÃO
+31 ficheiros de testes Node passaram; contrato estático mobile e análise
+de sintaxe passaram. A geometria, o teclado real e todos os modais em
+execução continuam por verificar visualmente: o navegador desta sessão
+atingiu o limite já reportado. Testes de funções não substituem esse teste.
+Confirmar em mobile e web antes de publicar: editar convidado/mesa/
+presente/protocolo, selector de convidados, QR, fotografias e planeamento.
