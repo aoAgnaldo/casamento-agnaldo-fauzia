@@ -1,0 +1,16 @@
+V8.73 — APENAS A SECÇÃO PÚBLICA DOS PRESENTES
+
+Contribuições em cartões arredondados; pesquisa arredondada; filtros
+em cápsula; presentes em linhas individuais com cantos arredondados,
+fotografia, nome e botão alinhados. Ordem e conteúdo preservados.
+Não inclui as alterações reprovadas das versões v8.71 e v8.72.
+
+Este pacote contém apenas index.html, public-gifts.css e estas instruções.
+Faça uma cópia do index.html actualmente hospedado e envie os dois ficheiros
+para a pasta do site. Não substitua ficheiros de configuração ou do Admin.
+A página base é a v8.70, com apenas uma ligação de estilo acrescentada.
+
+36 ficheiros de testes passaram. Confirmado que o HTML, sem essa ligação,
+é idêntico à base e que os controladores e o Admin não mudaram.
+O aspecto final ainda não foi validado num navegador nesta sessão.
+Não publicado automaticamente e sem alterações de dados.
