@@ -1,0 +1,23 @@
+CASAMENTO — V8.63 — CORRECÇÕES DE CONSISTÊNCIA
+
+Revisão do código das interfaces Admin, convite e recepção.
+Correcções principais:
+- Superfície de scroll mobile limitada à altura da moldura fixa.
+- Regras finais com prioridade suficiente sobre os estilos antigos.
+- Detalhes reais dos convidados em grelha, sem colunas escondidas no mobile.
+- RSVP visível antes dos restantes detalhes do cartão.
+- Miniaturas compactas dos presentes e acções que podem quebrar de linha.
+- Capa mobile em fluxo, sem mistura de coordenadas absolutas.
+- Scroll aplicado à janela reservada, não aos seus cartões de navegação.
+
+Faça uma cópia da hospedagem antes de substituir os ficheiros. Publique
+todos os ficheiros deste pacote juntos na pasta actual. Não é necessária
+nenhuma migração. Não foram alterados dados, permissões ou servidor.
+
+Passaram 30 ficheiros de testes Node, contrato estático mobile, sintaxe
+dos scripts e referências locais. A nova verificação de estilos é estática:
+não substitui uma inspecção de geometria e interacção num navegador.
+A ferramenta de navegador continua indisponível nesta sessão. A revisão
+visual completa, teclado, câmara e scroll físico continuam por validar.
+
+Não foi publicada automaticamente. A v8.62 foi preservada.
