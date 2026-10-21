@@ -1,0 +1,11 @@
+V8.68 — ORGANIZAÇÃO DOS CARTÕES DAS MESAS
+
+O círculo ilustrativo foi reposto sem alterar a sua largura, altura ou
+escala anteriores. Nome e acções ficam no cabeçalho; ocupação e barra
+ao lado do círculo; convidados e botão de adicionar ocupam a largura
+inferior. Alteração limitada a ecrãs até 1100 px, sem alterar dados.
+
+Publicar os ficheiros do ZIP juntos, após cópia da hospedagem actual.
+34 ficheiros de testes passaram. O teste de disposição é estático;
+validação visual ainda pendente pelo limite do navegador da sessão.
+Não publicado automaticamente.
