@@ -100,7 +100,16 @@
     <div class="site-story-preview"><img id="siteStoryLargePreview" src="monogram.svg" alt="Nossa história"><div><p class="site-story-label">A NOSSA HISTÓRIA</p><p id="siteStoryTextPreview" class="site-story-text">A nossa história aparecerá aqui.</p></div></div>
   </section>
   <section class="wedy-section admin-view-section" id="checkin"><div class="section-title-row"><div><p class="section-kicker">ENTRADAS</p><h2>Check-in dos convidados</h2><p class="muted">No dia do casamento, leia o QR Code ou procure pelo código do convite.</p></div><a class="button secondary" href="checkin.html">Abrir recepção ↗</a></div>
-    <div class="checkin-layout"><div class="checkin-main-card"><div class="scan-title"><span class="scan-icon">⌁</span><div><h3>Ler convite</h3><p class="muted">Aponte a câmara para o QR Code ou introduza o código.</p></div></div><div class="checkin-tools"><div class="checkin-manual"><label>Código do convite<input id="checkinCode" placeholder="Ex.: AF-TESTE01" autocomplete="off"></label><button class="button" id="checkinSearchBtn">Pesquisar convite</button></div><div id="checkinResult" class="checkin-result hidden"></div><button class="button secondary" id="startScannerBtn">▣ Ler QR Code</button><button class="button secondary hidden" id="stopScannerBtn">Parar leitura</button><div id="qrReader" class="qr-reader hidden"></div></div></div><div class="checkin-summary"><div><strong id="stCheckedIn2">0</strong><span>Entraram</span></div><div><strong id="stNotCheckedIn2">0</strong><span>Por entrar</span></div><div><strong id="stPresentPeople">0</strong><span>Pessoas presentes</span></div></div></div>
+    <div class="reception-workspace">
+      <article class="reception-search-card">
+        <header class="reception-search-heading"><h3>Encontrar convidado</h3><p>Pesquise pelo nome ou código do convite.</p></header>
+        <div class="reception-search-form"><label for="checkinCode">Nome ou código do convite</label><input id="checkinCode" type="search" placeholder="Ex.: Maria ou AF-1234" autocomplete="off" enterkeyhint="search"><button type="button" class="button" id="checkinSearchBtn">Pesquisar convidado</button></div>
+        <div id="checkinResult" class="checkin-result hidden" aria-live="polite"></div>
+        <div class="reception-scan-actions"><span>Ou use a câmara</span><button type="button" class="button secondary" id="startScannerBtn">Ler QR Code</button><button type="button" class="button secondary hidden" id="stopScannerBtn">Parar leitura</button></div>
+        <div id="qrReader" class="qr-reader hidden"></div>
+      </article>
+      <div class="reception-totals" aria-label="Resumo da recepção"><div><strong id="stCheckedIn2">0</strong><span>Convites recebidos</span></div><div><strong id="stNotCheckedIn2">0</strong><span>Por chegar</span></div><div><strong id="stPresentPeople">0</strong><span>Pessoas presentes</span></div></div>
+    </div>
   </section>
 
   <section class="wedy-section admin-extra admin-view-section" id="programa-admin"><div class="section-title-row"><div><p class="section-kicker">O GRANDE DIA</p><h2>Programa</h2><p class="muted">Defina o dia, a hora, o nome, a descrição e a localização de cada momento.</p></div><button class="button" id="addProgramBtn" type="button">＋ Adicionar momento</button></div><div class="program-admin-list" id="programAdminList"></div></section>
@@ -451,3 +460,4 @@ document.getElementById('siteStoryEditFullBtn')?.addEventListener('click',()=>wi
 <script src="admin-layout.js?v=8.56"></script>
 <link rel="stylesheet" href="system-ui.css?v=8.63"><script src="system-ui.js?v=8.62"></script>
 <link rel="stylesheet" href="admin-dialogs.css?v=8.65"><script src="admin-dialogs.js?v=8.64"></script>
+<link rel="stylesheet" href="reception-admin.css?v=8.66">

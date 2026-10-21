@@ -1,0 +1,16 @@
+V8.66 — REESTRUTURAÇÃO DA RECEPÇÃO DO ADMIN
+
+Composição: pesquisa pelo nome/código, leitura por QR e resumo compacto.
+Substituídas as classes antigas da composição da recepção por estrutura
+isolada. Mantidos todos os identificadores dos campos, botões, resultados,
+leitor e indicadores para preservar os controladores existentes.
+
+Os testes automáticos verificam estrutura, identificadores e regressões
+dos fluxos. Não comprovam a aparência, teclado ou câmara num dispositivo.
+Não foi possível abrir o navegador por limite da ferramenta nesta sessão.
+Esta é uma versão candidata a validação visual, não uma afirmação de que
+o problema no site publicado ficou resolvido.
+
+Instalação: faça cópia da hospedagem e substitua os ficheiros do ZIP juntos.
+É necessário incluir reception-admin.css e admin.html da mesma versão.
+Não requer migração. Não publicado automaticamente e sem alterações de dados.
