@@ -1,0 +1,30 @@
+/* RSVP phone repair only: bounded controls and a shorter visual hierarchy. */
+@media(max-width:800px){
+ html body.wedding-public.system62 #rsvp{min-height:0!important;height:auto!important;padding:36px 20px calc(36px + env(safe-area-inset-bottom))!important}
+ html body.wedding-public.system62 #rsvp .rsvp-inner{width:100%!important;max-width:460px!important;min-height:0!important;margin:0 auto!important;gap:0!important}
+ html body.wedding-public.system62 #rsvp .rsvp-mark{display:block!important;position:static!important;width:38px!important;height:46px!important;margin:0 auto 14px!important;flex:0 0 auto!important}
+ html body.wedding-public.system62 #rsvp .rsvp-mobile-steps{margin:0 auto 18px!important;gap:8px!important}
+ html body.wedding-public.system62 #rsvp .rsvp-mobile-steps span{font:500 10px/1.3 var(--font-body)!important;letter-spacing:.06em!important;padding:7px 11px!important}
+ html body.wedding-public.system62 #rsvp .rsvp-inner .section-label{display:block!important;width:100%!important;margin:0 0 12px!important;text-align:center!important;color:#f3d5c5!important}
+ html body.wedding-public.system62 #rsvp .rsvp-inner .section-label::before,html body.wedding-public.system62 #rsvp .rsvp-inner .section-label::after{display:none!important;content:none!important}
+ html body.wedding-public.system62 #rsvp .rsvp-inner .section-label>span{display:block!important;white-space:normal!important;font:500 10px/1.5 var(--font-body)!important;letter-spacing:.13em!important}
+ html body.wedding-public.system62 #rsvp .rsvp-heading-fixed{font:400 clamp(36px,10vw,46px)/1.04 var(--font-display)!important;letter-spacing:-.025em!important;margin:0!important;padding:0!important;width:100%!important;max-width:none!important}
+ html body.wedding-public.system62 #rsvp .rsvp-heading-fixed>span{display:block!important}
+ html body.wedding-public.system62 #rsvp .rsvp-divider{width:70%!important;max-width:240px!important;margin:18px auto!important}
+ html body.wedding-public.system62 #rsvp .rsvp-copy{font:400 14px/1.6 var(--font-body)!important;letter-spacing:0!important;max-width:350px!important;margin:0 auto 22px!important;padding:0!important;color:#fff0e7!important}
+ html body.wedding-public.system62 #rsvp #lookupStep{display:block;width:100%!important;min-width:0!important;margin:0!important}
+ html body.wedding-public.system62 #rsvp .rsvp-search{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+ html body.wedding-public.system62 #rsvp .rsvp-search label{display:block!important;min-width:0!important;text-align:left!important;font:500 12px/1.5 var(--font-body)!important;letter-spacing:0!important;text-transform:none!important;color:#fff0e7!important}
+ html body.wedding-public.system62 #rsvp .rsvp-search-row{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:10px!important;min-height:0!important;height:auto!important;margin-top:8px!important}
+ html body.wedding-public.system62 #rsvp #lookupKey,html body.wedding-public.system62 #rsvp #findBtn{flex:0 0 auto!important;box-sizing:border-box!important;position:static!important;min-width:0!important;width:100%!important;min-height:48px!important;height:48px!important;max-height:48px!important;margin:0!important;padding:12px 14px!important;font:400 16px/22px var(--font-body)!important;border-radius:10px!important;transform:none!important}
+ html body.wedding-public.system62 #rsvp #lookupKey{background:#fffaf5!important;color:#302820!important;border:1px solid #ead8cc!important;box-shadow:none!important}
+ html body.wedding-public.system62 #rsvp #lookupKey::placeholder{color:#786b61!important;opacity:1!important;font-size:14px!important;letter-spacing:0!important}
+ html body.wedding-public.system62 #rsvp #findBtn{display:flex!important;align-items:center!important;justify-content:center!important;background:#3e5d47!important;color:#fff!important;border:1px solid #3e5d47!important;font-weight:600!important;font-size:13px!important;letter-spacing:.04em!important}
+ html body.wedding-public.system62 #rsvp :is(input,select,textarea){font-size:16px!important}
+ html body.wedding-public.system62 #rsvp :is(button,input,select):focus-visible{outline:2px solid #fff2d8!important;outline-offset:3px!important}
+ html body.wedding-public.system62 #rsvp .rsvp-actions{width:100%!important;margin-top:16px!important}
+ html body.wedding-public.system62 #rsvp .rsvp-help{font:400 12px/1.6 var(--font-body)!important;margin:0!important;color:#fff0e7!important}
+ html body.wedding-public.system62 #rsvp .rsvp-help a{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:4px}
+ html body.wedding-public.system62 #rsvp .rsvp-signoff{margin-top:24px!important;padding-top:20px!important}
+ html body.wedding-public.system62 #rsvp .status:not(.hidden){margin-top:12px!important;font:500 13px/1.6 var(--font-body)!important;max-width:100%!important;overflow-wrap:anywhere!important}
+}

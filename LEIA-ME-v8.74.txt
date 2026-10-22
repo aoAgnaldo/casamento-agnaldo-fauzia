@@ -1,0 +1,20 @@
+V8.74 — RSVP MOBILE
+
+Corrige apenas a secção de confirmação em ecrãs até 800px:
+- Campo e botão de pesquisa limitados a 48px, sem crescimento flex vertical.
+- Título e instruções mais compactos; monograma e etapas com menos espaço.
+- Retiradas as linhas decorativas desalinhadas do pequeno título.
+- Campo claro de maior contraste e botão verde-sálvia mais escuro.
+- Textos, funções, dados e composição web preservados.
+
+Mantém a melhoria dos presentes da v8.73, sem as versões reprovadas v8.71/72.
+
+INSTALAR
+Faça uma cópia do index.html actual. Publique os três ficheiros juntos:
+index.html, public-gifts.css e public-rsvp-mobile.css.
+Não altere os ficheiros do Admin ou a configuração da base de dados.
+
+37 ficheiros de testes passaram, além do contrato mobile existente e
+verificação de referências. Testes estáticos não comprovam geometria.
+O resultado visual novo continua por validar no navegador desta sessão.
+Não foi publicado automaticamente.
